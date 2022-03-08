@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h2>메인페이지</h2>
+	<img src="./resources/img/123456789.jfif"/>
 </body>
 <script></script>
 </html>
