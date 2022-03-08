@@ -15,6 +15,43 @@
 		<level value="info" />
 	</logger>
 	
+		<!-- SQL 로그 설정 -->
+	<!-- additivity : true => 두번 찍힌다. -->
+	<!-- level = info -> logger.info() -->
+	<!-- 실행쿼리 + 걸린시간 -->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="console" />
+	</logger>
+	
+	<!-- 실행쿼리 + 쿼리결과값 -->
+	<!-- <level value="off"/> -> 이 로그는 보지 않겠다. -->
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="off"/>
+		<appender-ref ref="console" />
+	</logger>
+	
+	<!-- 쿼리실행시 보여줄수 있는 모든 값 -->
+	<logger name="jdbc.audit" additivity="false">
+		<level value="off"/>
+		<appender-ref ref="console" />
+	</logger>
+	
+	<!-- 실행쿼리 + 커넥션 열고 닫음 -->
+	<logger name="jdbc.connection" additivity="false">
+		<level value="off"/>
+		<appender-ref ref="console" />
+	</logger>
+	
+	<!-- 실행쿼리만 -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="off"/>
+		<appender-ref ref="console" />
+	</logger>		
+	
+	
+	
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
