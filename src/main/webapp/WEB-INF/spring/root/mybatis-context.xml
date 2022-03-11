@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
 
-		<!-- 사용 설정 -->
+	<!-- 사용 설정 -->
 	<!-- name=정해져 있음, id=내맘대로 정할 수 있음 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 위에서 설정한 datasource 불러오기 -->
@@ -14,7 +14,6 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:com/pretty/dog/dao/*.xml</value>
-			
 			</list>
 		</property>
 		<property name="configLocation" value="classpath:config/aliase.xml"></property> 

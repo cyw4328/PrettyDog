@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="com.pretty.dog.dao.ShopListDAO">
+
+	<select id="addservice" resultType="string">
+		SELECT add_sub FROM addition_place WHERE add_blind = 0
+	</select>
+	
+	<!-- <select id="shopList" resultType="dog">
+		SELECT * FROM 
+			shop s join price_list pl 
+			on s.busin_num = pl.busin_num	
+			join interior i 
+			on s.busin_num = i.busin_num
+			WHERE busin_calss = 1 order by busin_date desc
+	</select> -->
+	
+	<select id="shopSerch" resultType="dog">
+		SELECT * FROM 
+			shop s join price_list pl 
+			on s.busin_num = pl.busin_num	
+			join interior i 
+			on s.busin_num = i.busin_num
+			WHERE busin_calss = 1 
+			<if test='areaScope != null and areaScope != ""'>
+				and s.busin_area = #{areaScope}
+			</if>
+			<if test= 'dogScope != null and dogScope == 1'>
+				and s.busin_smalldog = 1
+			</if>
+			<if test= 'dogScope != null and dogScope == 2'>
+				and s.busin_middledog = 1
+			</if>
+			<if test= 'dogScope != null and dogScope == 3'>
+				and s.busin_bigdog = 1
+			</if>
+			<if test='serviceScope != null and serviceScope != 0'>
+				and pl.add_num = ${serviceScope}
+			</if>
+			<if test="nameScope != null and !('').equals(nameScope)">
+				and s.busin_name LIKE CONCAT('%',#{nameScope},'%')
+			</if>
+			<choose>
+				<when test="('recomendFilter').equals(hiddenFilter)">
+					order by s.busin_likes desc
+				</when>
+				<when test="('lowPriceFilter').equals(hiddenFilter)">
+					order by pl.price_cost
+				</when>
+				<when test="('highPriceFilter').equals(hiddenFilter)">
+					order by pl.price_cost desc
+				</when>
+				<otherwise>
+					order by busin_date desc 
+				</otherwise>
+			</choose>
+	</select>
+	
+	<select id="LikeCheck"  resultType="int">
+		SELECT count(interestshop_num) FROM interest_shop WHERE busin_num = #{param1} AND mem_id = #{param2}
+	</select>
+	
+	<delete id="deleteLike">
+		DELETE FROM interest_shop where busin_num = #{param1} AND mem_id = #{param2}
+	</delete>
+	
+	<update id="CancelBLike" parameterType="int">
+		UPDATE shop SET busin_likes = busin_likes -1 WHERE busin_num = #{param1}
+	</update>
+	
+	<insert id="insertLike">
+		INSERT INTO interest_shop (busin_num, mem_id) VALUES (#{param1}, #{param2})
+	</insert>
+	
+	<update id="updateBLike" parameterType="int">
+		UPDATE shop SET busin_likes = busin_likes+1 WHERE busin_num = #{param1}
+	</update>
+	
+	
+</mapper>
