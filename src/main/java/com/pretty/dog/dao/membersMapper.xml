@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="com.pretty.dog.dao.MembersDAO">
+
+	<!-- 일반 회원가입 -->	
+	<insert id="joinShs" parameterType = "hashmap">
+	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_nick,mem_email,mem_tel)
+	        VALUES(#{id},#{pw},#{name},#{nickname},#{email},#{phone})
+	 </insert>
+	 
+	 <!-- 점주 회원가입 -->	
+	<insert id="ShopjoinShs" parameterType = "hashmap">
+	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_nick,mem_email,mem_tel,mem_rank)
+	        VALUES(#{id},#{pw},#{name},#{nickname},#{email},#{phone},'1')
+	 </insert>
+
+	<!-- 중복체크 -->	
+	<select id="overlayShsid" resultType="String">
+			SELECT mem_id FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 매장정보등록(회원가입) -->	
+	<insert id="ShopInfo" parameterType = "hashmap">
+	      INSERT INTO shop (busin_num,mem_id,busin_name,busin_info,busin_smalldog,busin_middledog,busin_bigdog,busin_area,busin_juso)
+	        VALUES(#{shopSaup},#{shopid},#{shopname},#{shopSogae},#{smallD},#{middleD},#{bigD},#{addr},#{shopAddr})
+	 </insert>
+	 
+	 <!-- 매장인테리어 사진(회원가입) -->	
+	<insert id="shopPhoto">
+	      INSERT INTO interior (busin_num,interior_oriname,interior_newname)
+	        VALUES(#{param1},#{param2},#{param3})
+	 </insert>
+	 
+	 
+
+</mapper>
