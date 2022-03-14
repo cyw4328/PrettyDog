@@ -62,6 +62,9 @@
         </style>
     </head>
     <body class="no-drag">
+    <div>
+		<a href="./"><img src="./resources/img/LOGO.PNG"/></a>
+	</div>
         <div id="wrap">
             <div id="header">
                 <div class="container"></div>

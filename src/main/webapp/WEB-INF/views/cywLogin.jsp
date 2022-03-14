@@ -57,6 +57,9 @@
 	</style>
 </head>
 <body>
+	<div>
+		<a href="./"><img src="./resources/img/LOGO.PNG"/></a>
+	</div>
 	<div id="AllPage">
 		<div id="LoginSub">
 			<h2>LOGIN</h2>

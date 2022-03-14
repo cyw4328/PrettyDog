@@ -33,6 +33,9 @@
 	</style>
 </head>
 <body>
+	<div>
+		<a href="./"><img src="./resources/img/LOGO.PNG"/></a>
+	</div>
 	<div id="AllPage">
 		<form action="PwChange" method="post" onsubmit="return submitCheck();">
 			<div id="PwChangeSub">
