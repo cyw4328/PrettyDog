@@ -300,6 +300,94 @@ public class DogDTO {
 		this.point_distin = point_distin;
 	}
 	
+	private int poch_num;
+	private String poch_id;
+	private String poch_money;
+	private String poch_bank;
+	private String poch_banknum;
+	private Timestamp poch_date;
+	private Timestamp poch_cdate;
+	private int poch_check;
+
+	public int getPoch_num() {
+		return poch_num;
+	}
+	public void setPoch_num(int poch_num) {
+		this.poch_num = poch_num;
+	}
+	public String getPoch_id() {
+		return poch_id;
+	}
+	public void setPoch_id(String poch_id) {
+		this.poch_id = poch_id;
+	}
+	public String getPoch_money() {
+		return poch_money;
+	}
+	public void setPoch_money(String poch_money) {
+		this.poch_money = poch_money;
+	}
+	public String getPoch_bank() {
+		return poch_bank;
+	}
+	public void setPoch_bank(String poch_bank) {
+		this.poch_bank = poch_bank;
+	}
+	public String getPoch_banknum() {
+		return poch_banknum;
+	}
+	public void setPoch_banknum(String poch_banknum) {
+		this.poch_banknum = poch_banknum;
+	}
+	public Timestamp getPoch_date() {
+		return poch_date;
+	}
+	public void setPoch_date(Timestamp poch_date) {
+		this.poch_date = poch_date;
+	}
+	public Timestamp getPoch_cdate() {
+		return poch_cdate;
+	}
+	public void setPoch_cdate(Timestamp poch_cdate) {
+		this.poch_cdate = poch_cdate;
+	}
+	public int getPoch_check() {
+		return poch_check;
+	}
+	public void setPoch_check(int poch_check) {
+		this.poch_check = poch_check;
+	}
+	
+	private int category_num;
+	private String category_name;
+	private int category_admin;
+	private int category_blind;
+
+	public int getCategory_num() {
+		return category_num;
+	}
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+	public int getCategory_admin() {
+		return category_admin;
+	}
+	public void setCategory_admin(int category_admin) {
+		this.category_admin = category_admin;
+	}
+	public int getCategory_blind() {
+		return category_blind;
+	}
+	public void setCategory_blind(int category_blind) {
+		this.category_blind = category_blind;
+	}
+	
 	
 	
 }

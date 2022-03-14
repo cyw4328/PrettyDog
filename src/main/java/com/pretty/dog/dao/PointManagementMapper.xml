@@ -32,4 +32,36 @@
 		SELECT * FROM pointList WHERE mem_id = #{param3} ORDER BY point_num DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<!-- 업주회원 환전포인트 페이지이동 -->
+	<select id="onerPointChange" resultType="int">
+		SELECT mem_point FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 업주회원 환전내역리스트 갯수 페이징 -->
+	<select id="allPointChCount" resultType="int">
+		SELECT count(poch_num) FROM pointCh WHERE mem_id =#{param1}
+	</select>
+	
+	<!-- 업주회원 환전리스트 내역 -->
+	<select id="onerPointListCall" resultType="dog">
+		SELECT * FROM pointCh WHERE mem_id = #{param1} ORDER BY poch_num DESC LIMIT #{param2} OFFSET #{param3}
+	</select>
+	
+	<!-- 업주회원 환전가능포인트 -->
+	<select id="onerAllCount" resultType="int">
+		SELECT sum(poch_money) FROM pointCh WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 환전시 업주회원 포인트차감 -->
+	<update id="onerPointDel">
+		UPDATE members SET 
+			mem_point = #{param2} WHERE mem_id = #{param1}
+	</update>
+	
+	<insert id="pointChInsert">
+		INSERT INTO pointCh (mem_id,poch_money,poch_bank,poch_banknum)values(#{param1},#{param2},#{param3},#{param4});
+	</insert>
+	
+	
+	
 </mapper>

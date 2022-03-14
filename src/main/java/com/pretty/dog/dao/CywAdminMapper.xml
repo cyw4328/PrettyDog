@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="com.pretty.dog.dao.CywAdminDAO">
+
+<!-- 	<select id="categoryPage" resultType="dog">
+		SELECT * FROM community_category WHERE category_blind = 0
+	</select> -->
+	
+	<!-- 카테고리리스트 총페이지 -->
+	<select id="categoryListCount" resultType="int">
+		SELECT count(category_num) FROM community_category WHERE category_blind = 0
+	</select>
+	
+	<!-- 카테고리 리스트 -->
+	<select id="categoryListCall" resultType="dog">
+		SELECT * FROM community_category WHERE category_blind = 0
+	</select>
+	
+	<!-- 카테고리 추가 -->
+	<insert id="cateGoryAdd">
+		INSERT INTO community_category(category_name,category_admin)values(#{param1},#{param2})
+	</insert>
+
+	<!-- 카테고리 블라인드 -->
+	<update id="categoryDel">
+		UPDATE community_category SET category_blind = 1 WHERE category_num = #{param1}
+	</update>
+
+</mapper>
