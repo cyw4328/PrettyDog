@@ -121,11 +121,7 @@ public class DogDTO {
 	private Timestamp busin_date;
 	private int busin_calss;
 	private String busin_juso;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 8c42403ec16e7e79ddcff7ceba76196abfdb7153
 	public String getBusin_juso() {
 		return busin_juso;
 	}
