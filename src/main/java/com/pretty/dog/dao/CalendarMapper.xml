@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="com.pretty.dog.dao.CalendarDao">
+
+	<select id="dateInfo" parameterType="HashMap" resultType="HashMap">
+		select *
+		from reservaestablecimiento 
+		where set_date = #{ChooseDate}
+	</select>
+
+
+
+	<insert id="oneDaySetting" parameterType="HashMap">
+		insert into reservaestablecimiento (busin_num, set_date , set_time)
+		values(#{busin_num}, #{set_date}, #{set_time})
+		on DUPLICATE key update
+		set_date = #{set_date},
+		set_time = #{set_time}
+	</insert>
+	
+	
+	<delete id="holiDay">
+		delete from reservaestablecimiento 
+		where set_date = #{param1}; 
+	</delete>
+	
+	
+</mapper>
