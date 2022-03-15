@@ -6,12 +6,21 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/css/HS.css">
-	<style></style>
+	<style>
+		*{margin:0 auto;}
+		
+		.container{
+			margin-top:7%;
+		}
+		
+		table{background-color: white;}
+	</style>
 </head>
-<body>
-<div class="container">
-<div class="formDiv">
-        <form action="joinShs" method="post">
+<body bgcolor="#EAEAEA">
+	<a href="./"><img alt="logo" src="./resources/img/LOGO02.png"></a>
+	<div class="container">
+		<div class="formDiv">
+        	<form action="joinShs" method="post">
                 <table>
                 	<tr><th colspan="2" style="font-size: 26px;">일반회원가입</th></tr>
                     <tr>
