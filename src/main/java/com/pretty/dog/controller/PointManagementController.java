@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +45,7 @@ public class PointManagementController {
 	
 	
 	@RequestMapping(value = "/pointListPage")
-	public ModelAndView pointList(Model model,HttpSession session) {
+	public ModelAndView pointList(HttpSession session) {
 		logger.info("포인트리스트페이지");
 		
 		//String loginId = (String) session.getAttribute("loginId");
@@ -67,7 +68,44 @@ public class PointManagementController {
 	 }
 	
 	
+		@RequestMapping(value = "/onerPointChange")
+		public ModelAndView onerPointChange(HttpSession session) {
+			logger.info("포인트리스트페이지");
+			
+			//String loginId = (String) session.getAttribute("loginId");
+			String loginId = "dud";
+			
+			return service.onerPointChange(loginId);
+		}
+		
+		 @RequestMapping(value = "/onerPointListCall", method = RequestMethod.POST)
+		 @ResponseBody public HashMap<String, Object> onerPointListCall(Model model,HttpSession session,@RequestParam String page,@RequestParam String cnt){
+		 
+			// String loginId = (String) session.getAttribute("loginId");
+			 String loginId = "dud";
+			 
+			 int currPage = Integer.parseInt(page); 
+			 int pagePerCnt =Integer.parseInt(cnt);
+			 logger.info("페이징 컨트롤러:{}",currPage);
+			 logger.info("페이징 컨트롤러:{}",pagePerCnt);
+			 
+		 return service.onerPointListCall(currPage,pagePerCnt,loginId); 
+		 }
 	
-	
-	
+		@RequestMapping(value = "/pointChange")
+		public ModelAndView pointChange(HttpSession session,@RequestParam String changePoint,@RequestParam String bankName,@RequestParam String bankNum,RedirectAttributes rAttr) {
+			logger.info("포인트환전 요청:{}",changePoint);
+			
+			//String loginId = (String) session.getAttribute("loginId");
+			String loginId = "dud";
+			
+			return service.pointChange(loginId,changePoint,bankName,bankNum,rAttr);
+		}
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 }
