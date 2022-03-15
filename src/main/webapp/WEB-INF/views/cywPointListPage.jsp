@@ -11,7 +11,7 @@
 	<style>
 		#allpage{
 			position: relative;
-			left: 100px;
+			left: 300px;
 			top: 100px;
 		}
 		#pointInfo{
@@ -54,7 +54,7 @@
 			width: 350px;
 			padding: 10px;
 			vertical-align: top;
-			border-bottom: 1px solid #ccc;
+			/* border-bottom: 1px solid #ccc; */
 		}
 		#addPointPage{
 			background: black;
@@ -97,16 +97,70 @@
 			left: 150px;
 		}
 		
+		#onerChangeBtn{
+			background: black;
+			color:#fff;
+			border:none;
+			position:relative;
+			height:60px;
+			font-size:1.6em;
+			padding:0 2em;
+			cursor:pointer;
+			transition:800ms ease all;
+			outline:none;
+			margin-left: 10px;
+		}
+		#onerChangeBtn:hover{
+			background:#fff;
+	  		color:#1AAB8A;
+		}
+		#onerChangeBtn:before,#onerChangeBtn:after{
+			  content:'';
+			  position:absolute;
+			  top:0;
+			  right:0;
+			  height:2px;
+			  width:0;
+			  background: #1AAB8A;
+			  transition:400ms ease all;
+		}
+		#onerChangeBtn:after{
+			  right:inherit;
+			  top:inherit;
+			  left:0;
+			  bottom:0;
+		}
+		#onerChangeBtn:hover:before,#onerChangeBtn:hover:after{
+			width:100%;
+			transition:800ms ease all;
+		}
 	</style>
 </head>
 <body>
-	
+	<c:forEach items="${memInfo}" var="mem">
+		<c:if test="${mem.mem_rank == 0}">
+			<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
+		</c:if>
+		<c:if test="${mem.mem_rank == 1}">
+			<%@ include file="cywMyPageMenuBarOwner.jsp"%>		
+		</c:if>
+	</c:forEach>
 	<div id="allpage">
 		<div id="pointInfo">
 			<c:forEach items="${memInfo}" var="mem">
-			<h5 style="font-size: 25px;">${mem.mem_id} 님의 현재 포인트 잔액</h5>
-			<h5 style="font-size: 20px;"><b style="color: red; font-size: 30px;">${mem.mem_point}</b> POINT</h5>
+			<div>
+				<h5 style="font-size: 25px;">(${mem.mem_id} 님의 현재 확정 포인트 잔액) <br/>
+				<b style="color: red; font-size: 30px;">${mem.mem_point}</b>POINT</h5>
+				
+				<c:if test="${mem.mem_rank == 1}">
+					<h5 style="font-size: 25px; position: absolute; left: 450px; width: 330px; top: 0px;" id="onerFix">${mem.mem_id} 님의 현재 확정 전 포인트<br/>
+					<b style="color: red; font-size: 30px;">${mem.mem_nopoint}</b> POINT</h5>				
+				</c:if>
+			</div>
 			<input type="button" value="충전하기" id="addPointPage"/>
+			<c:if test="${mem.mem_rank == 1}">
+				<input type="button" value="환전하기" id="onerChangeBtn"/>
+			</c:if>
 
 			</c:forEach>
 		</div>
@@ -121,14 +175,14 @@
 					
 				</tbody>
 				<tr>
-				<td colspan="4" id="paging" style="text-align: center;">
-					<div class="container">                           
-               			<nav aria-label="Page navigation" style="text-align:center; width:500px;">
-                  			<ul class="pagination" id="pagination"></ul>
-              			</nav>               
-            		</div>
-				</td>
-			</tr>
+					<td colspan="4" id="paging" style="text-align: center;">
+						<div class="container">                           
+	               			<nav aria-label="Page navigation" style="text-align:center; width:500px;">
+	                  			<ul class="pagination" id="pagination"></ul>
+	              			</nav>               
+	            		</div>
+					</td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -204,7 +258,10 @@ function listDraw(list) {
     $('#list').empty();
     $('#list').append(content);
 }
-	
-	
+
+$('#onerChangeBtn').click(function() {
+	window.location.href="./onerPointChange";
+})
+
 </script>
 </html>

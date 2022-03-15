@@ -29,7 +29,7 @@ public class CywMemController {
 	public ModelAndView login(@RequestParam String idInput,@RequestParam String pwInput,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		String page = "login";
+
 
 		if (service.login(idInput,pwInput)) {
 			mav.addObject("msg", "로그인이 성공했습니다!");
