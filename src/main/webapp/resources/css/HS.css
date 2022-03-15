@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 
+
 h2{text-align: center; margin-top:60px; margin-bottom:20px;}
 #formDiv{
 		border-radius: 100px;
@@ -10,7 +11,7 @@ table {
 	border: 1px solid #eeeeee;
 	border-collapse: collapse;
 	padding: 5px 10px;
-	border-radius: 10px;
+	border-radius: 5px;
   	border-style: hidden;
  	box-shadow: 1px 2px 4px 1px #cbcbcb;
  	
@@ -27,7 +28,7 @@ table {
 	padding: 5px 10px;
 	color:#303030;
 	font-weight: bold;
-	border-radius: 10px;
+	border-radius: 5px;
 	height:60px;
 }
 

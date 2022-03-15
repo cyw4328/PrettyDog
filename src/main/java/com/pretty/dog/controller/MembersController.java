@@ -6,13 +6,13 @@ import java.util.Random;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.executor.ReuseExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pretty.dog.dto.DogDTO;
 import com.pretty.dog.service.MembersService;
 
 
@@ -46,15 +46,21 @@ public class MembersController {
 	
 	
 	
+	String hashText="";
 	@RequestMapping(value = "/joinShs", method = RequestMethod.POST)
-	public String join(Model model,@RequestParam HashMap<String, String> params) {
+	public String joinShs(Model model,@RequestParam String id,@RequestParam String pw,
+			@RequestParam String name,@RequestParam String phone,@RequestParam String email,@RequestParam String nickname) {
 		logger.info("일반 회원가입 요청");	
-		logger.info("params : {}",params);
-		service.joinShs(params);
-		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		hashText = encoder.encode(pw);
+		logger.info("암호화값 {}",hashText);
+		int row = service.joinShs(id,hashText,name,phone,email,nickname);
+		if(row>0) {
+			String msg = "회원가입에 실패하였습니다.";
+			model.addAttribute("msg",msg);
+		}
 		return "Main";
 	}
-	
 	
 	@RequestMapping(value = "/ShopJoinFormshs", method = RequestMethod.GET)
 	public String ShopjoinShs(Model model) {
@@ -65,15 +71,24 @@ public class MembersController {
 	
 	
 	@RequestMapping(value = "/ShopjoinShs", method = RequestMethod.POST)
-	public String ShopjoinShs(Model model,@RequestParam HashMap<String, String> params,@RequestParam String id,@RequestParam String nickname) {
+	public String ShopjoinShs(Model model,@RequestParam String id,@RequestParam String pw,
+			@RequestParam String name,@RequestParam String phone,@RequestParam String email,@RequestParam String nickname) {
 		logger.info("점주 회원가입 요청");	
-		logger.info("params : {}",params);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		hashText = encoder.encode(pw);
+		logger.info("암호화값 {}",hashText);
+		int row = service.ShopjoinShs(id,hashText,name,phone,email,nickname);
+		if(row>0) {
+			String msg = "회원가입에 실패하였습니다.";
+			model.addAttribute("msg",msg);
+		}
 		
-		service.ShopjoinShs(params);
 		model.addAttribute("id",id);
 		model.addAttribute("nickname",nickname);
 		return "ShopInfoFormshs";
 	}
+	
+	
 	
 	@RequestMapping(value = "/ShopInfo", method = RequestMethod.POST)
 	public String ShopInfo(Model model,MultipartFile shopPhoto,@RequestParam HashMap<String, String> params,@RequestParam String shopSaup) {
@@ -157,13 +172,111 @@ public class MembersController {
 	
 		
 		
-		@RequestMapping(value = "/MemberCkshs", method = RequestMethod.GET)
+		@RequestMapping(value = "/memberPassCk", method = RequestMethod.GET)
 		public String memberPassCk(Model model,HttpSession session) {
 //			logger.info("비밀번호체크 페이지 컨트롤러");	
+			String object = (String) session.getAttribute("loginId");
 
-			return "MemberCkshs";
+			String Page ="redirect:/loginPage";
+			if(object != null) {
+				session.getAttribute("loginId");
+				Page ="MemberCkshs";
+			}	
+
+			return Page;
 			}
 		
+		
+		@RequestMapping(value = "/PassCk", method = RequestMethod.POST)
+		public String PassCk(Model model,HttpSession session, @RequestParam String pw,@RequestParam String id) {
+//			logger.info("비밀번호체크 컨트롤러{}",pw+id);	
+			Object object = session.getAttribute("loginId");
+		
+			String Page ="redirect:/loginPage";
+			if(object != null) {
+				session.getAttribute("loginId");
+				String msg ="비밀번호가 일치하지 않습니다.";
+				String Ck = service.PassCk(id,pw);
+				
+				if(Ck != null) {
+					Page ="redirect:/MyjungboSujungshs";
+				}else {
+					Page ="redirect:/memberPassCk";
+
+				}
+				
+				
+			}	
+		
+			return Page;
+		}
+		
+		
+		//개인정보 수정페이지
+		@RequestMapping(value = "/MyjungboSujungshs", method = RequestMethod.GET)
+			public String memberDe(Model model,HttpSession session) {
+			
+				String id = (String) session.getAttribute("loginId");
+				logger.info("세션아이디 값 : {}",id);
+				
+				DogDTO dto = service.MyjungboSujungshs(id);
+				model.addAttribute("info", dto);
+				
+			return "MyjungboSujungshs";
+		}
+		
+		//매장정보 수정페이지
+		@RequestMapping(value = "/MyShopInfoshs", method = RequestMethod.GET)
+			public String MyjungboSujungshs(Model model,HttpSession session) {
+					
+				String id = (String) session.getAttribute("loginId");
+				logger.info("세션아이디 값 : {}",id);
+						
+				DogDTO dto = service.MyShopInfoshs(id);
+				model.addAttribute("shopinfo", dto);
+						
+			return "MyShopInfoshs";
+		}
+		
+		
+		
+	//개인 강아지 등록페이지
+		@RequestMapping(value = "/MyDogInfoshs", method = RequestMethod.GET)
+		public String MyDogInfoshs(Model model,HttpSession session) {
+				
+			String id = (String) session.getAttribute("loginId");
+			logger.info("세션아이디 값 : {}",id);
+		
+		return "MyDogInfoshs";
+	}		
+		
+		//개인 강아지 등록페이지
+		@RequestMapping(value = "/DogUp", method = RequestMethod.POST)
+		public String DogUp(Model model,HttpSession session,@RequestParam String dogname,@RequestParam String dogage
+				,@RequestParam String dogweight,@RequestParam String dogchar) {
+
+			String id = (String) session.getAttribute("loginId");
+			
+			int row= service.DogUp(id,dogname,dogage,dogweight,dogchar); 
+			
+		return "Main";
+	}	
+		
+		//애견 정보 확인 등록페이지
+		@RequestMapping(value = "/Mydogshs", method = RequestMethod.GET)
+		public String DogUp(Model model,HttpSession session) {
+
+			String id = (String) session.getAttribute("loginId");
+			logger.info("세션아이디 값 : {}",id);
+					
+			//DogDTO dto = service.Mydogshs(id);
+			
+			//model.addAttribute("mydoginfo", dto);
+			
+		return "Mydogshs";
+	}	
+
+
 
 		
 	
