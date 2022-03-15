@@ -28,6 +28,8 @@ public interface PointManagementDAO {
 
 	int pointChInsert(String loginId, String changePoint, String bankName, String bankNum);
 
+	void insertOnerPoint(String loginId, int w);
+
 
 	
 	

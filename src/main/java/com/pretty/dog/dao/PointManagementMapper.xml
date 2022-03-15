@@ -27,7 +27,7 @@
 		SELECT COUNT(point_num) FROM pointList WHERE mem_id = #{param1}
 	</select>
 	
-	<!-- 회원 총 포인트 조회 -->
+	<!-- 회원 총 포인트리스트 조회 -->
 	<select id="memPointList" resultType="dog">
 		SELECT * FROM pointList WHERE mem_id = #{param3} ORDER BY point_num DESC LIMIT #{param1} OFFSET #{param2}
 	</select>

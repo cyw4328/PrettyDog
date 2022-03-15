@@ -41,6 +41,7 @@ public class PointManageService {
 		
 		ArrayList<DogDTO> memPoint = dao.memPointSelect(loginId);
 		
+		mav.addObject("loginId", loginId);
 		mav.addObject("memInfo", memPoint);
 		mav.setViewName("cywPointListPage");
 		
@@ -107,24 +108,52 @@ public class PointManageService {
 		// 1. 회원포인트 삭제
 		int q = dao.onerPointChange(loginId);
 		int w = Integer.parseInt(changePoint);
+		int e = 10000;
 		
-		int r = q-w;
-		dao.onerPointDel(loginId,r);
-		// 2. 환전 테이블 등록
-		int row = dao.pointChInsert(loginId,changePoint,bankName,bankNum);
-		logger.info("환전완료:{}",row);
-		
-		logger.info("기존회원포인트:{}",q);
-		logger.info("환전입력한거:{}",w);
-		logger.info("시발 환전 회원에서 빼야되는데 :{}",r);
-		
-		if (row > 0) {
-			rAttr.addFlashAttribute("msg", "환전신청이 완료되었습니다.");
+		if (q < w) {
+			
+			rAttr.addFlashAttribute("msg3", "환전가능금액보다 신청금액이 높습니다.");
+			mav.setViewName("redirect:/onerPointChange");
+
+		}else if (w < e) {
+
+			rAttr.addFlashAttribute("msg3", "환전 가능 최소금액은 10,000원이상입니다.");
 			mav.setViewName("redirect:/onerPointChange");
 		}else {
-			rAttr.addFlashAttribute("msg", "환전신청이 실패하였습니다. 고객센터에 문의 부탁드립니다.");
-			mav.setViewName("redirect:/onerPointChange");
+			
+			int r = q-w;
+			dao.onerPointDel(loginId,r);
+			// 포인트내역 저장
+			dao.insertOnerPoint(loginId,w);
+			// 2. 환전 테이블 등록
+			int row = dao.pointChInsert(loginId,changePoint,bankName,bankNum);
+			logger.info("환전완료:{}",row);
+			
+			logger.info("기존회원포인트:{}",q);
+			logger.info("환전입력한거:{}",w);
+			logger.info("시발 환전 회원에서 빼야되는데 :{}",r);
+			
+			if (row > 0) {
+				rAttr.addFlashAttribute("msg", "환전신청이 완료되었습니다.");
+				mav.setViewName("redirect:/onerPointChange");
+			}else {
+				rAttr.addFlashAttribute("msg", "환전신청이 실패하였습니다. 고객센터에 문의 부탁드립니다.");
+				mav.setViewName("redirect:/onerPointChange");
+			}
 		}
+		
+		return mav;
+	}
+
+	public ModelAndView PointInsertPage(String loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<DogDTO> memPoint = dao.memPointSelect(loginId);
+		
+		mav.addObject("loginId", loginId);
+		mav.addObject("memInfo", memPoint);
+		
+		mav.setViewName("cywPointInsert");
 		
 		return mav;
 	}

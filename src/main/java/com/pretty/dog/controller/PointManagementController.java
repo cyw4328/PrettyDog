@@ -26,13 +26,13 @@ public class PointManagementController {
 	@Autowired PointManageService service;
 	
 	@RequestMapping(value = "/PointInsertPage")
-	public String PointInsertPage(Model model,HttpSession session) {
+	public ModelAndView PointInsertPage(Model model,HttpSession session) {
 		logger.info("포인트충전페이지");
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";
-		model.addAttribute("loginId", loginId);
-		return "cywPointInsert";
+		
+		return service.PointInsertPage(loginId);
 	}
 	
 	@RequestMapping(value = "/pointInsert")
