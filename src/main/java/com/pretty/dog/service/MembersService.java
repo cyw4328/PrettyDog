@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pretty.dog.dao.MembersDAO;
@@ -21,14 +24,15 @@ public class MembersService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MembersDAO dao;
 	
-	
-	public HashMap<String, Object> joinShs(HashMap<String, String> params) {
-		logger.info("일반 회원가입 요청 서비스 도착!!");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		int row = dao.joinShs(params);
-		map.put("success", row);
+	public int joinShs(String id, String hashText, String name, String phone, String email, String nickname) {
 		
-		return map;
+		return dao.joinShs(id,hashText,name,phone,email,nickname);
+	}
+	
+	
+	public int ShopjoinShs(String id, String hashText, String name, String phone, String email, String nickname) {
+		
+		return dao.ShopjoinShs(id,hashText,name,phone,email,nickname);
 	}
 	
 	
@@ -92,10 +96,44 @@ public class MembersService {
 	}
 
 
-	public DogDTO memberDe(String id) {
+
+	public DogDTO MyjungboSujungshs(String id) {
 		logger.info("회원정보 서비스 도착");
-		return dao.memberDe(id);
+		
+		return dao.MyjungboSujungshs(id);
 	}
+
+
+	public DogDTO MyShopInfoshs(String id) {
+		
+		return  dao.MyShopInfoshs(id);
+	}
+
+
+	public int DogUp(String id, String dogname, String dogage, String dogweight, String dogchar) {
+		
+		
+		return dao.DogUp(id,dogname,dogage,dogweight,dogchar);
+
+	}
+
+
+	public DogDTO Mydogshs(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+
+
+
+	
+
+
+	
 
 
 

@@ -7,15 +7,25 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
 		table{
-			border:1px solid black;
+			border:1px solid #DBDBDB;
 			border-collapse: collapse;
 			width: 900px;
 			height: 450px;
+			background-color: white;
 		}
+
+		*{margin:0 auto;}
+		
+		.container{
+			margin-top:7%;
+			
+		}
+		
 
 	</style>
 </head>
-<body>
+<body bgcolor="#EAEAEA">
+	<a href="./"><img alt="logo" src="./resources/img/LOGO02.png"></a>
 <div class="container">
 <div class="formDiv">
         <form action="ShopInfo" method="post" enctype="multipart/form-data">
@@ -51,7 +61,6 @@
                         <td> 지역</td>
                           <td>
 	                          <select name="addr" >
-	                         <option value="">--시/도 선택--</option>
 	                         <option value="서울특별시">서울특별시</option>
 	                         <option value="인천광역시">인천광역시</option>
 	                         <option value="대전광역시">대전광역시</option>
@@ -74,7 +83,7 @@
                         <td><input type="text" name="shopAddr"/></td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="border:0px; text-align: right;"><input type="submit" value="디음" id="btn-join"></td>
+                        <td colspan="4" style="border:0px; text-align: right;"><input type="submit" value="디음" id="btn-join"/></td>
                     </tr>
             </table>
         </form>
@@ -93,71 +102,38 @@ var checkId = false;
 //회원가입 버튼 클릭
 $("#btn-join").on("click", function(e) {
    e.preventDefault();
-   var id = $("input[name='id']").val();
-   var pw = $("input[name='pw']").val();
-   var repw = $("input[name='repw']").val();
-   var name = $("input[name='name']").val();
-   var phone = $("input[name='phone']").val();
-   var nickname = $("input[name='nickname']").val();
-   var email = $("input[name='email']").val();
+   var shopSogae = $("textarea[name='shopSogae']").val();
+   var shopSaup = $("input[name='shopSaup']").val();
+   var smallD = $("input[name='smallD']").val();
+   var middleD = $("input[name='middleD']").val();
+   var bigD = $("input[name='bigD']").val();
+   var shopPhoto = $("input[name='shopPhoto']").val();
+   var addr = $("input[name='addr']").val();
+   var shopAddr = $("input[name='shopAddr']").val();
    
-   /*   
-   //아이디,비밀번호 유효성 검사
-   if (id == null || id == "") { 
-      alert("아이디를 입력해주세요");
+   //유효성검사
+   if (shopSogae == null || shopSogae == "") { 
+      alert("매장소개를 입력해주세요");
       return false;
    } 
-   if (pw == null || pw == "") { 
-      alert("비밀번호를 입력해주세요");
+   if (shopSaup == null || shopSaup == "") { 
+      alert("사업자번호를 입력해주세요");
       return false;
    } 
-   if (repw == null || repw == "") { 
-      alert("비밀번호 확인을 입력해주세요");
+   if (shopPhoto == null || shopPhoto == "") { 
+      alert("매장사진을 입력해주세요");
       return false;
    } 
-   if (name == null || name == "") { 
-      alert("이름을 입력해주세요");
+
+   if (shopAddr == null || shopAddr == "") { 
+      alert("상세주소를 입력해주세요");
       return false;
    } 
-   if (phone == null || phone == "") { 
-      alert("전화번호를 입력해주세요");
-      return false;
-   } 
-   if (check == false) { 
-      alert("인증번호를 확인 해주세요");
-      return false;
-   } 
-   
-   if (checkId == false) { 
-	      alert("중복체크 확인 해주세요");
-	      return false;
-	   }
-   
-   if (nickname == null || nickname == "") { 
-      alert("닉네임을 입력해주세요");
-      return false;
-   } 
-   
-   if (!phone.match("-")) { 
-	      alert("전화번호 '-' 를 확인해 주세요.");
-	      return false;
-	   } 
-   
-   */
+  
   
    
   
    
-   var param = {'id':id};
-   param.pw = pw;
-   param.name = name;
-   param.phone = phone;
-   param.email = email;
-   param.nickname = nickname;
-   param.pw = pw;
-   
-   console.log(param);
-   console.log('서버전송 시작');
    $("form").submit();
    
   

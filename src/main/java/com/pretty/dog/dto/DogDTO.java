@@ -113,7 +113,14 @@ public class DogDTO {
 	private int busin_likes;
 	private Timestamp busin_date;
 	private int busin_calss;
+	private String busin_juso;
 
+	public String getBusin_juso() {
+		return busin_juso;
+	}
+	public void setBusin_juso(String busin_juso) {
+		this.busin_juso = busin_juso;
+	}
 	public String getBusin_num() {
 		return busin_num;
 	}

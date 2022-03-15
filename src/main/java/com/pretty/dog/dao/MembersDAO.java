@@ -18,6 +18,16 @@ public interface MembersDAO {
 
 	String PassCk(String id, String pw);
 
-	DogDTO memberDe(String id);
+
+	int joinShs(String id, String hashText, String name, String phone, String email, String nickname);
+
+	int ShopjoinShs(String id, String hashText, String name, String phone, String email, String nickname);
+
+	DogDTO MyjungboSujungshs(String id);
+
+	DogDTO MyShopInfoshs(String id);
+
+	int DogUp(String id, String dogname, String dogage, String dogweight, String dogchar);
+
 
 }

@@ -8,14 +8,15 @@
 
 	<!-- 일반 회원가입 -->	
 	<insert id="joinShs" parameterType = "hashmap">
-	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_nick,mem_email,mem_tel)
-	        VALUES(#{id},#{pw},#{name},#{nickname},#{email},#{phone})
+	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_tel,mem_email,mem_nick)
+	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
 	 </insert>
+
 	 
 	 <!-- 점주 회원가입 -->	
 	<insert id="ShopjoinShs" parameterType = "hashmap">
-	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_nick,mem_email,mem_tel,mem_rank)
-	        VALUES(#{id},#{pw},#{name},#{nickname},#{email},#{phone},'1')
+	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_tel,mem_email,mem_nick,mem_rank)
+	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},'1')
 	 </insert>
 
 	<!-- 중복체크 -->	
@@ -42,9 +43,19 @@
 	 
 	 
 	 <!-- 개인정보 확인 -->
-	<select id="memberDe" resultType="com.pretty.dog.dto.DogDTO">
-		select mem_name,mem_email, mem_tel, mem_nick, mem_pw from members WHERE mem_id =#{param1}
+	<select id="MyjungboSujungshs" resultType="com.pretty.dog.dto.DogDTO">
+		select * from members WHERE mem_id =#{param1}
+	</select>
+	
+	<!-- 매장정보 확인 -->
+	<select id="MyShopInfoshs" resultType="com.pretty.dog.dto.DogDTO">
+		select * from shop WHERE mem_id =#{param1}
 	</select>
 	 
+	 <!-- 강아지 등록 -->
+	 <insert id="DogUp" parameterType = "String">
+	      INSERT INTO doginfo (mem_id,dog_name,dog_age,dog_weight,dog_char)
+	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5})
+	 </insert>
 
 </mapper>
