@@ -20,7 +20,14 @@ public class DogDTO {
 	private Timestamp mem_secession;
 	private Timestamp mem_login;
 	private int mem_point;
+	private int mem_nopoint;
 	
+	public int getMem_nopoint() {
+		return mem_nopoint;
+	}
+	public void setMem_nopoint(int mem_nopoint) {
+		this.mem_nopoint = mem_nopoint;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -114,7 +121,11 @@ public class DogDTO {
 	private Timestamp busin_date;
 	private int busin_calss;
 	private String busin_juso;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 8c42403ec16e7e79ddcff7ceba76196abfdb7153
 	public String getBusin_juso() {
 		return busin_juso;
 	}
@@ -394,6 +405,188 @@ public class DogDTO {
 	public void setCategory_blind(int category_blind) {
 		this.category_blind = category_blind;
 	}
+	
+	private int reser_num;
+	private Timestamp reser_askdate;
+	private String reser_dog;
+	private String reser_service;
+	private Timestamp reser_visitday;
+	private int reser_money;
+	private int reser_state;
+	private Timestamp reser_updateday;
+	
+	
+	
+	public int getReser_num() {
+		return reser_num;
+	}
+	public void setReser_num(int reser_num) {
+		this.reser_num = reser_num;
+	}
+	public Timestamp getReser_askdate() {
+		return reser_askdate;
+	}
+	public void setReser_askdate(Timestamp reser_askdate) {
+		this.reser_askdate = reser_askdate;
+	}
+	public String getReser_dog() {
+		return reser_dog;
+	}
+	public void setReser_dog(String reser_dog) {
+		this.reser_dog = reser_dog;
+	}
+	public String getReser_service() {
+		return reser_service;
+	}
+	public void setReser_service(String reser_service) {
+		this.reser_service = reser_service;
+	}
+	public Timestamp getReser_visitday() {
+		return reser_visitday;
+	}
+	public void setReser_visitday(Timestamp reser_visitday) {
+		this.reser_visitday = reser_visitday;
+	}
+	public int getReser_money() {
+		return reser_money;
+	}
+	public void setReser_money(int reser_money) {
+		this.reser_money = reser_money;
+	}
+	public int getReser_state() {
+		return reser_state;
+	}
+	public void setReser_state(int reser_state) {
+		this.reser_state = reser_state;
+	}
+	public Timestamp getReser_updateday() {
+		return reser_updateday;
+	}
+	public void setReser_updateday(Timestamp reser_updateday) {
+		this.reser_updateday = reser_updateday;
+		
+	}
+	
+	private int alarm_num;
+	private Timestamp alarm_date;
+	private int alarm_class;
+	
+	public int getAlarm_num() {
+		return alarm_num;
+	}
+	public void setAlarm_num(int alarm_num) {
+		this.alarm_num = alarm_num;
+	}
+	public Timestamp getAlarm_date() {
+		return alarm_date;
+	}
+	public void setAlarm_date(Timestamp alarm_date) {
+		this.alarm_date = alarm_date;
+	}
+	public int getAlarm_class() {
+		return alarm_class;
+	}
+	public void setAlarm_class(int alarm_class) {
+		this.alarm_class = alarm_class;
+	}
+	
+	private int community_boardnum;
+	private String community_sub;
+	private String community_cont;
+	private Timestamp community_date;
+	private Timestamp community_updatedate;
+	private int community_view;
+	private int community_likes;
+	private int community_blind;
+
+	public int getCommunity_boardnum() {
+		return community_boardnum;
+	}
+	public void setCommunity_boardnum(int community_boardnum) {
+		this.community_boardnum = community_boardnum;
+	}
+	public String getCommunity_sub() {
+		return community_sub;
+	}
+	public void setCommunity_sub(String community_sub) {
+		this.community_sub = community_sub;
+	}
+	public String getCommunity_cont() {
+		return community_cont;
+	}
+	public void setCommunity_cont(String community_cont) {
+		this.community_cont = community_cont;
+	}
+	public Timestamp getCommunity_date() {
+		return community_date;
+	}
+	public void setCommunity_date(Timestamp community_date) {
+		this.community_date = community_date;
+	}
+	public Timestamp getCommunity_updatedate() {
+		return community_updatedate;
+	}
+	public void setCommunity_updatedate(Timestamp community_updatedate) {
+		this.community_updatedate = community_updatedate;
+	}
+	public int getCommunity_view() {
+		return community_view;
+	}
+	public void setCommunity_view(int community_view) {
+		this.community_view = community_view;
+	}
+	public int getCommunity_likes() {
+		return community_likes;
+	}
+	public void setCommunity_likes(int community_likes) {
+		this.community_likes = community_likes;
+	}
+	public int getCommunity_blind() {
+		return community_blind;
+	}
+	public void setCommunity_blind(int community_blind) {
+		this.community_blind = community_blind;
+	}
+	
+	private int bcomment_num;   
+	private String bcomment_cont;
+	private Timestamp bcomment_date;
+	private int bcomment_blind;
+
+	public int getBcomment_num() {
+		return bcomment_num;
+	}
+	public void setBcomment_num(int bcomment_num) {
+		this.bcomment_num = bcomment_num;
+	}
+	public String getBcomment_cont() {
+		return bcomment_cont;
+	}
+	public void setBcomment_cont(String bcomment_cont) {
+		this.bcomment_cont = bcomment_cont;
+	}
+	public Timestamp getBcomment_date() {
+		return bcomment_date;
+	}
+	public void setBcomment_date(Timestamp bcomment_date) {
+		this.bcomment_date = bcomment_date;
+	}
+	public int getBcomment_blind() {
+		return bcomment_blind;
+	}
+	public void setBcomment_blind(int bcomment_blind) {
+		this.bcomment_blind = bcomment_blind;
+	}
+	
+	private int interestshop_num;
+
+	public int getInterestshop_num() {
+		return interestshop_num;
+	}
+	public void setInterestshop_num(int interestshop_num) {
+		this.interestshop_num = interestshop_num;
+	}
+	
 	
 	
 	

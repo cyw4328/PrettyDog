@@ -29,5 +29,87 @@
 	<update id="categoryDel">
 		UPDATE community_category SET category_blind = 1 WHERE category_num = #{param1}
 	</update>
+	
+	<!-- 마이페이지 알림리스트 갯수 -->
+	<select id="AlrimPageListCount" resultType="int">
+		SELECT count(alarm_num) FROM alarm WHERE mem_id = #{param1}
+	</select>
 
+	<!-- 마이페이지 알림리스트 목록 -->
+	<select id="AlrimPageList" resultType="dog">
+		SELECT alarm_num,mem_id,reser_num,alarm_date,alarm_class FROM alarm WHERE mem_id = #{param3} ORDER BY alarm_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 알림페이지 멤버상태 -->
+	<select id="AlarmMem" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 알림삭제 -->
+	<delete id="alarmDel">
+		DELETE FROM alarm WHERE alarm_num = #{param1}
+	</delete>
+	
+	<!-- 내게시물페이지 이동 -->
+	<select id="MyBoard" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 내게시글 페이징 카운터 -->
+	<select id="MyBoardPageListCount" resultType="int">
+		SELECT count(community_boardnum) FROM community_board WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 내게시글 리스트 -->
+	<select id="MyBoardPageList" resultType="dog">
+		SELECT * FROM community_board WHERE mem_id = #{param3} and community_blind = 0 ORDER BY community_boardnum DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 게시글 블라인드처리 -->
+	<update id="boardDel">
+		UPDATE community_board SET community_blind = 1 WHERE community_boardnum =#{param1} and mem_id = #{param2}
+	</update>
+	
+	<!-- 내댓글페이지이동 -->
+	<select id="MyComment" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 내댓글 페이징 카운터 -->
+	<select id="CommentPageListCount" resultType="int">
+		SELECT count(bcomment_num) FROM community_board_comment WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 내댓글 리스트 -->
+	<select id="CommentPageList" resultType="dog">
+		SELECT * FROM community_board_comment WHERE mem_id = #{param3} and bcomment_blind = 0 ORDER BY bcomment_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 댓글 블라인드처리 -->
+	<update id="commentDel">
+		UPDATE community_board_comment SET bcomment_blind = 1 WHERE bcomment_num =#{param1} and mem_id = #{param2}
+	</update>
+	
+	<!-- 내댓글페이지이동 -->
+	<select id="MyLikeShop" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 내 관심매장 페이징 카운터 -->
+	<select id="MyLikeShopListCount" resultType="int">
+		SELECT count(interestshop_num) FROM interest_shop WHERE mem_id = #{param1}
+	</select>
+	
+	<select id="MyLikeShopList" resultType="dog">
+		SELECT i.interestshop_num,i.mem_id,i.busin_num,s.busin_name FROM interest_shop i join shop s on i.busin_num = s.busin_num
+		WHERE i.mem_id = #{param3} ORDER BY interestshop_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<delete id="LikeShopDel">
+		DELETE FROM interest_shop WHERE interestshop_num = #{param1}
+	</delete>
+	
+	<select id="MyPageReserPage" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
 </mapper>

@@ -35,7 +35,7 @@
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 			background: #fcf1f4;
-		}
+		} 
 		#main td {
 			width: 350px;
 			padding: 10px;
@@ -47,8 +47,8 @@
 		}
 		#AllPage{
 			position: relative;
-		    top: 50px;
-		    left: 150px;
+		    top: 110px;
+		    left: 300px;
 		}
 		#MainSub{
 			position: absolute;
@@ -87,6 +87,7 @@
 	</style>
 </head>
 <body>
+	<%@ include file="cywMyPageMenuBarOwner.jsp" %>
 	<div id="AllPage">
 		<div id="MainSub">
 			<h4>환전내역</h4>
@@ -219,13 +220,13 @@ function listDraw(list) {
 
 $('#changeBtn').click(function() {
 	var $changePoint = $('#changePoint');
-	var $pointResult = $('#pointResult');
+	//var $pointResult = $('#pointResult');
 	
 	var $bankName = $('#bankName');
 	var $bankNum = $('#bankNum');
 	
 	console.log($changePoint.val());
-	console.log($pointResult.val());
+	//console.log($pointResult.val());
 	
 		if ($changePoint.val() == '') {
 			alert('충전금액을 입력해 주세요.');
@@ -237,13 +238,14 @@ $('#changeBtn').click(function() {
 			alert('환급받을 계좌번호를 입력해 주세요.');
 			$bankNum.focus();
 		}else {
-			if ($changePoint.val() < "10000") {
+			/* if ($changePoint.val() < "10000") {
 				alert("최소 환전 포인트는 10,000 POINT 입니다.");
 			}else if ($changePoint.val() > $pointResult.val()) {
 				alert("환급 가능포인트보다 높습니다. 다시 한번 확인부탁합니다.");
 			}else {
 				$('#pointForm').submit();
-			}			
+			} */
+			$('#pointForm').submit();
 		}
 })
 		
@@ -253,7 +255,11 @@ if (msg != "") {
 	alert(msg);
 }
 	
-	
+var msg3 = "${msg3}";
+
+if (msg3 != "") {
+	alert(msg3);
+}	
 	
 
 </script>
