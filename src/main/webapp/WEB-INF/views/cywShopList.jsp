@@ -69,14 +69,10 @@
 			border: 0;
 			outline: 0;
 		}
-		#pt{
-			position: absolute;
-		}
 	</style>
 </head>
 <body>
 	<div id="allpage">
-	<input type="button" value="포인트내역" id="pt"/>
 		<div id="searchForm">
 			<form id="searchFormTag" action="shopSerch" method="post">
 				<input type="hidden" name="hiddenFilter" id="hiddenFilter" value="">
