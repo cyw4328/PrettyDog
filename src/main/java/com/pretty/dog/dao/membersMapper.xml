@@ -35,6 +35,16 @@
 	        VALUES(#{param1},#{param2},#{param3})
 	 </insert>
 	 
+	 <!-- 마이페이지 비밀번호 확인 -->
+	<select id="PassCk" resultType="String">
+		select mem_id,mem_pw from members WHERE mem_id =#{param1} and mem_pw=#{param2}
+	</select>
+	 
+	 
+	 <!-- 개인정보 확인 -->
+	<select id="memberDe" resultType="com.pretty.dog.dto.DogDTO">
+		select mem_name,mem_email, mem_tel, mem_nick, mem_pw from members WHERE mem_id =#{param1}
+	</select>
 	 
 
 </mapper>

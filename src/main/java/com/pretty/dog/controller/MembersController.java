@@ -6,7 +6,6 @@ import java.util.Random;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.executor.ReuseExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pretty.dog.dto.DogDTO;
 import com.pretty.dog.service.MembersService;
 
 
@@ -157,13 +156,59 @@ public class MembersController {
 	
 		
 		
-		@RequestMapping(value = "/MemberCkshs", method = RequestMethod.GET)
+		@RequestMapping(value = "/memberPassCk", method = RequestMethod.GET)
 		public String memberPassCk(Model model,HttpSession session) {
 //			logger.info("비밀번호체크 페이지 컨트롤러");	
+			String object = (String) session.getAttribute("loginId");
 
-			return "MemberCkshs";
+			String Page ="redirect:/loginPage";
+			if(object != null) {
+				session.getAttribute("loginId");
+				Page ="memberPassCk";
+			}	
+
+			return Page;
 			}
 		
+		
+		@RequestMapping(value = "/PassCk", method = RequestMethod.POST)
+		public String PassCk(Model model,HttpSession session, @RequestParam String pw,@RequestParam String id) {
+//			logger.info("비밀번호체크 컨트롤러{}",pw+id);	
+			Object object = session.getAttribute("loginId");
+		
+			String Page ="redirect:/loginPage";
+			if(object != null) {
+				session.getAttribute("loginId");
+				String msg ="비밀번호가 일치하지 않습니다.";
+				String Ck = service.PassCk(id,pw);
+				
+				if(Ck != null) {
+					Page ="redirect:/memberDe";
+				}else {
+					Page ="redirect:/memberPassCk";
+
+				}
+				
+				
+			}	
+		
+			return Page;
+		}
+		
+		
+		//개인정보 수정페이지
+		@RequestMapping(value = "/memberDe", method = RequestMethod.GET)
+			public String memberDe(Model model,HttpSession session) {
+			
+				String id = (String) session.getAttribute("loginId");
+//				logger.info("세션아이디 값 : {}",id);
+				
+				DogDTO dto = service.memberDe(id);
+				model.addAttribute("info", dto);
+				
+			return "memberDe";
+		}
+
 
 		
 	

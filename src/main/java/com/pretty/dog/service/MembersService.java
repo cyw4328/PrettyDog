@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pretty.dog.dao.MembersDAO;
+import com.pretty.dog.dto.DogDTO;
 
 @Service
 public class MembersService {
@@ -82,6 +83,18 @@ public class MembersService {
 			e.printStackTrace();
 		}
 		
+	}
+
+
+	public String PassCk(String id, String pw) {
+		logger.info("비밀번호체크 서비스 도착{}",id+pw);	
+		return dao.PassCk(id,pw);
+	}
+
+
+	public DogDTO memberDe(String id) {
+		logger.info("회원정보 서비스 도착");
+		return dao.memberDe(id);
 	}
 
 
