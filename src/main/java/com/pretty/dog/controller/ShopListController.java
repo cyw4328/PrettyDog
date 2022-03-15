@@ -72,4 +72,13 @@ public class ShopListController {
 	}
 	
 	
+	@RequestMapping(value = "/loginPage")
+	public String loginPage() {
+
+		return  "cywLogin";
+	}
+	
+	
+	
+	
 }

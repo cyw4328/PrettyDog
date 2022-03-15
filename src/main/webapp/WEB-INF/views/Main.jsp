@@ -9,6 +9,9 @@
 </head>
 <body>
 	<h2>메인페이지</h2>
+	<p><a href="./MyPageAlarm"/>마이페이지</a></p>
+	<p><a href="./ShopList"/>매장검색</a></p>
+	<p><a href="./loginPage"/>로그인</a></p>
 	<img src="./resources/img/123456789.jfif"/>
 </body>
 <script></script>
