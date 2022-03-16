@@ -1,6 +1,7 @@
 package com.pretty.dog.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,5 +32,14 @@ public class CalendarService {
 			
 			return dao.holiDay(holiDayDate);
 		}
+
+		public List<HashMap<String, Object>> totalReserEx(HashMap<String, Object> data) {
+			
+			System.out.println(data);
+			
+			return dao.totalReserEx(data);
+		}
+
+	
 		
 }

@@ -29,4 +29,10 @@
 	</delete>
 	
 	
+	<select id="totalReserEx" resultType="HashMap" parameterType="HashMap">
+		select *
+		from reservaestablecimiento
+		where busin_num = #{busin_num}
+	</select>
+	
 </mapper>

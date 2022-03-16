@@ -1,7 +1,10 @@
 package com.pretty.dog.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +74,38 @@ public class CalendarController {
 	
 		return service.holiDay(holiDayDate);
 	}
+	
+	
+	
+	@RequestMapping(value = "/totalReserEx", method = RequestMethod.POST)
+	@ResponseBody
+	public List<HashMap<String, Object>> totalReserEx(Model model, @RequestParam HashMap<String, Object> data) {
+		
+		//System.out.println(data.get("busin_num"));
+		
+		List<HashMap<String, Object>> totalReserEx = service.totalReserEx(data);
+		
+		//System.out.println(totalReserEx);
+		
+		return totalReserEx;
+	}
+	
+	
+	
+	@RequestMapping(value = "/noReserAllDate", method = RequestMethod.POST)
+	@ResponseBody
+	public List<HashMap<String, Object>>  noReserAllDate(Model model, @RequestParam HashMap<String, Object> data) {
+		
+		//System.out.println(data);
+		
+		//System.out.println(data.get("totalDay"));
+		
+
+		return null;
+	}
+	
+	
+	
 	
 	
 

@@ -190,6 +190,8 @@
 	//설정을 변경 요청한 시간과 해당 날짜에 에약이 있는지 검사하고 비교하기 위한 비교 문자열 변수
 	var compareTime ="";
 	
+	//리얼 워크 타임을 담을 변수
+	var workingHours = [];
 	
 	var today = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
 	var date = new Date();  // @param 전역 변수, today의 Date를 세어주는 역할
@@ -491,8 +493,7 @@
 		btstTwo = parseInt(btstTwo);
 		btetTwo = parseInt(btetTwo);		
 		
-		//리얼 워크 타임을 담을 변수
-		var workingHours = [];
+		
 		
 		if(st >= ed){
 			alert("영업 시간 설정을 확인해주세요.");
@@ -607,6 +608,105 @@
 	
 	function allDay(){
 		
+		var st = $("#startTime").val();
+		var ed = $("#endTime").val();
+		
+		//value 가 String 으로 인식 되어 정확한 비교를 하기 위해서 parseInt 로 변환
+		st = parseInt(st);
+		ed = parseInt(ed);
+		
+		//오브젝트 형태로 뽑아온 데이터를 다시 밸류값으로 추출하기 위한 과정
+		var ex = JSON.stringify(businHours);
+		const obj = JSON.parse(ex);
+		
+		//첫 번째 브레이크 타임
+		var btstOne = $("#btstOne").val();
+		var btetOne = $("#btetOne").val();			
+			
+		btstOne = parseInt(btstOne);
+		btetOne = parseInt(btetOne);		
+		
+		//두 번째 브레이크 타임
+		var btstTwo = $("#btstTwo").val();
+		var btetTwo = $("#btetTwo").val();	
+			
+		btstTwo = parseInt(btstTwo);
+		btetTwo = parseInt(btetTwo);		
+		
+		
+		
+		if(st >= ed){
+			alert("영업 시간 설정을 확인해주세요.");
+		}else if(document.getElementById("breakTimeOne") && document.getElementById("breakTimeTwo") == null){
+				
+			if(btstOne >= btetOne){
+				alert("첫 번째 브레이크 타임 설정을 확인해주세요.");
+			}else if(btstOne < st || btetOne > ed){
+				alert("브레이크 타임은 영업시간 내로 설정해주세요.");
+			}else if(btstOne == st && btetOne == ed) {
+				alert("영업 시간 전체가 브레이크 타임으로 설정될 수 없습니다. 설정 시간을 다시 확인해주세요.");
+			}else{
+				//console.log("브레이크 타임이 하나인 경우");
+				var beforeBreakTime = Object.values(obj).slice(st,btstOne);
+				var afterBreakTime = Object.values(obj).slice(btetOne,ed); 
+				workingHours = [...beforeBreakTime, ...afterBreakTime];
+				//console.log(workingHours);
+			}
+							
+		}else if(document.getElementById("breakTimeTwo")){
+			
+			if(btstTwo >= btetTwo){
+				alert("두 번째 브레이크 타임 설정을 확인해주세요.");
+			}else if(btstTwo < st || btetTwo > ed){
+				alert("브레이크 타임은 영업시간 내로 설정해주세요.");
+			}else if(btstTwo < btetOne && btstTwo > btstOne){
+				alert("브레이크 타임이 겹쳤습니다. 다시 확인해주세요.");
+			}else if(btstTwo < btstOne){
+				alert("두 번째 브레이크 타임이 첫 번째 브레이크 타임보다 이릅니다. 브레이크 타임 설정을 다시 확인해주세요.");
+			}else if((ed-st)==((btetOne-btstOne)+(btetTwo-btstTwo))){
+				alert("영업 시간 전체가 브레이크 타임으로 설정될 수 없습니다. 설정 시간을 다시 확인해주세요.");
+			}else{
+				//console.log("브레이크 타임이 두개인 경우");
+				var beforeBreakTime = Object.values(obj).slice(st,btstOne);
+				var betweenBreakTime = Object.values(obj).slice(btetOne,btstTwo)
+				var afterBreakTime = Object.values(obj).slice(btetTwo,ed);
+				workingHours = [...beforeBreakTime, ...betweenBreakTime, ...afterBreakTime];
+				//console.log(workingHours);		
+			}
+		}else{
+			//console.log("브레이크 타임이 없을 경우");
+			workingHours = Object.values(obj).slice(st,ed);
+			//console.log(workingHours); //영업 시간 원하는 만큼 추출	
+		}
+		
+		//예약이 되어있는 시간을 비교하여 예약이 있는 시간을 포함하여 설정을 요청하는지 확인하기 위한 변수
+		var k = 0;
+		
+		//예약된 시간을 포함하고 있는 설정 시간을 보냈을 경우 예약 시간이 몇번째 인덱스 인지 저장하기 위한 배열
+		var iArr = [];
+		
+		var objt = {};
+		
+		for(var i=0; i<workingHours.length; i++){
+			
+			objt[workingHours[i]] = 0;
+			
+			for(var j=0; j<reserArr.length; j++){
+				
+				compareTime = reserArr[j];
+				
+				//console.log(compareTime+" / "+workingHours[i]);
+				
+				if(workingHours[i] === compareTime){
+					k++
+					iArr.push(i);
+					objt[workingHours[i]] = 1;
+				} 
+			}
+		}
+		//시간 추출 완료
+		//=============================================================//
+		
 		let today = new Date();   
 
 		let year = today.getFullYear(); // 년도
@@ -632,6 +732,15 @@
 		var nextMonthDay = []; 
 		var j = 0; //이번달 날짜 계산할 때 배열을 지정해 줄 변수
 		var k = 0; //다음달 날짜 계산할 때 배열을 지정해 줄 변수
+		
+		//고정 휴무 선택하고 일괄 저장시 딜리트 시켜줄 휴무를 저장하는 배열 이번달
+		let delThisHoliDay = [];
+		let delThieDayCnt = 0; //위의 배열의 넘버를 찍어줄 변수
+		
+		let delNextHoilDay = []; //다음달 휴무
+		let delNextDayCnt = 0;
+		
+		let noCancleDate = []; //일괄 저장시 저장이 안되게 할 날짜
 		
 		//오늘 날짜부터 내달 말일까지 모든 날짜를 연/월/일 형식으로 추출
 		let choiceHoliDay = $("#choiceHoliDay").val();
@@ -676,6 +785,9 @@
 					if(comDate != choiceHoliDay){
 						thisMonthDay[j] = startDate; 
 						j++;			
+					}else{
+						delThisHoliDay[delThieDayCnt] = startDate;	
+						delThieDayCnt++;
 					}
 				}else{
 					var startDate = (year + '-' + month + '-' +i);
@@ -684,6 +796,9 @@
 					if(comDate != choiceHoliDay){
 						thisMonthDay[j] = startDate; 
 						j++;			
+					}else{
+						delThisHoliDay[delThieDayCnt] = startDate;	
+						delThieDayCnt++;
 					}
 				}
 			}
@@ -696,6 +811,9 @@
 					if(comDate != choiceHoliDay){
 						nextMonthDay[k] = startDate; 
 						k++;			
+					}else{
+						delNextHoilDay[delNextDayCnt] = startDate;	
+						delNextDayCnt++;
 					}
 				}else{
 					var startDate = (year + '-' + nextMonth + '-' + i);
@@ -703,6 +821,9 @@
 					if(comDate != choiceHoliDay){
 						nextMonthDay[k] = startDate; 
 						k++;			
+					}else{
+						delNextHoilDay[delNextDayCnt] = startDate;	
+						delNextDayCnt++;
 					}
 				}
 				
@@ -710,8 +831,112 @@
 
 		}
 		
-		//console.log(thisMonthDay);
-		//console.log(nextMonthDay);
+		//예약 스케쥴 변경 요청을 보내는 전체 날짜
+		var totalDay = [...thisMonthDay , ...nextMonthDay];
+		
+		var totalDelDay = [...delThisHoliDay, ...delNextHoilDay];
+		
+		var allTime =  JSON.stringify(objt);
+		
+		
+		$.ajax({
+        	url:"/dog/totalReserEx",
+        	type:"POST",
+        	dataType:"JSON",
+        	data:{"busin_num" : "378-1234-468321"},
+        	success :function(data){
+        		
+        		
+        		if(data.length == 0){
+        			//에약이 없을 경우 일괄 수정시 
+        			
+        			console.log(totalDay);
+
+        			$.ajax({
+    		        	url:"/dog/noReserAllDate",
+    		        	type:"POST",
+    		        	dataType:"JSON",
+    		        	data:{"busin_num" : "378-1234-468321", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(objt)},
+    		        	success :function(data){
+    		        		console.log(data);
+    		        	},
+    		        	error : function(e){
+    		        		console.log(e);
+    		        	}
+    		        });	
+        			
+        			
+        		}else{
+        			
+        			for(var i=0; i<data.length; i++){
+            			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
+                		let comDay = data[i].set_date;
+                		let comDate = new Date(comDay)
+                		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
+                		//console.log(reserDate);
+                		
+                		const obj = JSON.parse(data[i].set_time);
+                		let reserTime = Object.values(obj);
+                		//console.log(reserTime);
+            			
+            			if(reserTime.filter(v => v == 1).length >=1){
+            				noCancleDate.push(reserDate);
+                		}
+            		}
+        			
+        			//요청한 영업일에서 휴무와 예약이 있는 날짜를 저장할 배열
+        			var upsertDate = [];
+        			var delDate = [];
+            		
+        			
+            		
+        			i = 0;
+            		
+        			//설정 변경을 요청한 총 영업일에서 예약이 있는 날짜 제거
+        			for(var j=0; j<totalDay.length; j++){
+
+        				if(totalDay[j] == noCancleDate[i]){
+        					i++;
+        				}else{
+        					upsertDate.push(totalDay[j]);
+        				}
+            			
+            		}
+        			
+        			//설정 변경을 요청한 총 휴무일에서 예약이 있는 날짜 제거
+        			for(var j=0; j<totalDelDay.length; j++){
+        				
+        				if(totalDelDay[j] == noCancleDate[i]){
+        					i++;
+        				}else{
+        					delDate.push(totalDelDay[j]);
+        				}
+        					
+        			}
+            		
+            		//console.log(totalDelDay);
+            		//console.log(delDate);
+        		}
+        		
+        		
+        		
+        		
+        	},
+        	error : function(e){
+        		console.log(e);
+        	}
+        });
+		
+		
+		/*
+		
+		
+		console.log(thisMonthDay);
+		console.log(nextMonthDay);
+		console.log(delThisHoliDay);
+		console.log(delNextHoilDay);
+		console.log(totalDelDay);
+		*/
 		
 		//let exReser = ["2022-03-16","2022-03-18","2022-03-20"];
 		//let test = ["2022-03-16","2022-03-17","2022-03-18","2022-03-19","2022-03-20","2022-03-21"]
