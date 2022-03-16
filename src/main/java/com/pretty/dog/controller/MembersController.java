@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,12 +16,15 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MimeType;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pretty.dog.dto.DogDTO;
 import com.pretty.dog.service.MembersService;
@@ -47,6 +51,7 @@ public class MembersController {
 	
 	
 	String hashText="";
+	private MimeType request;
 	@RequestMapping(value = "/joinShs", method = RequestMethod.POST)
 	public String joinShs(Model model,@RequestParam String id,@RequestParam String pw,
 			@RequestParam String name,@RequestParam String phone,@RequestParam String email,@RequestParam String nickname) {
@@ -262,20 +267,86 @@ public class MembersController {
 		return "Main";
 	}	
 		
-		//애견 정보 확인 등록페이지
+		//개인 애견정보 리스트 페이지
 		@RequestMapping(value = "/Mydogshs", method = RequestMethod.GET)
-		public String DogUp(Model model,HttpSession session) {
+		public ModelAndView DogUp(Model model,HttpSession session) {
 
 			String id = (String) session.getAttribute("loginId");
 			logger.info("세션아이디 값 : {}",id);
-					
-			//DogDTO dto = service.Mydogshs(id);
 			
-			//model.addAttribute("mydoginfo", dto);
+		return service.Mydogshs(id);
+	}	
+		
+		
+		
+		//개인 애견정보 삭제
+		@ResponseBody
+		@RequestMapping(value = "/DogDel", method = RequestMethod.GET)
+		public HashMap<String, Object> DogDel(Model model,HttpSession session,@RequestParam String dogName) {
 			
-		return "Mydogshs";
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			String id = (String) session.getAttribute("loginId");
+			logger.info("세션아이디 값 : {}",id+"/"+dogName);
+			int delCnt = service.DogDel(id,dogName);
+			
+			map.put("msg","삭제에 실패하였습니다.");
+			if(delCnt>0) {
+				map.put("msg", delCnt+" 마리의 등록 정보를 삭제 하였습니다.");
+				
+			}
+		return map;
+	}	
+		
+		//개인 강아지 수정페이지
+		@RequestMapping(value = "/MyDogsujungshs")
+		public String MyDogsujungshs(Model model,HttpSession session,HttpServletRequest request) {
+
+			String id = (String) session.getAttribute("loginId");
+			String dogName = request.getParameter("dogName");
+			logger.info("세션아이디 강아지 값 : {}",id+dogName);
+			
+			DogDTO dto =  service.MyDogsujungshs(id,dogName);
+			model.addAttribute("doginfo",dto);
+			
+		return "MyDogsujungshs";
 	}	
 
+		//개인 강아지 수정페이지
+		@RequestMapping(value = "/DogSujung")
+		public String DogSujung(Model model,HttpSession session,@RequestParam String dogname,@RequestParam String dogage
+				,@RequestParam String dogweight,@RequestParam String dogchar) {
+			
+			String id = (String) session.getAttribute("loginId");
+			logger.info("세션아이디 강아지 값 : {}",dogname+dogage+dogweight+dogchar);
+			int row = service.DogSujung(id,dogname,dogage,dogweight,dogchar);
+			logger.info("수정 성공 여부 {}",row);
+			String msg = "수정에 실패 하였습니다.";
+			if(row>0) {
+				msg = "수정에 성공 하였습니다.";
+			}
+			model.addAttribute("msg",msg);
+					
+		return "redirect:/Mydogshs";
+			}	
+		
+		
+		//회원탈퇴
+		@RequestMapping(value = "/memberOut")
+		public String memberOut(HttpSession session) {
+//			logger.info("회원탈퇴 컨트롤러");
+			
+			String id = (String) session.getAttribute("loginId");
+			
+			if(id != null) {
+				session.getAttribute("loginId");
+//				logger.info("회원탈퇴 컨트롤러 : {}",object);
+				
+				service.memberOut(id);
+				session.invalidate();
+			}
+			
+			return "redirect:/";
+		}
 
 
 		

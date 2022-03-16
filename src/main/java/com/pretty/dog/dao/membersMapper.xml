@@ -36,6 +36,14 @@
 	        VALUES(#{param1},#{param2},#{param3})
 	 </insert>
 	 
+	 
+	 <!-- 회원탈퇴 -->
+	 <update id="memberOut">
+		update members set mem_state = '2' WHERE mem_id =#{param1}
+	</update>
+	 
+	 
+	 
 	 <!-- 마이페이지 비밀번호 확인 -->
 	<select id="PassCk" resultType="String">
 		select mem_id,mem_pw from members WHERE mem_id =#{param1} and mem_pw=#{param2}
@@ -57,5 +65,32 @@
 	      INSERT INTO doginfo (mem_id,dog_name,dog_age,dog_weight,dog_char)
 	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5})
 	 </insert>
+	 
+	 <!-- MY강아지 리스트-->
+	 <select id="Mydogshs" resultType="com.pretty.dog.dto.DogDTO">
+		select * from doginfo WHERE mem_id =#{param1} AND dog_state =0
+	</select>
+	
+	<!-- MY 강아지 등록 정보 삭제 -->
+	<update id="DogDel">
+		update doginfo set dog_state = '1' WHERE mem_id =#{param1} AND dog_name = #{param2}
+	</update>
+	
+	<!-- MY 강아지 정보 확인 -->
+	<select id="MyDogsujungshs" resultType="com.pretty.dog.dto.DogDTO">
+		select * from doginfo WHERE mem_id =#{param1} AND dog_name = #{param2} AND dog_state='0'
+	</select>
+	
+	<!-- MY 강아지 정보 수정 -->
+	<update id="DogSujung">
+		update doginfo set 
+		dog_name=#{param2},
+		dog_age=#{param3}, 
+		dog_weight=#{param4},
+		dog_char=#{param5}
+		 WHERE mem_id =#{param1} AND dog_name = #{param2}
+	</update>
+	
+	
 
 </mapper>
