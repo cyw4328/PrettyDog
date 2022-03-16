@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="com.pretty.dog.dao.AdminPageDAO">
+
+	<select id="userlist" resultType="com.pretty.dog.dto.DogDTO">
+			select * from members 
+	</select>
+	
+	<select id="detail" resultType="com.pretty.dog.dto.DogDTO">
+			select * from members where mem_id = #{param1}
+	</select>
+	
+	<update id="userupdate">
+			update members set  mem_state = #{param2}, mem_rank = #{param3} where mem_id = #{param1}
+	</update> 
+	
+	<insert id="pointupdate">
+			INSERT INTO pointList (mem_id,point_cdc,point_cont,point_distin)
+			VALUES (#{param1},#{param2},"관리자 임의 수정",#{param3});
+	</insert>
+	
+	<update id="adminPointAdd">
+		update members set mem_point = (select sum(point_cdc) from pointlist where mem_id = #{param1}) where mem_id = #{param1}
+	</update>
+	
+	
+
+</mapper>
