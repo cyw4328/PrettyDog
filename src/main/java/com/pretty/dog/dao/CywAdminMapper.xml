@@ -100,16 +100,126 @@
 		SELECT count(interestshop_num) FROM interest_shop WHERE mem_id = #{param1}
 	</select>
 	
+	<!-- 관심매장 불러오기 -->
 	<select id="MyLikeShopList" resultType="dog">
 		SELECT i.interestshop_num,i.mem_id,i.busin_num,s.busin_name FROM interest_shop i join shop s on i.busin_num = s.busin_num
 		WHERE i.mem_id = #{param3} ORDER BY interestshop_num DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<!-- 관심매장삭제 -->
 	<delete id="LikeShopDel">
 		DELETE FROM interest_shop WHERE interestshop_num = #{param1}
 	</delete>
 	
+	<!-- 예약목록페이지이동 -->
 	<select id="MyPageReserPage" resultType="dog">
 		SELECT * FROM members WHERE mem_id = #{param1}
 	</select>
+	
+	<!-- 내 예약목록 페이징 카운터 -->
+	<select id="MyReserPageListCount" resultType="int">
+		SELECT count(reser_num) FROM reservation WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 내 예약목록 리스트 가져오기 -->
+	<select id="MyReserPageList" resultType="dog">
+		select * from reservation r join shop s ON r.busin_num = s.busin_num 
+		join price_list pl on r.busin_num = pl.busin_num 
+		join doginfo d on r.mem_id = d.mem_id  
+		where r.mem_id = #{param3} 
+		ORDER BY reser_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 예약취소 -->
+	<update id="reserDel">
+		UPDATE reservation SET reser_state = 2 WHERE reser_num = #{param1} and mem_id = #{param2}
+	</update>
+	
+	<!-- 예약취소 완료 후 예약정보가져오기 -->
+	<select id="reserData" resultType="hashmap">
+		SELECT * FROM reservation WHERE reser_num = #{param1} 
+	</select>
+	
+	<!-- 예약취소 후 예약로그 저장 -->
+	<insert id="reserLogInsert" parameterType="hashmap"> 
+		INSERT INTO history(mem_id,busin_num,history_askdate,history_dog,history_service,history_visitday,history_money,history_states)
+			values(#{mem_id},#{busin_num},#{reser_askdate},#{reser_dog},#{reser_service},#{reser_visitday},#{reser_money},#{reser_state})
+	</insert>
+	
+	<!-- 예약취소 후 취소한 일반회원 알림테이블 저장 -->
+	<insert id="reserCancleInsert" parameterType="hashmap">
+		INSERT INTO alarm (mem_id,reser_num,alarm_class)values(#{mem_id},#{reser_num},2)
+	</insert>
+	
+	<!-- 예약취소 후 취소당한 업주회원 알림테이블 저장 -->
+	<insert id="OwnerCancleInsert" parameterType="hashmap">
+		INSERT INTO alarm (mem_id,reser_num,alarm_class) 
+			values((select mem_id from shop s where busin_num = (select busin_num from reservation where reser_num = #{reser_num}))
+			,#{reser_num},2)
+	</insert>
+	
+	
+	<!-- 업주회원 예약관리 -->
+	<select id="OwnerReserPage" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 업주회원 예약리스트 -->
+	<select id="OwnerReserPageList" resultType="dog">
+		select * from reservation r join shop s ON r.busin_num = s.busin_num 
+		join price_list pl on r.busin_num = pl.busin_num 
+		join doginfo d on r.mem_id = d.mem_id  
+		where s.mem_id = "cyw4328"<!-- #{param3}  -->
+		ORDER BY reser_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 업주회원 예약리스트 페이징 -->
+	<select id="OwnerReserPageListCount" resultType="int">
+		select count(reser_num) from reservation r join shop s on r.busin_num  = s.busin_num where s.mem_id = "cyw4328"<!-- #{param1} -->; 
+	</select>
+	
+	<!-- 업주회원 예약 노쇼처리 -->
+	<update id="NoShowChange">
+		UPDATE reservation SET reser_state = 1 WHERE reser_num = #{param1}
+	</update>
+	
+	<!-- 노쇼처리 예약히스토리 등록 -->
+	<insert id="reserLogNoshow" parameterType="hashmap">
+		INSERT INTO history(mem_id,busin_num,history_askdate,history_dog,history_service,history_visitday,history_money,history_states)
+			values(#{mem_id},#{busin_num},#{reser_askdate},#{reser_dog},#{reser_service},#{reser_visitday},#{reser_money},#{reser_state})
+	</insert>
+	
+	<!-- 업주회원 예약 이용완료처리 -->
+	<update id="SuccessChange">
+		UPDATE reservation SET reser_state = 3 WHERE reser_num = #{param1}
+	</update>
+	
+	<!-- 이용완료처리 예약히스토리 등록 -->
+	<insert id="reserLogSuccess" parameterType="hashmap">
+		INSERT INTO history(mem_id,busin_num,history_askdate,history_dog,history_service,history_visitday,history_money,history_states)
+			values(#{mem_id},#{busin_num},#{reser_askdate},#{reser_dog},#{reser_service},#{reser_visitday},#{reser_money},#{reser_state})
+	</insert>
+	
+	<!-- 이용완료처리시 일반회원 알림등록 -->
+	<insert id="AlarmInsert" parameterType="hashmap">
+		INSERT INTO alarm (mem_id,reser_num,alarm_class)values(#{mem_id},#{reser_num},4)
+	</insert>
+	
+	<!-- 예약로그페이지 -->
+	<select id="OwnerReserLogPage" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+	
+	<!-- 예약로그 페이징 카운트 -->
+	<select id="ReserLogListCount" resultType="int">
+		select count(history_num) from history h join shop s on h.busin_num = s.busin_num where s.mem_id = "cyw4328" <!-- #{param1} -->
+	</select>
+	
+	<!-- 예약히스토리 리스트  -->
+	<select id="ReserLogList" resultType="dog">
+		select * from history h join shop s on h.busin_num = s.busin_num 
+			where s.mem_id = "cyw4328"<!-- #{param1} -->ORDER BY history_num DESC
+	</select>
+	
+	
 </mapper>
