@@ -1,5 +1,6 @@
 package com.pretty.dog.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.pretty.dog.dto.DogDTO;
@@ -28,6 +29,20 @@ public interface MembersDAO {
 	DogDTO MyShopInfoshs(String id);
 
 	int DogUp(String id, String dogname, String dogage, String dogweight, String dogchar);
+
+	ArrayList<DogDTO> Mydogshs(String id);
+
+	int DogDel(String id, String dogName);
+
+	DogDTO MyDogsujungshs(String id, String dogName);
+
+	int DogSujung(HashMap<String, String> params, String id);
+
+	int DogSujung(String id, String dogname, String dogage, String dogweight, String dogchar);
+
+	int memberOut(String id);
+
+
 
 
 }
