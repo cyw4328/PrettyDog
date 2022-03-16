@@ -4,16 +4,15 @@ package com.pretty.dog.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pretty.dog.dao.MembersDAO;
 import com.pretty.dog.dto.DogDTO;
@@ -118,9 +117,47 @@ public class MembersService {
 	}
 
 
-	public DogDTO Mydogshs(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ModelAndView Mydogshs(String id) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<DogDTO> list = dao.Mydogshs(id);
+		logger.info("size",list.size());
+		mav.addObject("size",list.size());
+		mav.addObject("list",list);
+		
+		mav.setViewName("Mydogshs");
+		
+		return mav;
+	}
+
+
+	public int DogDel(String id, String dogName) {
+		
+			logger.info("DogDel 서비스 도착");
+		
+			int delcnt = dao.DogDel(id,dogName);
+			logger.info("삭제 성공 수 : {}",delcnt);
+		return delcnt;
+	}
+
+
+	public DogDTO MyDogsujungshs(String id, String dogName) {
+		logger.info(" 강아지 수정 폼 서비스 : {}",id+"/"+dogName);
+		return dao.MyDogsujungshs(id,dogName);
+	}
+
+
+	public int DogSujung(String id, String dogname, String dogage, String dogweight, String dogchar) {
+		int row = dao.DogSujung(id,dogname,dogage,dogweight,dogchar);
+		
+		return row;
+	}
+
+
+	public void memberOut(String id) {
+		logger.info("회원탈퇴 서비스 도착 : {}",id );
+		int memOutCnt = dao.memberOut(id);
 	}
 
 
