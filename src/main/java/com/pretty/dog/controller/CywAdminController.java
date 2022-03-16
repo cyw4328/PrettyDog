@@ -196,7 +196,7 @@ public class CywAdminController {
 	
 	@RequestMapping(value = "/MyPageReserPage")
 	public ModelAndView MyPageReserPage(HttpSession session) {
-		logger.info("마이페이지예약목록페이지");
+		logger.info("마이페이지일반회원예약목록페이지");
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";
@@ -204,4 +204,91 @@ public class CywAdminController {
 		return service.MyPageReserPage(loginId);
 	}
 	
+	@RequestMapping(value = "/MyReserPageList", method = RequestMethod.GET) 
+	public @ResponseBody HashMap<String, Object> MyReserPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
+		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+
+		return service.MyReserPageList(currPage,pagePerCnt,loginId);
+	}
+	
+	@RequestMapping(value = "/reserDel")
+	public ModelAndView reserDel(HttpSession session,@RequestParam String reser_num,RedirectAttributes rAttr) {
+		logger.info("마이페이지일반회원예약취소:{}",reser_num);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		return service.reserDel(reser_num,loginId,rAttr);
+	}
+	
+	@RequestMapping(value = "/OwnerReserPage")
+	public ModelAndView OwnerReserPageList(HttpSession session) {
+		logger.info("마이페이지업주회원예약목록페이지");
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		return service.OwnerReserPage(loginId);
+	}
+	@RequestMapping(value = "/OwnerReserPageList", method = RequestMethod.GET) 
+	public @ResponseBody HashMap<String, Object> OwnerReserPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
+		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+
+		return service.OwnerReserPageList(currPage,pagePerCnt,loginId);
+	}
+	
+	@RequestMapping(value = "/NoShowChange")
+	public ModelAndView NoShowChange(HttpSession session,@RequestParam String reser_num,RedirectAttributes rAttr) {
+		logger.info("마이페이지예약노쇼처리:{}",reser_num);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		return service.NoShowChange(reser_num,loginId,rAttr);
+	}
+	
+	@RequestMapping(value = "/SuccessChange")
+	public ModelAndView SuccessChange(HttpSession session,@RequestParam String reser_num,RedirectAttributes rAttr) {
+		logger.info("마이페이지예약이용완료처리:{}",reser_num);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		return service.SuccessChange(reser_num,loginId,rAttr);
+	}
+	
+	@RequestMapping(value = "/OwnerReserLogPage")
+	public ModelAndView OwnerReserLogPage(HttpSession session) {
+		logger.info("마이페이지일반회원예약목록페이지");
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		return service.OwnerReserLogPage(loginId);
+	}
+	
+	@RequestMapping(value = "/ReserLogList", method = RequestMethod.GET) 
+	public @ResponseBody HashMap<String, Object> ReserLogList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
+		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+
+		return service.ReserLogList(currPage,pagePerCnt,loginId);
+	}
 }
