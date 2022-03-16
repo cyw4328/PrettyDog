@@ -583,6 +583,120 @@ public class DogDTO {
 		this.interestshop_num = interestshop_num;
 	}
 	
+	private int dog_num;
+	private String dog_name;
+	private int dog_age;
+	private String dog_weight;
+	private String dao_char;
+	private Timestamp dog_date;
+	private int doa_state;
+
+	public int getDog_num() {
+		return dog_num;
+	}
+	public void setDog_num(int dog_num) {
+		this.dog_num = dog_num;
+	}
+	public String getDog_name() {
+		return dog_name;
+	}
+	public void setDog_name(String dog_name) {
+		this.dog_name = dog_name;
+	}
+	public int getDog_age() {
+		return dog_age;
+	}
+	public void setDog_age(int dog_age) {
+		this.dog_age = dog_age;
+	}
+	public String getDog_weight() {
+		return dog_weight;
+	}
+	public void setDog_weight(String dog_weight) {
+		this.dog_weight = dog_weight;
+	}
+	public String getDao_char() {
+		return dao_char;
+	}
+	public void setDao_char(String dao_char) {
+		this.dao_char = dao_char;
+	}
+	public Timestamp getDog_date() {
+		return dog_date;
+	}
+	public void setDog_date(Timestamp dog_date) {
+		this.dog_date = dog_date;
+	}
+	public int getDoa_state() {
+		return doa_state;
+	}
+	public void setDoa_state(int doa_state) {
+		this.doa_state = doa_state;
+	}
+	
+	private int history_num;
+	private Timestamp history_askdate;
+	private int history_dog;
+	private String history_service;
+	private Timestamp history_visitday;
+	private int history_money;
+	private String history_states;
+	private Timestamp history_updateday;
+
+	public int getHistory_num() {
+		return history_num;
+	}
+	public void setHistory_num(int history_num) {
+		this.history_num = history_num;
+	}
+	public Timestamp getHistory_askdate() {
+		return history_askdate;
+	}
+	public void setHistory_askdate(Timestamp history_askdate) {
+		this.history_askdate = history_askdate;
+	}
+	public int getHistory_dog() {
+		return history_dog;
+	}
+	public void setHistory_dog(int history_dog) {
+		this.history_dog = history_dog;
+	}
+	public String getHistory_service() {
+		return history_service;
+	}
+	public void setHistory_service(String history_service) {
+		this.history_service = history_service;
+	}
+	public Timestamp getHistory_visitday() {
+		return history_visitday;
+	}
+	public void setHistory_visitday(Timestamp history_visitday) {
+		this.history_visitday = history_visitday;
+	}
+	public int getHistory_money() {
+		return history_money;
+	}
+	public void setHistory_money(int history_money) {
+		this.history_money = history_money;
+	}
+	public String getHistory_states() {
+		return history_states;
+	}
+	public void setHistory_states(String history_states) {
+		this.history_states = history_states;
+	}
+	public Timestamp getHistory_updateday() {
+		return history_updateday;
+	}
+	public void setHistory_updateday(Timestamp history_updateday) {
+		this.history_updateday = history_updateday;
+	}
+	
+	
+
+
+	
+	
 	
 	
 	

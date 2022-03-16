@@ -39,6 +39,17 @@
 			vertical-align: top;
 			/* border-bottom: 1px solid #ccc; */
 		}
+		.table1{
+			width: 40%;
+		    max-width: 100%;
+		    margin-bottom: 20px;
+			table-layout: fixed;
+		}
+		.contCss{
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
 		</style>
 </head>
 <body>
@@ -55,7 +66,7 @@
 			<h4 style="font-size: 25px;">${loginId }님의 댓글 목록</h4>	
 		</div>
 		<div style="position: absolute; top: 150px; left: 20px;">
-			<table>
+			<table class="table1">
 				<thead>
 					<tr>
 						<th style="width: 150px;">내용</th>
@@ -130,7 +141,7 @@ function listDraw(list) {
  
 	
 		content +='<tr>';
-		content +='<td>'+'<a href="#">'+item.bcomment_cont+'</a>'+'</td>';
+		content +='<td class="contCss">'+'<a href="#">'+item.bcomment_cont+'</a>'+'</td>';
 		content += '<td>'+date.getFullYear()+"-"
 	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date.getDate()).slice(-2);+'</td>'

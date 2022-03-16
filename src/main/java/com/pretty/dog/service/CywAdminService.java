@@ -289,6 +289,159 @@ public class CywAdminService {
 		
 		return mav;
 	}
+
+	public HashMap<String, Object> MyReserPageList(int currPage, int pagePerCnt, String loginId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.MyReserPageListCount(loginId); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.MyReserPageList(pagePerCnt,offset,loginId));
+		
+		
+		return map;
+	}
+
+	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr) {
+		ModelAndView mav =new ModelAndView();
+		
+		int row = dao.reserDel(reser_num,loginId);
+		
+		if (row > 0) {
+			// 예약취소 후의 데이터 불러오기
+			HashMap<String, Object> list = dao.reserData(reser_num,loginId);
+			logger.info("예약취소하고 정보해쉬맵?:{}",list);
+			// 예약취소 후 예약히스토리 등록
+			int success = dao.reserLogInsert(list);
+			// 알람등록(일반회원)
+			int Alarm = dao.reserCancleInsert(list);
+			// 알람등록(업주회원)
+			int OwnerAlarm = dao.OwnerCancleInsert(list);
+			rAttr.addFlashAttribute("msg", "예약취소가 완료되었습니다.");
+			mav.setViewName("redirect:/MyPageReserPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "예약취소가 불가능합니다.");
+			mav.setViewName("redirect:/MyPageReserPage");
+		}
+		return mav;
+	}
+
+	public ModelAndView OwnerReserPage(String loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<DogDTO> memInfo = dao.OwnerReserPage(loginId);
+		
+		mav.addObject("loginId", loginId);
+		mav.addObject("memInfo", memInfo);
+		mav.setViewName("cywMyPageOwnerReser");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> OwnerReserPageList(int currPage, int pagePerCnt, String loginId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.OwnerReserPageListCount(loginId); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.OwnerReserPageList(pagePerCnt,offset,loginId));
+		
+		
+		return map;
+	}
+
+	public ModelAndView NoShowChange(String reser_num, String loginId, RedirectAttributes rAttr) {
+		ModelAndView mav =new ModelAndView();
+		
+		int row = dao.NoShowChange(reser_num,loginId);
+		
+		if (row > 0) {
+			HashMap<String, Object> list = dao.reserData(reser_num,loginId);
+			logger.info("노쇼처리하고 정보해쉬맵?:{}",list);
+			// 예약취소 후 예약히스토리 등록
+			int success = dao.reserLogNoshow(list);
+
+			rAttr.addFlashAttribute("msg", "노쇼처리가 완료되었습니다.");
+			mav.setViewName("redirect:/OwnerReserPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "노쇼처리가 불가능합니다.");
+			mav.setViewName("redirect:/OwnerReserPage");
+		}
+		return mav;
+	}
+
+	public ModelAndView SuccessChange(String reser_num, String loginId, RedirectAttributes rAttr) {
+		ModelAndView mav =new ModelAndView();
+		
+		int row = dao.SuccessChange(reser_num,loginId);
+		
+		if (row > 0) {
+			HashMap<String, Object> list = dao.reserData(reser_num,loginId);
+			logger.info("이용완료처리하고 정보해쉬맵?:{}",list);
+			// 예약취소 후 예약히스토리 등록
+			int success = dao.reserLogSuccess(list);
+			// 일반회원 알림서비스
+			int AlarmInsert = dao.AlarmInsert(list);
+			
+			rAttr.addFlashAttribute("msg", "이용완료처리가 완료되었습니다.");
+			mav.setViewName("redirect:/OwnerReserPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "이용완료처리가 불가능합니다.");
+			mav.setViewName("redirect:/OwnerReserPage");
+		}
+		return mav;
+	}
+
+	public ModelAndView OwnerReserLogPage(String loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<DogDTO> memInfo = dao.OwnerReserLogPage(loginId);
+		
+		mav.addObject("loginId", loginId);
+		mav.addObject("memInfo", memInfo);
+		mav.setViewName("cywMyPageReserLog");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> ReserLogList(int currPage, int pagePerCnt, String loginId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.ReserLogListCount(loginId); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.ReserLogList(pagePerCnt,offset,loginId));
+		
+		
+		return map;
+	}
 	
 	
 	

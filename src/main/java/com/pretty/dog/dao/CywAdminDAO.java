@@ -1,6 +1,7 @@
 package com.pretty.dog.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.pretty.dog.dto.DogDTO;
 
@@ -49,5 +50,41 @@ public interface CywAdminDAO {
 	int LikeShopDel(String interestshop_num, String loginId);
 
 	ArrayList<DogDTO> MyPageReserPage(String loginId);
+
+	int MyReserPageListCount(String loginId);
+
+	ArrayList<DogDTO> MyReserPageList(int pagePerCnt, int offset, String loginId);
+
+	int reserDel(String reser_num, String loginId);
+
+	ArrayList<DogDTO> OwnerReserPage(String loginId);
+
+	ArrayList<DogDTO> OwnerReserPageList(int pagePerCnt, int offset, String loginId);
+
+	int OwnerReserPageListCount(String loginId);
+
+	int NoShowChange(String reser_num, String loginId);
+
+	int SuccessChange(String reser_num, String loginId);
+
+	ArrayList<DogDTO> OwnerReserLogPage(String loginId);
+
+	int ReserLogListCount(String loginId);
+
+	ArrayList<DogDTO> ReserLogList(int pagePerCnt, int offset, String loginId);
+
+	HashMap<String, Object> reserData(String reser_num, String loginId);
+
+	int reserLogInsert(HashMap<String, Object> list);
+
+	int reserCancleInsert(HashMap<String, Object> list);
+
+	int OwnerCancleInsert(HashMap<String, Object> list);
+
+	int reserLogNoshow(HashMap<String, Object> list);
+
+	int reserLogSuccess(HashMap<String, Object> list);
+
+	int AlarmInsert(HashMap<String, Object> list);
 
 }
