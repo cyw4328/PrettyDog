@@ -28,7 +28,18 @@ public class SshShopListService {
 		return sshShopListDAO.sshShopDetail(idx);
 	}
 
-	
+	public ArrayList<HashMap<String, Object>> sshShopQnaList(String idx) {
+		System.out.println("sshShopQnaList 서비스 이동");
+		System.out.println("매장 번호" + idx);
+		return sshShopListDAO.sshShopQnaList(idx);
+	}
+
+	public ArrayList<HashMap<String, Object>> sshShopQnaIdChk(String memId) {
+		System.out.println("sshShopQnaIdChk 서비스 이동");
+		System.out.println("로그인 아이디 : " + memId);
+		return sshShopListDAO.sshShopQnaIdChk(memId);
+	}
+
 }
 
 

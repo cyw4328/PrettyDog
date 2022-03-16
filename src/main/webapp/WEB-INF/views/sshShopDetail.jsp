@@ -21,7 +21,7 @@
 		<li><a href="#tabmenu_03" data-toggle="tab">탭메뉴3</a></li>
 	</ul>
 	<div class="tab-content">
-		<div class="tab-pane fade in active" id="tabmenu_01"><p></p></div>
+		<div class="tab-pane fade in active" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div>
 		<div class="tab-pane fade" id="tabmenu_02"><p>탭메뉴2 내용</p></div>
 		<div class="tab-pane fade" id="tabmenu_03"><p>탭메뉴3 내용</p></div>
 	</div>
