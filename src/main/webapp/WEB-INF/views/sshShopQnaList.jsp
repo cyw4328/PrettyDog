@@ -67,18 +67,19 @@ qnaComChk();
 		//console.log($(".textarea").children("input")[i].value);
 	}
 	
+	console.log(a);
 	
 	function qnaComChk(){
 		$.ajax({
-			type:'get',
+			type:'POST',
 			url:'qnaComChk',
-			data:a,
+			data:{'abc':a},
 			dataType:'JSON',
 			success:function(data){
 				console.log(data);
 			},
 			error:function(e){
-				
+				//console.log(e);
 			}
 		})
 	}

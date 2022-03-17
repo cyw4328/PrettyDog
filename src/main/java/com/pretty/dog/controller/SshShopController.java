@@ -48,11 +48,12 @@ public class SshShopController {
 		return "sshShopDetail";
 	}
 	
-	@RequestMapping(value = "/qnaComChk", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaComChk", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> qnaComChk(Model model, @RequestParam HashMap<String, Object> a) {
+	public HashMap<String, Object> qnaComChk(Model model, @RequestParam HashMap<Object, Object> abc) {
 		System.out.println("여기로 오냐고");
-		System.out.println(a.size());
+		System.out.println(abc);
+		
 		return null;
 	}
 }
