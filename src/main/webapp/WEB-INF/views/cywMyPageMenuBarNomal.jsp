@@ -88,7 +88,7 @@ a{
 			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
 		</div>
 		
-		<a href="#"><div class= "tab00" id="tab1">개인정보수정</div></a>
+		<a href="./MyjungboSujungshs"><div class= "tab00" id="tab1">개인정보수정</div></a>
 		<a href="./pointListPage"><div class= "tab00" id="tab2">포인트내역</div></a>
 		<a href="#"><div class= "tab00" id="tab3">내가 등록한 애견</div></a>
 		<a href="./MyPageReserPage"><div class= "tab00" id="tab5">나의 예약 관리</div></a>

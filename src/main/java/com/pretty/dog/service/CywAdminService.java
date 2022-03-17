@@ -83,6 +83,9 @@ public class CywAdminService {
 		
 		return mav;
 	}
+	
+	
+//	마이페이지 부분 -------------------------------------------------------------------------------
 
 	public ModelAndView MyPageAlarm(String loginId) {
 		ModelAndView mav = new ModelAndView();
@@ -442,6 +445,247 @@ public class CywAdminService {
 		
 		return map;
 	}
+
+	// -----------------------------------------------------------------------------------------
+	
+	// 밑에부터 신고 부분
+	
+	public ModelAndView SingoHangmokPage() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("cywAdminSingoHangmok");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> SingoHangmokList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.SingoHangmokListCount(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.SingoHangmokList(pagePerCnt,offset));
+		
+		
+		return map;
+	}
+
+	public ModelAndView SingoHangmokAdd(String singoSub, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.SingoHangmokAdd(singoSub);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "신고항목이 등록되었습니다.");
+			mav.setViewName("redirect:/SingoHangmokPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "등록에 실패했습니다.");
+			mav.setViewName("redirect:/SingoHangmokPage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView HangmokReUse(String decO_num, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.HangmokReUse(decO_num);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "신고항목이 상태변경되었습니다.");
+			mav.setViewName("redirect:/SingoHangmokPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "상태변경에 실패했습니다.");
+			mav.setViewName("redirect:/SingoHangmokPage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView HangmokDel(String decO_num, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.HangmokDel(decO_num);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "신고항목이 상태변경되었습니다.");
+			mav.setViewName("redirect:/SingoHangmokPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "상태변경에 실패했습니다.");
+			mav.setViewName("redirect:/SingoHangmokPage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView SingoListPage() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("cywAdminSingoList");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> SingoNoCheckList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.SingoNoCheckListCount(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.SingoNoCheckList(pagePerCnt,offset));
+		
+		
+		return map;
+	}
+
+	public ModelAndView SingoProcess(String decl_num, RedirectAttributes rAttr, String loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+//		예약상태 변경
+		int row = dao.SingoProcess(decl_num);
+		
+		if (row > 0) {
+			// 예약처리테이블 등록
+			int success = dao.decAdminInsert(decl_num,loginId);
+			
+			rAttr.addFlashAttribute("msg", "신고가 처리상태가 되었습니다.");
+			mav.setViewName("redirect:/SingoListPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "상태변경에 실패했습니다.");
+			mav.setViewName("redirect:/SingoListPage");
+		}
+		
+		return mav;
+	}
+	
+	public ModelAndView SingoProcessListPage() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("cywAdminSingoProcess");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> SingoProcessList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.SingoProcessListCount(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.SingoProcessList(pagePerCnt,offset));
+		
+		
+		return map;
+	}
+
+	public ModelAndView AdminServicePage() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("cywAdminAddService");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> ServiceHangmokList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.ServiceHangmokListCount(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.ServiceHangmokList(pagePerCnt,offset));
+		
+		
+		return map;
+	}
+
+	public ModelAndView UseServiceChange(String add_num, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.UseServiceChange(add_num);
+		
+		if (row > 0) {
+			
+			rAttr.addFlashAttribute("msg", "사용상태로 변경 되었습니다.");
+			mav.setViewName("redirect:/AdminServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "상태변경에 실패했습니다.");
+			mav.setViewName("redirect:/AdminServicePage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView NoUseServiceChange(String add_num, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.NoUseServiceChange(add_num);
+		
+		if (row > 0) {
+			
+			rAttr.addFlashAttribute("msg", "미사용상태로 변경 되었습니다.");
+			mav.setViewName("redirect:/AdminServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "상태변경에 실패했습니다.");
+			mav.setViewName("redirect:/AdminServicePage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView ServiceHangmokAdd(String serviceDog, String serviceSub, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.ServiceHangmokAdd(serviceDog,serviceSub);
+		
+		if (row > 0) {
+			
+			rAttr.addFlashAttribute("msg", "서비스가 추가되었습니다.");
+			mav.setViewName("redirect:/AdminServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "서비스추가에 실패했습니다.");
+			mav.setViewName("redirect:/AdminServicePage");
+		}
+		
+		return mav;
+	}
+
 	
 	
 	

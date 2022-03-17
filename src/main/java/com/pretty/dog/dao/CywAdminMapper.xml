@@ -30,6 +30,8 @@
 		UPDATE community_category SET category_blind = 1 WHERE category_num = #{param1}
 	</update>
 	
+	<!-- 마이페이지쪽 시작 -->
+	
 	<!-- 마이페이지 알림리스트 갯수 -->
 	<select id="AlrimPageListCount" resultType="int">
 		SELECT count(alarm_num) FROM alarm WHERE mem_id = #{param1}
@@ -220,6 +222,88 @@
 		select * from history h join shop s on h.busin_num = s.busin_num 
 			where s.mem_id = "cyw4328"<!-- #{param1} -->ORDER BY history_num DESC
 	</select>
+	
+
+	
+	<!-- 신고항목 페이징 카운터 -->
+	<select id="SingoHangmokListCount" resultType="int">
+		select count(decO_num) from decOption
+	</select>
+	
+	<!-- 신고항목 리스트 -->
+	<select id="SingoHangmokList" resultType="dog">
+		SELECT * FROM decOption ORDER BY decO_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 신고항목 추가 -->
+	<insert id="SingoHangmokAdd">
+		INSERT INTO decOption(decO_cont)values(#{param1})
+	</insert>
+	
+	<!-- 신고항목 다시사용 -->
+	<update id="HangmokReUse">
+		UPDATE decOption SET decO_blind = 0 WHERE decO_num = #{param1}
+	</update>
+	
+	<!-- 신고항목 블라인드 처리 -->
+	<update id="HangmokDel">
+		UPDATE decOption SET decO_blind = 1 WHERE decO_num = #{param1}
+	</update>
+	
+	<!-- 신고리스트 미처리상태 페이징 카운트 -->
+	<select id="SingoNoCheckListCount" resultType="int">
+		select count(decl_num) from declaration WHERE dec_state = 0
+	</select>
+	
+	<!-- 신고 미처리상태 리스트 -->
+	<select id="SingoNoCheckList" resultType="dog">
+		select * from declaration d join decoption d2 on d.decO_num = d2.decO_num where dec_state = 0 ORDER BY decl_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 신고처리하기 -->
+	<update id="SingoProcess">
+		UPDATE declaration SET dec_state = 1 WHERE decl_num = #{param1}
+	</update>
+	
+	<!-- 신고처리테이블 등록 -->
+	<insert id="decAdminInsert">
+		INSERT INTO decAdmin(decl_num,decA_id)values(#{param1},#{param2})
+	</insert>
+	
+	<!-- 신고리스트 처리상태 페이징 카운트 -->
+	<select id="SingoProcessListCount" resultType="int">
+		select count(decA_num) from decAdmin
+	</select>
+	
+	 <!-- 신고 처리상태 리스트 -->
+	<select id="SingoProcessList" resultType="dog">
+		select * from decAdmin d join declaration d2 on d.decl_num = d2.decl_num ORDER BY decA_num DESC LIMIT #{param1} OFFSET #{param2};
+	</select>
+	
+	<!-- 추가서비스 항목관리 페이징 -->
+	<select id="ServiceHangmokListCount" resultType="int">
+		select count(add_num) from addition_place
+	</select>
+	
+	<!-- 추가서비스 항목리스트 -->
+	<select id="ServiceHangmokList" resultType="dog">
+		select * from addition_place ORDER BY add_num DESC LIMIT #{param1} OFFSET #{param2};
+	</select>
+	
+	<!-- 서비스 사용으로 변경 -->
+	<update id="UseServiceChange">
+		UPDATE addition_place SET add_blind = 0 WHERE add_num = #{param1}
+	</update>
+	
+	<!-- 서비스 미사용으로 변경 -->
+	<update id="NoUseServiceChange">
+		UPDATE addition_place SET add_blind = 1 WHERE add_num = #{param1}
+	</update>
+	
+	<!-- 추가서비스 등록 -->
+	<insert id="ServiceHangmokAdd">
+		INSERT INTO addition_place(add_sub,add_dog)values(#{param2},#{param1})
+	</insert>
 	
 	
 </mapper>

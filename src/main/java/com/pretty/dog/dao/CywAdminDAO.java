@@ -17,6 +17,8 @@ public interface CywAdminDAO {
 
 	int categoryDel(String category_num);
 
+	
+	// 마이페이지 ==--------------------------------------------------------
 	int AlrimPageListCount(String loginId);
 
 	ArrayList<DogDTO> AlrimPageList(int pagePerCnt, int offset, String of);
@@ -86,5 +88,39 @@ public interface CywAdminDAO {
 	int reserLogSuccess(HashMap<String, Object> list);
 
 	int AlarmInsert(HashMap<String, Object> list);
+
+	// -----------------------------------------------------------------
+	
+	int SingoHangmokListCount();
+
+	ArrayList<DogDTO> SingoHangmokList(int pagePerCnt, int offset);
+
+	int SingoHangmokAdd(String singoSub);
+
+	int HangmokReUse(String decO_num);
+
+	int HangmokDel(String decO_num);
+
+	int SingoNoCheckListCount();
+
+	ArrayList<DogDTO> SingoNoCheckList(int pagePerCnt, int offset);
+
+	int SingoProcess(String decl_num);
+
+	int decAdminInsert(String decl_num, String loginId);
+
+	int SingoProcessListCount();
+
+	ArrayList<DogDTO> SingoProcessList(int pagePerCnt, int offset);
+
+	int ServiceHangmokListCount();
+
+	ArrayList<DogDTO> ServiceHangmokList(int pagePerCnt, int offset);
+
+	int UseServiceChange(String add_num);
+
+	int NoUseServiceChange(String add_num);
+
+	int ServiceHangmokAdd(String serviceDog, String serviceSub);
 
 }

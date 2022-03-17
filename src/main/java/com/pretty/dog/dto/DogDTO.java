@@ -231,7 +231,15 @@ public class DogDTO {
 	private int add_num;
 	private String add_sub;
 	private int add_blind;
-
+	private int add_dog;
+	
+	
+	public int getAdd_dog() {
+		return add_dog;
+	}
+	public void setAdd_dog(int add_dog) {
+		this.add_dog = add_dog;
+	}
 	public int getAdd_num() {
 		return add_num;
 	}
@@ -692,10 +700,96 @@ public class DogDTO {
 		this.history_updateday = history_updateday;
 	}
 	
-	
+	private int decO_num;
+	private String decO_cont;
+	private int decO_blind;
 
+	public int getDecO_num() {
+		return decO_num;
+	}
+	public void setDecO_num(int decO_num) {
+		this.decO_num = decO_num;
+	}
+	public String getDecO_cont() {
+		return decO_cont;
+	}
+	public void setDecO_cont(String decO_cont) {
+		this.decO_cont = decO_cont;
+	}
+	public int getDecO_blind() {
+		return decO_blind;
+	}
+	public void setDecO_blind(int decO_blind) {
+		this.decO_blind = decO_blind;
+	}
+
+	private int decl_num;
+	private int dec_state;
+	private Timestamp dec_date;
+	private int dec_target;
+	private int dec_targetNum;
+	private String dec_id;
 
 	
+	public String getDec_id() {
+		return dec_id;
+	}
+	public void setDec_id(String dec_id) {
+		this.dec_id = dec_id;
+	}
+	public int getDecl_num() {
+		return decl_num;
+	}
+	public void setDecl_num(int decl_num) {
+		this.decl_num = decl_num;
+	}
+	public int getDec_state() {
+		return dec_state;
+	}
+	public void setDec_state(int dec_state) {
+		this.dec_state = dec_state;
+	}
+	public Timestamp getDec_date() {
+		return dec_date;
+	}
+	public void setDec_date(Timestamp dec_date) {
+		this.dec_date = dec_date;
+	}
+	public int getDec_target() {
+		return dec_target;
+	}
+	public void setDec_target(int dec_target) {
+		this.dec_target = dec_target;
+	}
+	public int getDec_targetNum() {
+		return dec_targetNum;
+	}
+	public void setDec_targetNum(int dec_targetNum) {
+		this.dec_targetNum = dec_targetNum;
+	}
+	
+	private int decA_num;
+	private String decA_id;
+	private Timestamp decA_date;
+
+	public int getDecA_num() {
+		return decA_num;
+	}
+	public void setDecA_num(int decA_num) {
+		this.decA_num = decA_num;
+	}
+	public String getDecA_id() {
+		return decA_id;
+	}
+	public void setDecA_id(String decA_id) {
+		this.decA_id = decA_id;
+	}
+	public Timestamp getDecA_date() {
+		return decA_date;
+	}
+	public void setDecA_date(Timestamp decA_date) {
+		this.decA_date = decA_date;
+	}
 	
 	
 	

@@ -43,11 +43,13 @@
 			font-size: 15px;
 		}
 		input[type="button"]{
-			width: 130px;
+			width: 110px;
 			height: 30px;
-			background-color: rightgray;
+			background-color: #DECCDF;
 			color: black;
 			font-size: 13px;
+			margin-left: 10px;
+			border: 0;
 		}
 		 a:link { color: black; text-decoration: none;}
 		 a:visited { color: black; text-decoration: none;}
@@ -83,7 +85,7 @@
 			<a href="./idSearchPage">아이디찾기</a>&nbsp;/&nbsp;<a href="./pwSearchPage">비밀번호찾기</a>
 		</div>
 		<div id="JoinFormBtn">
-			<input type="button" value="일반 회원가입" class="joinForm" id="nomalmem"/><input type="button" value="업주 회원가입" class="joinForm"/>
+			<input type="button" value="일반 회원가입" class="joinForm" id="nomalmem"/><input type="button" value="업주 회원가입" class="joinForm" id="Ownermem"/>
 		</div>
 	</div>	
 </body>
@@ -104,6 +106,9 @@ $('#nomalmem').click(function() {
 	window.location.href="./JoinFormshs";
 })
 
+$('#Ownermem').click(function() {
+	window.location.href="./ShopJoinFormshs";
+})
 
 </script>
 </html>
