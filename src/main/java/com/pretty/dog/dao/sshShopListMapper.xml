@@ -32,6 +32,16 @@
 		and sbc.mem_id = #{param1}
 	</select>
 
+	<select id="qnaComChk" parameterType="java.util.List" resultType="hashmap">
+		select sb.shop_boardnum 
+		from shop_board sb, shop_board_comment sbc
+		where sb.shop_boardnum = sbc.shop_boardnum
+		and sbc.shop_boardnum in
+		<foreach collection="list" item="item" open="(" close=")"  separator=",">
+			#{item}
+		</foreach>
+	</select>
+
 </mapper>
 
 

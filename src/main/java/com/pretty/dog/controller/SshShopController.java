@@ -50,11 +50,16 @@ public class SshShopController {
 	
 	@RequestMapping(value = "/qnaComChk", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> qnaComChk(Model model, @RequestParam HashMap<Object, Object> abc) {
+	public List<HashMap<String, Object>> qnaComChk(Model model, @RequestParam(value="a[]") List<String> a) {
 		System.out.println("여기로 오냐고");
-		System.out.println(abc);
-		
-		return null;
+		System.out.println(a);
+		List<HashMap<String,Object>> qnaComChk = sshShopListService.qnaComChk(a);
+		System.out.println(qnaComChk);
+		/*
+		 * HashMap<String, Object> map = new HashMap<String, Object>();
+		 * map.put("qnaComChk", qnaComChk);
+		 */
+		return qnaComChk;
 	}
 }
 

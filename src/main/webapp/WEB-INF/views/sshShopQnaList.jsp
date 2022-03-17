@@ -21,25 +21,26 @@
 		<p>${sshShopQnaList.mem_id }</p>
 		<p>${sshShopQnaList.shop_boarddate }</p>
 		<input type="hidden" value="${sshShopQnaList.shop_boardnum}" class="shopBoardNum"/>
-		<textarea cols="90" rows="3">${sshShopQnaList.shop_boardcont }</textarea>
+		<textarea class="${sshShopQnaList.shop_boardnum}" cols="90" rows="3">${sshShopQnaList.shop_boardcont }</textarea>
+		<div id="qnaBoard${sshShopQnaList.shop_boardnum }"></div>
 	</div>
 	</c:forEach>
 </body>
 <script>
-qnaComChk();
+
 	var memId0 = '${memId}'; // 로그인 아이디
 	var memId1 = '${sshShopDetail[0].mem_id}'; // 점주 아이디
 	var content = "";
 	var textLength = 0;
-	//var a = new Array();
-	//var b = '${sshShopQnaIdChk}'.length;
-	//a = '${sshShopQnaIdChk}'.slice(1,(b-1)).split(',');
-	/* console.log(a);
+	/* var a = new Array();
+	var b = '${sshShopQnaIdChk}'.length;
+	a = '${sshShopQnaIdChk}'.slice(1,(b-1)).split(',');
+	console.log(a);
 	for(var i=0; i<a.length; i++){
 		
-	} */
+	}
 	
-	if(memId0 === memId1){
+	 if(memId0 === memId1){
 		textLength = $(".textarea").length;
 		console.log(textLength);
 		for(var i = 0; i<=textLength; i++){
@@ -49,7 +50,7 @@ qnaComChk();
 			
 		}
 		$(".textarea").append(content);
-	}
+	}  */
 	
 	
 	$(".textarea").children(".shopBoardNum");
@@ -58,8 +59,7 @@ qnaComChk();
 	console.log($(".textarea").children("input")[1]);
 	console.log($(".textarea").children("input")[2]);	
 	
-	var a = [];
-	//var b = new Array();
+	var a = new Array();
 	
 	for(var i=0; i<$(".textarea").children("input").length; i++){
 		a.push($(".textarea").children("input")[i].value);	
@@ -68,18 +68,33 @@ qnaComChk();
 	}
 	
 	console.log(a);
-	
-	function qnaComChk(){
+    qnaComChk();
+	 function qnaComChk(){
 		$.ajax({
 			type:'POST',
 			url:'qnaComChk',
-			data:{'abc':a},
+			data:{a:a},
 			dataType:'JSON',
 			success:function(data){
-				console.log(data);
+				console.log("data : ", data);
+				console.log("data.length : " + data.length);
+				console.log("a.length : " + a.length);
+				console.log("a[0] : " + a[0]);
+				console.log("data[0] " , data[0]);
+				console.log("data[0].shop_boardnum : " , data[0].shop_boardnum);
+				for(var i = 0; i<=a.length; i++){
+					var b = data[i].shop_boardnum;
+					for(var j=0; j<=a.length; j++){
+						if(a[j] == b){
+							//console.log("아");
+							content = "<a href='#'>답글 달기</a>";
+							$("#qnaBoard"+b).append(content);
+						}	
+					}
+				}
 			},
 			error:function(e){
-				//console.log(e);
+				console.log(e);
 			}
 		})
 	}
