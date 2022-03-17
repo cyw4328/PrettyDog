@@ -40,6 +40,11 @@ public class CalendarService {
 			return dao.totalReserEx(data);
 		}
 
+		public int noReserAllDate(List<HashMap<String, Object>> list) {
+			
+			return dao.noReserAllDate(list);
+		}
+
 	
 		
 }

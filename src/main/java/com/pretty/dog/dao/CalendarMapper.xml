@@ -35,4 +35,18 @@
 		where busin_num = #{busin_num}
 	</select>
 	
+	
+	<insert id="noReserAllDate" parameterType="java.util.List">
+		insert into reservaestablecimiento (busin_num, set_date , set_time)
+		values 
+		<foreach collection="list" item="item" separator=",">
+			(#{item.busin_num}, #{item.set_date}, #{item.set_time})
+		</foreach>
+		on DUPLICATE key update
+		set_date = values(set_date),
+		set_time = values(set_time)
+	</insert>
+	
+	
+	
 </mapper>

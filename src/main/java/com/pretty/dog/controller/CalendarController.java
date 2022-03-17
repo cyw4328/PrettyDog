@@ -1,8 +1,11 @@
 package com.pretty.dog.controller;
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -94,14 +97,35 @@ public class CalendarController {
 	
 	@RequestMapping(value = "/noReserAllDate", method = RequestMethod.POST)
 	@ResponseBody
-	public List<HashMap<String, Object>>  noReserAllDate(Model model, @RequestParam HashMap<String, Object> data) {
+	public int noReserAllDate(Model model, @RequestParam HashMap<String, Object> data) throws Exception {
 		
 		//System.out.println(data);
 		
-		//System.out.println(data.get("totalDay"));
+		Object str = data.get("totalDay");
 		
-
-		return null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		
+		String totalDate = str.toString();
+		int lastInNo = totalDate.length();
+		String[] sendTotalDate = totalDate.substring(1, (lastInNo-1)).split(",");
+		String busin_num = (String) data.get("busin_num");
+		Object set_time = data.get("set_time");
+		
+		
+		for(int i=0; i<sendTotalDate.length; i++) {
+			map.put("busin_num", busin_num);
+			map.put("set_date", sendTotalDate[i]);
+			map.put("set_time", set_time);
+			list.add(i, map);
+			map = new HashMap<String, Object>();
+		}
+		
+		System.out.println(list);
+		
+		
+		
+		return service.noReserAllDate(list);
 	}
 	
 	

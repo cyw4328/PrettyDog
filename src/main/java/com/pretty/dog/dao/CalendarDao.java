@@ -13,6 +13,8 @@ public interface CalendarDao {
 
 	List<HashMap<String, Object>> totalReserEx(HashMap<String, Object> data);
 
+	int noReserAllDate(List<HashMap<String, Object>> list);
+
 
 
 }
