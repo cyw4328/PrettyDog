@@ -16,8 +16,7 @@
 		<c:forEach items="${sshShopList }" var="sshShopList">
 		<tr>
 		<%-- <a href="beautyTrendDetail?idx=${TrendListInfo.community_boardnum }"> --%>
-		<td><a href="sshShopDetail?idx=${sshShopList.busin_num }">${sshShopList.busin_num }</a></td>
-		<%-- <td onclick="location.href='./sshShopDetail?idx=${sshShopList.busin_num }&memId=a99'">${sshShopList.busin_num }</td> --%>
+		<td><a href="sshShopDetail?idx=${sshShopList.busin_num }&memId=a1">${sshShopList.busin_num }</a></td>
 		<td>${sshShopList.busin_name }</td>
 		</tr>
 		</c:forEach>
