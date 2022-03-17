@@ -13,6 +13,7 @@
 	</style>
 </head>
 <body>
+	<%@ include file="APside.jsp"%>
     <h2>회원 목록</h2>
     <table border="1" width="700px">
         <tr>
