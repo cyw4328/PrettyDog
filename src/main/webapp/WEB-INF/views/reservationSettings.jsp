@@ -193,6 +193,9 @@
 	//리얼 워크 타임을 담을 변수
 	var workingHours = [];
 	
+	//일괄 저장할 때 쓰일 시간 정보를 담은 객체
+	var sendWorkingTime = {};
+	
 	var today = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
 	var date = new Date();  // @param 전역 변수, today의 Date를 세어주는 역할
 	
@@ -390,7 +393,8 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"ChooseDate" : ChoiceDate,
+        		"busin_num": "378-1234-468522",
+        		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
         		
@@ -398,7 +402,7 @@
         		//console.log(data.set_time);
         		
         		//JSON 컬럼으로 되어 있는 녀석의 데이터를 js 에서 사용하기 위해서 파싱을 해준 작업
-        		const obj = JSON.parse(data.set_time);
+        		let obj = JSON.parse(data.set_time);
         		
         		//파싱한 데이터를 다시 키값으로 나누기 위한 작업(선택한 날짜의 시간 정보를 가져온다)
 				//console.log(Object.keys(obj));
@@ -547,9 +551,12 @@
 		
 		var objt = {};
 		
+		
+		
 		for(var i=0; i<workingHours.length; i++){
 			
 			objt[workingHours[i]] = 0;
+			
 			
 			for(var j=0; j<reserArr.length; j++){
 				
@@ -561,6 +568,7 @@
 					k++
 					iArr.push(i);
 					objt[workingHours[i]] = 1;
+					
 				} 
 			}
 		}
@@ -690,6 +698,7 @@
 		for(var i=0; i<workingHours.length; i++){
 			
 			objt[workingHours[i]] = 0;
+			sendWorkingTime[workingHours[i]] = 0;
 			
 			for(var j=0; j<reserArr.length; j++){
 				
@@ -701,6 +710,7 @@
 					k++
 					iArr.push(i);
 					objt[workingHours[i]] = 1;
+					sendWorkingTime[workingHours[i]] = 0;
 				} 
 			}
 		}
@@ -844,8 +854,10 @@
         	url:"/dog/totalReserEx",
         	type:"POST",
         	dataType:"JSON",
-        	data:{"busin_num" : "378-1234-468321"},
+        	data:{"busin_num" : "378-1234-468522"},
         	success :function(data){
+        		
+        		console.log(data);
         		
         		for(var i=0; i<data.length; i++){
         			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
@@ -854,7 +866,7 @@
             		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
             		//console.log(reserDate);
             		
-            		const obj = JSON.parse(data[i].set_time);
+            		let obj = JSON.parse(data[i].set_time);
             		let reserTime = Object.values(obj);
             		//console.log(reserTime);
         			
@@ -872,7 +884,7 @@
     		        	url:"/dog/noReserAllDate",
     		        	type:"POST",
     		        	dataType:"JSON",
-    		        	data:{"busin_num" : "378-1234-468321", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(objt), "totalDelDay" : JSON.stringify(totalDelDay)},
+    		        	data:{"busin_num" : "378-1234-468522", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(totalDelDay)},
     		        	success :function(data){
     		        		//console.log(data);
     		        		if(data >= 1){
@@ -918,9 +930,40 @@
         				}
         					
         			}
-            		
-            		//console.log(totalDelDay);
+        			
+        			console.log(sendWorkingTime);
+        			console.log(objt);
+        			
+        			//아작스 들어갈 부분
+        			
+        			
+        			$.ajax({
+    		        	url:"/dog/noReserAllDate",
+    		        	type:"POST",
+    		        	dataType:"JSON",
+    		        	data:{"busin_num" : "378-1234-468522", "totalDay" :JSON.stringify(upsertDate), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(delDate)},
+    		        	success :function(data){
+    		        		//console.log(data);
+    		        		if(data >= 1){
+    		        			location.reload();
+    		        		}
+    		        	},
+    		        	error : function(e){
+    		        		console.log(e);
+    		        	}
+    		        });	
+        			
+        			
+        			
+        			/*
+        			console.log(noCancleDate);
+        			console.log("==============================================");
+        			console.log(totalDay);
+        			console.log(totalDelDay);
+        			console.log("==============================================");
+            		console.log(upsertDate);
             		console.log(delDate);
+            		*/
         		}
         		
         		

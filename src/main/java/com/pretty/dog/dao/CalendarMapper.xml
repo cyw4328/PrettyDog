@@ -10,6 +10,7 @@
 		select *
 		from reservaestablecimiento 
 		where set_date = #{ChooseDate}
+		and busin_num = #{busin_num}
 	</select>
 
 
@@ -30,9 +31,9 @@
 	
 	
 	<select id="totalReserEx" resultType="HashMap" parameterType="HashMap">
-		select *
-		from reservaestablecimiento
-		where busin_num = #{busin_num}
+		SELECT * FROM reservaestablecimiento
+		WHERE date(set_date) >= date(now())
+		and busin_num = #{busin_num}
 	</select>
 	
 	

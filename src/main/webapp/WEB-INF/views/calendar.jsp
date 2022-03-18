@@ -256,7 +256,8 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"ChooseDate" : ChoiceDate,
+        		"busin_num": "378-1234-468522",
+        		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
         		

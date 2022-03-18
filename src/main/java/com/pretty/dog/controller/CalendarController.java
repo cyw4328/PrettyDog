@@ -39,7 +39,7 @@ public class CalendarController {
 	public HashMap<Object, Object> dateInfo(Model model, @RequestParam HashMap<String, Object> data) {
 		
 		HashMap<Object, Object> map = service.dateInfo(data);
-		//System.out.println(map.size());
+		System.out.println(data);
 
 		return map;
 		
@@ -126,7 +126,7 @@ public class CalendarController {
 			map = new HashMap<String, Object>();
 		}
 		
-		//System.out.println(list);
+		System.out.println(list);
 		
 		HashMap<String, Object> delMap = new HashMap<String, Object>();
 		ArrayList<HashMap<String, Object>> delList = new ArrayList<HashMap<String,Object>>();
@@ -158,9 +158,10 @@ public class CalendarController {
 		return service.noReserAllDate(list);
 	}
 	
+
 	
 	
-	
+
 	
 
 }
