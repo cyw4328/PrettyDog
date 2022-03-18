@@ -43,6 +43,8 @@
 	</style>
 </head>
 <body>
+
+<%@ include file="cywMyPageMenuBarOwner.jsp"%>	
 <div id="con_memberDe">
 
 <div id="sujung_txt">

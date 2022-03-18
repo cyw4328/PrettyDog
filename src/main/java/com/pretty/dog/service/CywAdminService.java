@@ -314,7 +314,7 @@ public class CywAdminService {
 		return map;
 	}
 
-	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr) {
+	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr, String reser_money, String busin_num) {
 		ModelAndView mav =new ModelAndView();
 		
 		int row = dao.reserDel(reser_num,loginId);
@@ -322,13 +322,29 @@ public class CywAdminService {
 		if (row > 0) {
 			// 예약취소 후의 데이터 불러오기
 			HashMap<String, Object> list = dao.reserData(reser_num,loginId);
-			logger.info("예약취소하고 정보해쉬맵?:{}",list);
+			logger.info("예약취소 후의 데이터 불러오기?:{}",list);
 			// 예약취소 후 예약히스토리 등록
 			int success = dao.reserLogInsert(list);
+			logger.info("예약취소 후 예약히스토리 등록?:{}",success);
 			// 알람등록(일반회원)
 			int Alarm = dao.reserCancleInsert(list);
+			logger.info("알람등록(일반회원)?:{}",Alarm);
 			// 알람등록(업주회원)
 			int OwnerAlarm = dao.OwnerCancleInsert(list);
+			logger.info("알람등록(업주회원)?:{}",OwnerAlarm);
+			// 회원포인트 추가
+			int reserDelMemPointAdd = dao.reserDelMemPointAdd(loginId,reser_money);
+			logger.info("회원포인트 추가?:{}",reserDelMemPointAdd);
+			// 회원포인트 추가 포인트테이블등록
+			int reserDelMemPointTable = dao.reserDelMemPointTable(loginId,reser_money);
+			logger.info("회원포인트 추가 포인트테이블등록?:{}",reserDelMemPointTable);
+			// 업주회원 노포인트 차감
+			int reserDelOwnerPointDel = dao.reserDelOwnerPointDel(reser_money,busin_num);
+			logger.info("업주회원 노포인트 차감?:{}",reserDelOwnerPointDel);
+			// 업주회원포인트 차감 포인트테이블 등록
+			int reserDelOwnerPointTable = dao.reserDelOwnerPointTable(reser_money,busin_num);
+			logger.info("업주회원포인트 차감 포인트테이블 등록?:{}",reserDelOwnerPointTable);
+			
 			rAttr.addFlashAttribute("msg", "예약취소가 완료되었습니다.");
 			mav.setViewName("redirect:/MyPageReserPage");
 		}else {
@@ -371,7 +387,7 @@ public class CywAdminService {
 		return map;
 	}
 
-	public ModelAndView NoShowChange(String reser_num, String loginId, RedirectAttributes rAttr) {
+	public ModelAndView NoShowChange(String reser_num, String loginId, RedirectAttributes rAttr, String busin_num,String reser_money) {
 		ModelAndView mav =new ModelAndView();
 		
 		int row = dao.NoShowChange(reser_num,loginId);
@@ -379,9 +395,16 @@ public class CywAdminService {
 		if (row > 0) {
 			HashMap<String, Object> list = dao.reserData(reser_num,loginId);
 			logger.info("노쇼처리하고 정보해쉬맵?:{}",list);
-			// 예약취소 후 예약히스토리 등록
+			// 노쇼처리 후 예약히스토리 등록
 			int success = dao.reserLogNoshow(list);
-
+			logger.info("노쇼처리하고 예약히스토리 등록?:{}",success);
+			// 노쇼처리 후 업주 노포인트에서 차감 
+			int NoShopNoPoint = dao.NoShopNoPoint(busin_num,reser_num,reser_money);
+			logger.info("노쇼처리 후 업주 노포인트에서 차감 ?:{}",NoShopNoPoint);
+			// 노쇼처리 후 업주 포인트에서 가감
+			int NoShowPointAdd = dao.NoShowPointAdd(busin_num,reser_money);
+			logger.info("노쇼처리 후 업주 포인트에서 가감?:{}",NoShowPointAdd);
+			
 			rAttr.addFlashAttribute("msg", "노쇼처리가 완료되었습니다.");
 			mav.setViewName("redirect:/OwnerReserPage");
 		}else {
@@ -391,7 +414,7 @@ public class CywAdminService {
 		return mav;
 	}
 
-	public ModelAndView SuccessChange(String reser_num, String loginId, RedirectAttributes rAttr) {
+	public ModelAndView SuccessChange(String reser_num, String loginId, RedirectAttributes rAttr, String busin_num, String reser_money) {
 		ModelAndView mav =new ModelAndView();
 		
 		int row = dao.SuccessChange(reser_num,loginId);
@@ -403,6 +426,13 @@ public class CywAdminService {
 			int success = dao.reserLogSuccess(list);
 			// 일반회원 알림서비스
 			int AlarmInsert = dao.AlarmInsert(list);
+			
+			// 이용완료 후 업주 노포인트에서 차감 
+			int UseSuccessNoPoint = dao.UseSuccessNoPoint(busin_num,reser_num,reser_money);
+			logger.info("이용완료 후 업주 노포인트에서 차감 ?:{}",UseSuccessNoPoint);
+			// 이용완료 후 업주 포인트에서 가감
+			int UseSuccessPointAdd = dao.UseSuccessPointAdd(busin_num,reser_money);
+			logger.info("이용완료 후 업주 포인트에서 가감?:{}",UseSuccessPointAdd);
 			
 			rAttr.addFlashAttribute("msg", "이용완료처리가 완료되었습니다.");
 			mav.setViewName("redirect:/OwnerReserPage");
