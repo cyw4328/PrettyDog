@@ -23,6 +23,7 @@
 		from shop_board
 		where shop_boardclass = 2
 		and busin_num = #{param1}
+		order by shop_boardnum desc
 	</select>
 	
 	<select id="sshShopQnaIdChk" resultType="hashmap">

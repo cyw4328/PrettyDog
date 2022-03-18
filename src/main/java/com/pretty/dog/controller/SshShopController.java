@@ -61,6 +61,15 @@ public class SshShopController {
 		 */
 		return qnaComChk;
 	}
+	
+	@RequestMapping(value = "/QnaNnswerInsert", method = RequestMethod.GET)
+	public String beautyTrendWriteForm(Model model, @RequestParam String QnaNnswerText, @RequestParam String memId0) {
+		logger.info("QnaNnswerText :  "+ QnaNnswerText);
+		logger.info("memId0 :  "+ memId0);
+		//model.addAttribute("mem_id", memId0);
+		return null;
+	}
+	
 }
 
 
