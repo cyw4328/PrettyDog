@@ -99,8 +99,6 @@ public class CalendarController {
 	@ResponseBody
 	public int noReserAllDate(Model model, @RequestParam HashMap<String, Object> data) throws Exception {
 		
-		//System.out.println(data);
-		
 		Object str = data.get("totalDay");
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -112,16 +110,48 @@ public class CalendarController {
 		String busin_num = (String) data.get("busin_num");
 		Object set_time = data.get("set_time");
 		
+		ArrayList<String> set_date = new ArrayList<String>();
+		
+		for(int j=0; j<sendTotalDate.length; j++) {
+			set_date.add(sendTotalDate[j].replaceAll("\"", "")); 
+		}
+		
 		
 		for(int i=0; i<sendTotalDate.length; i++) {
+			
 			map.put("busin_num", busin_num);
-			map.put("set_date", sendTotalDate[i]);
+			map.put("set_date", set_date.get(i));
 			map.put("set_time", set_time);
 			list.add(i, map);
 			map = new HashMap<String, Object>();
 		}
 		
-		System.out.println(list);
+		//System.out.println(list);
+		
+		HashMap<String, Object> delMap = new HashMap<String, Object>();
+		ArrayList<HashMap<String, Object>> delList = new ArrayList<HashMap<String,Object>>();
+		
+		Object noCancle = data.get("totalDelDay");
+		String coCan = noCancle.toString();
+		int lastNoCan = coCan.length();
+		String[] sendcoCan = coCan.substring(1, (lastNoCan-1)).split(",");
+		
+		ArrayList<String> del_date = new ArrayList<String>();
+		
+		for(int j=0; j<sendcoCan.length; j++) {
+			del_date.add(sendcoCan[j].replaceAll("\"", "")); 
+		}
+		
+		for(int i=0; i<sendcoCan.length; i++) {
+			
+			delMap.put("del_date", del_date.get(i));
+			delList.add(i, delMap);
+			delMap = new HashMap<String, Object>();
+		}
+		
+		System.out.println(delList);
+		
+		service.delDate(delList);
 		
 		
 		

@@ -1,5 +1,6 @@
 package com.pretty.dog.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,6 +44,11 @@ public class CalendarService {
 		public int noReserAllDate(List<HashMap<String, Object>> list) {
 			
 			return dao.noReserAllDate(list);
+		}
+
+		public void delDate(List<HashMap<String, Object>> delList) {
+			
+			dao.delDate(delList);
 		}
 
 	

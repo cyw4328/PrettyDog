@@ -838,6 +838,7 @@
 		
 		var allTime =  JSON.stringify(objt);
 		
+		//console.log(totalDelDay);
 		
 		$.ajax({
         	url:"/dog/totalReserEx",
@@ -846,8 +847,23 @@
         	data:{"busin_num" : "378-1234-468321"},
         	success :function(data){
         		
+        		for(var i=0; i<data.length; i++){
+        			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
+            		let comDay = data[i].set_date;
+            		let comDate = new Date(comDay)
+            		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
+            		//console.log(reserDate);
+            		
+            		const obj = JSON.parse(data[i].set_time);
+            		let reserTime = Object.values(obj);
+            		//console.log(reserTime);
+        			
+        			if(reserTime.filter(v => v == 1).length >=1){
+        				noCancleDate.push(reserDate);
+            		}
+        		}
         		
-        		if(data.length == 0){
+        		if(noCancleDate.length == 0){
         			//에약이 없을 경우 일괄 수정시 
         			
         			console.log(totalDay);
@@ -856,9 +872,12 @@
     		        	url:"/dog/noReserAllDate",
     		        	type:"POST",
     		        	dataType:"JSON",
-    		        	data:{"busin_num" : "378-1234-468321", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(objt)},
+    		        	data:{"busin_num" : "378-1234-468321", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(objt), "totalDelDay" : JSON.stringify(totalDelDay)},
     		        	success :function(data){
-    		        		console.log(data);
+    		        		//console.log(data);
+    		        		if(data >= 1){
+    		        			location.reload();
+    		        		}
     		        	},
     		        	error : function(e){
     		        		console.log(e);
@@ -868,21 +887,7 @@
         			
         		}else{
         			
-        			for(var i=0; i<data.length; i++){
-            			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
-                		let comDay = data[i].set_date;
-                		let comDate = new Date(comDay)
-                		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
-                		//console.log(reserDate);
-                		
-                		const obj = JSON.parse(data[i].set_time);
-                		let reserTime = Object.values(obj);
-                		//console.log(reserTime);
-            			
-            			if(reserTime.filter(v => v == 1).length >=1){
-            				noCancleDate.push(reserDate);
-                		}
-            		}
+        			
         			
         			//요청한 영업일에서 휴무와 예약이 있는 날짜를 저장할 배열
         			var upsertDate = [];
@@ -915,7 +920,7 @@
         			}
             		
             		//console.log(totalDelDay);
-            		//console.log(delDate);
+            		console.log(delDate);
         		}
         		
         		

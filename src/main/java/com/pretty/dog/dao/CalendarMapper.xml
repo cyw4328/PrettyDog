@@ -43,10 +43,20 @@
 			(#{item.busin_num}, #{item.set_date}, #{item.set_time})
 		</foreach>
 		on DUPLICATE key update
-		set_date = values(set_date),
 		set_time = values(set_time)
 	</insert>
-	
+
+	<delete id="delDate" parameterType="java.util.List"> 
+		DELETE FROM reservaestablecimiento 
+		<where> 
+			set_date IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				 #{item.del_date} 
+			 </foreach> 
+		 </where>
+	 </delete>
+
+
 	
 	
 </mapper>
