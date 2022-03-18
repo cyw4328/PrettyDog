@@ -160,6 +160,27 @@
 			,#{reser_num},2)
 	</insert>
 	
+	<!-- 예약취소 후 회원테이블 포인트컬럼 가감 -->
+	<update id="reserDelMemPointAdd">
+		UPDATE members SET mem_point = (select mem_point from members where mem_id = #{param1})+#{param2} WHERE mem_id = #{param1}
+	</update>
+	
+	<!-- 예약취소 후 포인트테이블 추가포인트 등록 -->
+	<insert id="reserDelMemPointTable">
+		INSERT INTO pointList (mem_id,point_cdc,point_cont,point_distin) values (#{param1},#{param2},"예약취소",0)
+	</insert>
+	
+	<!-- 예약취소 후 업주회원 노포인트 컬럼 차감 -->
+	<update id="reserDelOwnerPointDel">
+		update members set mem_nopoint = (select mem_nopoint from members 
+		where mem_id = (select mem_id from shop where busin_num = #{param2}))- #{param1} 
+		where mem_id = (select mem_id from shop where busin_num = #{param2});
+	</update>
+	
+	<!-- 예약취소 후 포인트테이블 업주 회원 등록 -->
+	<insert id="reserDelOwnerPointTable">
+		INSERT INTO pointList (mem_id,point_cdc,point_cont,point_distin) values ((select mem_id from shop where busin_num = #{param2}),-#{param1},"예약취소",1)
+	</insert>
 	
 	<!-- 업주회원 예약관리 -->
 	<select id="OwnerReserPage" resultType="dog">
@@ -191,6 +212,20 @@
 			values(#{mem_id},#{busin_num},#{reser_askdate},#{reser_dog},#{reser_service},#{reser_visitday},#{reser_money},#{reser_state})
 	</insert>
 	
+	<!-- 노쇼처리 후 업주 노포인트차감 -->
+	<update id="NoShopNoPoint">
+		update members set mem_nopoint = (select mem_nopoint from members where mem_id = 
+			(select mem_id from shop where busin_num = #{param1})) - #{param3} where mem_id = 
+			(select mem_id from shop where busin_num =#{param1})
+	</update>
+	
+	<!-- 노쇼처리 후 업주 포인트 가감 -->
+	<update id="NoShowPointAdd">
+		update members set mem_point = (select mem_point from members where mem_id = 
+			(select mem_id from shop where busin_num = #{param1})) + #{param2} where mem_id = 
+			(select mem_id from shop where busin_num =#{param1})
+	</update>
+	
 	<!-- 업주회원 예약 이용완료처리 -->
 	<update id="SuccessChange">
 		UPDATE reservation SET reser_state = 3 WHERE reser_num = #{param1}
@@ -206,6 +241,20 @@
 	<insert id="AlarmInsert" parameterType="hashmap">
 		INSERT INTO alarm (mem_id,reser_num,alarm_class)values(#{mem_id},#{reser_num},4)
 	</insert>
+	
+	<!-- 이용완료처리시 후 업주 노포인트차감 -->
+	<update id="UseSuccessNoPoint">
+		update members set mem_nopoint = (select mem_nopoint from members where mem_id = 
+			(select mem_id from shop where busin_num = #{param1})) - #{param3} where mem_id = 
+			(select mem_id from shop where busin_num =#{param1})
+	</update>
+	
+	<!-- 이용완료처리시 후 업주 포인트 가감 -->
+	<update id="UseSuccessPointAdd">
+		update members set mem_point = (select mem_point from members where mem_id = 
+			(select mem_id from shop where busin_num = #{param1})) + #{param2} where mem_id = 
+			(select mem_id from shop where busin_num =#{param1})
+	</update>
 	
 	<!-- 예약로그페이지 -->
 	<select id="OwnerReserLogPage" resultType="dog">

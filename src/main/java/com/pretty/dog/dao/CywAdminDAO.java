@@ -123,4 +123,20 @@ public interface CywAdminDAO {
 
 	int ServiceHangmokAdd(String serviceDog, String serviceSub);
 
+	int reserDelMemPointAdd(String loginId, String reser_money);
+
+	int reserDelMemPointTable(String loginId, String reser_money);
+
+	int reserDelOwnerPointDel(String reser_money, String busin_num);
+
+	int reserDelOwnerPointTable(String reser_money, String busin_num);
+
+	int NoShopNoPoint(String busin_num, String reser_num, String reser_money);
+
+	int NoShowPointAdd(String busin_num, String reser_money);
+
+	int UseSuccessNoPoint(String busin_num, String reser_num, String reser_money);
+
+	int UseSuccessPointAdd(String busin_num, String reser_money);
+
 }

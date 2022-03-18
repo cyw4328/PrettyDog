@@ -143,12 +143,15 @@ function listDraw(list) {
     	var date = new Date(item.reser_askdate);
     	var date1 = new Date(item.reser_visitday);
     	var date2 = new Date(item.reser_updateday);
+    	var $busin_num = item.busin_num;
+    	console.log($busin_num);
+    	
     	
     	if (item.reser_state == 0) {
 			reserState = '<b style="color:green";>'+"예약완료"+'</b>';
-			reserState1 = '<a onclick="NoShowChange('+item.reser_num+')" style="color:gray">노쇼</a>'
+			reserState1 = '<a onclick="NoShowChange('+item.reser_num+',\''+$busin_num+'\',\''+item.reser_money+'\')" style="color:gray">노쇼</a>'
 				+" / "+
-				'<a onclick="SuccessChange('+item.reser_num+')" style="color:gray">이용완료</a>';
+				'<a onclick="SuccessChange('+item.reser_num+',\''+$busin_num+'\',\''+item.reser_money+'\')" style="color:gray">이용완료</a>';
 		}else if (item.reser_state == 1) {
 			reserState = '<b style="color:red";>'+"노쇼"+'</b>';
 			reserState1 = '<b style="color:red";>'+"상태변경불가"+'</b>';
@@ -202,18 +205,20 @@ if(msg != ""){
 
 }	
 
-function NoShowChange(a) {
-	console.log(a);
+function NoShowChange(a,b,c) {
+	
+	console.log(c);
+	
 	var yn = confirm("정말 상태를 바꾸시겠습니까?");
 	if (yn) {
-		location.href='./NoShowChange?reser_num='+a ;
+		location.href='./NoShowChange?reser_num='+a+'&&busin_num='+b+'&&reser_money='+c ;
 	}
 }
-function SuccessChange(a) {
+function SuccessChange(a,b,c) {
 	console.log(a);
 	var yn = confirm("정말 상태를 바꾸시겠습니까?");
 	if (yn) {
-		location.href='./SuccessChange?reser_num='+a ;
+		location.href='./SuccessChange?reser_num='+a+'&&busin_num='+b+'&&reser_money='+c ;
 	}
 }
 
