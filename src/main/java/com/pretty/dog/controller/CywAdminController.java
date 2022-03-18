@@ -339,13 +339,16 @@ public class CywAdminController {
 	}
 	
 	@RequestMapping(value = "/reserDel")
-	public ModelAndView reserDel(HttpSession session,@RequestParam String reser_num,RedirectAttributes rAttr) {
+	public ModelAndView reserDel(HttpSession session,@RequestParam String reser_num,
+			RedirectAttributes rAttr,@RequestParam String reser_money,@RequestParam String busin_num) {
 		logger.info("마이페이지일반회원예약취소:{}",reser_num);
+		logger.info("마이페이지일반회원예약취소금액:{}",reser_money);
+		logger.info("마이페이지예약취소사업자번호:{}",busin_num);
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";
 		
-		return service.reserDel(reser_num,loginId,rAttr);
+		return service.reserDel(reser_num,loginId,rAttr,reser_money,busin_num);
 	}
 	
 	@RequestMapping(value = "/OwnerReserPage")
@@ -371,28 +374,34 @@ public class CywAdminController {
 	}
 	
 	@RequestMapping(value = "/NoShowChange")
-	public ModelAndView NoShowChange(HttpSession session,@RequestParam String reser_num,RedirectAttributes rAttr) {
+	public ModelAndView NoShowChange(HttpSession session,@RequestParam String reser_num,
+			RedirectAttributes rAttr,@RequestParam String busin_num,@RequestParam String reser_money) {
 		logger.info("마이페이지예약노쇼처리:{}",reser_num);
+		logger.info("마이페이지예약노쇼사업자번호:{}",busin_num);
+		logger.info("마이페이지예약노쇼 금액:{}",reser_money);
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";
 		
-		return service.NoShowChange(reser_num,loginId,rAttr);
+		return service.NoShowChange(reser_num,loginId, rAttr,busin_num,reser_money);
 	}
 	
 	@RequestMapping(value = "/SuccessChange")
-	public ModelAndView SuccessChange(HttpSession session,@RequestParam String reser_num,RedirectAttributes rAttr) {
+	public ModelAndView SuccessChange(HttpSession session,@RequestParam String reser_num,
+			RedirectAttributes rAttr,@RequestParam String busin_num,@RequestParam String reser_money) {
 		logger.info("마이페이지예약이용완료처리:{}",reser_num);
+		logger.info("마이페이지예약이용완료사업자번호:{}",busin_num);
+		logger.info("마이페이지예약이용완료 금액:{}",reser_money);
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";
 		
-		return service.SuccessChange(reser_num,loginId,rAttr);
+		return service.SuccessChange(reser_num,loginId, rAttr,busin_num,reser_money);
 	}
 	
 	@RequestMapping(value = "/OwnerReserLogPage")
 	public ModelAndView OwnerReserLogPage(HttpSession session) {
-		logger.info("마이페이지일반회원예약목록페이지");
+		logger.info("마이페이지업주회원예약목록페이지");
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";

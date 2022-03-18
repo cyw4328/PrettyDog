@@ -85,12 +85,23 @@ a{
 
 <div id="memuBar">
 		<div id = "left">
+		<%-- 	<c:if test="${loginId} != null">
 			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
+			</c:if> --%>
+		<c:choose>
+			<c:when test="${loginId} != null">
+				<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
+			</c:when>
+			<c:otherwise>
+				<p style="text-align: center;"><b style="font-size: 20px;">로그인해주세요</b></p>
+			</c:otherwise>
+		</c:choose>
+			
 		</div>
 		
 		<a href="./MyjungboSujungshs"><div class= "tab00" id="tab1">개인정보수정</div></a>
 		<a href="./pointListPage"><div class= "tab00" id="tab2">포인트내역</div></a>
-		<a href="#"><div class= "tab00" id="tab3">내가 등록한 애견</div></a>
+		<a href="./Mydogshs"><div class= "tab00" id="tab3">내가 등록한 애견</div></a>
 		<a href="./MyPageReserPage"><div class= "tab00" id="tab5">나의 예약 관리</div></a>
 		<a href="./MyPageAlarm"><div class= "tab00" id="tab6">알림목록</div></a>
 		<a href="./MyPageLikeShop"><div class= "tab00" id="tab7">관심매장</div></a>
