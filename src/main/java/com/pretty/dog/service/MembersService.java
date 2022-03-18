@@ -10,6 +10,7 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,15 +24,15 @@ public class MembersService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MembersDAO dao;
 	
-	public int joinShs(String id, String hashText, String name, String phone, String email, String nickname) {
+	public int joinShs(String id, String hashText, String name, String phone, String email) {
 		
-		return dao.joinShs(id,hashText,name,phone,email,nickname);
+		return dao.joinShs(id,hashText,name,phone,email);
 	}
 	
 	
-	public int ShopjoinShs(String id, String hashText, String name, String phone, String email, String nickname) {
+	public int ShopjoinShs(String id, String hashText, String name, String phone, String email) {
 		
-		return dao.ShopjoinShs(id,hashText,name,phone,email,nickname);
+		return dao.ShopjoinShs(id,hashText,name,phone,email);
 	}
 	
 	
@@ -158,6 +159,35 @@ public class MembersService {
 	public void memberOut(String id) {
 		logger.info("회원탈퇴 서비스 도착 : {}",id );
 		int memOutCnt = dao.memberOut(id);
+	}
+
+
+	public HashMap<String, Object> shopSaupCk(String shopSaup) {
+		
+		logger.info("사업자중복체크 서비스 도착!!");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String shopSaupCk = dao.shopSaupCk(shopSaup);
+		logger.info("중복 아이디 여부 : {}",shopSaupCk);		
+		boolean overlaySaup = shopSaupCk == null ? false : true;		
+		map.put("shopSaup", overlaySaup);		
+		return map;
+	}
+
+
+	public void userUp(HashMap<String, String> params) {
+		String hashText = "";
+		String pw = params.get("pw"); 
+		
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		hashText = encoder.encode(pw);
+		params.put("pw", hashText);
+
+		
+		int row = dao.userUp(params);
+		logger.info("입력된 건수  : {}",row);
+		
 	}
 
 

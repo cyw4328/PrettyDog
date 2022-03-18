@@ -595,9 +595,10 @@ public class DogDTO {
 	private String dog_name;
 	private int dog_age;
 	private String dog_weight;
-	private String dao_char;
+	private String dog_char;
 	private Timestamp dog_date;
 	private int doa_state;
+	
 
 	public int getDog_num() {
 		return dog_num;
@@ -623,11 +624,11 @@ public class DogDTO {
 	public void setDog_weight(String dog_weight) {
 		this.dog_weight = dog_weight;
 	}
-	public String getDao_char() {
-		return dao_char;
+	public String getDog_char() {
+		return dog_char;
 	}
-	public void setDao_char(String dao_char) {
-		this.dao_char = dao_char;
+	public void setDog_char(String dao_char) {
+		this.dog_char = dao_char;
 	}
 	public Timestamp getDog_date() {
 		return dog_date;
