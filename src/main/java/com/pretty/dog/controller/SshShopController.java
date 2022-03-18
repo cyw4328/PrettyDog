@@ -40,11 +40,13 @@ public class SshShopController {
 		ArrayList<HashMap<String,Object>> sshShopDetail = sshShopListService.sshShopDetail(idx);
 		ArrayList<HashMap<String,Object>> sshShopQnaList = sshShopListService.sshShopQnaList(idx);
 		ArrayList<HashMap<String,Object>> sshShopQnaIdChk = sshShopListService.sshShopQnaIdChk(memId);
+		ArrayList<HashMap<String,Object>> sshShopQnaNnswerList = sshShopListService.sshShopQnaNnswerList();
 		System.out.println("sshShopQnaIdChk 결과값 : " +  sshShopQnaIdChk.size() );
 		model.addAttribute("sshShopDetail", sshShopDetail);
 		model.addAttribute("sshShopQnaList", sshShopQnaList);
 		model.addAttribute("memId", memId);
 		model.addAttribute("sshShopQnaIdChk", sshShopQnaIdChk);
+		model.addAttribute("sshShopQnaNnswerList", sshShopQnaNnswerList);
 		return "sshShopDetail";
 	}
 	
@@ -63,11 +65,14 @@ public class SshShopController {
 	}
 	
 	@RequestMapping(value = "/QnaNnswerInsert", method = RequestMethod.GET)
-	public String beautyTrendWriteForm(Model model, @RequestParam String QnaNnswerText, @RequestParam String memId0) {
+	public String QnaNnswerInsert(Model model, @RequestParam String QnaNnswerText, @RequestParam String memId, @RequestParam String qnaDivNum, @RequestParam String busin_num) {
 		logger.info("QnaNnswerText :  "+ QnaNnswerText);
-		logger.info("memId0 :  "+ memId0);
-		//model.addAttribute("mem_id", memId0);
-		return null;
+		logger.info("memId :  "+ memId);
+		logger.info("qnaDivNum :  "+ qnaDivNum);
+		logger.info("busin_num :  "+ busin_num);
+		sshShopListService.QnaNnswerInsert(QnaNnswerText, memId, qnaDivNum);
+		return "redirect:/sshShopDetail?idx="+busin_num+"&memId="+memId;
+		//return "redirect:/beautyTrendList";
 	}
 	
 }

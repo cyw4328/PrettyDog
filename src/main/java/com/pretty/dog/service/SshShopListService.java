@@ -47,6 +47,19 @@ public class SshShopListService {
 		return sshShopListDAO.qnaComChk(a);
 	}
 
+	public void QnaNnswerInsert(String qnaNnswerText, String memId, String qnaDivNum) {
+		System.out.println("QnaNnswerInsert 서비스 이동");
+		System.out.println("넘어온 답글 내용 : " + qnaNnswerText);
+		System.out.println("넘어온 로그인 아이디 : " + memId);
+		System.out.println("넘어온 번호 : " + qnaDivNum);
+		sshShopListDAO.QnaNnswerInsert(qnaNnswerText, memId, qnaDivNum);
+	}
+
+	public ArrayList<HashMap<String, Object>> sshShopQnaNnswerList() {
+		System.out.println("sshShopQnaNnswerList 서비스 이동");
+		return sshShopListDAO.sshShopQnaNnswerList();
+	}
+
 }
 
 

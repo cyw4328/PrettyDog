@@ -42,6 +42,16 @@
 			#{item}
 		</foreach>
 	</select>
+	
+	<insert id="QnaNnswerInsert">
+		insert into shop_board_comment(shop_boardnum, mem_id, scomment_cont,scomment_class)
+		values(#{param3}, #{param2}, #{param1},2)
+	</insert>
+	
+	<select id="sshShopQnaNnswerList" resultType="hashmap">
+		select *
+		from shop_board_comment
+	</select>
 
 </mapper>
 

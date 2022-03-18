@@ -16,7 +16,7 @@
 		<c:forEach items="${sshShopList }" var="sshShopList">
 		<tr>
 		<%-- <a href="beautyTrendDetail?idx=${TrendListInfo.community_boardnum }"> --%>
-		<td><a href="sshShopDetail?idx=${sshShopList.busin_num }&memId=a1">${sshShopList.busin_num }</a></td>
+		<td><a href="sshShopDetail?idx=${sshShopList.busin_num }&memId=a2">${sshShopList.busin_num }</a></td>
 		<td>${sshShopList.busin_name }</td>
 		</tr>
 		</c:forEach>

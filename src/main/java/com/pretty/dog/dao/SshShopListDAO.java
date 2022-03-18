@@ -16,4 +16,7 @@ public interface SshShopListDAO {
 
 	List<HashMap<String, Object>> qnaComChk(List<String> a);
 
+	void QnaNnswerInsert(String qnaNnswerText, String memId, String qnaDivNum);
+
+	ArrayList<HashMap<String, Object>> sshShopQnaNnswerList();
 }
