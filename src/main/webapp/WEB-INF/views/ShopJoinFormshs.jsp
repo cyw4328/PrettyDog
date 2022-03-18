@@ -35,7 +35,11 @@
                     </tr>
                     <tr>
                         <th>비밀번호 확인</th>
-                        <td><input type="password" name="repw" class = "joinCL"  /></td>
+                        <td>
+                        	<input type="password" name="repw" class = "joinCL" id="qwCk" />
+                        	<div class="alert alert-success" id="successPw" style = "color:#19a901; font-size: 13px;">비밀번호가 일치합니다.</div>
+      						<div class="alert alert-danger" id="dangerPw" style = "color:#e70026; font-size: 13px;">비밀번호가 일치하지 않습니다.</div>
+                        </td>
                     </tr>
                     <tr>
                         <th>이름</th>
@@ -47,8 +51,9 @@
                     </tr>
                     <tr>
                         <th>E-mail</th>
-                        <td><input type="text" name="email" class = "joinCL" placeholder="@gmail.com" />
-                        <input type="button" id="mailCheck" value="메일발송"/></td>
+                        <td>
+                        <input type="text" name="email" class = "joinCL" placeholder="@gmail.com" />
+                        <input type="button" id="mailCheck" value="메일발송"/>
                         </td>
                     <tr id="enumber">
                         <th>인증번호</th>
@@ -58,11 +63,11 @@
       					<div class="alert alert-danger" id="alert-danger-email" style = "color:#e70026; font-size: 13px;">인증번호가 일치하지 않습니다.</div>
                         </td>
                     </tr>
-                    </tr>
-                    <tr>
+           
+ 			<!-- <tr>
                         <th>업체명</th>
                         <td><input type="text" name="nickname" class = "joinCL" /></td>
-                    </tr>
+                    </tr> -->
                     
                     <tr>
                         <td colspan="2" style="border:0px; text-align: center; font-size: 13px;" ><input type="checkbox" checked>개인정보동의(필수)</td>
@@ -85,6 +90,37 @@ $("#alert-danger-email").hide();
 $("#enumber").hide();
 var check = false;
 var checkId = false;
+
+
+var check = false;
+var checkId = false;
+
+
+$("#successPw").hide();
+$("#dangerPw").hide();
+var checkPw = false;
+var finalPw = null;
+
+//비밀번호 일치 체크
+$('#qwCk').keyup(function () {
+    pw =$("input[name='pw']").val();
+    repw = $("input[name='repw']").val();
+
+    if (pw != "" || repw != "") {
+		if (pw == repw) {
+			$("#successPw").show();
+			$("#dangerPw").hide();
+			finalPw = repw;
+			checkPw = true;
+		} else {
+			$("#successPw").hide();
+			$("#dangerPw").show();
+			checkPw = false;
+		}
+	}
+});
+
+
 //회원가입 버튼 클릭
 $("#btn-join").on("click", function(e) {
    e.preventDefault();
@@ -93,10 +129,9 @@ $("#btn-join").on("click", function(e) {
    var repw = $("input[name='repw']").val();
    var name = $("input[name='name']").val();
    var phone = $("input[name='phone']").val();
-   var nickname = $("input[name='nickname']").val();
    var email = $("input[name='email']").val();
    
-   /*   
+    
    //아이디,비밀번호 유효성 검사
    if (id == null || id == "") { 
       alert("아이디를 입력해주세요");
@@ -118,6 +153,12 @@ $("#btn-join").on("click", function(e) {
       alert("전화번호를 입력해주세요");
       return false;
    } 
+   
+   if (email == null || email == "") { 
+	      alert("이메일을 입력해주세요");
+	      return false;
+	   } 
+   
    if (check == false) { 
       alert("인증번호를 확인 해주세요");
       return false;
@@ -128,17 +169,12 @@ $("#btn-join").on("click", function(e) {
 	      return false;
 	   }
    
-   if (nickname == null || nickname == "") { 
-      alert("닉네임을 입력해주세요");
-      return false;
-   } 
+
    
    if (!phone.match("-")) { 
 	      alert("전화번호 '-' 를 확인해 주세요.");
 	      return false;
 	   } 
-   
-   */
   
    
   
@@ -148,7 +184,6 @@ $("#btn-join").on("click", function(e) {
    param.name = name;
    param.phone = phone;
    param.email = email;
-   param.nickname = nickname;
    param.pw = pw;
    
    console.log(param);

@@ -8,15 +8,15 @@
 
 	<!-- 일반 회원가입 -->	
 	<insert id="joinShs" parameterType = "hashmap">
-	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_tel,mem_email,mem_nick)
-	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_tel,mem_email)
+	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5})
 	 </insert>
 
 	 
 	 <!-- 점주 회원가입 -->	
 	<insert id="ShopjoinShs" parameterType = "hashmap">
-	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_tel,mem_email,mem_nick,mem_rank)
-	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},'1')
+	      INSERT INTO members (mem_id,mem_pw,mem_name,mem_tel,mem_email,mem_rank)
+	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},'1')
 	 </insert>
 
 	<!-- 중복체크 -->	
@@ -29,6 +29,12 @@
 	      INSERT INTO shop (busin_num,mem_id,busin_name,busin_info,busin_smalldog,busin_middledog,busin_bigdog,busin_area,busin_juso)
 	        VALUES(#{shopSaup},#{shopid},#{shopname},#{shopSogae},#{smallD},#{middleD},#{bigD},#{addr},#{shopAddr})
 	 </insert>
+	 
+	 	<!-- 사업자 중복체크 -->	
+	<select id="shopSaupCk" resultType="String">
+		SELECT busin_num FROM shop WHERE busin_num = #{param1}
+	</select>
+	 
 	 
 	 <!-- 매장인테리어 사진(회원가입) -->	
 	<insert id="shopPhoto">
@@ -54,6 +60,21 @@
 	<select id="MyjungboSujungshs" resultType="com.pretty.dog.dto.DogDTO">
 		select * from members WHERE mem_id =#{param1}
 	</select>
+	
+	<!-- 개인정보 수정 -->
+	<update id="userUp" parameterType="hashmap">
+		update members set 
+			
+			<if test ="pw.equals('')">
+			mem_email = #{email},
+			mem_tel = #{phone} WHERE mem_id =#{id}
+			</if>
+			<if test="!pw.equals('')">
+			mem_pw = #{pw},
+			mem_email = #{email},
+			mem_tel = #{phone} WHERE mem_id =#{id}
+			</if>	
+	</update>
 	
 	<!-- 매장정보 확인 -->
 	<select id="MyShopInfoshs" resultType="com.pretty.dog.dto.DogDTO">

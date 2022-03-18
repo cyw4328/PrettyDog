@@ -80,7 +80,6 @@
      	 	<c:if test="${size>0}">
      	 	
 	     	 	<c:forEach items="${list}" var="doginfo">
-	     	 		<a>
 	     	 		<tr>
 	     	 			<th><img alt="썸네일" src="./resources/img/images.png" width="100px" height="100px"></th>
 	     	 			<td>

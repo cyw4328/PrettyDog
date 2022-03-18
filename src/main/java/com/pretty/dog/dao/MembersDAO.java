@@ -20,9 +20,9 @@ public interface MembersDAO {
 	String PassCk(String id, String pw);
 
 
-	int joinShs(String id, String hashText, String name, String phone, String email, String nickname);
+	int joinShs(String id, String hashText, String name, String phone, String email);
 
-	int ShopjoinShs(String id, String hashText, String name, String phone, String email, String nickname);
+	int ShopjoinShs(String id, String hashText, String name, String phone, String email);
 
 	DogDTO MyjungboSujungshs(String id);
 
@@ -41,6 +41,10 @@ public interface MembersDAO {
 	int DogSujung(String id, String dogname, String dogage, String dogweight, String dogchar);
 
 	int memberOut(String id);
+
+	String shopSaupCk(String shopSaup);
+
+	int userUp(HashMap<String, String> params);
 
 
 
