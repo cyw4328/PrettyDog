@@ -43,6 +43,8 @@
 	</style>
 </head>
 <body>
+
+<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
 <div id="con_memberDe">
 
 <div id="sujung_txt">
@@ -63,11 +65,13 @@
 	            	<th>비밀번호</th>
 	           		<td  style="border-bottom:1px solid #dedede;"><input type="password" name="pw" placeholder="새로운 비밀번호" class="pw"   style="border:1px solid #ccc;"/></td>
 	           	</tr>
+	           	<tr>
 	            	<th>확인</th>
 	            	<td  style="border-bottom:1px solid #dedede;"><input type="password" name="repw" placeholder="비밀번호 확인"  class="pw" style="border:1px solid #ccc;"/></td>
 	            </tr>
-	        		<div class="successPw" id="successPw" style="color:#2cba00;">비밀번호가 일치합니다.</div>
-					<div class="dangerPw" id="dangerPw" style="color:#ce0000;">비밀번호가 일치하지 않습니다.</div>
+	            <tr>
+	        		<div class="alert alert-success" id="successPw" style = "color:#19a901; font-size: 13px;">비밀번호가 일치합니다.</div>
+      				<div class="alert alert-danger" id="dangerPw" style = "color:#e70026; font-size: 13px;">비밀번호가 일치하지 않습니다.</div>
 	      		</tr>
 	            <tr>
 	            	<th>이름</th>
@@ -90,16 +94,44 @@
 </div>
 </body>
 <script>
+
+
+
 $("#successPw").hide();
 $("#dangerPw").hide();
 
 var checkPw = false;
 var finalPw = null;
+var pw = $("input[name='pw']").val();
+var repw = $("input[name='repw']").val();
+
+//비밀번호 일치 체크
+$('#dangerPw').keyup(function () {
+    if (pw != "" || repw != "") {
+		if (pw == repw) {
+			$("#successPw").show();
+			$("#dangerPw").hide();
+			finalPw = repw;
+			checkPw = true;
+		} else {
+			$("#successPw").hide();
+			$("#dangerPw").show();
+			checkPw = false;
+		}
+	}
+});
+
+
 
 var pw =$("input[name='pw']").val();
 var repw = $("input[name='repw']").val();
 $("#btn-join").click(function() {
 	
+	 if (pw != repw) { 
+	      alert("비밀번호를 다시 확인해주세요");
+	      return false;
+	   } 
+	 
 	alert('저장이 완료되었습니다.');
 	$("form").submit();
 });	

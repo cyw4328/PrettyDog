@@ -141,7 +141,7 @@ function listDraw(list) {
     	
     	if (item.reser_state == 0) {
 			reserState = "예약완료";
-			reserState1 = '<a href="reserDel?reser_num='+item.reser_num+'">취소하기</a>';
+			reserState1 = '<a href="reserDel?reser_num='+item.reser_num+'&&reser_money='+item.reser_money+'&&busin_num='+item.busin_num+'">취소하기</a>';
 		}else if (item.reser_state == 1) {
 			reserState = "노쇼";
 			reserState1 = "취소불가";

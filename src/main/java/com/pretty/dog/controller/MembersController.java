@@ -51,20 +51,25 @@ public class MembersController {
 	
 	
 	String hashText="";
-	private MimeType request;
 	@RequestMapping(value = "/joinShs", method = RequestMethod.POST)
 	public String joinShs(Model model,@RequestParam String id,@RequestParam String pw,
-			@RequestParam String name,@RequestParam String phone,@RequestParam String email,@RequestParam String nickname) {
+			@RequestParam String name,@RequestParam String phone,@RequestParam String email) {
 		logger.info("일반 회원가입 요청");	
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		hashText = encoder.encode(pw);
 		logger.info("암호화값 {}",hashText);
-		int row = service.joinShs(id,hashText,name,phone,email,nickname);
+		int row = service.joinShs(id,hashText,name,phone,email);
+		
+		String success ="redirect:/JoinFormshs";
+		String msg = "회원가입에 실패하였습니다.";
+		model.addAttribute("msg",msg);
+		
 		if(row>0) {
-			String msg = "회원가입에 실패하였습니다.";
+			success ="redirect:/";
+			msg = "회원가입이 완료 되었습니다.";
 			model.addAttribute("msg",msg);
 		}
-		return "Main";
+		return success;
 	}
 	
 	@RequestMapping(value = "/ShopJoinFormshs", method = RequestMethod.GET)
@@ -77,29 +82,45 @@ public class MembersController {
 	
 	@RequestMapping(value = "/ShopjoinShs", method = RequestMethod.POST)
 	public String ShopjoinShs(Model model,@RequestParam String id,@RequestParam String pw,
-			@RequestParam String name,@RequestParam String phone,@RequestParam String email,@RequestParam String nickname) {
+			@RequestParam String name,@RequestParam String phone,@RequestParam String email) {
 		logger.info("점주 회원가입 요청");	
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		hashText = encoder.encode(pw);
 		logger.info("암호화값 {}",hashText);
-		int row = service.ShopjoinShs(id,hashText,name,phone,email,nickname);
+		int row = service.ShopjoinShs(id,hashText,name,phone,email);
+		String success ="redirect:/ShopJoinFormshs";
+		
+		String msg = "회원가입에 실패하였습니다.";
+		
 		if(row>0) {
-			String msg = "회원가입에 실패하였습니다.";
-			model.addAttribute("msg",msg);
+			model.addAttribute("id",id);
+			msg = "매장 회원가입 완료";
+			success ="redirect:/ShopInfoFormshs";
 		}
 		
-		model.addAttribute("id",id);
-		model.addAttribute("nickname",nickname);
-		return "ShopInfoFormshs";
+		model.addAttribute("msg",msg);
+		
+		return success;
 	}
 	
 	
 	
+	@RequestMapping(value = "/ShopInfoFormshs", method = RequestMethod.GET)
+	public String ShopInfoFormshs(Model model,HttpServletRequest request) {
+		logger.info(" 점주 회원가입 페이지");
+		String id =request.getParameter("id");
+
+		model.addAttribute("id",id);
+		
+		return "ShopInfoFormshs";
+	}
+	
 	@RequestMapping(value = "/ShopInfo", method = RequestMethod.POST)
-	public String ShopInfo(Model model,MultipartFile shopPhoto,@RequestParam HashMap<String, String> params,@RequestParam String shopSaup) {
+	public String ShopInfo(Model model,MultipartFile shopPhoto,@RequestParam HashMap<String, String> params, @RequestParam String shopSaup) {
 		logger.info("점주 매장정보 요청 컨트롤러");	
 		logger.info("params : {}",params);
 		logger.info("shopPhoto : {}",shopPhoto);
+		
 		service.ShopInfo(shopPhoto,params,shopSaup);
 		
 		return "Main";
@@ -151,16 +172,19 @@ public class MembersController {
 		public HashMap<String, Object> overlayid(@RequestParam String id) {		
 			logger.info("중복 아이디 체크 : {}",id);		
 			return service.overlayShsid(id);
-		}		
+		}	
 		
+		
+		//ajax 통신 - 중복 사업자 확인
+		@RequestMapping(value = "/shopSaupCk", method = RequestMethod.GET)
+		@ResponseBody
+		public HashMap<String, Object> shopSaupCk(@RequestParam String shopSaup) {		
+			logger.info("중복 아이디 체크 : {}",shopSaup);		
+			return service.shopSaupCk(shopSaup);
+		}	
 
 
-		@RequestMapping(value = "/ShopInfoFormshs", method = RequestMethod.GET)
-		public String ShopInfoFormshs(Model model) {
-			logger.info(" 점주 회원가입 페이지");
-			
-			return "ShopInfoFormshs";
-		}
+
 		
 		
 // 여기까지가 회원가입 기능 		
@@ -229,6 +253,22 @@ public class MembersController {
 				
 			return "MyjungboSujungshs";
 		}
+		
+		
+		//개인정보 수정요청
+		@RequestMapping(value = "/userUp")
+			public String userUp(Model model,HttpSession session,@RequestParam HashMap<String, String> params) {
+					
+				String id = (String) session.getAttribute("loginId");
+				logger.info("세션아이디 값 : {}",id);
+				logger.info("정보 값 : {}",params);
+						
+				service.userUp(params);
+						
+			return "redirect:/MyjungboSujungshs";
+		}
+		
+		
 		
 		//매장정보 수정페이지
 		@RequestMapping(value = "/MyShopInfoshs", method = RequestMethod.GET)
