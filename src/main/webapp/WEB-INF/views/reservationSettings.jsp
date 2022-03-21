@@ -18,14 +18,12 @@
     	cursor : pointer;
     	background-color : skyblue;
     	color : white;
-    	margin: 10px;
     	padding: 10px;
     }
     
     .noBtn{
     	background-color: gray;
     	color : white;
-    	margin: 10px;
     	padding: 10px;
     }
 
@@ -48,9 +46,9 @@
     </thead>
     <tbody></tbody>
 </table>
-<table id="reservationTime" style="float:left;">
+<table id="reservationTime" style="float:left; border-spacing: 10px 10px;">
 	<tr>
-		<td colspan="3">설정 시간과 예약 현황</td>
+		<td colspan="3">이용 가능 시간</td>
 	</tr>
 	<tr id="viewtimearea">
 	</tr>
@@ -393,7 +391,7 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"busin_num": "378-1234-468522",
+        		"busin_num": "202-1234-468522",
         		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
@@ -411,6 +409,20 @@
 				reserArr = [];
 				
 				compareTime ="";
+				
+				var content = "";
+        		var rowContent = "";
+        		var rowCnt = Object.keys(obj).length / 3;
+        		var rowPlus = Object.keys(obj).length % 3; 
+
+        		if(rowPlus == 0){
+					for(i=0; i<rowCnt; i++){
+						rowContent += "<tr id='viewtimearea"+i+"'>";
+						rowContent += "</tr>";	
+					}
+				}
+        		
+        		$("#viewtimearea").append(rowContent);
         		
         		//위애서 파싱한 데이터를 가지고 키와 밸류 추출 (예약이 된 녀석들의 정보만 뺴오기 위함)
         		for(var realTime in obj){
@@ -421,29 +433,51 @@
         			}
         		}
 
-				
-        		var content = "";
         		
         		//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
 				for(i=0; i<Object.keys(obj).length; i++){
-					//console.log(Object.keys(obj)[i]);
 					
-					if(Object.values(obj)[i]==0){
-						content += "<tr id='viewTimeArea"+i+"'>";
-						content += "<td class='timeBtn'>";
-						content += "<span>"+Object.keys(obj)[i]+"</span>";
-						content += "</td>";
-						content += "</tr>";	
-					}else{
-						content += "<tr id='viewTimeArea"+i+"'>";
-						content += "<td class='noBtn'>";
-						content += "<span>"+Object.keys(obj)[i]+"</span>";
-						content += "</td>";
-						content += "</tr>";
+					//console.log(Object.keys(obj)[i]);
+					if(i%3 == 0){
+						if(Object.values(obj)[i]==0){
+							content += "<tr>";
+							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}else{
+							content += "<tr>";
+							content += "<td class='noBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}	
+					}else if(i%3 == 1){
+						if(Object.values(obj)[i]==0){
+							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}else{
+							content += "<td class='noBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}
+					}else if(i%3 == 2){
+						if(Object.values(obj)[i]==0){
+							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+							content += "</tr>";	
+						}else{
+							content += "<td class='noBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+							content += "</tr>";
+						}	
 					}
+					
+					
 				}
-				$("#viewtimearea").empty();
-				$("#viewtimearea").append(content);		
+		    	$("#viewtimearea").empty();
+				$("#viewtimearea").append(content);			
         	},
         	error : function(e){
         		
@@ -576,7 +610,7 @@
 		//console.log(objt);	
 		
 		
-		var sendData = {"busin_num" : "378-1234-468522", "set_date" : ChoiceDate, "set_time" : JSON.stringify(objt)};
+		var sendData = {"busin_num" : "202-1234-468522", "set_date" : ChoiceDate, "set_time" : JSON.stringify(objt)};
 		
 		console.log(sendData);
 		
@@ -854,7 +888,7 @@
         	url:"/dog/totalReserEx",
         	type:"POST",
         	dataType:"JSON",
-        	data:{"busin_num" : "378-1234-468522"},
+        	data:{"busin_num" : "202-1234-468522"},
         	success :function(data){
         		
         		console.log(data);
@@ -884,7 +918,7 @@
     		        	url:"/dog/noReserAllDate",
     		        	type:"POST",
     		        	dataType:"JSON",
-    		        	data:{"busin_num" : "378-1234-468522", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(totalDelDay)},
+    		        	data:{"busin_num" : "202-1234-468522", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(totalDelDay)},
     		        	success :function(data){
     		        		//console.log(data);
     		        		if(data >= 1){
@@ -941,7 +975,7 @@
     		        	url:"/dog/noReserAllDate",
     		        	type:"POST",
     		        	dataType:"JSON",
-    		        	data:{"busin_num" : "378-1234-468522", "totalDay" :JSON.stringify(upsertDate), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(delDate)},
+    		        	data:{"busin_num" : "202-1234-468522", "totalDay" :JSON.stringify(upsertDate), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(delDate)},
     		        	success :function(data){
     		        		//console.log(data);
     		        		if(data >= 1){

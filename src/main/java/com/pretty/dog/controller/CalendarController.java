@@ -26,11 +26,18 @@ public class CalendarController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired CalendarService service;
 	
-	//일반 사용자에게 뿌려줄 캘린더 호출
+	//업주 회원에게 뿌려줄 캘린더 호출
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
 	public String calendar(Model model) {
 		
 		return "calendar";
+	}
+	
+	//업주 회원에게 뿌려줄 캘린더 호출
+	@RequestMapping(value = "/reserCalendar", method = RequestMethod.GET)
+	public String reserCalendar(Model model) {
+		
+		return "reserCalendar";
 	}
 	
 	//달력에 날짜를 클릭하면 해당 날짜의 예약 가능 시간 정보를 보여주는 컨트롤러
@@ -159,9 +166,76 @@ public class CalendarController {
 	}
 	
 
+	//예약 할 때 필요한 일반 회원이 등록한 애견 정보를 받아오기
+	@RequestMapping(value = "/findMyDog", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> findMyDog(Model model, @RequestParam HashMap<String, Object> data) {
+		
+		return service.findMyDog(data);
+	}
 	
 	
-
+	//예약 할 때 필요한 일반 회원이 애견을 선택하면 해당 견급에 따라서 노출시켜 줄 리스트를 호출
+	@RequestMapping(value = "/shopServiceInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> shopServiceInfo(Model model, @RequestParam HashMap<String, Object> data) {
+		
+		//System.out.println(data);
+		
+		return service.shopServiceInfo(data);
+	}
 	
-
+	//예약 진행, 예약 설정 상태를 예약 불가능으로, 예약 정보에 insert, 예약 로그에 insert 
+	@RequestMapping(value = "/reservation", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String,Object> reservation(Model model, @RequestParam HashMap<String, Object> data) {
+				
+		HashMap<String, Object> reserState = new HashMap<String, Object>();
+		HashMap<String, Object> reserHistory = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> point = new HashMap<String, Object>();
+		
+		String str = (String) data.get("ChoiceTime");
+		String ct = str.replaceAll("\'", ""); 
+		String ChoiceTime = "$."+ct;
+		
+		System.out.println(ChoiceTime);
+		
+		//예약 상태 변경할 떄 보낼 데이터
+		reserState.put("busin_num", data.get("busin_num"));
+		reserState.put("ChoiceDate", data.get("ChoiceDate"));
+		reserState.put("ChoiceTime", ChoiceTime);
+		
+		reserHistory.put("mem_id",  data.get("mem_id"));
+		reserHistory.put("busin_num",  data.get("busin_num"));
+		reserHistory.put("add_num",  data.get("add_num"));
+		reserHistory.put("service",  data.get("service"));
+		reserHistory.put("servicePrice",  data.get("servicePrice"));
+		reserHistory.put("reserTime",  data.get("reserTime"));
+		
+		point.put("mem_id", data.get("mem_id"));
+		point.put("busin_mem_id", data.get("busin_mem_id"));
+		point.put("servicePrice", data.get("servicePrice"));
+		
+		service.point(point);
+		
+		service.reserState(reserState);
+		
+		int cnt = service.reserHistory(reserHistory);
+		
+		map.put("inHistory", cnt);
+		
+		return map;
+	}
+	
+	
+	
+	//include 테스트용
+	@RequestMapping(value = "/reserCalTest", method = RequestMethod.GET)
+	public String reserCalTest(Model model) {
+		
+		return "reserCalTest";
+	}
+	
+	
 }
