@@ -14,8 +14,28 @@
 	
 	<select id="sshShopDetail" resultType="hashmap">
 		select *
-		from shop
-		where busin_num = #{param1}
+		from shop s, members m, interior i
+		where s.mem_id = m.mem_id
+		and i.busin_num = s.busin_num 
+		and m.mem_id = s.mem_id 
+		and i.busin_num = #{param1}
+	</select>
+	
+	<select id="sshShopDetailTwo" resultType="hashmap">
+		select *
+		from shop s, members m
+		where s.mem_id = m.mem_id
+		and s.busin_num = #{param1}
+	</select>
+	
+	
+	<select id="sshMyInterestShopList" resultType="hashmap">
+		select *
+		from members m, shop s, interest_shop isp
+		where m.mem_id = isp.mem_id
+		and s.busin_num = isp.busin_num
+		and m.mem_id = #{param1}
+		and s.busin_num = #{param2}
 	</select>
 	
 	<select id="sshShopQnaList" resultType="hashmap">
@@ -34,7 +54,7 @@
 	</select>
 
 	<select id="qnaComChk" parameterType="java.util.List" resultType="hashmap">
-		select sb.shop_boardnum 
+		select *
 		from shop_board sb, shop_board_comment sbc
 		where sb.shop_boardnum = sbc.shop_boardnum
 		and sbc.shop_boardnum in
@@ -52,7 +72,73 @@
 		select *
 		from shop_board_comment
 	</select>
-
+	
+	<insert id="QnaWrite">
+		insert into shop_board (mem_id, busin_num,shop_boardsub,shop_boardcont,shop_boardclass)
+		values(#{param2}, #{param3},'', #{param1},2)
+	</insert>
+	
+	<select id="sshShopRevList" resultType="hashmap">
+		select *
+		from shop_board sb, shop_board_photo sbp, recommendation r
+		where sb.shop_boardnum = sbp.shop_boardnum
+		and sbp.shop_boardnum = r.shop_boardnum
+		and sb.shop_boardclass = 1
+		and sb.busin_num = #{param1}
+	</select>
+	
+	<select id="revLength" resultType="hashmap">
+		select *
+		from reservation
+		where reser_state = 3
+		and mem_id = #{param1}
+		and busin_num = #{param2}
+		order by reser_visitday desc
+		limit 1
+	</select>
+	
+	<update id="reservationUpdate">
+		update
+			reservation
+		set 
+			reser_state = 4
+		where
+			reser_num = #{param1}	
+	</update>
+	
+	<insert id="reviewWrite" parameterType="hashmap">
+		insert into shop_board(mem_id, busin_num, shop_boardsub, shop_boardcont, shop_boardclass)
+			values(#{mem_id}, #{busin_num}, '',#{shop_boardcont},1)
+			<selectKey keyProperty="shop_boardnum" resultType="Integer" order="AFTER">
+        		SELECT LAST_INSERT_ID()
+    		</selectKey>
+	</insert>
+	
+	<insert id="recommendationWrite">
+		insert into recommendation(shop_boardnum, apprai_cont)
+		values(#{param1}, #{param2})
+	</insert>
+	
+	<insert id="fileWrite">
+		insert into shop_board_photo(shop_boardnum, sphoto_oriname, sphoto_newname) values(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	<insert id="baseSaveFile">
+		insert into shop_board_photo(shop_boardnum, sphoto_oriname, sphoto_newname) values(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	<update id="memberPointUpdate" parameterType="String">
+		update 
+			members
+		set 
+			mem_point = mem_point+100
+		where
+			mem_id = #{param1}
+	</update>
+	
+	<insert id="pointListInsert">
+		insert into pointlist(mem_id, point_cdc, point_cont,point_distin) values(#{param1}, 100,'리뷰작성', 0)
+	</insert>
 </mapper>
 
 

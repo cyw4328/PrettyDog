@@ -7,7 +7,7 @@
 <mapper namespace="com.pretty.dog.dao.TrendDAO">
 
 	<select id="beautyTrendList" resultType="hashmap">
-		select m.mem_id,m.mem_pw,m.mem_name,m.mem_nick,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
+		select m.mem_id,m.mem_pw,m.mem_name,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
 		,s.busin_num,s.mem_id,s.busin_name,s.busin_info,s.busin_smalldog,s.busin_middledog,s.busin_bigdog,s.busin_area,s.busin_likes,s.busin_date,s.busin_calss,s.busin_juso
 		,cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
 		,cb.community_boardnum,cb.category_num,cb.mem_id,cb.community_sub,cb.community_cont,cb.community_date,cb.community_updatedate,cb.community_view,cb.community_likes,cb.community_blind
@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="changeKoMap" resultType="hashmap">
-		select m.mem_id,m.mem_pw,m.mem_name,m.mem_nick,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
+		select m.mem_id,m.mem_pw,m.mem_name,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
 		,s.busin_num,s.mem_id,s.busin_name,s.busin_info,s.busin_smalldog,s.busin_middledog,s.busin_bigdog,s.busin_area,s.busin_likes,s.busin_date,s.busin_calss,s.busin_juso
 		,cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
 		,cb.community_boardnum,cb.category_num,cb.mem_id,cb.community_sub,cb.community_cont,cb.community_date,cb.community_updatedate,cb.community_view,cb.community_likes,cb.community_blind
@@ -45,7 +45,7 @@
 	</select>
 	
 	<select id="beautyTrendDetail" resultType="hashmap">
-		select m.mem_id,m.mem_pw,m.mem_name,m.mem_nick,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
+		select m.mem_id,m.mem_pw,m.mem_name,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
 		,s.busin_num,s.mem_id,s.busin_name,s.busin_info,s.busin_smalldog,s.busin_middledog,s.busin_bigdog,s.busin_area,s.busin_likes,s.busin_date,s.busin_calss,s.busin_juso
 		,cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
 		,cb.community_boardnum,cb.category_num,cb.mem_id,cb.community_sub,cb.community_cont,cb.community_date,cb.community_updatedate,cb.community_view,cb.community_likes,cb.community_blind
@@ -63,7 +63,7 @@
 	</select>
 	
 	<select id="beautyTrendUpdate" resultType="hashmap">
-		select m.mem_id,m.mem_pw,m.mem_name,m.mem_nick,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
+		select m.mem_id,m.mem_pw,m.mem_name,m.mem_email,m.mem_tel,m.mem_rank,m.mem_state
 		,s.busin_num,s.mem_id,s.busin_name,s.busin_info,s.busin_smalldog,s.busin_middledog,s.busin_bigdog,s.busin_area,s.busin_likes,s.busin_date,s.busin_calss,s.busin_juso
 		,cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
 		,cb.community_boardnum,cb.category_num,cb.mem_id,cb.community_sub,cb.community_cont,cb.community_date,cb.community_updatedate,cb.community_view,cb.community_likes,cb.community_blind
@@ -87,7 +87,7 @@
 	</select>
 	
 	<select id="memberRank1" resultType="hashmap">
-		select m.mem_id, m.mem_pw, m.mem_name, m.mem_nick, m.mem_email, m.mem_tel, m.mem_rank, m.mem_state, m.mem_date, m.mem_secession, m.mem_login, m.mem_point, m.mem_nopoint
+		select m.mem_id, m.mem_pw, m.mem_name, m.mem_email, m.mem_tel, m.mem_rank, m.mem_state, m.mem_date, m.mem_secession, m.mem_login, m.mem_point, m.mem_nopoint
 		,cc.category_num , cc.category_name , cc.category_admin , cc.category_blind
 		,cb.community_boardnum ,cb.category_num ,cb.mem_id ,cb.community_sub ,cb.community_cont ,cb.community_date ,cb.community_updatedate ,cb.community_view ,cb.community_likes ,cb.community_blind 
 		from members m , community_category cc , community_board cb
