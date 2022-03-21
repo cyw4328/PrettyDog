@@ -85,13 +85,13 @@
 	 <!-- MY 매장정보 수정 -->
 	<update id="shopup" parameterType = "hashmap">
 		update shop set 
-		busin_info =#{shopSogae},
-		busin_area =#{addr}, 
-		busin_juso=#{shopAddr},
-		busin_smalldog=#{smallD},
-		busin_middledog=#{middleD},
-		busin_bigdog=#{bigD}
-		 WHERE mem_id =#{id}
+			busin_info =#{shopSogae},
+			busin_area =#{addr}, 
+			busin_juso=#{shopAddr},
+			busin_smalldog=#{smallD},
+			busin_middledog=#{middleD},
+			busin_bigdog=#{bigD}
+			WHERE mem_id =#{id}
 	</update>
 	 
 	 

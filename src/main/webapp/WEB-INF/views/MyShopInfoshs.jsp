@@ -66,7 +66,7 @@
 	            	<td><input type="text"  style="border:1px solid white;" value="${shopinfo.busin_num}" name="busin_num" class="formSt" ></td>
 	            	<th>취급강아지</th>
 	            	<td>
-                        	<input type="checkbox" name="smallD" value="1" checked>소형견
+                        	<input type="checkbox" name="smallD"  value="1" checked>소형견
                         	<input type="checkbox" name="middleD" value="1" checked>중형견
                         	<input type="checkbox" name="bigD" value="1" checked>대형견
                         </td>    
@@ -115,6 +115,9 @@ $("#btn-join").click(function() {
 	   var shopSaup = $("input[name='shopSaup']").val();
 	   var addr = $("input[name='addr']").val();
 	   var shopAddr = $("input[name='shopAddr']").val();
+	   var smallD = $("input[name='smallD']").val();
+	   var middleD = $("input[name='middleD']").val();
+	   var bigD = $("input[name='bigD']").val();
 	   
 	 //유효성검사
 	   if (shopSogae == null || shopSogae == "") { 
@@ -127,6 +130,7 @@ $("#btn-join").click(function() {
 		      return false;
 		   } 
 	   
+
 	
 	
 	alert('저장이 완료되었습니다.');

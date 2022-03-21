@@ -162,11 +162,12 @@ public class MembersService {
 	}
 
 
-<<<<<<< HEAD
+
 	public void shopup(HashMap<String, String> params) {
 		
 		dao.shopup(params);
-=======
+}
+
 	public HashMap<String, Object> shopSaupCk(String shopSaup) {
 		
 		logger.info("사업자중복체크 서비스 도착!!");
@@ -193,7 +194,6 @@ public class MembersService {
 		int row = dao.userUp(params);
 		logger.info("입력된 건수  : {}",row);
 		
->>>>>>> 0732ad51c5bcf30f510d8d59da40f61fda6016c0
 	}
 
 
