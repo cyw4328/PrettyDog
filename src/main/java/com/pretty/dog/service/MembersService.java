@@ -162,6 +162,12 @@ public class MembersService {
 	}
 
 
+
+	public void shopup(HashMap<String, String> params) {
+		
+		dao.shopup(params);
+}
+
 	public HashMap<String, Object> shopSaupCk(String shopSaup) {
 		
 		logger.info("사업자중복체크 서비스 도착!!");

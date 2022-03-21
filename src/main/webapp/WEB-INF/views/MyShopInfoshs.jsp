@@ -66,7 +66,7 @@
 	            	<td><input type="text"  style="border:1px solid white;" value="${shopinfo.busin_num}" name="busin_num" class="formSt" ></td>
 	            	<th>취급강아지</th>
 	            	<td>
-                        	<input type="checkbox" name="smallD" value="1" checked>소형견
+                        	<input type="checkbox" name="smallD"  value="1" checked>소형견
                         	<input type="checkbox" name="middleD" value="1" checked>중형견
                         	<input type="checkbox" name="bigD" value="1" checked>대형견
                         </td>    
@@ -94,11 +94,11 @@
 		                         <option value="제주도">제주도</option>
 	                    	 </select>
 	           		<th>상세주소</th>
-	           		<td><input type="text" value="${shopinfo.busin_juso}" name="email"  class="formSt"   style="border:1px solid #ccc;"></td>
+	           		<td><input type="text" value="${shopinfo.busin_juso}" name="shopAddr"  class="formSt"   style="border:1px solid #ccc;"></td>
 	           		</tr>
 	           <tr>
 	           		<th>매장소개</th>
-	           		<td colspan="5"><textarea name="email"  class="formSt" style="width:100%; height: 200px;" >${shopinfo.busin_info}</textarea></td>
+	           		<td colspan="5"><textarea name="shopSogae"  class="formSt" style="width:100%; height: 200px;" >${shopinfo.busin_info}</textarea></td>
 	           	</tr>
 	            <tr><td colspan="6" style="border:0px; text-align: center; border-bottom:1px solid #dedede;"><button id="btn-join"  style="border:1px solid #fff; font-size: 15px; font-weight: bold; border-radius: 10px; cursor: pointer;" >저장</button></td></tr>
 			</table>
@@ -109,61 +109,35 @@
 </div>
 </body>
 <script>
-$("#successPw").hide();
-$("#dangerPw").hide();
 
-var checkPw = false;
-var finalPw = null;
-
-var pw =$("input[name='pw']").val();
-var repw = $("input[name='repw']").val();
 $("#btn-join").click(function() {
+	   var shopSogae = $("textarea[name='shopSogae']").val();
+	   var shopSaup = $("input[name='shopSaup']").val();
+	   var addr = $("input[name='addr']").val();
+	   var shopAddr = $("input[name='shopAddr']").val();
+	   var smallD = $("input[name='smallD']").val();
+	   var middleD = $("input[name='middleD']").val();
+	   var bigD = $("input[name='bigD']").val();
+	   
+	 //유효성검사
+	   if (shopSogae == null || shopSogae == "") { 
+	      alert("매장소개를 입력해주세요");
+	      return false;
+	   } 
+	   
+	   if (shopAddr == null || shopAddr == "") { 
+		      alert("상세주소를 입력해주세요");
+		      return false;
+		   } 
+	   
+
+	
 	
 	alert('저장이 완료되었습니다.');
 	$("form").submit();
 });	
 
 
-$("#userOut_btn").click(function() {
-    console.log('userOut_btn 확인');     
-	
-    var inputOut1 = prompt(" '탈퇴' 를 입력해주세요' ");
-    
-    if(inputOut1 != null){
-    	var trimOut1 = inputOut1.trim();
-    	
-    	if(trimOut1 != "" && trimOut1 != '탈퇴'){
-    		console.log('탈퇴불가'); 
-    		alert('탈퇴가 불가합니다. 다시 시도해 주세요.');
-    	}else if(trimOut1 == '탈퇴'){
-    		console.log('탈퇴가능');
-    		alert('탈퇴 되었습니다. 이용해 주셔서 감사합니다.');
-    		location.href="./memberOut";
-    	}
-    	
-    	
-    }
-    
- });
-
-
-$('.pw').keyup(function () {
-    pw =$("input[name='pw']").val();
-    repw = $("input[name='repw']").val();
-
-    if (pw != "" || repw != "") {
-		if (pw == repw) {
-			$("#successPw").show();
-			$("#dangerPw").hide();
-			finalPw = repw;
-			checkPw = true;
-		} else {
-			$("#successPw").hide();
-			$("#dangerPw").show();
-			checkPw = false;
-		}
-	}
-});
 
 
 
