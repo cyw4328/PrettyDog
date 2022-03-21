@@ -60,7 +60,21 @@
 		select * from shop WHERE mem_id =#{param1}
 	</select>
 	 
-	 <!-- 강아지 등록 -->
+	 
+	 <!-- MY 매장정보 수정 -->
+	<update id="shopup" parameterType = "hashmap">
+		update shop set 
+		busin_info =#{shopSogae},
+		busin_area =#{addr}, 
+		busin_juso=#{shopAddr},
+		busin_smalldog=#{smallD},
+		busin_middledog=#{middleD},
+		busin_bigdog=#{bigD}
+		 WHERE mem_id =#{id}
+	</update>
+	 
+	 
+	 <!-- MY강아지 등록 -->
 	 <insert id="DogUp" parameterType = "String">
 	      INSERT INTO doginfo (mem_id,dog_name,dog_age,dog_weight,dog_char)
 	        VALUES(#{param1},#{param2},#{param3},#{param4},#{param5})

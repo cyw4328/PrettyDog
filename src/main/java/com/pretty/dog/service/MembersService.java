@@ -161,6 +161,12 @@ public class MembersService {
 	}
 
 
+	public void shopup(HashMap<String, String> params) {
+		
+		dao.shopup(params);
+	}
+
+
 
 
 

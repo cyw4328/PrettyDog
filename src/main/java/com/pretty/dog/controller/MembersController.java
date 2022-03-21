@@ -243,6 +243,19 @@ public class MembersController {
 			return "MyShopInfoshs";
 		}
 		
+		//매장정보 수정
+				@RequestMapping(value = "/shopUp", method = RequestMethod.POST)
+					public String shopup(Model model,HttpSession session, @RequestParam HashMap<String, String> params) {
+							
+						String id = (String) session.getAttribute("loginId");
+						logger.info("세션아이디 값 : {}",params);
+								
+						service.shopup(params);
+								
+					return "redirect:/MyShopInfoshs";
+				}
+				
+		
 		
 		
 	//개인 강아지 등록페이지

@@ -42,6 +42,8 @@ public interface MembersDAO {
 
 	int memberOut(String id);
 
+	int shopup(HashMap<String, String> params);
+
 
 
 
