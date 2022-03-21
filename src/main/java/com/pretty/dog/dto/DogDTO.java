@@ -263,7 +263,15 @@ public class DogDTO {
 	private int price_num;
 	private int price_cost;
 	private int price_class;
-
+	private int price_blind;
+	
+	
+	public int getPrice_blind() {
+		return price_blind;
+	}
+	public void setPrice_blind(int price_blind) {
+		this.price_blind = price_blind;
+	}
 	public int getPrice_num() {
 		return price_num;
 	}
@@ -792,6 +800,29 @@ public class DogDTO {
 		this.decA_date = decA_date;
 	}
 	
+	private int pochOk_num;
+	private String pochOk_id;
+	private Timestamp pochOk_date;
+
+	public int getPochOk_num() {
+		return pochOk_num;
+	}
+	public void setPochOk_num(int pochOk_num) {
+		this.pochOk_num = pochOk_num;
+	}
+	public String getPochOk_id() {
+		return pochOk_id;
+	}
+	public void setPochOk_id(String pochOk_id) {
+		this.pochOk_id = pochOk_id;
+	}
+	public Timestamp getPochOk_date() {
+		return pochOk_date;
+	}
+	public void setPochOk_date(Timestamp pochOk_date) {
+		this.pochOk_date = pochOk_date;
+	}
+
 	
 	
 	

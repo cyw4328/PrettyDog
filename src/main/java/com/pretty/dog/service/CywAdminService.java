@@ -716,6 +716,175 @@ public class CywAdminService {
 		return mav;
 	}
 
+	public ModelAndView ChangeListPage() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("cywAdminChangeList");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> ChangeList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.ChangeListCount(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.ChangeList(pagePerCnt,offset));
+		
+		
+		return map;
+	}
+
+	public ModelAndView ChangeMoneyCheck(String poch_num, RedirectAttributes rAttr, String loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.ChangeMoneyCheck(poch_num);
+		
+		if (row > 0) {
+			dao.pointChOkAdd(poch_num,loginId);
+			
+			rAttr.addFlashAttribute("msg", "환전 신청이 완료처리 되었습니다.");
+			mav.setViewName("redirect:/ChangeListPage");
+		}else {
+			rAttr.addFlashAttribute("msg", "환전 신청이 완료처리에 실패했습니다.");
+			mav.setViewName("redirect:/ChangeListPage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView ChangeOkListPage() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("cywAdminChangeOk");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> ChangeOkList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.ChangeOkListCount(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.ChangeOkList(pagePerCnt,offset));
+		
+		
+		return map;
+	}
+
+	public ModelAndView ShopServicePage(String loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 해당 아이디의 매장 정보
+		ArrayList<DogDTO> ShopServiceList = dao.ShopServiceList(loginId);
+		
+		// 해당 매장 서비스 목록 과 추가항목 리스트
+		ArrayList<DogDTO> ServiceInfoList = dao.ShopService(loginId);
+		// 소형견 서비스
+		ArrayList<DogDTO> AddSmallServiceName = dao.AddSmallServiceName();
+		// 중형견 서비스
+		ArrayList<DogDTO> AddMiddleServiceName = dao.AddMiddleServiceName();
+		// 대형견 서비스
+		ArrayList<DogDTO> AddBigServiceName = dao.AddBigServiceName();
+		logger.info("서비스 가져오냐?{}",AddSmallServiceName);
+		
+		mav.addObject("loginId", loginId);
+		mav.addObject("AddSmallServiceName", AddSmallServiceName);
+		mav.addObject("AddMiddleServiceName", AddMiddleServiceName);
+		mav.addObject("AddBigServiceName", AddBigServiceName);
+		mav.addObject("ShopServiceList", ShopServiceList);
+		mav.addObject("ServiceInfoList", ServiceInfoList);
+		mav.setViewName("cywShopService");
+		
+		return mav;
+	}
+
+	public ModelAndView SreviceDel(String price_num, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.SreviceDel(price_num);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "서비스가 삭제 되었습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "서비스삭제에 실패했습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView addShopSmallService(String inputText1, String serviceName1, String busin_num, RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.addShopSmallService(inputText1,serviceName1,busin_num);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "서비스가 추가 되었습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "서비스추가에 실패했습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView addShopMiddleService(String inputText2, String serviceName2, String busin_num,
+			RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.addShopMiddleService(inputText2,serviceName2,busin_num);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "서비스가 추가 되었습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "서비스추가에 실패했습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}
+		
+		return mav;
+	}
+
+	public ModelAndView addShopBigService(String inputText3, String serviceName3, String busin_num,
+			RedirectAttributes rAttr) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = dao.addShopBigService(inputText3,serviceName3,busin_num);
+		
+		if (row > 0) {
+			rAttr.addFlashAttribute("msg", "서비스가 추가 되었습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}else {
+			rAttr.addFlashAttribute("msg", "서비스추가에 실패했습니다.");
+			mav.setViewName("redirect:/ShopServicePage");
+		}
+		
+		return mav;
+	}
+
 	
 	
 	

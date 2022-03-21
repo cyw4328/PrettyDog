@@ -64,7 +64,11 @@ public class CywMemService {
 	public ModelAndView pwChange(String id, String pwInput, String pwcheck) {
 		ModelAndView mav = new ModelAndView();
 		
-		int row = dao.pwChange(id,pwInput);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String pw = encoder.encode(pwInput);
+		
+		int row = dao.pwChange(id,pw);
 		
 		logger.info("row:{}",row);
 		if (row >0) {

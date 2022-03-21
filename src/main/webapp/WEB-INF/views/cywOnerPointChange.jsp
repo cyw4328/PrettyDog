@@ -159,7 +159,7 @@ function listCall(page,cnt) {
 		type:'POST',
 		url:'onerPointListCall',
 		data:{'page':page,'cnt':cnt},
-		dataType:'JSON',
+		dataType:'JSON', 
 		success:function(data) {
 			console.log(data);
 			totalPage = data.pages;
