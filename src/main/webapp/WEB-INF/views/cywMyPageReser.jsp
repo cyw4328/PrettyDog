@@ -133,6 +133,7 @@ function listDraw(list) {
    	var msg ='';
     var reserState = '';
     var reserState1 ='';
+    var dog="";
     
     list.forEach(function(item,reser_num) {
     	var date = new Date(item.reser_askdate);
@@ -142,7 +143,8 @@ function listDraw(list) {
     	if (item.reser_state == 0) {
 			reserState = "예약완료";
 			reserState1 = '<a href="reserDel?reser_num='+item.reser_num+'&&reser_money='+item.reser_money+'&&busin_num='+item.busin_num+'">취소하기</a>';
-		}else if (item.reser_state == 1) {
+			//reserState1 = '<input type="button" id="btn" onclick="func()" value="예약취소"/>'
+    	}else if (item.reser_state == 1) {
 			reserState = "노쇼";
 			reserState1 = "취소불가";
 		}else if (item.reser_state == 2) {
@@ -155,20 +157,27 @@ function listDraw(list) {
 			reserState = "리뷰작성완료";
 			reserState1 = "이용완료";
 		}
+    	if (item.reser_dog == 1) {
+			dog ="소형견";
+		}else if (item.reser_dog == 2) {
+			dog ="중형견";
+		}else if (item.reser_dog == 3) {
+			dog ="대형견";
+		}
     	
 		content +='<tr>';
 		content += '<td>'+date1.getFullYear()+"-"
 	      +("0"+(date1.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date1.getDate()).slice(-2);+'</td>';
 		content +='<td>'+item.busin_name+'</td>';
-		content +='<td>'+'<a href="#">'+item.dog_name+'</a>'+'</td>';
+		content +='<td>'+dog+'</td>';
 		content +='<td>'+item.reser_service+'</td>';
 		content +='<td>'+item.reser_money+'</td>';
 		content +='<td>'+reserState+'</td>';
 		content += '<td>'+date2.getFullYear()+"-"
 	      +("0"+(date2.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date2.getDate()).slice(-2);+'</td>';
-		content += '<td>'+reserState1+'</td>';   
+		content += '<td>'+'<input type="hidden" value="'+item.reser_num+'"/>'+reserState1+'</td>';   
 		content +='</tr>';
 
     });
@@ -182,6 +191,11 @@ if(msg != ""){
 	alert(msg);
 
 }	
+
+function func() {
+	console.log($(this).prev().val());
+	//$(this).prev().val();
+}
 
 </script>
 </html>
