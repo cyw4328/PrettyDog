@@ -24,8 +24,7 @@
     	color : white;
     	padding: 10px;
     }
-    
-    
+  
 </style>
 
 </head>
@@ -53,18 +52,32 @@
 	<tr id="viewtimearea">
 	</tr>
 </table>
-<div style="position: absolute; left: 140px; top: 450px;">
-	<button style="font-weight: bold;" onclick="sendReserSet()">
-	예약 스케줄 수정
-	</button>
+<div style="position: absolute; left: 20px; top: 450px;">
+	<span style="font-weight: bold; padding:0px 40px 40px 0px;">나의 애견 선택</span>
+	<span style="font-weight: bold; padding:0px 40px 40px 0px;">이용 가능한 서비스</span>
+	<br/>
+	<select id="myDog" style="margin: 10px 70px 10px 10px;">
+		
+	</select>
+	<select id="shopService" style="margin: 10px;">
+		<option value="0">이용 서비스</option>
+	</select>
+</div>
+<div style="position: absolute; left: 20px; top: 600px; text-align: left;">
+	<h3>결제 금액 :&nbsp;&nbsp;&nbsp;<span id="servicePrice" style="color : red; font-weight: bold; font-size: x-large;">0 Point</span> </h3> 
+	<button id="reserVation" onclick="reserVation()"
+	style="cursor : pointer; background-color : lightGray; border: 0px; outline: 0px; font-size: large;"
+	>예약 하기</button>
+	<a style="font-size: small; cursor : pointer;" onclick="refundRegulation()">환불 규정</a>
 </div>
 </body>
 </html>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         buildCalendar();
+        findMyDog();
     });
-
+    
     var today = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
     var date = new Date();  // @param 전역 변수, today의 Date를 세어주는 역할
 
@@ -94,7 +107,7 @@
         let lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
         let tbCalendar = document.querySelector(".scriptCalendar > tbody");
-         document.getElementById("calYear").innerText = today.getFullYear();                                  // @param YYYY월
+         document.getElementById("calYear").innerText = today.getFullYear(); // @param YYYY월
         document.getElementById("calMonth").innerText = autoLeftPad((today.getMonth() + 1), 2);   // @param MM월
 
 
@@ -222,6 +235,7 @@
     
     //선택한 날짜의 데이터를 전역 변수로 선언
     var ChoiceDate = "";
+    var ChoiceTime = "";
 
     /**
      * @brief   날짜 선택
@@ -261,7 +275,7 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"busin_num": "378-1234-468522",
+        		"busin_num": "202-1234-468522",
         		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
@@ -272,11 +286,12 @@
         		//파싱한 데이터를 다시 키값으로 나누기 위한 작업
 				//console.log(Object.keys(obj));
         		//console.log(Object.values(obj));
-        		
-				var content = "";
+				
+        		var content = "";
         		var rowContent = "";
         		var rowCnt = Object.keys(obj).length / 3;
         		var rowPlus = Object.keys(obj).length % 3; 
+        		
         		
         		if(rowPlus == 0){
 					for(i=0; i<rowCnt; i++){
@@ -285,7 +300,6 @@
 					}
 				}
         		$("#viewtimearea").append(rowContent);	
-        		
         		
         		//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
 				for(i=0; i<Object.keys(obj).length; i++){
@@ -331,6 +345,7 @@
 				}
 		    	$("#viewtimearea").empty();
 				$("#viewtimearea").append(content);	
+
         	},
         	error : function(e){
         		console.log(e)
@@ -339,10 +354,32 @@
     }
     
     function selectTime(data){
-    	
+ 
+    	/*
     	console.log(ChoiceDate); // 요청 보낼 연 월 일 데이터
     	console.log(data.firstElementChild.innerText); //요청 보낼 시간 데이터
+    	console.log(data);
+    	console.log($(".choiceTime"));
+    	*/
     	
+    	if($(".choiceTime")[0]){
+    		$(".choiceTime").css({
+    			"background-color" : "skyblue",
+    			"font-weight" : "normal"
+    		})
+    		$(".choiceTime")[0].classList.remove("choiceTime");
+		} 
+    	
+    	data.classList.add("choiceTime");
+    	
+    	$(data).css({
+    	    	"background-color" : "lightgreen",
+    	    	"font-weight" : "bold"
+		});
+    	
+    	ChoiceTime = $(".choiceTime")[0].firstChild.innerText;
+    	
+    	 
     }
 
     /**
@@ -359,8 +396,210 @@
     }
     
     
-    function sendReserSet(){
-    	location.assign("/dog/reservationSettings");
-    }
+    //예약할 때 넘겨 줄 일반 회원의 정보를 전역 변수로 지정
+    var mem_id = "";
+    var mem_point = 0;
+    
 
+    function findMyDog(){
+    	
+    	$.ajax({
+    		url:"/dog/findMyDog",
+    		type:"GET",
+    		dataType:"JSON",
+    		data:{
+    			"id" : "testshs25"
+    		},    		
+    		success :function(data){
+    			
+    			console.log(data);
+    			
+    			mem_id = data[0].mem_id;
+    			mem_point = data[0].mem_point;
+    			
+    			let content = "";
+    			
+    			if(data.length>0){
+    				
+    				content += "<option value='noChoiceDog'>나의 애견</option>";
+        			
+        			for(let i=0; i<data.length; i++){
+        				content += "<option value='"+data[i].dog_weight+"'>"+data[i].dog_name+"</option>";
+        			}
+        			$("#myDog").empty();
+    				$("#myDog").append(content);
+    			}else{
+    				content += "<option value='noMyDog'>애견 없음</option>";
+    				
+        			$("#myDog").empty();
+    				$("#myDog").append(content);
+    			}
+    			
+    			
+    		},
+        	error : function(e){
+        		console.log(e);
+        	}
+    		
+    	})
+    }
+    
+    //예약할 때 넘겨 줄 데이터 전역 변수로 지정
+    var busin_name = "";
+    var busin_num = "";
+    var busin_mem_id = "";
+    var add_num;
+    
+    $(function() {
+
+        $("#myDog").change(function() {
+        	
+            var v = $("#myDog").val();
+            
+            var dogName = $("#myDog option:checked").text();
+            
+            console.log(mem_point);
+            
+            //alert("선택하신 애견은 "+dogName+"입니다.");
+            
+            if( v == "소형견"){
+            	add_num = 1;
+            }else if(v == "중형견"){
+            	add_num = 2;
+            }else if(v == "대형견"){
+            	add_num = 3;
+            }
+            
+            $.ajax({
+            	url:"/dog/shopServiceInfo",
+            	type:"GET",
+            	data:{
+            		"busin_num" : "202-1234-468522",
+            		"add_num" : add_num 
+            	},
+            	dataType:"JSON",
+            	success : function(data){
+            		
+            		busin_name = data[0].busin_name;
+            		busin_num = data[0].busin_num;
+            		busin_mem_id = data[0].mem_id;
+            		
+        			let content = "";
+        			
+            		if(data.length>0){
+        				
+        				content += "<option value='noChoiceService'>이용 서비스</option>";
+            			
+            			for(let i=0; i<data.length; i++){
+            				content += "<option value='"+data[i].price_cost+"'>"+data[i].add_sub+"</option>";
+            			}
+            			$("#shopService").empty();
+        				$("#shopService").append(content);
+        			}else{
+        				if(add_num = 1){
+	        				alert("본 매장은 소형견 서비스가 없습니다.");
+        				}else if(add_num = 2){
+	        				alert("본 매장은 중형견 서비스가 없습니다.");
+        				}else if(add_num = 3){
+	        				alert("본 매장은 대형견 서비스가 없습니다.");
+        				}
+        				content += "<option value='noServiceInfo'>서비스 없음</option>";
+        				
+            			$("#shopService").empty();
+        				$("#shopService").append(content);
+        			}
+            		
+            		
+            	},error : function(e){
+            		console.log(e);
+            	}
+            });
+
+
+        });
+
+    });
+    
+    
+    
+    $(function() {
+
+        $("#shopService").change(function() {
+    		    	
+        	//shopServicePrice
+        	var ssp = $("#shopService").val();
+        	//console.log(ssp);
+        	
+        	$("#servicePrice").text(ssp+" Point");
+        });
+	});
+
+
+    function reserVation(){
+    	
+    	var ssp = $("#shopService").val();
+    	var v = $("#myDog option:checked").text();
+		var ssn = $("#shopService option:checked").text();
+    
+    	
+    	if($("#myDog").val() == "noChoiceDog"){
+    		alert("서비스를 이용할 애견을 선택해주세요.");
+    	}else if(($("#shopService").val() == "noChoiceService")){
+    		alert("이용할 서비스를 선택해주세요.");
+    	}else if(ChoiceDate == ""){
+    		alert("예약하실 날짜를 선택해주세요.");
+    	}else if(ChoiceTime == ""){
+    		alert("예약하실 시간을 선택해주세요.");
+    	}else{
+    		let yn = confirm("신청하실 예약 정보를 확인해주세요.\n\n매장명 :                 "+busin_name
+    				+"\n예약시간 :              "+ChoiceDate+" "+ChoiceTime
+    				+"\n이용 서비스 :          "+ssn
+    				+"\n서비스 이용 애견 :   "+v
+    				+"\n\n이용 금액 : "+ssp+" Point\n정말 예약을 하시겠습니까?");
+    		
+    		var reserTime = (ChoiceDate+" "+ChoiceTime);
+    		
+    		if(yn){
+    			
+    			if(mem_point < ssp){
+    				alert("현재 보유하신 포인트가 부족합니다.");
+    				location.assign("/dog/PointInsertPage");
+    			}else{
+    				$.ajax({
+        				url:"/dog/reservation",
+        				type:"POST",
+        				data:{
+        					"busin_num" : busin_num,
+        					"ChoiceDate" : ChoiceDate,
+        					"ChoiceTime" : ChoiceTime,
+        					"mem_id" : mem_id,
+        					"add_num" : add_num,
+        					"service" : ssn,
+        					"servicePrice" : ssp,
+        					"reserTime" : reserTime,
+        					"busin_mem_id" : busin_mem_id
+        				},
+        				dataType:"JSON",
+        				success : function(data){
+        					console.log(data);
+        					if(data.inHistory>0){
+        						alert("예약이 완료 되었습니다.");
+        						location.assign("/dog/MyPageReserPage");
+        					}
+        				},error : function(e){
+        					console.log(e);
+        				}
+        			});
+    			}
+    			
+    		}
+    	}
+    	
+    }
+    
+    function refundRegulation(){
+    	alert("환불 규정 안내입니다.\n\n 15일 이전 취소 시 100%\n 7일 이전 취소 시  70%\n 5일 이전 취소 시  50%\n 3일 이전 취소 시  30%\n 하루 이전 취소 10%\n 당일 취소  0%");
+    }
+    
+    
 </script>

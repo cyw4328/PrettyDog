@@ -1,5 +1,6 @@
 package com.pretty.dog.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +39,48 @@ public class CalendarService {
 			System.out.println(data);
 			
 			return dao.totalReserEx(data);
+		}
+
+		public int noReserAllDate(List<HashMap<String, Object>> list) {
+			
+			return dao.noReserAllDate(list);
+		}
+
+		public void delDate(List<HashMap<String, Object>> delList) {
+			
+			dao.delDate(delList);
+		}
+
+		public ArrayList<HashMap<String, Object>> findMyDog(HashMap<String, Object> data) {
+			
+			return dao.findMyDog(data);
+		}
+
+		public ArrayList<HashMap<String, Object>> shopServiceInfo(HashMap<String, Object> data) {
+			
+			return dao.shopServiceInfo(data);
+		}
+
+		public void reserState(HashMap<String, Object> reserState) {
+			
+			dao.reserState(reserState);
+		}
+
+		public int reserHistory(HashMap<String, Object> reserHistory) {
+			
+			dao.reserInfo(reserHistory);
+			return dao.reserHistory(reserHistory);
+		}
+
+		public void point(HashMap<String, Object> point) {
+			//일반 회원 포인트에서 예약금 만큼 차감
+			dao.minusPoint(point);
+			//업주 회원 노포인트에 예약금 만큼 증가 
+			dao.plusPoint(point);
+			//일반 회원 포인트 내역에 저장
+			dao.normalPointList(point);
+			//업주 회원 포인트 내역에 저장
+			dao.businPointList(point);
 		}
 
 	

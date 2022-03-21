@@ -18,14 +18,12 @@
     	cursor : pointer;
     	background-color : skyblue;
     	color : white;
-    	margin: 10px;
     	padding: 10px;
     }
     
     .noBtn{
     	background-color: gray;
     	color : white;
-    	margin: 10px;
     	padding: 10px;
     }
 
@@ -48,9 +46,9 @@
     </thead>
     <tbody></tbody>
 </table>
-<table id="reservationTime" style="float:left;">
+<table id="reservationTime" style="float:left; border-spacing: 10px 10px;">
 	<tr>
-		<td colspan="3">설정 시간과 예약 현황</td>
+		<td colspan="3">이용 가능 시간</td>
 	</tr>
 	<tr id="viewtimearea">
 	</tr>
@@ -192,6 +190,9 @@
 	
 	//리얼 워크 타임을 담을 변수
 	var workingHours = [];
+	
+	//일괄 저장할 때 쓰일 시간 정보를 담은 객체
+	var sendWorkingTime = {};
 	
 	var today = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
 	var date = new Date();  // @param 전역 변수, today의 Date를 세어주는 역할
@@ -390,7 +391,8 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"ChooseDate" : ChoiceDate,
+        		"busin_num": "202-1234-468522",
+        		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
         		
@@ -398,7 +400,7 @@
         		//console.log(data.set_time);
         		
         		//JSON 컬럼으로 되어 있는 녀석의 데이터를 js 에서 사용하기 위해서 파싱을 해준 작업
-        		const obj = JSON.parse(data.set_time);
+        		let obj = JSON.parse(data.set_time);
         		
         		//파싱한 데이터를 다시 키값으로 나누기 위한 작업(선택한 날짜의 시간 정보를 가져온다)
 				//console.log(Object.keys(obj));
@@ -407,6 +409,20 @@
 				reserArr = [];
 				
 				compareTime ="";
+				
+				var content = "";
+        		var rowContent = "";
+        		var rowCnt = Object.keys(obj).length / 3;
+        		var rowPlus = Object.keys(obj).length % 3; 
+
+        		if(rowPlus == 0){
+					for(i=0; i<rowCnt; i++){
+						rowContent += "<tr id='viewtimearea"+i+"'>";
+						rowContent += "</tr>";	
+					}
+				}
+        		
+        		$("#viewtimearea").append(rowContent);
         		
         		//위애서 파싱한 데이터를 가지고 키와 밸류 추출 (예약이 된 녀석들의 정보만 뺴오기 위함)
         		for(var realTime in obj){
@@ -417,29 +433,51 @@
         			}
         		}
 
-				
-        		var content = "";
         		
         		//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
 				for(i=0; i<Object.keys(obj).length; i++){
-					//console.log(Object.keys(obj)[i]);
 					
-					if(Object.values(obj)[i]==0){
-						content += "<tr id='viewTimeArea"+i+"'>";
-						content += "<td class='timeBtn'>";
-						content += "<span>"+Object.keys(obj)[i]+"</span>";
-						content += "</td>";
-						content += "</tr>";	
-					}else{
-						content += "<tr id='viewTimeArea"+i+"'>";
-						content += "<td class='noBtn'>";
-						content += "<span>"+Object.keys(obj)[i]+"</span>";
-						content += "</td>";
-						content += "</tr>";
+					//console.log(Object.keys(obj)[i]);
+					if(i%3 == 0){
+						if(Object.values(obj)[i]==0){
+							content += "<tr>";
+							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}else{
+							content += "<tr>";
+							content += "<td class='noBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}	
+					}else if(i%3 == 1){
+						if(Object.values(obj)[i]==0){
+							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}else{
+							content += "<td class='noBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}
+					}else if(i%3 == 2){
+						if(Object.values(obj)[i]==0){
+							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+							content += "</tr>";	
+						}else{
+							content += "<td class='noBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+							content += "</tr>";
+						}	
 					}
+					
+					
 				}
-				$("#viewtimearea").empty();
-				$("#viewtimearea").append(content);		
+		    	$("#viewtimearea").empty();
+				$("#viewtimearea").append(content);			
         	},
         	error : function(e){
         		
@@ -547,9 +585,12 @@
 		
 		var objt = {};
 		
+		
+		
 		for(var i=0; i<workingHours.length; i++){
 			
 			objt[workingHours[i]] = 0;
+			
 			
 			for(var j=0; j<reserArr.length; j++){
 				
@@ -561,6 +602,7 @@
 					k++
 					iArr.push(i);
 					objt[workingHours[i]] = 1;
+					
 				} 
 			}
 		}
@@ -568,7 +610,7 @@
 		//console.log(objt);	
 		
 		
-		var sendData = {"busin_num" : "378-1234-468522", "set_date" : ChoiceDate, "set_time" : JSON.stringify(objt)};
+		var sendData = {"busin_num" : "202-1234-468522", "set_date" : ChoiceDate, "set_time" : JSON.stringify(objt)};
 		
 		console.log(sendData);
 		
@@ -690,6 +732,7 @@
 		for(var i=0; i<workingHours.length; i++){
 			
 			objt[workingHours[i]] = 0;
+			sendWorkingTime[workingHours[i]] = 0;
 			
 			for(var j=0; j<reserArr.length; j++){
 				
@@ -701,6 +744,7 @@
 					k++
 					iArr.push(i);
 					objt[workingHours[i]] = 1;
+					sendWorkingTime[workingHours[i]] = 0;
 				} 
 			}
 		}
@@ -838,16 +882,34 @@
 		
 		var allTime =  JSON.stringify(objt);
 		
+		//console.log(totalDelDay);
 		
 		$.ajax({
         	url:"/dog/totalReserEx",
         	type:"POST",
         	dataType:"JSON",
-        	data:{"busin_num" : "378-1234-468321"},
+        	data:{"busin_num" : "202-1234-468522"},
         	success :function(data){
         		
+        		console.log(data);
         		
-        		if(data.length == 0){
+        		for(var i=0; i<data.length; i++){
+        			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
+            		let comDay = data[i].set_date;
+            		let comDate = new Date(comDay)
+            		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
+            		//console.log(reserDate);
+            		
+            		let obj = JSON.parse(data[i].set_time);
+            		let reserTime = Object.values(obj);
+            		//console.log(reserTime);
+        			
+        			if(reserTime.filter(v => v == 1).length >=1){
+        				noCancleDate.push(reserDate);
+            		}
+        		}
+        		
+        		if(noCancleDate.length == 0){
         			//에약이 없을 경우 일괄 수정시 
         			
         			console.log(totalDay);
@@ -856,9 +918,12 @@
     		        	url:"/dog/noReserAllDate",
     		        	type:"POST",
     		        	dataType:"JSON",
-    		        	data:{"busin_num" : "378-1234-468321", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(objt)},
+    		        	data:{"busin_num" : "202-1234-468522", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(totalDelDay)},
     		        	success :function(data){
-    		        		console.log(data);
+    		        		//console.log(data);
+    		        		if(data >= 1){
+    		        			location.reload();
+    		        		}
     		        	},
     		        	error : function(e){
     		        		console.log(e);
@@ -868,21 +933,7 @@
         			
         		}else{
         			
-        			for(var i=0; i<data.length; i++){
-            			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
-                		let comDay = data[i].set_date;
-                		let comDate = new Date(comDay)
-                		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
-                		//console.log(reserDate);
-                		
-                		const obj = JSON.parse(data[i].set_time);
-                		let reserTime = Object.values(obj);
-                		//console.log(reserTime);
-            			
-            			if(reserTime.filter(v => v == 1).length >=1){
-            				noCancleDate.push(reserDate);
-                		}
-            		}
+        			
         			
         			//요청한 영업일에서 휴무와 예약이 있는 날짜를 저장할 배열
         			var upsertDate = [];
@@ -913,9 +964,40 @@
         				}
         					
         			}
-            		
-            		//console.log(totalDelDay);
-            		//console.log(delDate);
+        			
+        			console.log(sendWorkingTime);
+        			console.log(objt);
+        			
+        			//아작스 들어갈 부분
+        			
+        			
+        			$.ajax({
+    		        	url:"/dog/noReserAllDate",
+    		        	type:"POST",
+    		        	dataType:"JSON",
+    		        	data:{"busin_num" : "202-1234-468522", "totalDay" :JSON.stringify(upsertDate), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(delDate)},
+    		        	success :function(data){
+    		        		//console.log(data);
+    		        		if(data >= 1){
+    		        			location.reload();
+    		        		}
+    		        	},
+    		        	error : function(e){
+    		        		console.log(e);
+    		        	}
+    		        });	
+        			
+        			
+        			
+        			/*
+        			console.log(noCancleDate);
+        			console.log("==============================================");
+        			console.log(totalDay);
+        			console.log(totalDelDay);
+        			console.log("==============================================");
+            		console.log(upsertDate);
+            		console.log(delDate);
+            		*/
         		}
         		
         		

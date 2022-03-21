@@ -1,5 +1,6 @@
 package com.pretty.dog.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +14,27 @@ public interface CalendarDao {
 
 	List<HashMap<String, Object>> totalReserEx(HashMap<String, Object> data);
 
+	int noReserAllDate(List<HashMap<String, Object>> list);
+
+	void delDate(List<HashMap<String,Object>> list);
+
+	ArrayList<HashMap<String, Object>> findMyDog(HashMap<String, Object> data);
+
+	ArrayList<HashMap<String, Object>> shopServiceInfo(HashMap<String, Object> data);
+
+	void reserState(HashMap<String, Object> reserState);
+
+	void reserInfo(HashMap<String, Object> reserHistory);
+
+	int reserHistory(HashMap<String, Object> reserHistory);
+
+	void minusPoint(HashMap<String, Object> point);
+
+	void plusPoint(HashMap<String, Object> point);
+
+	void normalPointList(HashMap<String, Object> point);
+
+	void businPointList(HashMap<String, Object> point);
 
 
 }
