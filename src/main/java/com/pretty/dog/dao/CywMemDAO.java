@@ -12,6 +12,6 @@ public interface CywMemDAO {
 
 	int pwSearch(String userId, String userName, String userPhone, String userEmail);
 
-	int pwChange(String id, String pwInput);
+	int pwChange(String id, String pw);
 
 }
