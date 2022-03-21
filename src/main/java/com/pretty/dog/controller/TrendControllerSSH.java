@@ -109,7 +109,7 @@ public class TrendControllerSSH {
 	 @RequestMapping(value = "/trendUpdate")
 	 public String trendUpdate(Model model, MultipartFile photos, @RequestParam HashMap<String, String> params) {
 		 logger.info("수정 요청 : {}", params);
-		 logger.info("업로드 할 파일 수 : {}", photos.getOriginalFilename()); // 서비스에서 어느페이지로 보낼건지 결정 
+		 logger.info("업로드 할 파일 수 : {}", photos.getOriginalFilename());
 		 return trendServiceSSH.trendUpdate(photos, params); 
 	 }
 	 
