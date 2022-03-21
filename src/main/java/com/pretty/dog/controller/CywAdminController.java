@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -176,6 +177,49 @@ public class CywAdminController {
 	}
 	
 	
+	@RequestMapping(value = "/ChangeListPage")
+	public ModelAndView ChangeListPage(HttpSession session) {
+		logger.info("환전신청목록 페이지");
+
+		return service.ChangeListPage();
+	}
+	
+	@RequestMapping(value = "/ChangeList", method = RequestMethod.POST) 
+	public @ResponseBody HashMap<String, Object> ChangeList(@RequestParam String page,@RequestParam String cnt) {
+		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+
+		return service.ChangeList(currPage,pagePerCnt);
+	}
+	
+	@RequestMapping(value = "/ChangeMoneyCheck")
+	public ModelAndView ChangeMoneyCheck(HttpSession session,@RequestParam String poch_num,RedirectAttributes rAttr) {
+		logger.info("환전신청완료하기");
+
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "dud";
+		return service.ChangeMoneyCheck(poch_num,rAttr,loginId);
+	}
+	
+	@RequestMapping(value = "/ChangeOkListPage")
+	public ModelAndView ChangeOkListPage(HttpSession session) {
+		logger.info("환전완료목록 페이지");
+
+		return service.ChangeOkListPage();
+	}
+
+	@RequestMapping(value = "/ChangeOkList", method = RequestMethod.POST) 
+	public @ResponseBody HashMap<String, Object> ChangeOkList1(@RequestParam String page,@RequestParam String cnt) {
+		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+
+		return service.ChangeOkList(currPage,pagePerCnt);
+	}
+	
 	@RequestMapping(value = "/TEST1")
 	public ModelAndView TEST1() {
 		ModelAndView mavAndView = new ModelAndView();
@@ -320,7 +364,7 @@ public class CywAdminController {
 		logger.info("마이페이지일반회원예약목록페이지");
 		
 		//String loginId = (String) session.getAttribute("loginId");
-		String loginId = "dud";
+		String loginId = "testshs25";
 		
 		return service.MyPageReserPage(loginId);
 	}
@@ -330,7 +374,7 @@ public class CywAdminController {
 		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
 		
 		//String loginId = (String) session.getAttribute("loginId");
-		String loginId = "dud";
+		String loginId = "testshs25";
 		
 		int currPage = Integer.parseInt(page);
 		int pagePerCnt = Integer.parseInt(cnt);
@@ -421,4 +465,58 @@ public class CywAdminController {
 
 		return service.ReserLogList(currPage,pagePerCnt,loginId);
 	}
+	
+	@RequestMapping(value = "/ShopServicePage")
+	public ModelAndView ShopServicePage(HttpSession session) {
+		logger.info("매장 추가 서비스 설정 페이지");
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "cyw4328";
+		
+		return service.ShopServicePage(loginId);
+	}
+	
+	@RequestMapping(value = "/addShopSmallService")
+	public ModelAndView addShopSmallService(HttpSession session,@RequestParam String inputText1,
+			@RequestParam String serviceName1,@RequestParam String busin_num,RedirectAttributes rAttr) {
+		logger.info("매장 소형견 서비스추가:{}",busin_num);
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "cyw4328";
+		
+		return service.addShopSmallService(inputText1,serviceName1,busin_num,rAttr);
+	}
+	
+	@RequestMapping(value = "/addShopMiddleService")
+	public ModelAndView addShopMiddleService(HttpSession session,@RequestParam String inputText2,
+			@RequestParam String serviceName2,@RequestParam String busin_num,RedirectAttributes rAttr) {
+		logger.info("매장 중형견 서비스추가");
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "cyw4328";
+		
+		return service.addShopMiddleService(inputText2,serviceName2,busin_num,rAttr);
+	}
+	
+	@RequestMapping(value = "/addShopBigService")
+	public ModelAndView addShopBigService(HttpSession session,@RequestParam String inputText3,
+			@RequestParam String serviceName3,@RequestParam String busin_num,RedirectAttributes rAttr) {
+		logger.info("매장 대형견 서비스추가");
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		String loginId = "cyw4328";
+		
+		return service.addShopBigService(inputText3,serviceName3,busin_num,rAttr);
+	}
+	
+	@RequestMapping(value = "/SreviceDel")
+	public ModelAndView SreviceDel(HttpSession session,@RequestParam String price_num,RedirectAttributes rAttr) {
+		logger.info("매장 추가 서비스 삭제");
+		
+		//String loginId = (String) session.getAttribute("loginId");
+		//String loginId = "cyw4328";
+		
+		return service.SreviceDel(price_num,rAttr);
+	}
+	
 }

@@ -58,8 +58,14 @@
 			mem_point = #{param2} WHERE mem_id = #{param1}
 	</update>
 	
+	<!-- 환전 테이블 저장 -->
 	<insert id="pointChInsert">
 		INSERT INTO pointCh (mem_id,poch_money,poch_bank,poch_banknum)values(#{param1},#{param2},#{param3},#{param4});
+	</insert>
+	
+	<!-- 환전시 포인트내역에 등록 -->
+	<insert id="insertOnerPoint">
+		INSERT INTO pointList (mem_id,point_cdc,point_cont,point_distin)values(#{param1},#{param2},"환전완료",1);
 	</insert>
 	
 	
