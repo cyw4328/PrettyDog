@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>신고 항목 리스트</title>
+	<title>Insert title here</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -78,36 +78,11 @@
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 		}
-		#Allpage{
-			position: relative;
-			top: 150px;
-			left: 300px;
-		}
-		#AddForm{
-			position: absolute;
-			top: 50px;
-			left: 10px;
-		}
+		
 		#HangmokList{
 			position: absolute;
 			top: 120px;
 			/* left: 10px; */
-		}
-		input[name="SingoSub"]{
-			width: 300px;
-			height: 60px;
-		}
-		input[name="AddBtn"] {
-			background-color: pink;
-			height: 60px;
-			width: 100px;
-			text-align: center;
-		}
-		.table1{
-			width: 40%;
-		    max-width: 100%;
-		    margin-bottom: 20px;
-			table-layout: fixed;
 		}
  
    </style>
@@ -148,12 +123,12 @@
 
             
             <div style="width: 100%; height: 79%;">
-                <a href="apuserlist2" style="text-decoration:none;"><div class= "sidebar">회원조회 및 관리</div></a>
+                <a href="apuserlist2" style="text-decoration:none;"><div class= "sidebar" >회원조회 및 관리</div></a>
                 <a href="apshoplist2" style="text-decoration:none;"><div class= "sidebar" >매장조회 및 관리</div></a>
-                <a href="appointlist2" style="text-decoration:none;"><div class= "sidebar" >포인트 내역 조회</div></a>
+                <a href="appointlist2" style="text-decoration:none;"><div class= "sidebar" style="background-color: rgb(167, 167, 167); color: #020202; font-weight: bold;" >포인트 내역 조회</div></a>
                 <a href="apreservelist2" style="text-decoration:none;"><div class= "sidebar" >예약 조회</div></a>
                 <a href="SingoListPage" style="text-decoration:none;"><div class= "sidebar" >신고 관리</div></a>
-                <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar" style="background-color: rgb(167, 167, 167); color: #020202; font-weight: bold;">신고 항목 관리</div></a>
+                <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar" >신고 항목 관리</div></a>
                 <a href="AdminServicePage" style="text-decoration:none;"><div class= "sidebar" >추가서비스 관리</div></a>
                 <a href="categoryPage" style="text-decoration:none;"><div class= "sidebar" >카테고리 관리</div></a>
             </div>
@@ -162,34 +137,67 @@
         <!-- 내용 -->
         <div style="width: 87%; height: 100%;">
             <!-- 검색 바 -->
-            <div style="width: 100%; height: 5%;">
-                
+            <div style="width: 100%; height: 11%;">
+                <div style="width: 100%; height: 30%;"></div> 
+                <div style="width: 100%; height: 55%; display: flex;">
+                    <div style="width: 5%; height: 100%;"></div>
+                    <div style="width: 90%; height: 100%; display: flex; border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
+                        <div style="width: 50%; height: 100%;">
+                            <input class="form-control border-0.5 shadow-0" style="width: 100%; height: 100%; font-size: 15px;" type="text" name="search" placeholder="원하는 검색어를 입력하세요~">
+                        </div>
+
+                        <div style="width: 1%; height: 100%;"></div>
+                        <div style="width: 10%; height: 100%;">
+                            <button class="btn btn-secondary btn-lg" style="width: 100%; height: 100%; font-size: 15px;" type="submit">Search </button>
+                        </div>
+                        <div style="width: 1%; height: 100%;"></div>
+
+                        <div style="width: 10%; height: 100%;">
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
+                                <option value="">일반</option>
+                                <option value="">제재</option>
+                                <option value="">휴먼</option>
+                                <option value="">탈퇴</option>
+                            </select>
+                        </div>
+
+                        <div style="width: 1%; height: 100%;"></div>
+                        <div style="width: 10%; height: 100%;">
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
+                                <option value="">일반회원</option>
+                                <option value="">업주회원</option>
+                                <option value="">일반관리자</option>
+                            </select>
+                        </div>
+                        <div style="width: 1%; height: 100%;"></div>
+                        
+                    </div>
+                    <div style="width: 5%; height: 100%;"></div>
+                </div> 
+                <div style="width: 100%; height: 15%;"></div> 
             </div>
 
-            <div style="width: 100%; height: 85%; display: flex;">
+            <div style="width: 100%; height: 75%; display: flex;">
                 <div style="width: 5%; height: 100%;"></div>
                 <!-- 내용 -->
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
-					<div id="Allpage">
-						<div id="AddForm">
-							<form action="SingoHangmokAdd" id="SingoHangmokAdd">
-								<input type="text" placeholder="추가할 항목이름을 적어주세요." name="SingoSub" id="SingoSub"/>
-								<input t	ype="button" value="추가" name="AddBtn" id="AddBtn"/>
-							</form>
-						</div>
-						<div id="HangmokList">
+					<table border="1" width="700px">
+				        <div id="HangmokList">
 							<table class="table1">
 								<thead>
 									<tr>
-										<th>항목이름</th>
-										<th>항목상태</th>
-										<th>상태변경</th>
+										<th>아이디</th>
+							            <th>이름</th>
+							            <th>포인트 변경일/시간</th>
+							            <th>내용</th>
+							            <th>금액</th>
+							            <th>상태</th>
 									</tr>
 								</thead>
 								<tbody id="list">
-									
+			
 								</tbody>
-								<tr>
+								<tbody>
 									<td colspan="3" id="paging">
 										<div class="container">                           
 					               			<nav aria-label="Page navigation" style="text-align:center; width: 600px;">
@@ -197,11 +205,12 @@
 					              			</nav>               
 					            		</div>
 									</td>
-								</tr>
+								</tbody>
 							</table>
+								
+								
 						</div>
-					</div>					
-
+				    </table>
                 </div>
                 
             </div>
@@ -219,19 +228,18 @@
 				
 </body>
 <script>
-
 var currPage = 1;
 var totalPage = 2;
 
-SingoHangmokList(currPage,10);
+appointlist3(currPage,5);
 
 
-function SingoHangmokList(page,cnt) {
+function appointlist3(page,cnt) {
 	
 	// 페이지 도착하자마자 ajax 실행
 	$.ajax({
 		type:'POST',
-		url:'SingoHangmokList',
+		url:'appointlist3',
 		data:{'page':page,'cnt':cnt}, 
 		dataType:'JSON',
 		success:function(data) {
@@ -248,7 +256,7 @@ function SingoHangmokList(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						SingoHangmokList(page,10);
+						appointlist3(page,5);
 					}
 				});
 			}
@@ -260,29 +268,19 @@ function SingoHangmokList(page,cnt) {
 	});
 }
 
+
 function listDraw(list) {
     var content = '';
 
-    list.forEach(function(item,decO_num) {
+    list.forEach(function(item,mem_id) {
 
-    	var blind = "";
-    	if (item.decO_blind == 1) {
-    		blind = '<b  style="color: red;">'+"사용안함"+'</b>';
-		}else {
-			blind = '<b  style="color: blue;">'+"사용중"+'</b>';;
-		}
-    	var ChangeBlind = "";
-    	if (item.decO_blind == 1) {
-    		ChangeBlind = '<a href="HangmokReUse?decO_num='+item.decO_num+'">'+"다시사용하기"+'</a>';
-		}else {
-			ChangeBlind = '<a href="HangmokDel?decO_num='+item.decO_num+'">'+"미사용처리"+'</a>';
-		}
-    	
-	
     	content += '<tr>';
-    	content += '<td>'+item.decO_cont+'</td>';
-   		content += '<td>'+blind+'</td>';
-    	content += '<td>'+ChangeBlind+'</td>';
+    	content += '<td>'+item.mem_id+'</td>';
+   		content += '<td>'+item.mem_name+'</td>';
+    	content += '<td>'+item.point_date+'</td>';
+    	content += '<td>'+item.point_cont+'</td>';
+    	content += '<td>'+item.point_cdc+'</td>';
+    	content += '<td>'+item.point_distin+'</td>';
     	content += '</tr>';
 
     });
@@ -290,26 +288,6 @@ function listDraw(list) {
     $('#list').append(content);
 }
 
-$('#AddBtn').click(function() {
-	var $SingoSub = $('input[name="SingoSub"]')
-	console.log($SingoSub.val());
-	if ($SingoSub.val() == "") {
-		alert("항목이름을 적어주세요");
-	}else {
-		var yn = confirm("등록하시겠습니까?");
-		if (yn) {
-			$('#SingoHangmokAdd').submit();
-		}
-	}
-})
-
-
-var msg = "${msg}";
-
-if(msg != ""){
-	alert(msg);
-
-}	
 
 </script>
 </html>

@@ -5,11 +5,19 @@
 
 <!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="com.pretty.dog.dao.AdminPageDAO">
-
-	<select id="userlist" resultType="com.pretty.dog.dto.DogDTO">
-			select * from members 
+	
+	<!-- 회원 조회 -->
+	<select id="apuserlist3Count" resultType="int">
+			select count(mem_id) from members
+	</select>
+	<select id="apuserlist3" resultType="dog">
+			select * from members ORDER BY mem_date DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	
+	
+	
+	<!-- 회원 상세보기 -->
 	<select id="detail" resultType="com.pretty.dog.dto.DogDTO">
 			select * from members where mem_id = #{param1}
 	</select>
@@ -27,6 +35,78 @@
 		update members set mem_point = (select sum(point_cdc) from pointlist where mem_id = #{param1}) where mem_id = #{param1}
 	</update>
 	
+	
+	<!-- 매장 조회 -->
+	<select id="apshoplist3Count" resultType="int">
+			select count(busin_name) from shop
+	</select>
+	<select id="apshoplist3" resultType="dog">
+			select * from members mem join shop sh on mem.mem_id = sh.mem_id where sh.busin_num ORDER BY sh.busin_date DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	
+	
+	<!-- 매장 상세보기(정보) -->
+	<select id="shopdetail" resultType="com.pretty.dog.dto.DogDTO">
+			select * from members mem join shop sh on mem.mem_id = sh.mem_id where sh.busin_num = #{param1}
+	</select>
+	
+	<!-- 매장 상세보기(이용) -->
+	<select id="shopdetail2" resultType="int">
+			SELECT COUNT(reser_state) FROM reservation re where re.busin_num = #{param1} and reser_state in(0,1,3,4)
+	</select>
+	
+	<!-- 매장 상세보기(취소) -->
+	<select id="shopdetail3" resultType="int">
+			SELECT COUNT(reser_state) FROM reservation re where re.busin_num = #{param1} and reser_state in(2)
+	</select>
+	
+	<!-- 매장 매출금액 -->
+	<select id="shopmoney" resultType="int">
+			SELECT IFNULL(sum(reser_money), 0) FROM reservation where busin_num = #{param1} and reser_state in(1,3,4)
+	</select>
+	
+	<!-- 매장 환급금액 -->
+	<select id="shopmoney2" resultType="int">
+			<!-- SELECT COUNT(reser_state) FROM reservation re where re.busin_num = #{param1} and reser_state in(2); -->
+			select IFNULL(sum(poch_money), 0) from pointCh where mem_id = (select mem_id from shop where busin_num = #{param1}) and poch_check in(1)
+	</select>
+	
+	<!-- 매장 결제금액 -->
+	<select id="shopmoney3" resultType="int">
+			SELECT IFNULL(sum(reser_money), 0) FROM reservation where busin_num = #{param1} and reser_state in(0,1,3,4)
+	</select>
+	
+	<!-- 매장 취소금액 -->
+	<select id="shopmoney4" resultType="int">		
+			SELECT IFNULL(sum(reser_money), 0) FROM reservation where busin_num = #{param1} and reser_state in(2)
+	</select>
+	
+	<!-- 매장 상태수정 -->
+	<update id="shopdate">
+			update shop set busin_calss = #{param2} where busin_num = #{param1}
+	</update>
+	
+	
+	
+	<!-- 포인트 조회 -->
+	<select id="appointlist3Count" resultType="int">
+			select count(point_num) from pointlist
+	</select>
+	<select id="appointlist3" resultType="dog">
+			select * from pointList p join members mem on p.mem_id = mem.mem_id ORDER BY p.point_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+	<!-- 예약 조회 -->
+	<select id="apreservelist3Count" resultType="int">
+			select count(reser_num) from reservation
+	</select>
+	<select id="apreservelist3" resultType="dog">
+			select * from shop sh join reservation re on sh.busin_num = re.busin_num ORDER BY re.reser_num DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+		
+	 
 	
 
 </mapper>

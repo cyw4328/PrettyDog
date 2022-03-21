@@ -276,7 +276,7 @@
 	
 	<!-- 신고항목 페이징 카운터 -->
 	<select id="SingoHangmokListCount" resultType="int">
-		select count(decO_num) from decOption
+		select count(reser_num) from reservation
 	</select>
 	
 	<!-- 신고항목 리스트 -->

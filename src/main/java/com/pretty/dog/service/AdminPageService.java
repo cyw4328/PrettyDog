@@ -21,13 +21,37 @@ public class AdminPageService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired AdminPageDAO dao;
 	
-	public ArrayList<DogDTO> userlist() {
+	//관리자 회원리스트
+	public ModelAndView apuserlist2() {
+		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<DogDTO> userlist = null;
-		userlist = dao.userlist();
-		logger.info("size : {}",userlist.size());
-		return userlist;
+		mav.setViewName("APuserList2");
+		
+		return mav;
 	}
+
+	public HashMap<String, Object> apuserlist3(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.apuserlist3Count(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.apuserlist3(pagePerCnt,offset));
+		
+		return map;
+	}	
+	
+	
+	
 
 	public DogDTO detail(String id) {
 		
@@ -48,7 +72,6 @@ public class AdminPageService {
 
 	public void pointupdate(HashMap<String, String> params, RedirectAttributes rArrt) {
 		
-		
 		String id = params.get("id");
 		String CHpoint = params.get("CHpoint");
 		String pointstate = params.get("pointstate");
@@ -60,12 +83,180 @@ public class AdminPageService {
 		}
 		rArrt.addFlashAttribute("success", row);
 		
+		logger.info("수정 성공 여부 : "+row);
+	}
 
+	//관리자 매장
+	public ModelAndView apshoplist2() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("APshopList2");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> apshoplist3(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.apshoplist3Count(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.apshoplist3(pagePerCnt,offset));
+		
+		return map;
+	}	
+
+	
+	
+
+	public DogDTO adminshopdetail(String shop) {
+		
+		return dao.shopdetail(shop);
+	}
+
+	public int adminshopdetail2(String shop) {
+		
+		
+		int totalCount = dao.shopdetail2(shop);
+		logger.info("totalCount:{}",totalCount);
+		
+		
+		return  totalCount;
+	}
+
+	public int adminshopdetail3(String shop) {
+		
+		int totalCount = dao.shopdetail3(shop);
+		logger.info("totalCount:{}",totalCount);
+		
+		return totalCount;
+	}
+
+	public int adminshopmoney(String shop) {
+		
+		int totalCount = dao.shopmoney(shop);
+		logger.info("totalCount:{}",totalCount);
+		
+		return totalCount;
+	}
+
+	
+	 public int adminshopmoney2(String shop) {
+	  
+		int totalCount = dao.shopmoney2(shop);
+		logger.info("totalCount:{}",totalCount);
+		  
+		return totalCount; 
+	 }
+
+	public int adminshopmoney3(String shop) {
+		
+		int totalCount = dao.shopmoney3(shop);
+		logger.info("totalCount:{}",totalCount);
+		  
+		return totalCount; 
+	}
+
+	public int adminshopmoney4(String shop) {
+
+		int totalCount = dao.shopmoney4(shop);
+		logger.info("totalCount:{}",totalCount);
+		  
+		return totalCount; 
+	}
+
+	public void shopdate(HashMap<String, String> params) {
+
+		
+		String shop = params.get("shop");
+		String calss = params.get("calss");
+		
+		logger.info(shop+"/"+calss);
+		
+		int row = dao.shopdate(shop,calss);
+		
 		logger.info("수정 성공 여부 : "+row);
 		
-		
-		
 	}
+	
+	
+	//관리자 포인트
+	public ModelAndView appointlist2() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("APpointList2");
+		
+		return mav;
+	}
+	
+	public HashMap<String, Object> appointlist3(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.appointlist3Count(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.appointlist3(pagePerCnt,offset));
+		
+		return map;
+	}
+	
+	//관리자 예약
+	public ModelAndView apreservelist2() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("APreserveList2");
+		
+		return mav;
+	}
+
+	public HashMap<String, Object> apreservelist3(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.apreservelist3Count(); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.apreservelist3(pagePerCnt,offset));
+		
+		return map;
+	}
+
+	
+
+	
+
+	
+
+	
+	
+	 
+	 
 
 	
 
