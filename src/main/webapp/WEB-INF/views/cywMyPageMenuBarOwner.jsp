@@ -88,10 +88,11 @@ a{
 			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
 		</div>
 		
-		<a href="./MyjungboSujungshs"><div class= "tab00" id="tab1">개인정보수정</div></a>
+		<a href="./memberPassCk"><div class= "tab00" id="tab1">개인정보수정</div></a>
 		<a href="./pointListPage"><div class= "tab00" id="tab2">포인트내역</div></a>
 		<a href="./MyShopInfoshs"><div class= "tab00" id="tab3">매장정보확인</div></a>
-		<a href="#"><div class= "tab00" id="tab4">매장 영업시간 확인</div></a>
+		<a href="./calendar"><div class= "tab00" id="tab4">매장 영업시간 확인</div></a>
+		<a href="./ShopServicePage"><div class= "tab00" id="tab10">매장 서비스 설정</div></a>
 		<a href="./OwnerReserPage"><div class= "tab00" id="tab5">매장 예약 관리</div></a>
 		<a href="./OwnerReserLogPage"><div class= "tab00" id="tab6">매장 예약 히스토리</div></a>
 		<a href="./MyPageAlarm"><div class= "tab00" id="tab7">알림목록</div></a>
