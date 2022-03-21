@@ -42,9 +42,11 @@ public interface MembersDAO {
 
 	int memberOut(String id);
 
-	String shopSaupCk(String shopSaup);
+	int shopup(HashMap<String, String> params);
 
 	int userUp(HashMap<String, String> params);
+
+	String shopSaupCk(String shopSaup);
 
 
 
