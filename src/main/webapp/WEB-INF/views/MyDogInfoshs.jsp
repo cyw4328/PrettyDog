@@ -74,7 +74,7 @@
 	            	<td ><textarea name="dogchar" class="formSt"></textarea></td>
 	            </tr>
 	            <tr>
-	            	<td colspan="2" id = "btn"><input type="submit" value="저장" id="btn"></td>
+	            	<td colspan="2"><input type="submit" value="저장" id="btn"></td>
 	            </tr>
 	         </table>
 	      </form>
@@ -85,29 +85,31 @@
 </body>
 <script>
 
-var dogname = $("input[name='dogname']").val();
-var dogage = $("input[name='dogage']").val();
-var dogchar = $("input[name='dogchar']").val();
 
-$("#btn").click(function() {
 
+$("#btn").on("click", function(e) {
+		e.preventDefault();
+		var dogname = $("input[name='dogname']").val();
+		var dogage = $("input[name='dogage']").val();
+		var dogchar = $("textarea[name='dogchar']").val();
 	   //유효성 검사
 	   if (dogname == null || dogname == "") { 
 	      alert("강아지 이름을 입력해주세요");
 	      return false;
 	   } 
-	   if (dogname == null || dogname == "") { 
+	   if (dogage == null || dogage == "") { 
 		      alert("강아지 나이를 입력해주세요");
 		      return false;
 		   }
 	   if (dogchar == null || dogchar == "") { 
-		      alert("강아지 나이를 입력해주세요");
+		      alert("강아지 특징을 입력해주세요");
 		      return false;
 		   }
 	   
+	   else{
 		   alert('저장이 완료되었습니다.');
 			$("form").submit();
-
+	   }
 });	
 
 
