@@ -74,7 +74,7 @@
 	            	<td ><textarea name="dogchar" class="formSt"></textarea></td>
 	            </tr>
 	            <tr>
-	            	<td colspan="2"><button>저장</button></td>
+	            	<td colspan="2" id = "btn"><input type="submit" value="저장" id="btn"></td>
 	            </tr>
 	         </table>
 	      </form>
@@ -85,11 +85,29 @@
 </body>
 <script>
 
+var dogname = $("input[name='dogname']").val();
+var dogage = $("input[name='dogage']").val();
+var dogchar = $("input[name='dogchar']").val();
 
-$("#btn-join").click(function() {
-	
-	alert('저장이 완료되었습니다.');
-	$("form").submit();
+$("#btn").click(function() {
+
+	   //유효성 검사
+	   if (dogname == null || dogname == "") { 
+	      alert("강아지 이름을 입력해주세요");
+	      return false;
+	   } 
+	   if (dogname == null || dogname == "") { 
+		      alert("강아지 나이를 입력해주세요");
+		      return false;
+		   }
+	   if (dogchar == null || dogchar == "") { 
+		      alert("강아지 나이를 입력해주세요");
+		      return false;
+		   }
+	   
+		   alert('저장이 완료되었습니다.');
+			$("form").submit();
+
 });	
 
 

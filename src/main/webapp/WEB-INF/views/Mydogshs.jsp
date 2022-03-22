@@ -107,11 +107,11 @@
 var id = $('#loginId').html();
 var dogName = $('.dogName').html();
 
-	function MyDogsujungshs(dogName) {
+function MyDogsujungshs(dogName) {
 		//console.log('수정 로그');
 		//console.log(id,dogName);
 		//alert(dogName);
-		location.href="./MyDogsujungshs?dogName="+dogName;
+	location.href="./MyDogsujungshs?dogName="+dogName;
 		
 			
 	}

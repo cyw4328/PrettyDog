@@ -17,9 +17,8 @@ public interface MembersDAO {
 
 	int shopPhoto(String shopSaup, String oriFileName, String newFileName);
 
-	String PassCk(String id, String pw);
-
-
+	String PassCk(String id);
+	
 	int joinShs(String id, String hashText, String name, String phone, String email);
 
 	int ShopjoinShs(String id, String hashText, String name, String phone, String email);
