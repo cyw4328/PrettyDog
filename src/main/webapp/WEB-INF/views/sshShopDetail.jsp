@@ -53,7 +53,7 @@
 			$("#like").text("♡");
 		}
 	}
-	/*
+
 	$("#like").click(function () {
 		console.log("여기까지는 옴?");
 		if('${sshMyInterestShop_size}' > 0){
@@ -64,11 +64,30 @@
 			location.href='myShopLike?likeVal='+${sshMyInterestShop_size}+'&memId='+'${memId}'+'&idx='+'${sshShopDetail[0].busin_num }';
 		}
 	})
+
+	/*
+	var busin_num = '${sshShopDetail[0].busin_num }';
+	console.log("busin_num busin_num busin_num" + busin_num);
+	$.ajax({
+		url: "updateLike",
+		type: "GET",
+		data: {'busin_num':busin_num},
+		dataType: "JSON",
+		success: function (data) {
+				console.log(data.msg);
+				if (data.msg != null) {
+					alert(data.msg)
+				}else if(data.LikeCheck == 1) {
+					alert("매장 추천 취소했당개!");
+				}else{
+					alert("추천 완료했당개");
+				}			
+		},					
+		error : function () {
+			alert("추천에 실패했당개");
+		}
+	});
 	*/
-	$("#like").click(function () {
-		
-	})
-	}
 </script>
 </html>
 

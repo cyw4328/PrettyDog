@@ -174,23 +174,23 @@ public class SshShopListService {
 		return sshShopListDAO.sshShopDetailTwo(idx);
 	}
 
-	public void myShopLikeInsert(String likeVal, String memId) {
-		//sshShopListDAO.myShopLikeInsert();
+	public void myShopLikeInsert(String memId, String idx) {
+		sshShopListDAO.myShopLikeInsert(memId, idx);
 		
 	}
 
 	public void shopLikeUpdate(String idx) {
-		// TODO Auto-generated method stub
+		sshShopListDAO.shopLikeUpdate(idx);
 		
 	}
 
-	public void myShopLikeDelete(String likeVal, String memId) {
-		// TODO Auto-generated method stub
+	public void myShopLikeDelete(String memId, String idx) {
+		sshShopListDAO.myShopLikeDelete(memId, idx);
 		
 	}
 
 	public void shopLikeDown(String idx) {
-		// TODO Auto-generated method stub
+		sshShopListDAO.shopLikeDown(idx);
 		
 	}
 

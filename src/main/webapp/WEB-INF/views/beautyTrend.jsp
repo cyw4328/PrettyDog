@@ -51,7 +51,7 @@
 
    function idChk() {
       //var memberId = ${sessionScope.memberId};
-      var memberId = 'a2';
+      var memberId = 'a1';
       
       var memberRank = 0;
       
