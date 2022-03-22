@@ -59,7 +59,7 @@ public class ShopListService {
 		
 		ArrayList<DogDTO> list = dao.shopSerch(params);
 		mav.addObject("shopList", list);
-		logger.info("서비스사이즈 :{}",list.size());
+		logger.info("서비스사이즈 :{}",list);
 		ArrayList<String> addservice = dao.addservice();
 
 		mav.addObject("selectAreaScope",SELECT_AREA_SCOPE);
@@ -72,9 +72,43 @@ public class ShopListService {
 		
 		return mav;
 	}
+	
+	public HashMap<String, Object> shopSearchAjax(HashMap<String, Object> params) {
+		logger.info("params:{}",params);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int currPage = params.get("page") != null ? Integer.parseInt((String)params.get("page")) : 1;  
+		int pagePerCnt = params.get("cnt") != null ? Integer.parseInt((String)params.get("cnt")) : 6;
+		
+		int offset = ((currPage-1) * pagePerCnt) >= 0 ? ((currPage-1) * pagePerCnt) : 0; 
+		logger.info("offset:{}",offset);
+		params.put("offset",offset);
+		
+		int totalCount = dao.ShopListCount(params); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		
+		ArrayList<DogDTO> list = dao.shopSerch(params);
+		map.put("shopList", list);
+		logger.info("서비스사이즈 :{}",list.size());
+		ArrayList<String> addservice = dao.addservice();
+
+		map.put("selectAreaScope",SELECT_AREA_SCOPE);
+		map.put("selectDogScope",SELECT_DOG_SCOPE);
+		map.put("selectServiceScope", addservice);
+		map.put("params", params);
+
+		return map;
+	}
 
 
-	public int LikeCheck(String busin_num, String mem_id) {
+/*	public int LikeCheck(String busin_num, String mem_id) {
 		
 		return dao.LikeCheck(busin_num, mem_id);
 	}
@@ -91,10 +125,15 @@ public class ShopListService {
 		dao.insertLike(busin_num, loginId);
 		
 	}
-
 	public void updateBLike(String busin_num) {
 		dao.updateBLike(busin_num);
 		
+	}*/
+
+
+	public ArrayList<DogDTO> serviceScopeSelect(String serviceNum) {
+		
+		return dao.serviceScopeSelect(serviceNum);
 	}
 
 
