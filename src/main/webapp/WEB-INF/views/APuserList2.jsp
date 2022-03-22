@@ -11,7 +11,7 @@
 	
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
     
     <script src="resources/js/jquery.twbsPagination.js"></script>
@@ -46,11 +46,12 @@
         }
 
 		table {
+			width: 100%;
 			border-collapse: collapse;
 			/* text-align: left; */
 			line-height: 1.5;
 			border: 1px solid #ccc;
-			margin: 20px 10px;
+			margin: 15px 0px;
 			/* width: 600px; */
 		}
 		table thead {
@@ -73,7 +74,8 @@
 			background: #fcf1f4;
 		}
 		table td {
-			width: 350px;
+			width: auto;
+			height: 50px;
 			padding: 10px; 
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
@@ -131,6 +133,7 @@
                 <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar" >신고 항목 관리</div></a>
                 <a href="AdminServicePage" style="text-decoration:none;"><div class= "sidebar" >추가서비스 관리</div></a>
                 <a href="categoryPage" style="text-decoration:none;"><div class= "sidebar" >카테고리 관리</div></a>
+                <a href="ChangeListPage" style="text-decoration:none;"><div class= "sidebar" >환전 신청 관리</div></a>
             </div>
 
         </div>
@@ -145,32 +148,34 @@
                     
                     
                         <div style="width: 50%; height: 100%;">
-                            <input class="form-control border-0.5 shadow-0" id="keyword"  style="width: 100%; height: 100%; font-size: 15px;" type="text" name="search" placeholder="원하는 검색어를 입력하세요~">
+                            <input class="form-control border-0.5 shadow-0" id="searchkeyword"  style="width: 100%; height: 100%; font-size: 15px;" type="text" name="search" placeholder="검색할 아이디를 입력하세요~">
                         </div>
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <button id="btnSearch" name="btnSearch" class="btn btn-secondary btn-lg" style="width: 100%; height: 100%; font-size: 15px;">Search </button>
+                            <button id="searchBtr" name="btnSearch" class="btn btn-secondary btn-lg" style="width: 100%; height: 100%; font-size: 15px;">Search </button>
                         </div>
                         <div style="width: 1%; height: 100%;"></div>
 
 
 
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
-                                <option value="">일반</option>
-                                <option value="">제재</option>
-                                <option value="">휴먼</option>
-                                <option value="">탈퇴</option>
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1"> <!-- onchange 함수 필요함 -->
+                                <option value="99" selected="selected">전체회원상태</option>
+                                <option value="0">일반</option>
+                                <option value="1">제재</option>
+                                <option value="2">휴먼</option>
+                                <option value="3">탈퇴</option>
                             </select>
                         </div>
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
-                                <option value="">일반회원</option>
-                                <option value="">업주회원</option>
-                                <option value="">일반관리자</option>
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder2" name="shOrder2"> <!-- onchange 함수 필요함 -->
+                                <option value="99" selected="selected">전체회원</option>
+                                <option value="0">일반회원</option>
+                                <option value="1">업주회원</option>
+                                <option value="3">일반관리자</option>
                             </select>
                         </div>
                         <div style="width: 1%; height: 100%;"></div>
@@ -204,13 +209,15 @@
 			
 								</tbody>
 								<tbody>
-									<td colspan="3" id="paging">
-										<div class="container">                           
-					               			<nav aria-label="Page navigation" style="text-align:center; width: 600px;">
-					                  			<ul class="pagination" id="pagination"></ul>
-					              			</nav>               
-					            		</div>
-									</td>
+									<tr>
+										<td colspan="3" id="paging">
+											<div class="container">                           
+						               			<nav aria-label="Page navigation" style="text-align:center; width: 600px;">
+						                  			<ul class="pagination" id="pagination"></ul>
+						              			</nav>               
+						            		</div>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 								
@@ -236,17 +243,20 @@
 <script>
 var currPage = 1;
 var totalPage = 2;
+var a = '99';
+var b ='99';
+var c = '99';
 
-apuserlist3(currPage,5);
+apuserlist3(currPage,10,a,b,c);
 
 
-function apuserlist3(page,cnt) {
+function apuserlist3(page,cnt,a,b,c) {
 	
 	// 페이지 도착하자마자 ajax 실행
 	$.ajax({
 		type:'POST',
 		url:'apuserlist3',
-		data:{'page':page,'cnt':cnt}, 
+		data:{'page':page,'cnt':cnt,'a':a,'b':b,'c':c}, 
 		dataType:'JSON',
 		success:function(data) {
 
@@ -262,7 +272,10 @@ function apuserlist3(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						apuserlist3(page,5);
+						a = $('input[name="search"]').val();
+						b = $('select[name="shOrder1"]').val();
+						c = $('select[name="shOrder2"]').val();
+						apuserlist3(page,10,a,b,c);
 					}
 				});
 			}
@@ -280,6 +293,16 @@ function listDraw(list) {
 
     list.forEach(function(item,mem_id) {
 
+    	if (item.mem_state == 0) {
+    		mestate = "일반";
+		}else if (item.mem_state == 1) {
+			mestate = "제재";
+		}else if (item.mem_state == 2) {
+			mestate = "휴먼";
+		}else if (item.mem_state == 3) {
+			mestate = "탈퇴";
+		}
+    	
     	content += '<tr>';
    		content += '<td>'+item.mem_name+'</td>';
     	content += '<td>'+'<a href="apuserdetail?id='+item.mem_id+'">'+item.mem_id+'</a>'+'</td>';
@@ -287,29 +310,64 @@ function listDraw(list) {
     	content += '<td>'+item.mem_email+'</td>';
     	content += '<td>'+item.mem_tel+'</td>';
     	content += '<td>'+item.mem_point+'</td>';
-    	content += '<td>'+item.mem_state+'</td>';
+    	content += '<td>'+mestate+'</td>';
     	content += '<td>'+item.mem_rank+'</td>';
     	content += '</tr>';
+    	
 
     });
     $('#list').empty();
     $('#list').append(content);
 }
 
+$('#searchBtr').click(function() {
+	a = $('input[name="search"]').val();
+	b = $('select[name="shOrder1"]').val();
+	c = $('select[name="shOrder2"]').val();
+	console.log(a);
+	console.log(b);
+	console.log(c);
+	/* if (a == "") {
+		alert("아이디를 입력하세요");
+	} */
+	
+	apuserlist3(currPage,10,a,b,c);
+	
+})
 
-$(document).on('click', '#btnSearch', function(e){
+/* function apuserlist30(page,cnt,a,b,c) {
+	
+	// 페이지 도착하자마자 ajax 실행
+	$.ajax({
+		type:'POST',
+		url:'apuserlist30',
+		data:{'page':page,'cnt':cnt,'a':a,'b':b,'c':c}, 
+		dataType:'JSON',
+		success:function(data) {
 
-	e.preventDefault();
-
-	var url = "${pageContext.request.contextPath}/aPuserList2";
-
-	url = url + "&keyword=" + $('#keyword').val();
-
-	location.href = url;
-
-	console.log(url);
-
-});
+			totalPage = data.pages;
+			listDraw(data.list);
+			console.log(data.list);
+			
+			if (data.list.length > 0) {
+				$('#pagination').twbsPagination({
+					startPage:currPage, // 현재 페이지
+					totalPages:totalPage, // 만들수 있는 총 페이지 수
+					visiblePages:5, // [1][2][3]... 이걸 몇개까지 보여줄 것인가? 밑에 페이지클릭숫자
+					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
+						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
+						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
+						apuserlist30(page,5,a,b,c);
+					}
+				});
+			}
+			
+		},
+		error:function(e) {
+			console.log(e);
+		}
+	});
+} */
 
 
 

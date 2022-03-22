@@ -7,9 +7,9 @@ import com.pretty.dog.dto.DogDTO;
 public interface AdminPageDAO {
 	
 	//관리자 회원리스트
-	int apuserlist3Count();
+	int apuserlist3Count(String a, int b1, int c1);
 
-	ArrayList<DogDTO> apuserlist3(int pagePerCnt, int offset);
+	ArrayList<DogDTO> apuserlist3(int pagePerCnt, int offset, String a, int b1, int c1);
 	
 	
 
@@ -52,6 +52,17 @@ public interface AdminPageDAO {
 	int apreservelist3Count();
 
 	ArrayList<DogDTO> apreservelist3(int pagePerCnt, int offset);
+
+	/*
+	 * int apuserlist30Count(String a, int b1, int c1);
+	 * 
+	 * ArrayList<DogDTO> apuserlist30(int pagePerCnt, int offset, String a, int b1,
+	 * int c1);
+	 */
+	
+	
+	//회원 검색
+	
 
 	
 

@@ -11,7 +11,7 @@
 	
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
     
     <script src="resources/js/jquery.twbsPagination.js"></script>
@@ -157,6 +157,7 @@
                 <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar">신고 항목 관리</div></a>
                 <a href="AdminServicePage" style="text-decoration:none;"><div class= "sidebar">추가서비스 관리</div></a>
                 <a href="categoryPage" style="text-decoration:none;"><div class= "sidebar" style="background-color: rgb(167, 167, 167); color: #020202; font-weight: bold;">카테고리 관리</div></a>
+            	<a href="ChangeListPage" style="text-decoration:none;"><div class= "sidebar" >환전 신청 관리</div></a>
             </div>
 
         </div>

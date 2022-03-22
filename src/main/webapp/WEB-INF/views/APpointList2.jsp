@@ -46,11 +46,12 @@
         }
 
 		table {
+			width: 100%;
 			border-collapse: collapse;
 			/* text-align: left; */
 			line-height: 1.5;
 			border: 1px solid #ccc;
-			margin: 20px 10px;
+			margin: 15px 0px;
 			/* width: 600px; */
 		}
 		table thead {
@@ -73,7 +74,8 @@
 			background: #fcf1f4;
 		}
 		table td {
-			width: 350px;
+			width: auto;
+			height: 50px;
 			padding: 10px; 
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
@@ -131,6 +133,7 @@
                 <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar" >신고 항목 관리</div></a>
                 <a href="AdminServicePage" style="text-decoration:none;"><div class= "sidebar" >추가서비스 관리</div></a>
                 <a href="categoryPage" style="text-decoration:none;"><div class= "sidebar" >카테고리 관리</div></a>
+                <a href="ChangeListPage" style="text-decoration:none;"><div class= "sidebar" >환전 신청 관리</div></a>
             </div>
 
         </div>
@@ -231,7 +234,7 @@
 var currPage = 1;
 var totalPage = 2;
 
-appointlist3(currPage,5);
+appointlist3(currPage,10);
 
 
 function appointlist3(page,cnt) {
@@ -256,7 +259,7 @@ function appointlist3(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						appointlist3(page,5);
+						appointlist3(page,10);
 					}
 				});
 			}

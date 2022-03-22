@@ -11,7 +11,7 @@
 	
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
     
     <script src="resources/js/jquery.twbsPagination.js"></script>
@@ -46,11 +46,11 @@
         }
 
 		table {
-			border-collapse: collapse;
+			width: 100%;
 			/* text-align: left; */
 			line-height: 1.5;
 			border: 1px solid #ccc;
-			margin: 20px 10px;
+			margin: 15px 0px;
 			/* width: 600px; */
 		}
 		table thead {
@@ -73,12 +73,13 @@
 			background: #fcf1f4;
 		}
 		table td {
-			width: 350px;
+			width: auto;
+			height: 50px;
 			padding: 10px; 
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 		}
-		#Allpage{
+		/* #Allpage{
 			position: relative;
 			top: 150px;
 			left: 300px;
@@ -92,23 +93,23 @@
 			position: absolute;
 			top: 120px;
 			/* left: 10px; */
-		}
-		input[name="SingoSub"]{
+		} */
+		/* input[name="SingoSub"]{
 			width: 300px;
-			height: 60px;
-		}
+			height: 100px;
+		} */
 		input[name="AddBtn"] {
 			background-color: pink;
 			height: 60px;
 			width: 100px;
 			text-align: center;
 		}
-		.table1{
+		./* table1{
 			width: 40%;
 		    max-width: 100%;
 		    margin-bottom: 20px;
 			table-layout: fixed;
-		}
+		} */
  
    </style>
 
@@ -156,6 +157,7 @@
                 <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar" style="background-color: rgb(167, 167, 167); color: #020202; font-weight: bold;">신고 항목 관리</div></a>
                 <a href="AdminServicePage" style="text-decoration:none;"><div class= "sidebar" >추가서비스 관리</div></a>
                 <a href="categoryPage" style="text-decoration:none;"><div class= "sidebar" >카테고리 관리</div></a>
+                <a href="ChangeListPage" style="text-decoration:none;"><div class= "sidebar" >환전 신청 관리</div></a>
             </div>
 
         </div>
@@ -171,10 +173,11 @@
                 <!-- 내용 -->
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
 					<div id="Allpage">
+						<div style="width: 300px; height: 20px;"></div>
 						<div id="AddForm">
 							<form action="SingoHangmokAdd" id="SingoHangmokAdd">
-								<input type="text" placeholder="추가할 항목이름을 적어주세요." name="SingoSub" id="SingoSub"/>
-								<input t	ype="button" value="추가" name="AddBtn" id="AddBtn"/>
+								<input type="text" placeholder="추가할 항목이름을 적어주세요." name="SingoSub" id="SingoSub" style="width: 300px; height: 60px;"/>
+								<input t	ype="button" value="추가" name="AddBtn" id="AddBtn"  style="width: 100px; height: 60px; text-align: center; background-color: pink;"  />
 							</form>
 						</div>
 						<div id="HangmokList">
