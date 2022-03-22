@@ -50,9 +50,6 @@
 		
 		<br/>
 		
-		<input type="radio" name="sort_line" checked="checked" value="최신순"/>최신순
-		<input type="radio" name="sort_line" value="좋아요순"/>좋아요순
-		
 		<br/><br/>
 		
 		<table>
@@ -64,7 +61,6 @@
 	            <th>작성자</th>
 		        <th>작성일</th>
 		        <th>조회수</th>
-		        <th>좋아요</th>
 	         </tr>
 	      </thead>
 	      <tbody id="list">
@@ -88,16 +84,14 @@
 		
 		<br/><br/>
 		
-		<div>
-			<form action="freeSearch" method="get"> 		
-		   			<select name="opt">
+		<div>					
+		   			<select name="searchOpt">
 		   				<option value="community_sub">제목</option>
 		   				<option value="community_cont">내용</option>
 		   				<option value="mem_id">작성자</option>
 		   			</select>
 		   			<input type="text" name="keyword" placeholder="검색어를 입력하세요">
-		   			<button name = "search_btn">검색</button>
-	   		</form>
+		   			<button id = "searchBtn">검색</button>
 		</div>
 	</div><!-- community_frame.e -->
 		
@@ -109,17 +103,19 @@
 
 
 <script>
+	var selectValue = "";
 	
-	
+	 
 	var currPage = 1;
 	var totalPage= 2;	  
 	listCall(currPage,10);
 	   
+	//셀렉트 값서  값받아오기
 	
 	$(document).ready(function(){
 		var selectValue = $("#category_selecter").val();
 		listCall(currPage,10,selectValue);
-	});
+	}); 
 	
 	function change_selecter(){
 		currPage = 1;
@@ -127,6 +123,8 @@
 		var selectValue = $("#category_selecter").val();
 		listCall(currPage,10,selectValue);
 	}
+	
+	
 	
 	function more(){
 	  currPage++;
@@ -139,16 +137,30 @@
 	  }
 	}
 	
+	  var searchOpt ="";
+	  var keyword =  "";
+
+	document.getElementById("searchBtn").onclick = function () {
+    
+	  searchOpt =   document.getElementsByName("searchOpt")[0].value;
+	  keyword =  document.getElementsByName("keyword")[0].value;
+	  
+	  console.log(searchOpt);
+	  console.log(keyword);
+	  listCall(currPage, 10, selectValue);
+	 };
+	
+	 
 	function listCall(page, cnt, selectValue){
 		//var selectValue = $("#category_selecter").val();
-		if(selectValue == '' || selectValue == "undifined" || selectValue == null){
+		if(selectValue == '' || selectValue == "unsearchOptdifined" || selectValue == null){
 			selectValue = 999;
 		}
 		
 	  $.ajax({
 	     type:'GET',
 	     url:'listCall',
-	     data:{'page':page, 'cnt':cnt, 'catNum':selectValue},
+	     data:{'page':page, 'cnt':cnt, 'catNum':selectValue,'searchOpt':searchOpt, 'keyword':keyword},
 	     dataType:'JSON',
 	     success:function(data){
 	        //console.log(data.list);
@@ -163,7 +175,7 @@
 	        		console.log(evt);
 	        		console.log(page);
 	        		console.log(catNum);
-	        		listCall(page,10,catNum);
+	        		listCall(page,10,catNum, searchOpt, keyword);
 	        	}//onPageClick:function(evt,page).e
 	        	
 	        });//$('#pagination').twbsPagination.e
@@ -205,8 +217,7 @@
 		             +("0" + codate.getDate()).slice(-2)+" "
 		      		 +"</td>";
 
-			        content += '<td>'+item.community_view+'</td>';
-			        content += '<td>'+item.community_likes+'</td>';
+			        content += '<td>'+item.community_view+'</td>'
 			    content += '</tr>';
 			  
 		  } 

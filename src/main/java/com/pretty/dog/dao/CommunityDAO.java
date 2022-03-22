@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.pretty.dog.dto.CommunityDTO;
-import com.pretty.dog.dto.DogDTO;
 
 public interface CommunityDAO {
 	
@@ -18,21 +17,47 @@ public interface CommunityDAO {
 	*/
 	int allCount(int catNum);
 
-	 ArrayList<CommunityDTO> listCall(int pagePerCnt, int offset, int catNum);
+	 ArrayList<CommunityDTO> listCall(HashMap<String, Object> sendMap);
 
-	void freeWrite(HashMap<String, Object> freeWrite);
-
-	void fileWrite(int idx, String oriFileName, String newFileName);
+	int freeWrite(HashMap<String, Object> freeWrite);
 
 	int community_view(String community_boardnum);
 
-	CommunityDTO detail(String community_boardnum);
-
+	CommunityDTO freeDetail(String community_boardnum);
+	
 	ArrayList<CommunityDTO> photoList(String community_boardnum);
 
 	int freeDelete(String community_boardnum);
 
 	int freeUpdate(HashMap<String, String> params);
+	
+	ArrayList<CommunityDTO> commentList(String community_boardnum);
+	
+	void free_commentDelete(int bcn);
+	
+	int boardNumOfdelCom(int bcn);
+	
+	void free_commentWrite(CommunityDTO dto);
+	
+	void saveFile(int community_boardnum, String oriFileName, String newFileName);
+		
+	ArrayList<CommunityDTO> declaOp();
+		
+	ArrayList<CommunityDTO> declalist();
+	
+	void DeclaSend_post(HashMap<String, Object> params);
+	
+	CommunityDTO commentDetail(String bcomment_num);
+	
+	
+	ArrayList<CommunityDTO> declalistC();
+	
+	void DeclaSend_comment(HashMap<String, Object> params);
+	
+	
+	
+	
+	
 
 
 	
