@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
    <meta charset="UTF-8">
    <title>Insert title here</title>
-   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+   <script src="resources/js/jquery.twbsPagination.js"></script>
    <style></style>
 </head>
 <body>
@@ -35,13 +39,13 @@
       <a href="beautyTrendDetail?idx=${TrendListInfo.community_boardnum }">
       <%-- "C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/trend/${beautyTrendDetail.bphoto_newname }" --%>
       <img alt="" src="resources/trend/${TrendListInfo.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px"/>
-      <p style="margin-left: 70px;">${TrendListInfo.busin_name }</p><p style="float: right; margin-right: 50px;">${TrendListInfo.community_date }</p>
+      <p style="margin-left: 70px;">${TrendListInfo.busin_name }</p><p style="margin-left: 70px;"><fmt:formatDate value="${TrendListInfo.community_date }" pattern="yyyy-MM-dd"/></p>
       <p style="margin-left: 70px;">${TrendListInfo.community_sub }</p>
       </a>
    </div>
    </c:forEach>
    </div>
-   <div id="memberRankDiv">
+   <div id="memberRankDiv" style="position: absolute; top:970px; left: 70px;">
       <a href="#" id="memberRank">등록</a>
    </div>
 </body>
@@ -73,12 +77,12 @@
                   data:{'memberId':memberId},
                   dataType:'JSON',
                   success:function(data){
-                	  console.log(data.community_boardnum);
-                	  console.log("여기까지옴? memberRank1");
+                     console.log(data.community_boardnum);
+                     console.log("여기까지옴? memberRank1");
                      if(data.community_boardnum == 0){
                         $("#memberRank").text('등록').attr('href',"beautyTrendWriteForm?mem_id="+memberId);
                      }else{
-                    	 urlIdx = data.memberRank[0].community_boardnum;
+                        urlIdx = data.memberRank[0].community_boardnum;
                         $("#memberRank").text('수정').attr('href', "beautyTrendUpdate?idx="+urlIdx);
                      }
                   },
@@ -95,9 +99,7 @@
          }
       })
    }
-
    
-
    $("#koMap").on('change',function () {
       //alert('koMap 변경');
       $("#divA").empty();
@@ -132,13 +134,9 @@
          content += '<a href="beautyTrendDetail?idx='+idx+'">';
          content += '<div style="float: left; width: 33%;">';
          content += '<img src="resources/trend/'+list[i].bphoto_newname+'" width="350px" height="350px" style="padding-left: 70px"/>';
-         content += '<p style="margin-left: 70px;">'+list[i].busin_name+'</p><p style="float: right; margin-right: 50px;">'+date.getFullYear()+"-"
+         content += '<p style="margin-left: 70px;">'+list[i].busin_name+'</p><p style="margin-left: 70px;">'+date.getFullYear()+"-"
             +("0"+(date.getMonth()+1)).slice(-2)+"-"
-            +("0" + date.getDate()).slice(-2)+" "
-            +("0" + date.getHours()).slice(-2)+":"
-            +("0" + date.getMinutes()).slice(-2)+":"
-            +("0" + date.getSeconds()).slice(-2)+"."
-            +"0"+'</p>';
+            +("0" + date.getDate()).slice(-2)+'</p>';
          content += '<p style="margin-left: 70px;">'+list[i].community_sub+'</p>';
          content += '</div>';
          content +="</a>";
@@ -148,7 +146,6 @@
    }
 </script>
 </html>
-
 
 
 

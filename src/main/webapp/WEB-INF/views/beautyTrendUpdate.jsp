@@ -25,7 +25,7 @@
 	<div style="margin-left: 500px;">
 		<button onclick="location.href='beautyTrendList'">뒤로가기</button>
 		<button onclick="location.href='beautyTrendDelete?idx=${beautyTrendDetail.community_boardnum}&newFilename=${beautyTrendDetail.bphoto_newname}'">삭제</button>
-		<button>매장이동</button>
+		<!-- <button>매장이동</button> -->
 	</div>
 	
 	
