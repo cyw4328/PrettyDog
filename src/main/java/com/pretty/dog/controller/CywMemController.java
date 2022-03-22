@@ -84,6 +84,10 @@ public class CywMemController {
 
 		return service.pwChange(Id,pwInput,pwcheck);
 	}
-	
+	@RequestMapping(value = "/loginPage")
+	public String loginPage() {
+
+		return  "cywLogin";
+	}
 	
 }
