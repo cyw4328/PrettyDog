@@ -12,8 +12,10 @@ public interface ShopListDAO {
 	/* ArrayList<DogDTO> shopList(); */
 
 	ArrayList<DogDTO> shopSerch(HashMap<String, Object> params);
+	
+	int ShopListCount(HashMap<String, Object> params);
 
-	int LikeCheck(String busin_num, String mem_id);
+	/*int LikeCheck(String busin_num, String mem_id);
 
 	void deleteLike(String busin_num, String loginId);
 
@@ -21,8 +23,10 @@ public interface ShopListDAO {
 
 	void insertLike(String busin_num, String loginId);
 
-	void updateBLike(String busin_num);
+	void updateBLike(String busin_num);*/
 
 	ArrayList<String> addservice();
+
+	ArrayList<DogDTO> serviceScopeSelect(String serviceNum);
 
 }
