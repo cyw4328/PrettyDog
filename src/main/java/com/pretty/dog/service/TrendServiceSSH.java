@@ -140,6 +140,8 @@ public class TrendServiceSSH {
 		trendDAO.beautyTrendDelete(idx);
 	}
 
+
+
 }
 
 

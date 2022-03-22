@@ -50,4 +50,12 @@ public interface SshShopListDAO {
 
 	ArrayList<HashMap<String, Object>> sshShopDetailTwo(String idx);
 
+	void myShopLikeInsert(String memId, String idx);
+
+	void shopLikeUpdate(String idx);
+
+	void myShopLikeDelete(String memId, String idx);
+
+	void shopLikeDown(String idx);
+
 }
