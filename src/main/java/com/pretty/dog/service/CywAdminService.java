@@ -314,7 +314,7 @@ public class CywAdminService {
 		return map;
 	}
 
-	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr, String reser_money, String busin_num) {
+	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr, String busin_num) {
 		ModelAndView mav =new ModelAndView();
 		
 		int row = dao.reserDel(reser_num,loginId);
