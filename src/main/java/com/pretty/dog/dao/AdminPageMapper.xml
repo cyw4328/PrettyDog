@@ -8,14 +8,59 @@
 	
 	<!-- 회원 조회 -->
 	<select id="apuserlist3Count" resultType="int">
-			select count(mem_id) from members
+			select count(mem_id) from members where 1=1
+				<if test="param1 != '' and param1 != '99' ">and mem_id LIKE CONCAT('%',#{param1},'%')</if>
+				<if test="param2 != '' and param2 != 99 ">and mem_state = #{param2}</if>
+				<if test="param3 != '' and param3 != 99 ">and mem_rank = #{param3}</if>
 	</select>
 	<select id="apuserlist3" resultType="dog">
-			select * from members ORDER BY mem_date DESC LIMIT #{param1} OFFSET #{param2}
+			select * from members where 1=1 <!-- ORDER BY mem_date DESC LIMIT #{param1} OFFSET #{param2} -->
+				<if test="param3 != '' and param3 != '99' ">and mem_id LIKE CONCAT('%',#{param3},'%')</if>
+				<if test="param4 != '' and param4 != 99 ">and mem_state = #{param4}</if>
+				<if test="param5 != '' and param5 != 99 ">and mem_rank = #{param5}</if>
+				ORDER BY mem_date DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<!-- <select id="apuserlist30Count" resultType="int">
+			select count(mem_id) from members where 1=1
+			
+				<if test="param1 != '' and param1 != null ">and mem_id LIKE CONCAT('%',#{param1},'%')</if>
+				<if test="param2 != '' and param2 != null ">and mem_state = #{param2}</if>
+				<if test="param3 != '' and param3 != null ">and mem_rank = #{param3}</if>
+				<choose>
+					<when test="a != '' and a != null ">
+						and mem_id LIKE CONCAT('%',#{param1},'%')
+					</when>
+					<when test="b != '' and b != null">
+						and mem_state = #{param2}
+					</when>
+					<when test="c != '' and c != null">
+						and mem_rank = #{param3}
+					</when>
+				</choose>
+	</select>
 	
-	
+	<select id="apuserlist30" resultType="dog">
+			select * from members where 1=1 
+				<if test="param3 != '' and param3 != null ">and mem_id LIKE CONCAT('%',#{param3},'%')</if>
+				<if test="param4 != '' and param4 != null ">and mem_state = #{param4}</if>
+				<if test="param5 != '' and param5 != null ">and mem_rank = #{param5}</if>
+				ORDER BY mem_date DESC LIMIT #{param1} OFFSET #{param2}
+				 <choose>
+					<when test="#{param3} != '' and #{param3} != null ">
+						and mem_id LIKE CONCAT('%',#{param3},'%')
+					</when>
+					<when test="#{param4} != '' and #{param4} != null">
+						and mem_state = #{param4}
+					</when>
+					<when test="#{param5} != '' and #{param5} != null">
+						and mem_rank = #{param5}
+					</when>
+					<otherwise>
+						ORDER BY mem_date DESC LIMIT #{param1} OFFSET #{param2}
+					</otherwise>
+				</choose>
+	</select> -->
 	
 	<!-- 회원 상세보기 -->
 	<select id="detail" resultType="com.pretty.dog.dto.DogDTO">
