@@ -11,7 +11,7 @@
     <script src="resources/js/jquery.twbsPagination.js"></script>
 	<style>
 		body{
-			background-color: #F8ECF2;
+			/* background-color: #F8ECF2; */
 		}
 		#allpage{
 			position: relative;
@@ -52,7 +52,7 @@
 		}
 		#searchForm{
 			position: absolute;
-			left: 250px;
+			left: 200px;
 			top: 140px;
 			background-color: white;
 			height: 50px;
@@ -75,7 +75,7 @@
 	<div id="allpage">
 		<div id="searchForm">
 			<form id="searchFormTag" action="shopSerch" method="post">
-				<input type="hidden" name="hiddenFilter" id="hiddenFilter" value="">
+				<input type="hidden" name="hiddenFilter" id="hiddenFilter" value="${params.hiddenFilter}">
 				<select name="areaScope">
 		
 					<option <c:if test="${empty params.areaScope}">selected="selected"</c:if> value="">지역선택</option>
@@ -85,7 +85,7 @@
 					
 				</select>
 				
-				<select name="dogScope">
+				<select name="dogScope" onchange="serviceSelect(this.value);">
 					<option <c:if test="${empty params.dogScope}">selected="selected"</c:if> value="0">견종선택</option>
 					
 					<c:forEach items="${fn:split(selectDogScope,',')}" var="item2" varStatus="status">
@@ -93,13 +93,13 @@
 					</c:forEach>
 
 				</select>
-				<select name="serviceScope" id="addService">
-					<option <c:if test="${empty params.serviceScope}">selected="selected"</c:if> value="0">서비스선택</option>
-					
-					<c:forEach items="${fn:split(selectServiceScope,',')}" var="item3" varStatus="status">
+				
+				<select name="serviceScope" id="addService" style="width: 300px;">
+					<option <c:if test="${empty params.serviceScope}">selected="selected"</c:if> value="0">서비스선택(견종을 먼저 선택해주세요)</option>
+					<%-- <c:forEach items="${fn:split(selectServiceScope,',')}" var="item3" varStatus="status">
 						<option value="${status.count}" <c:if test="${status.count eq params.serviceScope }">selected="selected"</c:if>>${item3 }</option>
-					</c:forEach>
-				</select>
+					</c:forEach> --%>
+				</select> 
 				
 				<input type="text" placeholder="매장명입력" name="nameScope" id="inputShop"/>
 				
@@ -119,40 +119,46 @@
 			<c:set var="j" value="3" /> 
 			
 			<table style="border: none; text-align: center;" id="shopTable"> 
-
-				<c:forEach items="${shopList }" var="list"> 
-					<c:if test="${i%j == 0 }"> 
-						<tr> 
-					</c:if> 
-					<td class="shopPaging">
-						<input type="hidden" value="${list.busin_num}" id="shopDetail"/> 
-						<img src="resources/img/${list.interior_newname}"/ style="width: 200px;height: 250px" class="shopimg"/>
-
-					<br/>
-					${list.busin_name} 
-					<c:choose>
-						<c:when test="${LikeCheck eq '0' or empty LikeCheck }">
-							<input type="hidden" value="${list.busin_num}" id="likes1num"/>
-							<input type="button" value="♡" class="likebtn"/>&nbsp;${list.busin_likes}
-							<%-- <a href="javascript:likes1()">♡<input type="hidden" value="${list.busin_num}" id="likes1num"/>
-							</a>&nbsp;${list.busin_likes} --%>
-						</c:when>
-						<c:otherwise>
-							<input type="hidden" value="${list.busin_num}" id="likes1num"/>
-							<input type="button" value="♥" class="likebtn"/>&nbsp;${list.busin_likes}
-						
+				<tbody id="shopListTbody">
+					<c:forEach items="${shopList }" var="list"> 
+						<c:if test="${i%j == 0 }"> 
+							<tr> 
+						</c:if> 
+						<td class="shopPaging">
+							<input type="hidden" value="${list.busin_num}" id="shopDetail"/> 
+							<img src="resources/img/${list.interior_newname}"/ style="width: 200px;height: 250px" class="shopimg"/>
 	
-						</c:otherwise>
-					</c:choose>
-					<br/>
-					<b>${list.price_cost}Point</b>
-					</td> 		
-					<c:if test="${i%j == j-1 }"> 
-					</tr> 
-					</c:if> 
-					<c:set var="i" value="${i+1 }" /> 
-				</c:forEach> 
-				
+						<br/>
+						${list.busin_name} 
+						${list.busin_likes}
+						<br/>
+							<c:if test="${list.price_class == 1}">
+								<b>소형견</b>
+							</c:if>
+							<c:if test="${list.price_class == 2}">
+								<b>중형견</b>
+							</c:if>
+							<c:if test="${list.price_class == 3}">
+								<b>대형견</b>
+							</c:if>
+							<b>${list.add_sub}</b>
+							<b>${list.price_cost}Point</b>
+						</td> 		
+						<c:if test="${i%j == j-1 }"> 
+							</tr> 
+						</c:if> 
+						<c:set var="i" value="${i+1 }" /> 
+					</c:forEach> 
+				</tbody>
+				<tr>
+					<td colspan="4" id="paging" style="text-align: center; position: absolute; left: 300px;">
+						<div class="container">                           
+	              			<nav aria-label="Page navigation" style="text-align:center; width:500px;">
+	                 			<ul class="pagination" id="pagination"></ul>
+	             			</nav>               
+		           		</div>
+					</td>
+				</tr>
 			</table>
 	
 	
@@ -176,7 +182,7 @@ function test3(){
 }
 
 
-$('.likebtn').click(function() {
+/* $('.likebtn').click(function() {
 	
 	var $busin_num = $(this).prev().val()
 	console.log($busin_num);
@@ -200,25 +206,133 @@ $('.likebtn').click(function() {
 			alert("추천에 실패했당개");
 		}
 	}); 
-});
+}); */
 
-$('.shopimg').click(function() {
+/* $('.shopimg').click(function() {
 	var $busin_num = $(this).prev().val();
 	 console.log("매장상세보기",$busin_num);
 	 alert("매장상세보기는 준비중입니다.");
-});
-
-
-
-
-
-var success = "${success}" ;
-if (success > 0) {
-	alert("충전이 완료되었습니다.");
+}); */
+/* 매장상세보기 이어지기 */
+function shopDetail(a) {
+	var $busin_num = $(this).prev().val();
+	 console.log("매장상세보기",a);
+	 alert("매장상세보기는 준비중입니다.");
 }
 
-$('#pt').click(function() {
-	window.location.href="./pointListPage";
-})
+function serviceSelect(a) {
+	
+	console.log(a);
+	$.ajax({
+		type:'GET',
+		url:'serviceScopeSelect',
+		data:{'serviceNum':a},
+		dataType:'JSON',
+		success:function(data) {
+			console.log(data.serviceList);
+			listDraw(data.serviceList);
+			
+		},
+		error:function(e) {
+			console.log(e);
+		}
+	});
+}
+function listDraw(list) {
+    var content = '<option <c:if test="${empty params.serviceScope}">'+'selected="selected"'+'</c:if>'+'value="0">'+"서비스선택(견종을 먼저 선택해주세요)"+'</option>';
+    
+    list.forEach(function(item,add_num) {
+		content += '<option value="'+item.dog_num+'"<c:if test="${params.serviceScope eq '+item.dog_num+' }">selected="selected"</c:if>>'+item.add_sub+'</option>'
+    });
+   $('#addService').empty();
+    $('#addService').append(content);
+}
+
+var currPage = 1;
+var totalPage = 2;
+
+shopListPageList(currPage,6);
+
+function shopListPageList(page,cnt) {
+	
+	// 페이지 도착하자마자 ajax 실행
+	var dataList = $('#searchFormTag').serialize();
+	
+	dataList += '&page='+page;
+	dataList += '&cnt='+cnt
+	
+	$.ajax({
+		type:'POST',
+		url:'shopListAjax',
+		data: dataList, 
+		dataType:'JSON',
+		success:function(data) {
+			console.log(data);
+			totalPage = data.pages;
+			shopListDraw(data.shopList);
+			console.log(data.shopList);
+			
+			if (data.shopList.length > 0) {
+				$('#pagination').twbsPagination({
+					startPage:currPage, // 현재 페이지
+					totalPages:totalPage, // 만들수 있는 총 페이지 수
+					visiblePages:5, // [1][2][3]... 이걸 몇개까지 보여줄 것인가? 밑에 페이지클릭숫자
+					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
+						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
+						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
+						shopListPageList(page,6);
+					}
+				});
+			} 
+			
+		},
+		error:function(e) {
+			console.log(e);
+		}
+	});
+}
+
+function shopListDraw(list) {
+    var content = '';
+   	var msg ='';
+    var $dogClass = ''
+   	
+   	var index = 0;
+   	var arrage = 3;
+    list.forEach(function(item) {
+ 		
+    	if(index % arrage ==0){
+			content +='<tr>';
+    	}
+    	if (item.price_class == 1) {
+    		$dogClass = "소형견 ";
+		}else if (item.price_class == 2) {
+			$dogClass = "중형견 ";
+		}else if (item.price_class == 3) {
+			$dogClass = "대형견 ";
+		}
+    	
+    	content +='<td class="shopPaging">';
+   		content +='<input type="hidden" value="'+item.busin_num+'" id="shopDetail"/>';
+   		content +='<a onclick="shopDetail(\''+item.busin_num+'\')">'+'<img src="resources/img/'+item.interior_newname+'" style="width: 200px;height: 250px" class="shopimg"/>'+'</a>';
+   		content +='<br/>';
+   		content += '<b style="font-size: 20px;">'+item.busin_name+'</b>';
+   		content += '<b style="font-size: 15px; color:gray;">'+"  "+"추천수 : "+item.busin_likes+'</b>';
+   		/* 관심매장 뺌 */
+   		content +='<br/>';
+   		content +='<b style="font-size: 15px;color:gray;">'+$dogClass+'</b>';
+   		content +='<b style="font-size: 15px;color:gray;">'+item.add_sub+'</b>';
+    	content +='<b style="font-size: 15px; color:red;">'+item.price_cost+' Point</b>';
+   		content +='</td>';
+   		
+	    if(index % arrage == arrage-1 ){
+			content +='</tr>';
+	    }
+	    index++;
+    });
+    $('#shopListTbody').empty();
+    $('#shopListTbody').append(content);
+}
+
 </script>
 </html>

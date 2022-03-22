@@ -25,6 +25,62 @@
 			on s.busin_num = pl.busin_num	
 			join interior i 
 			on s.busin_num = i.busin_num
+			join addition_place ap 
+			on pl.add_num = ap.add_num
+			WHERE busin_calss = 1
+			
+			<if test='areaScope != null and areaScope != ""'>
+				and s.busin_area = #{areaScope}
+			</if>
+			<if test= 'dogScope != null and dogScope == 1'>
+				and s.busin_smalldog = 1
+			</if>
+			<if test= 'dogScope != null and dogScope == 2'>
+				and s.busin_middledog = 1
+			</if>
+			<if test= 'dogScope != null and dogScope == 3'>
+				and s.busin_bigdog = 1
+			</if>
+			<if test='serviceScope != null and serviceScope != 0'>
+				and pl.add_num = ${serviceScope}
+			</if>
+			<if test="nameScope != null and !('').equals(nameScope)">
+				and s.busin_name LIKE CONCAT('%',#{nameScope},'%')
+			</if>
+			<if test="areaScope == null and dogScope == null and nameScope == null">
+				group by s.busin_num
+			</if>
+			<choose>
+				<when test="('recomendFilter').equals(hiddenFilter)">
+					order by s.busin_likes desc
+				</when>
+				<when test="('lowPriceFilter').equals(hiddenFilter)">
+					order by pl.price_cost
+				</when>
+				<when test="('highPriceFilter').equals(hiddenFilter)">
+					order by pl.price_cost desc
+				</when>
+				<otherwise>
+					order by busin_date desc 
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="cnt != null and offset !=null">
+					LIMIT ${cnt} OFFSET ${offset}
+				</when>
+				<otherwise>
+					LIMIT 6 OFFSET 0
+				</otherwise>
+			</choose>
+	</select>
+	
+		<!-- 샵리스트 갯수 -->
+	<select id="ShopListCount" resultType="int">
+		SELECT count(*) FROM 
+			shop s join price_list pl 
+			on s.busin_num = pl.busin_num	
+			join interior i 
+			on s.busin_num = i.busin_num
 			WHERE busin_calss = 1 
 			<if test='areaScope != null and areaScope != ""'>
 				and s.busin_area = #{areaScope}
@@ -44,20 +100,6 @@
 			<if test="nameScope != null and !('').equals(nameScope)">
 				and s.busin_name LIKE CONCAT('%',#{nameScope},'%')
 			</if>
-			<choose>
-				<when test="('recomendFilter').equals(hiddenFilter)">
-					order by s.busin_likes desc
-				</when>
-				<when test="('lowPriceFilter').equals(hiddenFilter)">
-					order by pl.price_cost
-				</when>
-				<when test="('highPriceFilter').equals(hiddenFilter)">
-					order by pl.price_cost desc
-				</when>
-				<otherwise>
-					order by busin_date desc 
-				</otherwise>
-			</choose>
 	</select>
 	
 	<select id="LikeCheck"  resultType="int">
@@ -80,7 +122,10 @@
 		UPDATE shop SET busin_likes = busin_likes+1 WHERE busin_num = #{param1}
 	</update>
 	
-	
+	<!-- 견종선택시 해당서비스 리스트 -->
+	<select id="serviceScopeSelect" resultType="dog">
+		SELECT * FROM addition_place WHERE add_dog = #{param1}
+	</select>
 	
 	
 </mapper>
