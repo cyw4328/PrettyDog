@@ -141,7 +141,7 @@ function listDraw(list) {
  
 	
 		content +='<tr>';
-		content +='<td class="contCss">'+'<a href="#">'+item.bcomment_cont+'</a>'+'</td>';
+		content +='<td class="contCss">'+'<a href="freeDetail?community_boardnum='+item.community_boardnum+'">'+item.bcomment_cont+'</a>'+'</td>';
 		content += '<td>'+date.getFullYear()+"-"
 	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date.getDate()).slice(-2);+'</td>'
