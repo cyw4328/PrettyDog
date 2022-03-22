@@ -1,5 +1,6 @@
 package com.pretty.dog.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pretty.dog.dto.DogDTO;
 import com.pretty.dog.service.ShopListService;
 
 @Controller
@@ -46,13 +48,21 @@ public class ShopListController {
 		return  service.shopSerch(params);
 	}
 	
-	@ResponseBody
+	@RequestMapping(value = "/shopListAjax", method = RequestMethod.POST) 
+	public @ResponseBody HashMap<String, Object> AlrimPageList(@RequestParam HashMap<String, Object> params) {
+		
+		return service.shopSearchAjax(params);
+	}
+	
+/*	@ResponseBody
 	@RequestMapping(value = "/updateLike", method = RequestMethod.GET)
 	public HashMap<String, Object> updateLike (@RequestParam String busin_num, HttpSession session) {
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			String loginId = (String) session.getAttribute("loginId");
+			//String loginId = "dud";
+			
 			if (loginId != null) {
 				int LikeCheck = service.LikeCheck(busin_num, loginId);
 				
@@ -64,19 +74,28 @@ public class ShopListController {
 					service.updateBLike(busin_num);
 				}
 				map.put("LikeCheck", LikeCheck);
-			}else {
-				map.put("msg", "로그인이 필요한 기능입니다.");
+			} else { 
+				map.put("msg", "로그인이 필요한 기능입니다."); 
 			}
+			
 		
+		return map;
+	}*/
+	
+	@ResponseBody
+	@RequestMapping(value = "/serviceScopeSelect", method = RequestMethod.GET)
+	public HashMap<String, Object> serviceScopeSelect (@RequestParam String serviceNum) {
+			
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		logger.info("serviceNum:{}",serviceNum);
+		ArrayList<DogDTO> list = service.serviceScopeSelect(serviceNum);
+		
+		map.put("serviceList", list);
 		return map;
 	}
 	
 	
-	@RequestMapping(value = "/loginPage")
-	public String loginPage() {
 
-		return  "cywLogin";
-	}
 	
 	
 	
