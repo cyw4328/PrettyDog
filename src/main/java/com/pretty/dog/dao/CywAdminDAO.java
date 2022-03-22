@@ -123,13 +123,13 @@ public interface CywAdminDAO {
 
 	int ServiceHangmokAdd(String serviceDog, String serviceSub);
 
-	int reserDelMemPointAdd(String loginId, String reser_money);
+	int reserDelMemPointAdd(String loginId, int normalChange);
 
-	int reserDelMemPointTable(String loginId, String reser_money);
+	int reserDelMemPointTable(String loginId, int normalChange);
 
-	int reserDelOwnerPointDel(String reser_money, String busin_num);
+	int reserDelOwnerPointDel(int normalChange, String busin_num);
 
-	int reserDelOwnerPointTable(String reser_money, String busin_num);
+	int reserDelOwnerPointTable(int normalChange, String busin_num);
 
 	int NoShopNoPoint(String busin_num, String reser_num, String reser_money);
 
@@ -168,5 +168,11 @@ public interface CywAdminDAO {
 	int addShopMiddleService(String inputText2, String serviceName2, String busin_num);
 
 	int addShopBigService(String inputText3, String serviceName3, String busin_num);
+
+	int reserDelOwnerPointChange(int businChange, String busin_num);
+
+	int reserDelOwnerPointAdd(int businChange, String busin_num);
+
+	int reserStateChange(String busin_num, String reserDay, String canReserTime);
 	
 }

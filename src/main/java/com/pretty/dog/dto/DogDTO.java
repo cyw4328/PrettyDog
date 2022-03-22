@@ -2,6 +2,8 @@ package com.pretty.dog.dto;
 
 import java.sql.Timestamp;
 
+import javax.xml.crypto.Data;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias(value = "dog")
@@ -823,7 +825,28 @@ public class DogDTO {
 		this.pochOk_date = pochOk_date;
 	}
 
-	
+	private int set_num;
+	private Data set_date;
+	private String set_time;
+
+	public int getSet_num() {
+		return set_num;
+	}
+	public void setSet_num(int set_num) {
+		this.set_num = set_num;
+	}
+	public Data getSet_date() {
+		return set_date;
+	}
+	public void setSet_date(Data set_date) {
+		this.set_date = set_date;
+	}
+	public String getSet_time() {
+		return set_time;
+	}
+	public void setSet_time(String set_time) {
+		this.set_time = set_time;
+	}
 	
 	
 }

@@ -185,11 +185,13 @@
 	
 	<!-- 업주회원 예약리스트 -->
 	<select id="OwnerReserPageList" resultType="dog">
-		select * from reservation r join shop s ON r.busin_num = s.busin_num 
+		<!-- select * from reservation r join shop s ON r.busin_num = s.busin_num 
 		join price_list pl on r.busin_num = pl.busin_num 
 		join doginfo d on r.mem_id = d.mem_id  
-		where s.mem_id = "cyw4328"<!-- #{param3}  -->
-		ORDER BY reser_num DESC LIMIT #{param1} OFFSET #{param2}
+		where s.mem_id = "cyw4328"#{param3} 
+		ORDER BY reser_num DESC LIMIT #{param1} OFFSET #{param2} -->	
+		select * from reservation r join shop s ON r.busin_num = s.busin_num 
+      where s.mem_id = 'cyw4328' ORDER BY reser_num desc LIMIT #{param1} OFFSET #{param2};
 	</select>
 	
 	<!-- 업주회원 예약리스트 페이징 -->
@@ -425,5 +427,23 @@
 		INSERT INTO price_list (busin_num,add_num,price_cost,price_class) values(#{param3},#{param2},#{param1},3)
 	</insert>
 	
+	<!-- 예약취소시 업주 노포인트에서 포인트로 변경 -->
+	<update id="reserDelOwnerPointChange">
+		update members set mem_nopoint = mem_nopoint-#{param1} 
+			where mem_id = (select mem_id from shop where busin_num = #{param2})
+	</update>
+	
+	<!-- 예약취소시 업주 포인트 더하기 -->
+	<update id="reserDelOwnerPointAdd">
+		update members set mem_point = mem_point +#{param1} 
+		where mem_id = (select mem_id from shop where busin_num = #{param2});
+	</update>
+	<!-- 취소시 예약 가능 상태로 변경 -->
+	<update id="reserStateChange" parameterType="HashMap">
+      update reservaestablecimiento
+      set set_time = JSON_SET(set_time, #{param3}, 0)
+      where set_date = #{param2}
+      and busin_num = #{param1}
+   </update>
 	
 </mapper>

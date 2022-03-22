@@ -314,11 +314,11 @@ public class CywAdminService {
 		return map;
 	}
 
-	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr, String busin_num) {
+	public ModelAndView reserDel(String reser_num, String loginId, RedirectAttributes rAttr, String busin_num, int businChange, int normalChange, String reserDay, String canReserTime) {
 		ModelAndView mav =new ModelAndView();
-		
+	
 		int row = dao.reserDel(reser_num,loginId);
-		
+		logger.info("마이페이지예약취소사업자번호:{}",busin_num);
 		if (row > 0) {
 			// 예약취소 후의 데이터 불러오기
 			HashMap<String, Object> list = dao.reserData(reser_num,loginId);
@@ -333,17 +333,26 @@ public class CywAdminService {
 			int OwnerAlarm = dao.OwnerCancleInsert(list);
 			logger.info("알람등록(업주회원)?:{}",OwnerAlarm);
 			// 회원포인트 추가
-			int reserDelMemPointAdd = dao.reserDelMemPointAdd(loginId,reser_money);
+			int reserDelMemPointAdd = dao.reserDelMemPointAdd(loginId,normalChange);
 			logger.info("회원포인트 추가?:{}",reserDelMemPointAdd);
 			// 회원포인트 추가 포인트테이블등록
-			int reserDelMemPointTable = dao.reserDelMemPointTable(loginId,reser_money);
+			int reserDelMemPointTable = dao.reserDelMemPointTable(loginId,normalChange);
 			logger.info("회원포인트 추가 포인트테이블등록?:{}",reserDelMemPointTable);
 			// 업주회원 노포인트 차감
-			int reserDelOwnerPointDel = dao.reserDelOwnerPointDel(reser_money,busin_num);
+			int reserDelOwnerPointDel = dao.reserDelOwnerPointDel(normalChange,busin_num);
 			logger.info("업주회원 노포인트 차감?:{}",reserDelOwnerPointDel);
 			// 업주회원포인트 차감 포인트테이블 등록
-			int reserDelOwnerPointTable = dao.reserDelOwnerPointTable(reser_money,busin_num);
+			int reserDelOwnerPointTable = dao.reserDelOwnerPointTable(normalChange,busin_num);
 			logger.info("업주회원포인트 차감 포인트테이블 등록?:{}",reserDelOwnerPointTable);
+			// 업주 회원 노포인트에서 포인트로 이동
+			int reserDelOwnerPointChange = dao.reserDelOwnerPointChange(businChange,busin_num);
+			logger.info("업주 회원 노포인트에서 포인트로 이동?:{}",reserDelOwnerPointChange);
+			// 업주 회원 포인트 더하기
+			int reserDelOwnerPointAdd = dao.reserDelOwnerPointAdd(businChange,busin_num);
+			logger.info("업주 회원 포인트 더하기?:{}",reserDelOwnerPointAdd);
+			// 예약가능 상태로 변경
+			int reserStateChange = dao.reserStateChange(busin_num,reserDay,canReserTime);
+			logger.info("예약가능 상태로 변경?:{}",reserStateChange);
 			
 			rAttr.addFlashAttribute("msg", "예약취소가 완료되었습니다.");
 			mav.setViewName("redirect:/MyPageReserPage");
