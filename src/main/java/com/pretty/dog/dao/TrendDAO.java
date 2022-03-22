@@ -27,4 +27,5 @@ public interface TrendDAO {
 
 	void beautyTrendDelete(String idx);
 
+
 }
