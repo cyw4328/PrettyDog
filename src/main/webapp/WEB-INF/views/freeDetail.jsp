@@ -40,19 +40,14 @@
          <td>${dto.community_date}</td>
       </tr>
       <tr>
-         <td colspan="2">${dto.community_cont}</td>
+         <td colspan="2">        
+         	<img width="300px" height="300px" src="resources/commu/${imgs.bphoto_newname}" onerror="this.style.display='none';"/>
+         	<br/>
+        	 <br/>
+         	${dto.community_cont}
+         </td>
          <td></td>
       </tr>
-      <tr>
-      	<tr>	
-			<c:if test="${imgs.bphoto_newname != null || imgs.bphoto_newname != '' || imgs.bphoto_newname != 0}">
-         		<th>사진</th>
-         		<td>	           		
-           	 		<img width="300px" height="300px" src="resources/commu/${imgs.bphoto_newname}"/>
-         		</td>
-           			
-			</c:if>
-      	</tr>
      	 <tr>
          <th colspan="2">
            	 	<a href="freeList">리스트</a>
@@ -69,10 +64,12 @@
    
    <div id="free_commentList">
    		<table>
-   		
+   		<!-- commentCount -->
    			<thead>
 	   			<tr>
-	   				<th colspan="2">댓글 몇개인지 나오는 곳</th>
+	   				<th colspan="2">	   				
+	   					 <%-- ${commentCount.bcomment_cnt}	  --%>  				
+	   				</th>
 	   				<th></th>
 	   			</tr>	   			   			
     		</thead>

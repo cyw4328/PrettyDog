@@ -186,6 +186,9 @@ public class CommunityController {
 		 ArrayList<CommunityDTO> commentList =  communityService.commentList(community_boardnum);
 		 model.addAttribute("commentList", commentList);
 		 
+		 //댓글 갯수 가져오기	 
+
+		 
 		 //사진 목록 가져오기
 		 ArrayList<CommunityDTO> imgs = communityService.photoList(community_boardnum);
 		 

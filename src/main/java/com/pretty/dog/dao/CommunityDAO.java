@@ -58,6 +58,8 @@ public interface CommunityDAO {
 	
 	
 	
+	
+	
 
 
 	

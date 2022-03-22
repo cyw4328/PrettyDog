@@ -139,6 +139,7 @@ public class CommunityDTO {
 	public int bcomment_blind;
 	
 	
+	
 	public int getBcomment_num() {
 		return bcomment_num;
 	}

@@ -324,6 +324,9 @@ public class CommunityService {
 		mav.setViewName("redirect:/freeList");
 		return mav;
 	}
+
+
+	
 	
 
 

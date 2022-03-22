@@ -26,32 +26,32 @@
 </head>
 <body>
 	<h1>자유게시판 게시물 수정</h1>
-	<form action="freeWrite" method="POST" enctype="multipart/form-data" ><!-- 여러가지~ -->
+	<form action="freeWrite" name="freeForm" method="POST" enctype="multipart/form-data"  onsubmit="submit_chk(event);"><!-- 여러가지~ -->
       	<table>
          <tr style="height: 5%">
             <td>
-            	<input type="text" name="community_sub" style="width: 70%" value = "${dto.community_sub}">
+            	<input type="text" name="community_sub" id="subject" style="width: 70%" value = "${dto.community_sub}">
             	
-            	<select name="category_num" id="category_selecter" onchange="change_selecter()"> 
+            	<select name="category_num" id="category_selecter" > 
             	
-					<option value="${sel.category_num}">${dto.category_name}</option> 
+					<option value="${sel.category_num}"  selected="selected">${dto.category_name}</option> 
 					
 						<c:forEach items="${category}" var="sel"> 
 							<!-- 트렌드 게시판 , 블라인드된 카테고리, 관리자용 카테고리 필터링-->
 							<c:if test="${sel.category_num != 3 && sel.category_blind != 1  && sel.category_admin != 1}">			
 								<!-- 카테고리 번호, 블라인드된 카테고리 여부, 관리자용 카테고리 여부, 카테고리 이름 -->			
-								<option value="${sel.category_num}" selected="selected">${sel.category_name}</option>							
+								<option value="${sel.category_num}">${sel.category_name}</option>							
 							</c:if>	
 						</c:forEach> 
 				</select>	
             </td>
          </tr>
          <tr style="height: 5%">      
-            <td><input type="text" name="mem_id"  value="${dto.mem_id}"/></td>
+            <td><input type="text" name="mem_id"  id="writer" value="${dto.mem_id}"/></td>
          </tr>
          <tr style="height: 60%">     
             <td>
-            	<textarea name="community_cont" style="width: 100%; height: 100%">${dto.community_cont}</textarea>
+            	<textarea name="community_cont" id="content" style="width: 100%; height: 100%">${dto.community_cont}</textarea>
            	</td>
          </tr>
          
@@ -81,6 +81,30 @@
 
 
 <script>
+
+function submit_chk(event){
+	var sub = document.getElementById('subject').value;
+	var cat = document.getElementById('category').value;
+	var con = document.getElementById('content').value;
+	
+	if(sub == ""){
+		alert("제목을 기입하세요")
+		document.freeForm.community_sub.focus();
+		event.preventDefault();
+	} else if(cat == ""){
+		alert("카테고리를 선택하세요")
+		document.freeForm.category_num.focus();
+		event.preventDefault();
+	} else if(con == ""){
+		alert("내용을 기입하세요")
+		document.freeForm.community_cont.focus();
+		event.preventDefault();
+	} else{
+		alert("게시물을 수정하였습니다.");
+	}
+	
+	
+}
 
 	
 function setThumbnail(event) { 

@@ -84,21 +84,23 @@ function submit_chk(event){
 		alert("제목을 기입하세요")
 		document.freeForm.community_sub.focus();
 		event.preventDefault();
-	} 
-	if(cat == ""){
+	} else if(cat == ""){
 		alert("카테고리를 선택하세요")
-		document.freeForm.community_sub.focus();
+		document.freeForm.category_num.focus();
 		event.preventDefault();
-	} 
-	if(cont == ""){
+	} else if(con == ""){
 		alert("내용을 기입하세요")
-		document.freeForm.community_sub.focus();
+		document.freeForm.community_cont.focus();
 		event.preventDefault();
-	} 
+	} else{
+		alert("게시물을 등록하였습니다.");
+	}
 	
 	
 }
-	
+
+
+
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
 	console.log("섬네일 생성하기");

@@ -67,8 +67,7 @@
    		from community_board 
    		where category_num not in(3)
    		
-   		
-   		
+   				
    </select>
 		
 	  <!-- 게시글 작성 -->
@@ -89,7 +88,13 @@
 	
 	<!-- 게시글 상세보기 -->
 	<select id="freeDetail" resultType="com.pretty.dog.dto.CommunityDTO">
-   		SELECT * FROM community_board WHERE community_boardnum =#{param1};
+   		
+	select cb.community_boardnum, cb.category_num, cb.community_sub, cb.mem_id , cb.community_date,  cb.community_cont, cb.community_view, cb.community_likes, cb.community_blind,
+		cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
+		from  community_board cb, community_category cc
+		where cb.category_num = cc.category_num 
+		and cb.community_boardnum = #{param1};
+
    </select>
    
    <!--  게시글 상세보기 ~ 이미지 출력 -->
@@ -102,7 +107,15 @@
    <select id="commentList" resultType="com.pretty.dog.dto.CommunityDTO">
    		select * from community_board_comment where community_boardnum = #{param1} 
    </select>
+  	
+  	<!-- 댓글갯수 가져오기 -->
+   <select id="commentCount" resultType="com.pretty.dog.dto.CommunityDTO">
+   		select count(*) from community_board_comment
+		where community_boardnum = #{param1} 
+		and bcomment_blind = 0
+   </select>
    
+
    <!-- 댓글 삭제(블라인드) -->
 	<delete id="free_commentDelete">
       update community_board_comment set bcomment_blind = 1 where bcomment_num = #{param1}
