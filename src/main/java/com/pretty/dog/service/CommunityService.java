@@ -12,11 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pretty.dog.dao.CommunityDAO;
 import com.pretty.dog.dto.CommunityDTO;
+import com.pretty.dog.dto.DogDTO;
 
 
 @Service
@@ -33,14 +35,18 @@ public class CommunityService {
 	*/
 	
 	//카테고리 불러오기
-	public ArrayList<CommunityDTO> categoryList() {		
+	public ArrayList<CommunityDTO> categoryList() {
+		logger.info("카테고리 가져오기 서비스");
 		return communityDao.categoryList();
 	}
 	
 	
 	//페이징
-		 public HashMap<String, Object> listCall(int currPage, int pagePerCnt, int catNum ) {
+		 public HashMap<String, Object> listCall(int currPage, int pagePerCnt, int catNum, String searchOpt, String keyword ) {
 		      
+			 logger.info("리스트콜 서비스 도착");
+			 
+			 HashMap<String, Object> sendMap = new HashMap<String, Object>();
 		      HashMap<String, Object> map = new HashMap<String, Object>(); 
 		      
 		      int offset = ((currPage-1) * pagePerCnt-1) >=0 ? ((currPage-1) * pagePerCnt-1) : 0; //어디서부터 보여줘야 하는가?
@@ -50,12 +56,17 @@ public class CommunityService {
 		      int range = totalCount%pagePerCnt>0?	
 		    		  (totalCount/pagePerCnt)+1:(totalCount/pagePerCnt);
 		      logger.info("총갯수:{}",totalCount);
-		      logger.info("만들 수 있는 총 페이지:{}",range);
-		      
+		      logger.info("만들 수 있는 총 페이지:{}",range);	      
 		      logger.info("리스트 콜 서비스 : DAO 호출");
 		      
+		      sendMap.put("pagePerCnt", pagePerCnt);
+		      sendMap.put("offset", offset);
+		      sendMap.put("catNum", catNum);
+		      sendMap.put("searchOpt", searchOpt);
+		      sendMap.put("keyword", keyword);
+		      
 		      map.put("pages",range);
-		      map.put("list",communityDao.listCall(pagePerCnt, offset, catNum));
+		      map.put("list",communityDao.listCall(sendMap));
 		      
 		      //logger.info("Map에 담긴 정보"+map);
 		      
@@ -73,117 +84,45 @@ public class CommunityService {
 	}
 	**/
 		 
-	/**
-	public String freeWrite(MultipartFile imgs, HashMap<String, Object> params) {
-		
-		String page = "redirect:/";
-		//우리는 방금 insert한 글의 idx를 뽑아내야 한다.
-		//성공하면 특정 상세보기로 넘어갈때 글번호가 필요하기에
-		//파일을 업로드한 경우 photo table에 글번호를 넣어야 하기에
-		//방금 넣은 데이터에 대한 idx를 알고 싶다면 몇가지 조건이 있다.
-		
-		//조건1. parameter는 DTO형태로 넣을 것
-		
-		CommunityDTO dto = new CommunityDTO();
-		//DB의 데이터를 Service나 Controller 등으로 보낼 때 사용하는 객체
-		//BoardDTO의 경우 
-		dto.setCommunity_sub((String) params.get("community_sub"));
-		dto.setMem_id((String) params.get("mem_id"));
-		dto.setCommunity_cont((String) params.get("community_cont"));
-		//카테고리 값
-		dto.setCategory_num(Integer.parseInt((String) params.get("category_num")));
-
-		System.out.println(imgs);
-		
-		communityDao.freeWrite(dto);
-		
-		//그렇게 실행하고 나면 dto에 방금 넣은 게시물에 대한 idx가 담겨져 나온다
-		//idx? 
-		int idx = dto.getCommunity_boardnum();
-		logger.info("idx: " + idx);
-		if(idx>0){
-			page="redirect:/freeList";
-			saveFile(idx,imgs);//파일 저장 처리
-		}
-		return page;
-	}
-	**/
-		
 	
-	public String freeWrite(MultipartFile photos, HashMap<String, Object> params){
 		
+	//게시글 작성
+	public String freeWrite( HashMap<String, Object> params, MultipartFile imgs){
 		
-	      String page = "redirect:/";
+	      String page = "freeWriteForm";
 	      HashMap<String, Object> freeWrite = params;
 	      //HashMap<String, Object> beautyTrendWrite = new HashMap<String, Object>();
-	      logger.info("프리라이트 서비스");
+	      logger.info("글쓰기 서비스");
 	      freeWrite.put("community_sub", params.get("community_sub"));
+	      
 	      freeWrite.put("community_cont", params.get("community_cont"));
+	      
 	      freeWrite.put("mem_id", params.get("mem_id"));
+	      
 	      freeWrite.put("category_num",Integer.parseInt((String) params.get("category_num")));
 	      //dto.setCategory_num(Integer.parseInt((String) params.get("category_num"))
 	      freeWrite.put("community_boardnum", 0);
 	      
+	      
 	      System.out.println(freeWrite.get("community_sub"));
 	      System.out.println(freeWrite.get("community_cont"));
-	      System.out.println(freeWrite.get("mem_id"));
+	      System.out.println(freeWrite.get("mem_id"));	     
 	      System.out.println(freeWrite.get("category_num"));
-	      
 	      communityDao.freeWrite(freeWrite);
-	       
-	
-	      //System.out.println(beautyTrendWrite.get("community_boardnum"));
-	        
-	      int community_boardnum = (int)freeWrite.get("community_boardnum");
+
+	      int community_boardnum = (int) freeWrite.get("community_boardnum");
+	    
+	      System.out.println("community_boardnum: " + community_boardnum);
+	     
 	      if(community_boardnum > 0) {
-	         page = "redirect:/freeDetail?idx="+community_boardnum;
-	         saveFile(community_boardnum, photos);
-	      }
+	         page = "redirect:/freeDetail?community_boardnum="+community_boardnum;
+	         saveFile(community_boardnum, imgs);
+	      }	     
 	      return page;
 	   }
 	 
-	
-	/**
-	private void saveFile(int idx, MultipartFile[] imgs) {
-		logger.info("파일 업로드 서비스");
-
-		for(MultipartFile photo : imgs) {
-	         
-	         try {
-	            String oriFileName = photo.getOriginalFilename(); //원본 파일명을 추출
-	            
-	            int index = oriFileName.lastIndexOf("."); //뒤에서부터 . 을 찾아 해당 인덱스의 번호를 반환
-	            String ext = oriFileName.substring(index); //인자값 인덱스부터 이하의 부분을 반환 (확장자를 추출하는 과정)
-	            
-	            //방어 코트 : 예외가 발생 예상되는 지점을 피해가도록 처리
-	            if(index>0) {
-	               String newFileName = System.currentTimeMillis()+ext; // 새로운 파일명을 생성하기 위해 (중복 회피)
-	               logger.info(oriFileName+" => "+newFileName);
-	               
-	               //파일 저장 (photo 로 부터 byte를 뽑아내 경로를 지정하여 넣는다.)
-	               //steam 을 사용하지 않았기 때문에 합리적으로 nio 를 사용했다고 생각 할 수는 있다.
-	               byte[] bytes = photo.getBytes();
-	               
-	               Path path = Paths.get("C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/commu/" + newFileName);;
-	               
-	               Files.write(path,bytes);
-	               logger.info(oriFileName + " SAVE OK!! ");
-	               //DB 에 저장한 파일명을 기록
-	               communityDao.fileWrite(idx,oriFileName,newFileName);               
-	            }
-	            
-	            
-	            Thread.sleep(1);
-	            
-	         } catch (Exception e) {
-	            e.printStackTrace();
-	         }
-	      }
-		
-	}
-	**/
-	
-	   private void saveFile(int idx, MultipartFile imgs){
+		// 파일저장
+	   private void saveFile(int community_boardnum, MultipartFile imgs){
 		   
 	      String oriFileName = imgs.getOriginalFilename();
 	      logger.info("세이브 파일 서비스");
@@ -196,14 +135,17 @@ public class CommunityService {
 	            logger.info(oriFileName + " = >" + newFileName);
 	            byte[] bytes = imgs.getBytes(); // photo에 여러개의 정보(파일명/크기/byte... 등등)가 있지만 byte만 뽑아와서 byte[]배열에 담아준다
 	            
-	            Path path = Paths.get("C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/commu/" + newFileName); // 파일을 저장할 경로와 파일 이름을 설정해 준다.
+	            Path path = Paths.get("C:/STUDY/PrettyDog/src/main/webapp/resources/commu/" + newFileName); // 파일을 저장할 경로와 파일 이름을 설정해 준다.
+	            // 파일을 저장할 경로와 파일 이름을 설정해 준다.
+	            //"C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/trend/" + newFileName);
+	            
 	            // 스트림을 사용 안해서 Files가  nio 라는걸 알수 있다 Files의 라이트 메서드를 사용해서(저장할 위치와 photo로부터 뽑아온 byte[]의 값을 사용해서 저장한다.)
 	            // 이때는 그냥 컴퓨터에 저장을 하는것(DB에 저장은 dao로 해야 한다.)
 	            System.out.println(path);
 	            Files.write(path, bytes);
 	            // Files.write(path, bytes); 까지 성공 하면 컴퓨터에 저장이 된거기 때문에 oriFileName 을 출력할수 있기 때문에 logger 로 확인해 본다
 	            logger.info(oriFileName + "SAVE OK!!"); 
-	            communityDao.fileWrite(idx, oriFileName, newFileName);// DB 에 저장할 파일명을 기록               
+	            communityDao.saveFile(community_boardnum, oriFileName, newFileName);// DB 에 저장할 파일명을 기록               
 	         }
 	      } catch (Exception e) {
 	         // TODO Auto-generated catch block
@@ -211,6 +153,7 @@ public class CommunityService {
 	      }
 	   }
 	
+	//상세보기   
 	public CommunityDTO freeDetail(String community_boardnum) {
 
 		CommunityDTO dto = null;
@@ -218,20 +161,20 @@ public class CommunityService {
 		
 		if(success>0) {
 			
-			dto = communityDao.detail(community_boardnum);
+			dto = communityDao.freeDetail(community_boardnum);
 		}
 		return dto;
 		
 	}
 	
 	
-	
+	//사진 출력
 	public ArrayList<CommunityDTO> photoList(String community_boardnum) {
-		// TODO Auto-generated method stub
+		logger.info("사진 출력");
 		return communityDao.photoList(community_boardnum);
 	}
 
-
+	//게시글 삭제
 	public void freeDelete(String community_boardnum) {
 		 //1. 게시물에 사진이 있는지 확인
 	      ArrayList<CommunityDTO> list = communityDao.photoList(community_boardnum);
@@ -244,7 +187,7 @@ public class CommunityService {
 	      if(success>0) {
 	         for(CommunityDTO dto : list) {
 	            //4. 있으면 업로드 된 사진 이름(newFileName) 알아오기
-	            File file = new File("C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/commu/"+dto.getBphoto_newname());
+	            File file = new File("C:/STUDY/PrettyDog/src/main/webapp/resources/commu/" + dto.getBphoto_newname());
 	            boolean yn = file.delete();      
 	            logger.info(dto.getBphoto_oriname()+" delete : "+yn);
 	         }         
@@ -252,10 +195,10 @@ public class CommunityService {
 		
 	}
 
-
+	//게시글 수정폼 이동
 	public String freeUpdateForm(Model model, String community_boardnum) {
 
-			CommunityDTO dto = communityDao.detail(community_boardnum);
+			CommunityDTO dto = communityDao.freeDetail(community_boardnum);
 			ArrayList<CommunityDTO> list = communityDao.photoList(community_boardnum);
 	      
 			logger.info("subject : "+dto.getCommunity_sub());
@@ -270,24 +213,136 @@ public class CommunityService {
 		return "freeUpdateForm";
 	}
 
-
+	//게시글 수정
 	public String freeUpdate(MultipartFile imgs, HashMap<String, String> params) {
 		
 
 		int community_boardnum = Integer.parseInt(params.get("community_boardnum"));
-	      String page = "redirect:/updateForm?idx="+community_boardnum;
+	      String page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
 	      
 	      if(communityDao.freeUpdate(params)>0) {
-	         page = "redirect:/detail?idx="+community_boardnum;
+	         page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
 	         saveFile(community_boardnum,imgs);
 	      }
 	      
-	      return page;
-		
-		
-		
+	      return page;	
 		
 	}
+
+	//댓글리스트 출력
+	public ArrayList<CommunityDTO> commentList(String community_boardnum) {
+		return communityDao.commentList(community_boardnum);
+	}
+
+	//댓글  삭제
+	public void free_commentDelete(int bcn) {
+		
+		communityDao.free_commentDelete(bcn);
+		
+	}
+
+	//댓글 번호 찾기
+	public int boardNumOfdelCom(int bcn) {
+		
+		return communityDao.boardNumOfdelCom(bcn);
+	}
+
+	// 댓글 작성
+	public void free_commentWrite(CommunityDTO dto) {
+		logger.info("댓글입력 서비스");
+		communityDao.free_commentWrite(dto);
+		
+	}
+
+	//게시글 신고 폼 
+	public CommunityDTO DeclaForm_Post(String community_boardnum) {
+		CommunityDTO dto = communityDao.freeDetail(community_boardnum);				
+		return dto;
+	}
+	
+	//댓글 신고 폼
+	public CommunityDTO DeclaForm_Comment(String bcomment_num) {
+		CommunityDTO dto = communityDao.commentDetail(bcomment_num);
+		return dto;
+	}
+	
+	//신고옵션 출력 ~ 게시글
+	public ModelAndView declalist() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<CommunityDTO> list = communityDao.declalist();
+		
+		System.out.println(list);
+		
+		mav.addObject("list", list);
+		mav.setViewName("DeclaForm_Post");
+		
+		return mav;
+	}
+	
+	//신고옵션 출력 ~ 댓글
+	public ModelAndView declalistC() {
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<CommunityDTO> list = communityDao.declalistC();
+		
+		System.out.println(list);
+		
+		mav.addObject("list", list);
+		mav.setViewName("DeclaForm_Comment");
+		
+		return mav;
+	}
+	//게시글 신고 제출
+	public ModelAndView DeclaSend_post(HashMap<String, Object> params) {
+		 ModelAndView mav = new ModelAndView();
+		 communityDao.DeclaSend_post(params);
+		 
+		 logger.debug("게시글 신고 서비스");
+		 //int boardNum = (int) params.get("dec_targetNum");
+		 
+		 //System.out.println("신고 할 때 받아온 게시물 번호"+boardNum);
+		 
+		 //신고 완료시 해당 디테일 페이지 새로고침 
+	     mav.setViewName("redirect:/freeList");
+	     return mav;
+
+	}
+
+	//댓글 신고 제출
+	public ModelAndView DeclaSend_comment(HashMap<String, Object> params) {
+		ModelAndView mav = new ModelAndView();
+		communityDao.DeclaSend_comment(params);
+		
+		logger.info("댓글신고 서비스");
+		//int boardNum = (int) params.get("dec_targetNum");
+		
+		//System.out.println("신고 할 때 받아온 게시물 번호"+boardNum);
+		
+		//신고 완료시 해당 디테일 페이지 새로고침 
+		mav.setViewName("redirect:/freeList");
+		return mav;
+	}
+
+
+	
+	
+
+
+	
+
+	
+	
+
+
+	
+
+
+	
+
+
+
 
 
 	

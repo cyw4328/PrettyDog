@@ -132,5 +132,111 @@ public class CommunityDTO {
 		this.bphoto_date = bphoto_date;
 	}
 	
+	//커뮤니티 댓글
+	public int bcomment_num;
+	public String bcomment_cont;
+	public Timestamp bcomment_date;
+	public int bcomment_blind;
+	
+	
+	
+	public int getBcomment_num() {
+		return bcomment_num;
+	}
+	public void setBcomment_num(int bcomment_num) {
+		this.bcomment_num = bcomment_num;
+	}
+	public String getBcomment_cont() {
+		return bcomment_cont;
+	}
+	public void setBcomment_cont(String bcomment_cont) {
+		this.bcomment_cont = bcomment_cont;
+	}
+	public Timestamp getBcomment_date() {
+		return bcomment_date;
+	}
+	public void setBcomment_date(Timestamp bcomment_date) {
+		this.bcomment_date = bcomment_date;
+	}
+	public int getBcomment_blind() {
+		return bcomment_blind;
+	}
+	public void setBcomment_blind(int bcomment_blind) {
+		this.bcomment_blind = bcomment_blind;
+	}
+
+	//신고관련
+	
+	public int decl_num;
+	public int dec_state;
+	public Timestamp dec_date;
+	public int dec_target;
+	public int dec_targetNum;
+	public String dec_id;
+	
+	public int decO_num;
+	public String decO_cont;
+	public int decO_blind;
+	
+	public String getDecO_cont() {
+		return decO_cont;
+	}
+	public void setDecO_cont(String decO_cont) {
+		this.decO_cont = decO_cont;		
+	}
+
+	public int getDecl_num() {
+		return decl_num;
+	}
+	public void setDecl_num(int decl_num) {
+		this.decl_num = decl_num;
+	}
+	public int getDec_state() {
+		return dec_state;
+	}
+	public void setDec_state(int dec_state) {
+		this.dec_state = dec_state;
+	}
+	public Timestamp getDec_date() {
+		return dec_date;
+	}
+	public void setDec_date(Timestamp dec_date) {
+		this.dec_date = dec_date;
+	}
+	public int getDec_target() {
+		return dec_target;
+	}
+	public void setDec_target(int dec_target) {
+		this.dec_target = dec_target;
+	}
+	public int getDec_targetNum() {
+		return dec_targetNum;
+	}
+	public void setDec_targetNum(int dec_targetNum) {
+		this.dec_targetNum = dec_targetNum;
+	}
+	public String getDec_id() {
+		return dec_id;
+	}
+	public void setDec_id(String dec_id) {
+		this.dec_id = dec_id;
+	}
+	public int getDecO_num() {
+		return decO_num;
+	}
+	public void setDecO_num(int decO_num) {
+		this.decO_num = decO_num;
+	}
+	
+	public int getDecO_blind() {
+		return decO_blind;
+	}
+	public void setDecO_blind(int decO_blind) {
+		this.decO_blind = decO_blind;
+	}
+	
+	
+	
+	
 	
 }
