@@ -127,7 +127,7 @@
 	<delete id="beautyTrendDelete">
 		delete from community_board where community_boardnum = #{param1}
 	</delete>
-
+	
 </mapper>
 
 

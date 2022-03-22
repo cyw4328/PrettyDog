@@ -139,6 +139,37 @@
 	<insert id="pointListInsert">
 		insert into pointlist(mem_id, point_cdc, point_cont,point_distin) values(#{param1}, 100,'리뷰작성', 0)
 	</insert>
+	
+	<insert id="myShopLikeInsert">
+		insert into interest_shop(mem_id, busin_num) values(#{param1}, #{param2})
+	</insert>
+	
+	<update id="shopLikeUpdate">
+		update
+			shop
+		set
+			busin_likes = busin_likes + 1
+		where
+			busin_num = #{param1}
+	</update>
+	
+	<delete id="myShopLikeDelete">
+		delete from 
+			interest_shop
+		where
+			busin_num = #{param2}
+		and
+			mem_id = #{param1}
+	</delete>
+	
+	<update id="shopLikeDown">
+		update
+			shop
+		set
+			busin_likes = busin_likes - 1
+		where
+			busin_num = #{param1}
+	</update>
 </mapper>
 
 
