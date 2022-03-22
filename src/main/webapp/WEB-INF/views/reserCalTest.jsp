@@ -20,9 +20,6 @@
 	let dateTest = today.getDate();  // 날짜
 	let dayTest = today.getDay();  // 요일
 	
-	//사용자가 예약한 날짜 임의의 데이터 
-	let reserDay = yearTest+"-"+monthTest+"-"+(dateTest+7);
-	
 	//예약 날짜와 비교할 날짜들 변수에 저장
 	let thisDay = yearTest+"-"+monthTest+"-"+dateTest;		//오늘 날짜
 	let oneDay = yearTest+"-"+monthTest+"-"+(dateTest+1);	//하루 날짜
@@ -30,7 +27,7 @@
 	let fiveDay = yearTest+"-"+monthTest+"-"+(dateTest+5);	//5일 전
 	let sevenDay = yearTest+"-"+monthTest+"-"+(dateTest+7);	//7일 전
 	let freeDay = yearTest+"-"+monthTest+"-"+(dateTest+15); //15일 전
-	
+
 	let servicePrice = 10000;//임의의 예약금
 	
 	if(reserDay == thisDay){
