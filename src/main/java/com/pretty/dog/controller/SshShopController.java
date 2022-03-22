@@ -147,27 +147,26 @@ public class SshShopController {
 		 //return "redirect:/sshShopDetail?idx="+busin_num+"&memId="+memId;
 		 return null;
 	 }
-	/*
+
 	@RequestMapping(value = "/myShopLike")
 	public String myShopLike(@RequestParam String likeVal, @RequestParam String memId, @RequestParam String idx) {
 		System.out.println("매장 좋아요 상태 : " + likeVal);
 		System.out.println("로그인한 아이디 : " + memId);
 		System.out.println("매장 번호 : " + idx);
-		//String page = "redirect:/sshShopDetail?idx="+idx+"&memId="+memId;
+		String page = "redirect:/sshShopDetail?idx="+idx+"&memId="+memId;
 		if(likeVal.equals("0")) {
-			sshShopListService.myShopLikeInsert(likeVal,memId);
+			sshShopListService.myShopLikeInsert(memId, idx);
 			sshShopListService.shopLikeUpdate(idx);
-			//return page;
-			return null;
+			return page;
+			//return null;
 		}else {
-			sshShopListService.myShopLikeDelete(likeVal,memId);
+			sshShopListService.myShopLikeDelete(memId,idx);
 			sshShopListService.shopLikeDown(idx);
-			//return page;
-			return null;
+			return page;
+			//return null;
 		}
 		
 	 }
-	 */
 }
 
 

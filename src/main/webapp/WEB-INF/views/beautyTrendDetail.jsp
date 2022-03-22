@@ -16,7 +16,7 @@
 	<%-- <img src="resources/trend/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/> --%>
 	<img src="resources/trend/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/>
 	<button onclick="location.href='beautyTrendList'">뒤로가기</button>
-	<button>매장이동</button>
+	<button onclick="location.href='sshShopDetail?idx=${beautyTrendDetail.busin_num}&memId=a1'">매장이동</button>
 	<%-- <button onclick="location.href='beautyTrendUpdate?idx=${beautyTrendDetail.community_boardnum}'">수정</button> --%>
 </body>
 <script></script>
