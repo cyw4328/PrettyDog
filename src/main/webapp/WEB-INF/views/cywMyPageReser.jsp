@@ -140,9 +140,37 @@ function listDraw(list) {
     	var date1 = new Date(item.reser_visitday);
     	var date2 = new Date(item.reser_updateday);
     	
+    	let dateYear = date1.getFullYear();
+    	let dateMonth = date1.getMonth() + 1;
+    	let dateDay = date1.getDate();
+    	
+    	let dataHour = date1.getHours();
+    	let dataMinute = date1.getMinutes();
+    	
+    	if(dataHour < 10 && dataMinute < 10){
+    		dataHour = "0"+dataHour;
+    		dataMinute = "0"+dataMinute;
+    	}else if(dataHour < 10){
+    		dataHour = "0"+dataHour;
+    	}else if(dataMinute < 10){
+    		dataMinute = "0"+dataMinute;
+    	}
+    	
+    	let reserTime = dataHour+":"+dataMinute;
+    	
+    	//console.log(reserTime);
+    	
+    	if(dateMonth<10){
+    		dateMonth = "0"+dateMonth;
+    	}else{
+    		dateMonth = dateMonth;
+    	}
+    	
+    	let reserDay = dateYear+"-"+dateMonth+"-"+dateDay;
+    	
     	if (item.reser_state == 0) {
 			reserState = "예약완료";
-			reserState1 = '<a href="reserDel?reser_num='+item.reser_num+'&&reser_money='+item.reser_money+'&&busin_num='+item.busin_num+'">취소하기</a>';
+			reserState1 = '<a onclick="cancleReser(\''+item.reser_num+'\',\''+item.reser_money+'\',\''+item.busin_num+'\',\''+reserDay+'\',\''+reserTime+'\')">취소하기</a>';
 			//reserState1 = '<input type="button" id="btn" onclick="func()" value="예약취소"/>'
     	}else if (item.reser_state == 1) {
 			reserState = "노쇼";
@@ -196,6 +224,16 @@ function func() {
 	console.log($(this).prev().val());
 	//$(this).prev().val();
 }
+
+
+function cancleReser(reser_num, reser_money, busin_num, reserDay, reserTime){
+	
+	console.log(reser_num + "," + reser_money + "," + busin_num + "," + reserDay + "," + reserTime);
+	
+	location.href="reserDel?reser_num="+reser_num+"&&reser_money="+reser_money+"&&busin_num="+busin_num+"&&reserDay="+reserDay+"&&reserTime="+reserTime
+}
+
+
 
 </script>
 </html>
