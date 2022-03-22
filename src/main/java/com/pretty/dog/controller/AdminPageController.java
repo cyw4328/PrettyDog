@@ -39,15 +39,33 @@ public class AdminPageController {
 	}
 	
 	@RequestMapping(value = "/apuserlist3", method = RequestMethod.POST) 
-	public @ResponseBody HashMap<String, Object> apuserlist3(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
+	public @ResponseBody HashMap<String, Object> apuserlist3(@RequestParam String page,@RequestParam String cnt,HttpSession session,
+			@RequestParam String a,@RequestParam String b,@RequestParam String c) {
+				/* @RequestParam String a,@RequestParam String b,@RequestParam String c */
 		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
 		
 		int currPage = Integer.parseInt(page);
 		int pagePerCnt = Integer.parseInt(cnt);
-
-		return service.apuserlist3(currPage,pagePerCnt);
+		int b1 = Integer.parseInt(b);
+		int c1 = Integer.parseInt(c);
+		
+		return service.apuserlist3(currPage,pagePerCnt,a,b1,c1);
 	}		
 	
+/*	@RequestMapping(value = "/apuserlist30", method = RequestMethod.POST) 
+	public @ResponseBody HashMap<String, Object> apuserlist30(@RequestParam String page,@RequestParam String cnt,HttpSession session, 
+			@RequestParam String a,@RequestParam String b,@RequestParam String c
+			) {
+		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+		logger.info("시발1:{}",a);
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+		int b1 = Integer.parseInt(b);
+		int c1 = Integer.parseInt(c);
+		
+		return service.apuserlist30(currPage,pagePerCnt,a,b1,c1);
+	}		*/
 	
 	
 	

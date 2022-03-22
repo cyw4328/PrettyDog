@@ -11,7 +11,7 @@
 	
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> --> 
     <script src="resources/js/jquery.twbsPagination.js"></script>
     
     <script src="resources/js/jquery.twbsPagination.js"></script>
@@ -46,11 +46,11 @@
         }
 
 		table {
-			border-collapse: collapse;
+			width: 100%;
 			/* text-align: left; */
 			line-height: 1.5;
 			border: 1px solid #ccc;
-			margin: 20px 10px;
+			margin: 15px 0px;
 			/* width: 600px; */
 		}
 		table thead {
@@ -73,45 +73,26 @@
 			background: #fcf1f4;
 		}
 		table td {
-			width: 350px;
+			width: auto;
+			height: 50px;
 			padding: 10px; 
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 		}
-		#Allpage{
-			position: relative;
-			top: 150px;
-			left: 300px;
-		}
-		#AddForm{
-			position: absolute;
-			top: 80px;
-			left: 1000px;
-
-		}
-		#HangmokList{
-			position: absolute;
-			top: 120px;
-			/* left: 10px; */
-		}
-		input[type="button"]{
+		
+		/* input[type="button"]{
 			width: 180px;
 			height: 40px;
 			background-color: black;
 			color: white;
-		}
+		}  */
 		.ChangeSingeBtn{
 			width: 110px;
 			height: 25px;
 			background-color: black;
 			color: white;
 		}
-		.table1{
-			width: 64%;
-		    max-width: 100%;
-		    margin-bottom: 20px;
-			table-layout: fixed;
-		}
+		
 		.ChangeBtn{
 			width: 110px;
 			height: 30px;
@@ -170,6 +151,7 @@
                 <a href="SingoHangmokPage" style="text-decoration:none;"><div class= "sidebar" >신고 항목 관리</div></a>
                 <a href="AdminServicePage" style="text-decoration:none;"><div class= "sidebar" >추가서비스 관리</div></a>
                 <a href="categoryPage" style="text-decoration:none;"><div class= "sidebar" >카테고리 관리</div></a>
+                <a href="ChangeListPage" style="text-decoration:none;"><div class= "sidebar" >환전 신청 관리</div></a>
             </div>
 
         </div>
@@ -221,8 +203,14 @@
                 <!-- 내용 -->
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
 					<div id="Allpage">
-						<div id="AddForm">
-							<input type="button" value="처리된신고목록보기" id="processBtn"/>
+						<div style="height: 5px;"></div>
+						
+						<div id="AddForm" style="display: flex;">
+							<div style="width: 30px; height: 30px; he background-color: balck;">
+							</div>
+							<div>
+								<input type="button" value="처리된신고목록보기" id="processBtn"/>
+							</div>
 						</div>
 						<div id="HangmokList">
 							<table class="table1">

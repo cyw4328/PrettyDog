@@ -30,14 +30,14 @@ public class AdminPageService {
 		return mav;
 	}
 
-	public HashMap<String, Object> apuserlist3(int currPage, int pagePerCnt) {
+	public HashMap<String, Object> apuserlist3(int currPage, int pagePerCnt, String a, int b1, int c1) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		//어디서부터 보여줘야 하는가?
 		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
 		logger.info("offset:{}",offset);
 		
-		int totalCount = dao.apuserlist3Count(); 
+		int totalCount = dao.apuserlist3Count(a,b1,c1); 
 		
 		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
 		
@@ -45,10 +45,34 @@ public class AdminPageService {
 		logger.info("만들수 있는 총 페이지 :{}",range);
 		
 		map.put("pages", range);
-		map.put("list", dao.apuserlist3(pagePerCnt,offset));
+		map.put("list", dao.apuserlist3(pagePerCnt,offset,a,b1,c1));
 		
 		return map;
 	}	
+	
+/*	public HashMap<String, Object> apuserlist30(int currPage, int pagePerCnt, String a, int b1, int c1) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		logger.info("시발:{}",a);
+		logger.info("시발:{}",b1);
+		logger.info("시발:{}",c1);
+		
+		//어디서부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
+		logger.info("offset:{}",offset);
+		
+		int totalCount = dao.apuserlist30Count(a,b1,c1); 
+		
+		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
+		
+		logger.info("총 갯수 : {}",totalCount);
+		logger.info("만들수 있는 총 페이지 :{}",range);
+		
+		map.put("pages", range);
+		map.put("list", dao.apuserlist30(pagePerCnt,offset,a,b1,c1));
+		
+		return map;
+	}*/
 	
 	
 	
@@ -246,6 +270,10 @@ public class AdminPageService {
 		
 		return map;
 	}
+
+
+
+	
 
 	
 
