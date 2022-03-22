@@ -90,9 +90,17 @@ public class MembersService {
 	}
 
 
-	public String PassCk(String id, String pw) {
-		logger.info("비밀번호체크 서비스 도착{}",id+pw);	
-		return dao.PassCk(id,pw);
+	public boolean PassCk(String id, String pw) {
+		boolean success = false;
+		
+		String hashpw = dao.PassCk(id);
+		
+		if (hashpw != null) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			success = encoder.matches(pw, hashpw);			
+		}
+		
+		return success;
 	}
 
 
@@ -184,12 +192,13 @@ public class MembersService {
 	public void userUp(HashMap<String, String> params) {
 		String hashText = "";
 		String pw = params.get("pw"); 
-		
-		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		hashText = encoder.encode(pw);
-		params.put("pw", hashText);
-
+		logger.info("비밀번호값 : {}",pw);
+		if(params.get("pw") != "") {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			hashText = encoder.encode(pw);
+			params.put("pw", hashText);
+		}
+		logger.info("현재 비밀번호  : {}",params.get("pw"));
 		
 		int row = dao.userUp(params);
 		logger.info("입력된 건수  : {}",row);
