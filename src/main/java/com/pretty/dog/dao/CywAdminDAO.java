@@ -7,172 +7,172 @@ import com.pretty.dog.dto.DogDTO;
 
 public interface CywAdminDAO {
 
-	/* ArrayList<DogDTO> categoryPage(); */
+   /* ArrayList<DogDTO> categoryPage(); */
 
-	int categoryListCount();
+   int categoryListCount();
 
-	ArrayList<DogDTO> categoryListCall(int pagePerCnt, int offset);
+   ArrayList<DogDTO> categoryListCall(int pagePerCnt, int offset);
 
-	int cateGoryAdd(String categoryName, String categoryClass);
+   int cateGoryAdd(String categoryName, String categoryClass);
 
-	int categoryDel(String category_num);
+   int categoryDel(String category_num);
 
-	
-	// 마이페이지 ==--------------------------------------------------------
-	int AlrimPageListCount(String loginId);
+   
+   // 마이페이지 ==--------------------------------------------------------
+   int AlrimPageListCount(String loginId);
 
-	ArrayList<DogDTO> AlrimPageList(int pagePerCnt, int offset, String of);
+   ArrayList<DogDTO> AlrimPageList(int pagePerCnt, int offset, String of);
 
-	ArrayList<DogDTO> AlarmMem(String loginId);
+   ArrayList<DogDTO> AlarmMem(String loginId);
 
-	int alarmDel(String alarm_num);
+   int alarmDel(String alarm_num);
 
-	ArrayList<DogDTO> MyBoard(String loginId);
+   ArrayList<DogDTO> MyBoard(String loginId);
 
-	int MyBoardPageListCount(String loginId);
+   int MyBoardPageListCount(String loginId);
 
-	ArrayList<DogDTO> MyBoardPageList(int pagePerCnt, int offset, String loginId);
+   ArrayList<DogDTO> MyBoardPageList(int pagePerCnt, int offset, String loginId);
 
-	int boardDel(String community_boardnum, String loginId);
+   int boardDel(String community_boardnum, String loginId);
 
-	ArrayList<DogDTO> MyComment(String loginId);
+   ArrayList<DogDTO> MyComment(String loginId);
 
-	int CommentPageListCount(String loginId);
+   int CommentPageListCount(String loginId);
 
-	ArrayList<DogDTO> CommentPageList(int pagePerCnt, int offset, String loginId);
+   ArrayList<DogDTO> CommentPageList(int pagePerCnt, int offset, String loginId);
 
-	int commentDel(String bcomment_num, String loginId);
+   int commentDel(String bcomment_num, String loginId);
 
-	ArrayList<DogDTO> MyLikeShop(String loginId);
+   ArrayList<DogDTO> MyLikeShop(String loginId);
 
-	int MyLikeShopListCount(String loginId);
+   int MyLikeShopListCount(String loginId);
 
-	ArrayList<DogDTO> MyLikeShopList(int pagePerCnt, int offset, String loginId);
+   ArrayList<DogDTO> MyLikeShopList(int pagePerCnt, int offset, String loginId);
 
-	int LikeShopDel(String interestshop_num, String loginId);
+   int LikeShopDel(String interestshop_num, String loginId);
 
-	ArrayList<DogDTO> MyPageReserPage(String loginId);
+   ArrayList<DogDTO> MyPageReserPage(String loginId);
 
-	int MyReserPageListCount(String loginId);
+   int MyReserPageListCount(String loginId);
 
-	ArrayList<DogDTO> MyReserPageList(int pagePerCnt, int offset, String loginId);
+   ArrayList<DogDTO> MyReserPageList(int pagePerCnt, int offset, String loginId);
 
-	int reserDel(String reser_num, String loginId);
+   int reserDel(String reser_num, String loginId);
 
-	ArrayList<DogDTO> OwnerReserPage(String loginId);
+   ArrayList<DogDTO> OwnerReserPage(String loginId);
 
-	ArrayList<DogDTO> OwnerReserPageList(int pagePerCnt, int offset, String loginId);
+   ArrayList<DogDTO> OwnerReserPageList(int pagePerCnt, int offset, String loginId);
 
-	int OwnerReserPageListCount(String loginId);
+   int OwnerReserPageListCount(String loginId);
 
-	int NoShowChange(String reser_num, String loginId);
+   int NoShowChange(String reser_num, String loginId);
 
-	int SuccessChange(String reser_num, String loginId);
+   int SuccessChange(String reser_num, String loginId);
 
-	ArrayList<DogDTO> OwnerReserLogPage(String loginId);
+   ArrayList<DogDTO> OwnerReserLogPage(String loginId);
 
-	int ReserLogListCount(String loginId);
+   int ReserLogListCount(String loginId);
 
-	ArrayList<DogDTO> ReserLogList(int pagePerCnt, int offset, String loginId);
+   ArrayList<DogDTO> ReserLogList(int pagePerCnt, int offset, String loginId);
 
-	HashMap<String, Object> reserData(String reser_num, String loginId);
+   HashMap<String, Object> reserData(String reser_num, String loginId);
 
-	int reserLogInsert(HashMap<String, Object> list);
+   int reserLogInsert(HashMap<String, Object> list);
 
-	int reserCancleInsert(HashMap<String, Object> list);
+   int reserCancleInsert(HashMap<String, Object> list);
 
-	int OwnerCancleInsert(HashMap<String, Object> list);
+   int OwnerCancleInsert(HashMap<String, Object> list);
 
-	int reserLogNoshow(HashMap<String, Object> list);
+   int reserLogNoshow(HashMap<String, Object> list);
 
-	int reserLogSuccess(HashMap<String, Object> list);
+   int reserLogSuccess(HashMap<String, Object> list);
 
-	int AlarmInsert(HashMap<String, Object> list);
+   int AlarmInsert(HashMap<String, Object> list);
 
-	// -----------------------------------------------------------------
-	
-	int SingoHangmokListCount();
+   // -----------------------------------------------------------------
+   
+   int SingoHangmokListCount();
 
-	ArrayList<DogDTO> SingoHangmokList(int pagePerCnt, int offset);
+   ArrayList<DogDTO> SingoHangmokList(int pagePerCnt, int offset);
 
-	int SingoHangmokAdd(String singoSub);
+   int SingoHangmokAdd(String singoSub);
 
-	int HangmokReUse(String decO_num);
+   int HangmokReUse(String decO_num);
 
-	int HangmokDel(String decO_num);
+   int HangmokDel(String decO_num);
 
-	int SingoNoCheckListCount();
+   int SingoNoCheckListCount();
 
-	ArrayList<DogDTO> SingoNoCheckList(int pagePerCnt, int offset);
+   ArrayList<DogDTO> SingoNoCheckList(int pagePerCnt, int offset);
 
-	int SingoProcess(String decl_num);
+   int SingoProcess(String decl_num);
 
-	int decAdminInsert(String decl_num, String loginId);
+   int decAdminInsert(String decl_num, String loginId);
 
-	int SingoProcessListCount();
+   int SingoProcessListCount();
 
-	ArrayList<DogDTO> SingoProcessList(int pagePerCnt, int offset);
+   ArrayList<DogDTO> SingoProcessList(int pagePerCnt, int offset);
 
-	int ServiceHangmokListCount();
+   int ServiceHangmokListCount();
 
-	ArrayList<DogDTO> ServiceHangmokList(int pagePerCnt, int offset);
+   ArrayList<DogDTO> ServiceHangmokList(int pagePerCnt, int offset);
 
-	int UseServiceChange(String add_num);
+   int UseServiceChange(String add_num);
 
-	int NoUseServiceChange(String add_num);
+   int NoUseServiceChange(String add_num);
 
-	int ServiceHangmokAdd(String serviceDog, String serviceSub);
+   int ServiceHangmokAdd(String serviceDog, String serviceSub);
 
-	int reserDelMemPointAdd(String loginId, int normalChange);
+   int reserDelMemPointAdd(String loginId, int normalChange);
 
-	int reserDelMemPointTable(String loginId, int normalChange);
+   int reserDelMemPointTable(String loginId, int normalChange);
 
-	int reserDelOwnerPointDel(int normalChange, String busin_num);
+   int reserDelOwnerPointDel(int normalChange, String busin_num);
 
-	int reserDelOwnerPointTable(int normalChange, String busin_num);
+   int reserDelOwnerPointTable(int normalChange, String busin_num);
 
-	int NoShopNoPoint(String busin_num, String reser_num, String reser_money);
+   int NoShopNoPoint(String busin_num, String reser_num, String reser_money);
 
-	int NoShowPointAdd(String busin_num, String reser_money);
+   int NoShowPointAdd(String busin_num, String reser_money);
 
-	int UseSuccessNoPoint(String busin_num, String reser_num, String reser_money);
+   int UseSuccessNoPoint(String busin_num, String reser_num, String reser_money);
 
-	int UseSuccessPointAdd(String busin_num, String reser_money);
+   int UseSuccessPointAdd(String busin_num, String reser_money);
 
-	int ChangeListCount();
+   int ChangeListCount();
 
-	ArrayList<DogDTO> ChangeList(int pagePerCnt, int offset);
+   ArrayList<DogDTO> ChangeList(int pagePerCnt, int offset);
 
-	int ChangeMoneyCheck(String poch_num);
+   int ChangeMoneyCheck(String poch_num);
 
-	void pointChOkAdd(String poch_num, String loginId);
+   void pointChOkAdd(String poch_num, String loginId);
 
-	int ChangeOkListCount();
+   int ChangeOkListCount();
 
-	ArrayList<DogDTO> ChangeOkList(int pagePerCnt, int offset);
+   ArrayList<DogDTO> ChangeOkList(int pagePerCnt, int offset);
 
-	ArrayList<DogDTO> ShopServiceList(String loginId);
-	
-	ArrayList<DogDTO> ShopService(String loginId);
+   ArrayList<DogDTO> ShopServiceList(String loginId);
+   
+   ArrayList<DogDTO> ShopService(String loginId);
 
-	int SreviceDel(String price_num);
+   int SreviceDel(String price_num);
 
-	ArrayList<DogDTO> AddSmallServiceName();
+   ArrayList<DogDTO> AddSmallServiceName();
 
-	ArrayList<DogDTO> AddMiddleServiceName();
+   ArrayList<DogDTO> AddMiddleServiceName();
 
-	ArrayList<DogDTO> AddBigServiceName();
+   ArrayList<DogDTO> AddBigServiceName();
 
-	int addShopSmallService(String inputText1, String serviceName1, String busin_num);
+   int addShopSmallService(String inputText1, String serviceName1, String busin_num);
 
-	int addShopMiddleService(String inputText2, String serviceName2, String busin_num);
+   int addShopMiddleService(String inputText2, String serviceName2, String busin_num);
 
-	int addShopBigService(String inputText3, String serviceName3, String busin_num);
+   int addShopBigService(String inputText3, String serviceName3, String busin_num);
 
-	int reserDelOwnerPointChange(int businChange, String busin_num);
+   int reserDelOwnerPointChange(int businChange, String busin_num);
 
-	int reserDelOwnerPointAdd(int businChange, String busin_num);
+   int reserDelOwnerPointAdd(int businChange, String busin_num);
 
-	int reserStateChange(String busin_num, String reserDay, String canReserTime);
-	
+   int reserStateChange(String busin_num, String reserDay, String canReserTime);
+   
 }

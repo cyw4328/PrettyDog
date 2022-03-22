@@ -24,6 +24,12 @@
     	color : white;
     	padding: 10px;
     }
+    
+    .pastBtn{
+		background-color: gray;
+    	color : white;
+    	padding: 10px;
+    }
   
 </style>
 
@@ -80,7 +86,10 @@
     
     var today = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
     var date = new Date();  // @param 전역 변수, today의 Date를 세어주는 역할
-
+    var compaHour = today.getHours()+1;
+    var compaMinite = today.getMinutes();
+	var compaTime = compaHour+":"+compaMinite; 
+    
     /**
      * @brief   이전달 버튼 클릭
      */
@@ -301,12 +310,20 @@
 				}
         		$("#viewtimearea").append(rowContent);	
         		
+        		console.log(Object.keys(obj));
+        		console.log(compaTime);
+        		
         		//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
 				for(i=0; i<Object.keys(obj).length; i++){
 					
 					//console.log(Object.keys(obj)[i]);
 					if(i%3 == 0){
-						if(Object.values(obj)[i]==0){
+						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
+							content += "<tr>";
+							content += "<td class='pastBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}else if(Object.values(obj)[i]==0){
 							content += "<tr>";
 							content += "<td class='timeBtn' onclick='selectTime(this)'>";
 							content += "<span>"+Object.keys(obj)[i]+"</span>";
@@ -316,9 +333,13 @@
 							content += "<td class='noBtn'>";
 							content += "<span>"+Object.keys(obj)[i]+"</span>";
 							content += "</td>";
-						}	
+						}
 					}else if(i%3 == 1){
-						if(Object.values(obj)[i]==0){
+						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
+							content += "<td class='pastBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+						}else if(Object.values(obj)[i]==0){
 							content += "<td class='timeBtn' onclick='selectTime(this)'>";
 							content += "<span>"+Object.keys(obj)[i]+"</span>";
 							content += "</td>";
@@ -328,7 +349,12 @@
 							content += "</td>";
 						}
 					}else if(i%3 == 2){
-						if(Object.values(obj)[i]==0){
+						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
+							content += "<td class='pastBtn'>";
+							content += "<span>"+Object.keys(obj)[i]+"</span>";
+							content += "</td>";
+							content += "</tr>";	
+						}else if(Object.values(obj)[i]==0){
 							content += "<td class='timeBtn' onclick='selectTime(this)'>";
 							content += "<span>"+Object.keys(obj)[i]+"</span>";
 							content += "</td>";
