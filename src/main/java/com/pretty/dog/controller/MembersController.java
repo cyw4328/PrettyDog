@@ -217,27 +217,18 @@ public class MembersController {
 		
 		
 		@RequestMapping(value = "/PassCk", method = RequestMethod.POST)
-		public String PassCk(Model model,HttpSession session, @RequestParam String pw,@RequestParam String id) {
-//			logger.info("비밀번호체크 컨트롤러{}",pw+id);	
-			Object object = session.getAttribute("loginId");
+		public ModelAndView PassCk(Model model,HttpSession session, @RequestParam String pw,@RequestParam String id) {
+			//logger.info("비밀번호체크 컨트롤러{}",pw+id);	
+			ModelAndView mav = new ModelAndView();
 		
-			String Page ="redirect:/loginPage";
-			if(object != null) {
-				session.getAttribute("loginId");
-				String msg ="비밀번호가 일치하지 않습니다.";
-				String Ck = service.PassCk(id,pw);
-				
-				if(Ck != null) {
-					Page ="redirect:/MyjungboSujungshs";
+				if (service.PassCk(id,pw)) {
+					mav.setViewName("redirect:/MyjungboSujungshs");
 				}else {
-					Page ="redirect:/memberPassCk";
 
+					mav.setViewName("redirect:/memberPassCk");	
 				}
-				
-				
-			}	
-		
-			return Page;
+			
+			return mav;
 		}
 		
 		
@@ -284,15 +275,15 @@ public class MembersController {
 		}
 		
 		//매장정보 수정
-				@RequestMapping(value = "/shopUp", method = RequestMethod.POST)
-					public String shopup(Model model,HttpSession session, @RequestParam HashMap<String, String> params) {
+		@RequestMapping(value = "/shopUp", method = RequestMethod.POST)
+			public String shopup(Model model,HttpSession session, @RequestParam HashMap<String, String> params) {
 							
-						String id = (String) session.getAttribute("loginId");
-						logger.info("세션아이디 값 : {}",params);
+				String id = (String) session.getAttribute("loginId");
+				logger.info("세션아이디 값 : {}",params);
 								
-						service.shopup(params);
+				service.shopup(params);
 								
-					return "redirect:/MyShopInfoshs";
+			return "redirect:/MyShopInfoshs";
 				}
 				
 		
@@ -317,7 +308,7 @@ public class MembersController {
 			
 			int row= service.DogUp(id,dogname,dogage,dogweight,dogchar); 
 			
-		return "Main";
+		return "redirect:/Mydogshs";
 	}	
 		
 		//개인 애견정보 리스트 페이지
