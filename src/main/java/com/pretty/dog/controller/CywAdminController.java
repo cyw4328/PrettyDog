@@ -1,5 +1,7 @@
 package com.pretty.dog.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -384,15 +385,104 @@ public class CywAdminController {
 	
 	@RequestMapping(value = "/reserDel")
 	public ModelAndView reserDel(HttpSession session,@RequestParam String reser_num,
-			RedirectAttributes rAttr,@RequestParam String reser_money,@RequestParam String busin_num) {
-		logger.info("마이페이지일반회원예약취소:{}",reser_num);
-		logger.info("마이페이지일반회원예약취소금액:{}",reser_money);
-		logger.info("마이페이지예약취소사업자번호:{}",busin_num);
+			RedirectAttributes rAttr,@RequestParam String reser_money,@RequestParam String busin_num,@RequestParam String reserDay,@RequestParam String reserTime) {
+		//logger.info("마이페이지일반회원예약취소:{}",reser_num);
+		//logger.info("마이페이지일반회원예약취소금액:{}",reser_money);
+		//logger.info("마이페이지예약취소사업자번호:{}",busin_num);
+		//logger.info("마이페이지예약취소예약방문날짜:{}",reserDay);
+		//logger.info(reserTime);
+		
+		String canReserTime = "$."+reserTime;
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		//로컬데이터를 이용한 날짜 추출
+		LocalDate reser = LocalDate.parse(reserDay, formatter);
+		
+		LocalDate now = LocalDate.now(); 	
+		LocalDate oneDay = now.plusDays(1);
+		LocalDate threeDay = now.plusDays(3);
+		LocalDate fiveDay = now.plusDays(3);
+		LocalDate sevenDay = now.plusDays(3);
+		LocalDate freeDay = now.plusDays(3);
+		
+		//최종적으로 처리할 환불금에 대한 정보를 담을 변수
+		String normalChange;
+		String businChange;
+		
+		int normalEx;
+		int BusinEx;
+		
+		int servicePrice = Integer.parseInt(reser_money);
+
+		if(reser.isEqual(now)){
+			
+			businChange = Integer.toString(servicePrice);
+			
+			System.out.println("환불금 0%");
+			System.out.println("업주 한테 :"+businChange);
+		}else if(reser.isBefore(threeDay) && reser.isAfter(oneDay) || reser.isEqual(oneDay)){
+			
+			BusinEx = (int) (servicePrice*0.9);
+			normalEx = (int) (servicePrice*0.1);
+			
+			businChange = Integer.toString(BusinEx);
+			normalChange = Integer.toString(normalEx);
+			
+			System.out.println("환불금 10%");
+			System.out.println("업주 한테 :"+businChange);
+			System.out.println("일반 한테 :"+normalChange);
+		}else if(reser.isBefore(fiveDay) && reser.isAfter(threeDay)){
+			
+			BusinEx = (int) (servicePrice*0.7);
+			normalEx = (int) (servicePrice*0.3);
+			
+			businChange = Integer.toString(BusinEx);
+			normalChange = Integer.toString(normalEx);
+			
+			System.out.println("환불금 30%");
+			System.out.println("업주 한테 :"+businChange);
+			System.out.println("일반 한테 :"+normalChange);
+		}else if(reser.isBefore(sevenDay) && reser.isAfter(fiveDay)){
+
+			BusinEx = (int) (servicePrice*0.5);
+			normalEx = (int) (servicePrice*0.5);
+			
+			businChange = Integer.toString(BusinEx);
+			normalChange = Integer.toString(normalEx);
+			
+			System.out.println("환불금 50%");
+			System.out.println("업주 한테 :"+businChange);
+			System.out.println("일반 한테 :"+normalChange);
+		}else if(reser.isBefore(freeDay) && reser.isAfter(sevenDay)){
+			
+			BusinEx = (int) (servicePrice*0.7);
+			normalEx = (int) (servicePrice*0.3);
+			
+			businChange = Integer.toString(BusinEx);
+			normalChange = Integer.toString(normalEx);
+			
+			System.out.println("환불금 70%");
+			System.out.println("업주 한테 :"+businChange);
+			System.out.println("일반 한테 :"+normalChange);
+		}else if(reser.isAfter(freeDay)){
+			
+			businChange = Integer.toString(servicePrice);
+			normalChange = Integer.toString(servicePrice);
+			
+			System.out.println("환불금 100%");
+			System.out.println("일반 한테 :"+servicePrice);
+		}
+
 		
 		//String loginId = (String) session.getAttribute("loginId");
 		String loginId = "dud";
 		
-		return service.reserDel(reser_num,loginId,rAttr,reser_money,busin_num);
+		// 업주 회원 noPoint 에서 차감 할 포인트 변수명  businChange
+		// 일반 호원 point 에서 적립 될 포인트 변수명 normalChange
+		// 예약 상태를 변경하기 위해서 보내야 할 변수명 2개  1.날짜 reserDay, 2.시간 canReserTime
+		
+		return service.reserDel(reser_num,loginId,rAttr,busin_num,businChange);
 	}
 	
 	@RequestMapping(value = "/OwnerReserPage")
