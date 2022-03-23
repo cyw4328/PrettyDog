@@ -9,10 +9,24 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
    <script src="resources/js/jquery.twbsPagination.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+    <script src="resources/js/jquery.twbsPagination.js"></script>
    <style></style>
 </head>
 <body>
-   <h2>애견 미용 트렌드</h2>
+
+<section style="width: 100%; height: 84px; display: flex; background-color: rgb(66, 52, 52);">
+        <%@ include file="Header.jsp"%>
+</section>
+
+
+   <h2 style="margin-left: 70px;">애견 미용 트렌드</h2>
    <select id="koMap" style="margin-left: 1000px;">
       <option>지역전체</option>
       <option value="서울특별시">서울특별시</option>
@@ -52,10 +66,9 @@
 <script>
 
    idChk();
-
    function idChk() {
-      //var memberId = ${sessionScope.memberId};
-      var memberId = 'a1';
+      var memberId = ${sessionScope.loginId};
+      //var memberId = 'a1';
       
       var memberRank = 0;
       
