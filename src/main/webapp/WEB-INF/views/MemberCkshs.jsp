@@ -5,17 +5,16 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/css/HS.css">
+
 	<style>
-		#con_memberDe{width: 1200px;}
+	#con_memberDe{width: 1200px;}
    #sujung_txt{
       position: relative;
       top :100px;
-      right:0px;
+      left:0px;
       float:right;
-      width:900px;
-      
-      
+      width:900px; 
+      padding: 20px 30px;
    }
    
    #sujung_txt p{
@@ -40,15 +39,46 @@
 	.followCnt{
 	font-size: 16px;
 	}
-		
+	
+	#btn-join{
+		font-size: 15px; 
+		font-weight: bold; 
+		border-radius: 7px; 
+		cursor: pointer;	
+		text-align: center;
+		border: 1px solid #D985B7;
+		background-color: white;
+		padding: 5px 10px;
+		color: #D985B7;
+	}
+	
+	#btn-join:hover{
+		border: 1px solid #D985B7;
+		background-color: #D985B7;
+		padding: 5px 10px;
+		color: white;
+	}
+	
+	input{
+		border:1px solid #dedede;
+		width:100%;
+	}
+	
+	#formCs{
+		margin-top:20px;
+
+		border:1px solid #dedede;
+		width: 420px;
+		}
+
 		
 
 	</style>
 </head>
 <body>
 <%@ include file="cywMyPageMenuBarOwner.jsp"%>	
-	<div id="con_memberDe">
 
+<div id="con_memberDe">
 <div id="sujung_txt">
 <p id="headTxt">비밀번호 확인</p>
 <hr>
@@ -56,17 +86,21 @@
 		
    <div id="formCs">
      	 <form action="./PassCk" method="POST">
-     	 	<table style ="width:420px;">
-	            <tr><th>ID</th>
-	            <td style="border-bottom:1px solid #dedede"><input type="text" name="id"  value="${loginId}" class="formSt" readonly="readonly" placeholder="아이디" /></td>
+     	 	<table style="margin:20px 45px; ">
+	            <tr>
+	            	<th style="width: 100px;">ID</th>
+	            	<td><input type="text" name="id"  value="${loginId}" class="formSt" readonly="readonly" placeholder="아이디" /></td>
 	            </tr>
 	          	 <tr>
-	          	 <th>비밀번호</th>
-	          	 <td  style="border-bottom:1px solid #dedede"><input type="password" name="pw" placeholder="비밀번호" class="pw" /></td>
+	          	 	<th>비밀번호</th>
+	          	 	<td><input type="password" name="pw" placeholder="비밀번호" class="pw" /></td>
 	          	 </tr>
-	            <tr><th  colspan="2"><button id="btn-join" style="border:1px solid #fff; font-size: 15px; font-weight: bold; border-radius: 10px; cursor: pointer;" >확인</button></th>
-	            </tr>
+	          	  <tr>
+	          	 	<th colspan="2" style="text-align: right; height: 50px;"><button id="btn-join" >확인</button></th>
+	          	 </tr>
+	          	 
 	            </table>
+	            
 	      </form>
 	   </div>
 	   
