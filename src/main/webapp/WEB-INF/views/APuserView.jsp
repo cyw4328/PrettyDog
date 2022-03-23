@@ -90,26 +90,7 @@
 <body id="body">
     <!-- 상단 바 고정 -->
     <section style="width: 100%; height: 54px; display: flex; background-color: white;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                            <ul class="navbar-nav ml-md-auto">
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                                <div style="width: 10px; height: 5px;"></div>
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                            </ul>
-                            <div style="width: 66px; height: 30px;"></div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <%@ include file="APHeader.jsp"%>
     </section>
 
 
@@ -217,28 +198,31 @@
 							</tr>
 				        </table>
 				        &nbsp;&nbsp;&nbsp;&nbsp;
-				        <table border="1" width="400px">
-				        	<tr>
-				        		<td colspan="2" align="center">회원등급</td>
-				        	</tr>
-				            <tr>
-								<td colspan="2" align="center">
-									<input type="radio" name="rank" value="0" 
-									<c:if test="${info.mem_rank eq '0'}"> checked</c:if>
-									/> 일반회원
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input style="display: none;" type="radio" name="rank" value="1" 
-									<c:if test="${info.mem_rank eq '1'}"> checked</c:if>
-									/>
-									<input style="display: none;" type="radio" name="rank" value="2" 
-									<c:if test="${info.mem_rank eq '2'}"> checked</c:if>
-									/>
-									<input type="radio" name="rank" value="3" 
-									<c:if test="${info.mem_rank eq '3'}"> checked</c:if>
-									/> 일반관리자
-								</td>
-							</tr>
-				        </table>
+				        <div name="aprank" >
+					        <table id="aprank" border="1" width="400px">
+					        	<tr>
+					        		<td colspan="2" align="center">회원등급</td>
+					        	</tr>
+					            <tr>
+									<td colspan="2" align="center">
+										<input type="radio" name="rank" value="0" 
+										<c:if test="${info.mem_rank eq '0'}"> checked</c:if>
+										/> 일반회원
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<input style="display: none;" type="radio" name="rank" value="1" 
+										<c:if test="${info.mem_rank eq '1'}"> checked</c:if>
+										/>
+										<input style="display: none;" type="radio" name="rank" value="2" 
+										<c:if test="${info.mem_rank eq '2'}"> checked</c:if>
+										/>
+										<input type="radio" name="rank" value="3" 
+										<c:if test="${info.mem_rank eq '3'}"> checked</c:if>
+										/> 일반관리자
+									</td>
+								</tr>
+					        </table>
+				        
+				        </div>
 				        &nbsp;&nbsp;&nbsp;&nbsp;
 				        <table>
 				            <tr>
@@ -304,6 +288,23 @@
 				
 </body>
 <script>
+/* $(function(info){
+	var con = document.getElementsByClassName("aprank");
+	if(info.mem_rank == 2){
+		con.style.display = "none";
+	}
+}) */
 
+/* $(function(info){
+	if (info.mem_state == 0) {
+		mestate = "일반";
+	}else if (info.mem_state == 1) {
+		mestate = "제재";
+	}else if (info.mem_state == 2) {
+		mestate = "휴먼";
+	}else if (info.mem_state == 3) {
+		mestate = "탈퇴";
+	}
+}) */
 </script>
 </html>

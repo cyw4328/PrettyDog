@@ -116,26 +116,7 @@
 <body id="body">
     <!-- 상단 바 고정 -->
     <section style="width: 100%; height: 54px; display: flex; background-color: white;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                            <ul class="navbar-nav ml-md-auto">
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                                <div style="width: 10px; height: 5px;"></div>
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                            </ul>
-                            <div style="width: 66px; height: 30px;"></div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <%@ include file="APHeader.jsp"%>
     </section>
 
 
@@ -164,11 +145,11 @@
         <!-- 내용 -->
         <div style="width: 87%; height: 100%;">
             <!-- 검색 바 -->
-            <div style="width: 100%; height: 5%;">
+            <div style="width: 100%; height: 11%;">
                 
             </div>
 
-            <div style="width: 100%; height: 85%; display: flex;">
+            <div style="width: 100%; height: 75%; display: flex;">
                 <div style="width: 5%; height: 100%;"></div>
                 <!-- 내용 -->
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
