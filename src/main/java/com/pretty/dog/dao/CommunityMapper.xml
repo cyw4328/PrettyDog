@@ -12,6 +12,9 @@
 	<select id="categoryList" resultType="com.pretty.dog.dto.CommunityDTO">
 		select category_num, category_name,category_admin,category_blind  
 		from community_category	
+		where category_num not in(3)
+		and category_blind not in(1)
+		and category_admin not in(1)
 	</select>
 	
 	<!-- 게시물 리스트 페이징 -->
@@ -93,7 +96,7 @@
 		cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
 		from  community_board cb, community_category cc
 		where cb.category_num = cc.category_num 
-		and cb.community_boardnum = #{param1};
+		and cb.community_boardnum = #{param1}
 
    </select>
    
@@ -105,7 +108,9 @@
    
    <!-- 게시글 상세보기 ~ 댓글 리스트 출력 -->
    <select id="commentList" resultType="com.pretty.dog.dto.CommunityDTO">
-   		select * from community_board_comment where community_boardnum = #{param1} 
+   		select * from community_board_comment 
+   		where community_boardnum = #{param1} 
+   		and bcomment_blind = 0
    </select>
   	
   	<!-- 댓글갯수 가져오기 -->
