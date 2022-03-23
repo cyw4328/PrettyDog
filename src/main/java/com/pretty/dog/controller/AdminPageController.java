@@ -43,7 +43,7 @@ public class AdminPageController {
 			@RequestParam String a,@RequestParam String b,@RequestParam String c) {
 				/* @RequestParam String a,@RequestParam String b,@RequestParam String c */
 		logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
-		
+		logger.info("시발1:{}",b);
 		int currPage = Integer.parseInt(page);
 		int pagePerCnt = Integer.parseInt(cnt);
 		int b1 = Integer.parseInt(b);

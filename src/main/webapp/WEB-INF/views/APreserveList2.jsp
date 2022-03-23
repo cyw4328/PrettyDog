@@ -92,26 +92,7 @@
 <body id="body">
     <!-- 상단 바 고정 -->
     <section style="width: 100%; height: 54px; display: flex; background-color: white;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                            <ul class="navbar-nav ml-md-auto">
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                                <div style="width: 10px; height: 5px;"></div>
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                            </ul>
-                            <div style="width: 66px; height: 30px;"></div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <%@ include file="APHeader.jsp"%>
     </section>
 
 
@@ -146,31 +127,22 @@
                     <div style="width: 5%; height: 100%;"></div>
                     <div style="width: 90%; height: 100%; display: flex; border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
                         <div style="width: 50%; height: 100%;">
-                            <input class="form-control border-0.5 shadow-0" style="width: 100%; height: 100%; font-size: 15px;" type="text" name="search" placeholder="원하는 검색어를 입력하세요~">
+                           
                         </div>
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <button class="btn btn-secondary btn-lg" style="width: 100%; height: 100%; font-size: 15px;" type="submit">Search </button>
+                            
                         </div>
                         <div style="width: 1%; height: 100%;"></div>
 
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
-                                <option value="">일반</option>
-                                <option value="">제재</option>
-                                <option value="">휴먼</option>
-                                <option value="">탈퇴</option>
-                            </select>
+                            
                         </div>
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
-                                <option value="">일반회원</option>
-                                <option value="">업주회원</option>
-                                <option value="">일반관리자</option>
-                            </select>
+                            
                         </div>
                         <div style="width: 1%; height: 100%;"></div>
                         
