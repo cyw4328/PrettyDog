@@ -30,6 +30,11 @@
 </style>
 </head>
 <body>
+<%@ include file="cywMyPageMenuBarOwner.jsp"%>
+<div style="position: absolute; left: 300px; top: 100px;">
+	<h3>${busin_name} 매장의 영업시간 수정 페이지입니다.</h3>
+</div>
+<div style="position: absolute; left: 350px; top: 180px;">
 <table class="scriptCalendar" style="float:left;">
     <thead>
         <tr>
@@ -46,6 +51,8 @@
     </thead>
     <tbody></tbody>
 </table>
+</div>
+<div style="position: absolute; left: 746px; top: 180px;">
 <table id="reservationTime" style="float:left; border-spacing: 10px 10px;">
 	<tr>
 		<td colspan="3">이용 가능 시간</td>
@@ -53,6 +60,8 @@
 	<tr id="viewtimearea">
 	</tr>
 </table>
+</div>
+<div style="position: absolute; left: 970px; top: 180px;">
 <table>
 	<tr>
 		<td style="font-weight: bold;">영업 시간 선택</td>
@@ -170,6 +179,7 @@
 		</td>
 	</tr>
 </table>
+</div>
 </body>
 </html>
 <script type="text/javascript">

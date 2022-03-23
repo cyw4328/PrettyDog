@@ -3,7 +3,16 @@
 <html>
 <head>
 <title>:: JavaScript 예약 캘린더 ::</title>
-<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  -->
+    <script src="resources/js/jquery.twbsPagination.js"></script>
+    
+    <script src="resources/js/jquery.twbsPagination.js"></script>
 <style type="text/css">
     a { color:#000000;text-decoration:none; }
     .scriptCalendar { text-align:center; }
@@ -30,34 +39,42 @@
 
 </head>
 <body>
-<table class="scriptCalendar" style="float:left;">
-    <thead>
-        <tr>
-            <td onClick="prevCalendar();" style="cursor:pointer;">&#60;&#60;</td>
-            <td colspan="5">
-                <span id="calYear">YYYY</span>년
-                <span id="calMonth">MM</span>월
-            </td>
-            <td onClick="nextCalendar();" style="cursor:pointer;">&#62;&#62;</td>
-        </tr>
-        <tr>
-            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-<table id="reservationTime" style="float:left; border-spacing: 10px 10px;">
-	<tr>
-		<td colspan="3">이용 가능 시간</td>
-	</tr>
-	<tr id="viewtimearea">
-	</tr>
-</table>
-<div style="position: absolute; left: 140px; top: 450px;">
-	<button style="font-weight: bold;" onclick="sendReserSet()">
-	예약 스케줄 수정
-	</button>
+<%@ include file="cywMyPageMenuBarOwner.jsp"%>
+<div style="position: absolute; left: 300px; top: 100px;">
+	<h3>${busin_name} 매장의 영업시간 정보입니다.</h3>
 </div>
+<div style="position: absolute; left: 350px; top: 180px;">
+	<table class="scriptCalendar" style="float:left;">
+	    <thead>
+	        <tr>
+	            <td onClick="prevCalendar();" style="cursor:pointer;">&#60;&#60;</td>
+	            <td colspan="5">
+	                <span id="calYear">YYYY</span>년
+	                <span id="calMonth">MM</span>월
+	            </td>
+	            <td onClick="nextCalendar();" style="cursor:pointer;">&#62;&#62;</td>
+	        </tr>
+	        <tr>
+	            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+	        </tr>
+	    </thead>
+	    <tbody></tbody>
+	</table>
+</div>
+<div style="position: absolute; left: 746px; top: 180px;">
+	<table id="reservationTime" style=" border-spacing: 10px 10px;"	>
+		<tr>
+			<td colspan="3">이용 가능 시간</td>
+		</tr>
+		<tr id="viewtimearea">
+		</tr>
+	</table>	
+</div>
+<div style="position: absolute; left: 470px; top: 568px;">
+		<button style="font-weight: bold;" onclick="sendReserSet()">
+		예약 스케줄 수정
+		</button>
+	</div>
 </body>
 </html>
 <script type="text/javascript">
