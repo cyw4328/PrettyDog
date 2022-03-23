@@ -38,8 +38,8 @@ public class PointManagementController {
 	@RequestMapping(value = "/pointInsert")
 	public ModelAndView PointInsert(@RequestParam String point,HttpSession session,RedirectAttributes rArrt) {
 		logger.info("포인트충전");
-		//String loginId = (String) session.getAttribute("loginId");
-		String loginId = "dud";
+		String loginId = (String) session.getAttribute("loginId");
+	      //String loginId = "dud";
 		return service.pointInsert(point,loginId,rArrt);
 	}
 	
@@ -48,8 +48,8 @@ public class PointManagementController {
 	public ModelAndView pointList(HttpSession session) {
 		logger.info("포인트리스트페이지");
 		
-		//String loginId = (String) session.getAttribute("loginId");
-		String loginId = "dud";
+		String loginId = (String) session.getAttribute("loginId");
+	      //String loginId = "dud";
 		
 		return service.pointListPage(loginId);
 	}
@@ -58,8 +58,8 @@ public class PointManagementController {
 	 @RequestMapping(value = "/memPointList", method = RequestMethod.POST)
 	 @ResponseBody public HashMap<String, Object> memPointList(Model model,@RequestParam String page,@RequestParam String cnt,HttpSession session){
 	 
-		// String loginId = (String) session.getAttribute("loginId");
-		 String loginId = "dud";
+		 String loginId = (String) session.getAttribute("loginId");
+	      //String loginId = "dud";
 		 
 		 int currPage = Integer.parseInt(page); 
 		 int pagePerCnt =Integer.parseInt(cnt);
@@ -72,8 +72,8 @@ public class PointManagementController {
 		public ModelAndView onerPointChange(HttpSession session) {
 			logger.info("포인트리스트페이지");
 			
-			//String loginId = (String) session.getAttribute("loginId");
-			String loginId = "dud";
+			String loginId = (String) session.getAttribute("loginId");
+		      //String loginId = "dud";
 			
 			return service.onerPointChange(loginId);
 		}
@@ -81,8 +81,8 @@ public class PointManagementController {
 		 @RequestMapping(value = "/onerPointListCall", method = RequestMethod.POST)
 		 @ResponseBody public HashMap<String, Object> onerPointListCall(Model model,HttpSession session,@RequestParam String page,@RequestParam String cnt){
 		 
-			// String loginId = (String) session.getAttribute("loginId");
-			 String loginId = "dud";
+			 String loginId = (String) session.getAttribute("loginId");
+		      //String loginId = "dud";
 			 
 			 int currPage = Integer.parseInt(page); 
 			 int pagePerCnt =Integer.parseInt(cnt);
@@ -96,8 +96,8 @@ public class PointManagementController {
 		public ModelAndView pointChange(HttpSession session,@RequestParam String changePoint,@RequestParam String bankName,@RequestParam String bankNum,RedirectAttributes rAttr) {
 			logger.info("포인트환전 요청:{}",changePoint);
 			
-			//String loginId = (String) session.getAttribute("loginId");
-			String loginId = "dud";
+			String loginId = (String) session.getAttribute("loginId");
+		      //String loginId = "dud";
 			
 			return service.pointChange(loginId,changePoint,bankName,bankNum,rAttr);
 		}

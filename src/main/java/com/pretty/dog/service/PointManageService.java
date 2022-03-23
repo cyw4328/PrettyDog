@@ -30,7 +30,7 @@ public class PointManageService {
 		logger.info("포인트들어갔니?:{}",row);
 		rArrt.addFlashAttribute("success", row);
 		
-		mav.setViewName("redirect:/ShopList");
+		mav.setViewName("redirect:/pointListPage");
 		
 		return mav;
 	}

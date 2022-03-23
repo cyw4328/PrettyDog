@@ -23,11 +23,13 @@
 			left: 60px;
 		}
 		input[type="button"]{
-			border-radius: 7px / 7px;
-			background-color: black;
-			color: white;
+			border-radius: 5px / 5px;
+			background-color: #F8E0F1;
+			color: black;
 			width: 250px;
 			height: 40px;
+			border: 0;
+			font-size: 15px;
 		}
 		input[name="nameInput"],input[name="emailInput"]{
 			width: 250px;
@@ -47,16 +49,16 @@
 	</div>
 	<div id="AllPage">
 		<div id="idSearchSub">
-			<h2>아이디 찾기</h2>
+			<h2 style="color: pink;">아이디 찾기</h2>
 		</div>
 		<div id="idSearchInput">
 			<table>
 				<thead>
 					<tr>
-						<td><input type="text" placeholder="NAME" name="nameInput"/></td>
+						<td><input type="text" placeholder="이름을 입력해주세요" name="nameInput"/></td>
 					</tr>
 					<tr>
-						<td><input type="email" placeholder="E-MAIL" name="emailInput"/></td>
+						<td><input type="email" placeholder="E-MAIL을 입력해주세요" name="emailInput"/></td>
 					</tr>
 					<tr>
 						<td><input type="button" value="확인" id="IdSearchBtn"/></td>

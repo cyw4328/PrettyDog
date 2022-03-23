@@ -7,10 +7,39 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/list"/>
-			<mvc:mapping path="/detail*"/>
+			<mvc:mapping path="/*"/>
+			<mvc:exclude-mapping path="/*"/>
+			<mvc:exclude-mapping path="/loginPage*"/>
+			<mvc:exclude-mapping path="/login*"/>
+			<mvc:exclude-mapping path="/idSearchPage*"/>
+			<mvc:exclude-mapping path="/idSearch*"/>
+			<mvc:exclude-mapping path="/pwSearchPage*"/>
+			<mvc:exclude-mapping path="/PwS*"/>
+			<mvc:exclude-mapping path="/PwChange*"/>
+			<mvc:exclude-mapping path="/shopSerch*"/>
+			<mvc:exclude-mapping path="/ShopList*"/>
+			<mvc:exclude-mapping path="/shopListAjax*"/>
+			<mvc:exclude-mapping path="/serviceScopeSelect*"/>
+			<mvc:exclude-mapping path="/JoinFormshs*"/>
+			<mvc:exclude-mapping path="/joinShs*"/>
+			<mvc:exclude-mapping path="/ShopJoinFormshs*"/>
+			<mvc:exclude-mapping path="/ShopInfoFormshs*"/>
+			<mvc:exclude-mapping path="/ShopInfo*"/>
+			<mvc:exclude-mapping path="/mailCheck*"/>
+			<mvc:exclude-mapping path="/overlayid*"/>
+			<mvc:exclude-mapping path="/shopSaupCk*"/>
+			<mvc:exclude-mapping path="/beautyTrendList*"/>
+			<mvc:exclude-mapping path="/beautyTrendDetail*"/>
+			<mvc:exclude-mapping path="/changeKoMap*"/>
+			<mvc:exclude-mapping path="/sshShopList*"/>
+			<mvc:exclude-mapping path="/sshShopDetail*"/>
+			<mvc:exclude-mapping path="/freeList*"/>
+			<mvc:exclude-mapping path=" /listCall*"/>
+			<mvc:exclude-mapping path="/freeDetail"/>
+			<!-- 영우,현선,승혁,근원 완료 -->
+
+			
 			<bean class="com.pretty.dog.utils.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
 </beans>

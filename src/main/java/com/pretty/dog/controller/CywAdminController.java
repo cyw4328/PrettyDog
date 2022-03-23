@@ -115,9 +115,8 @@ public class CywAdminController {
    public ModelAndView SingoProcess(HttpSession session,@RequestParam String decl_num,RedirectAttributes rAttr) {
       logger.info("신고처리",decl_num);
       
-      /* String loginId = (String) session.getAttribute("loginId"); */
-      
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.SingoProcess(decl_num,rAttr,loginId);
    }
@@ -199,8 +198,8 @@ public class CywAdminController {
    public ModelAndView ChangeMoneyCheck(HttpSession session,@RequestParam String poch_num,RedirectAttributes rAttr) {
       logger.info("환전신청완료하기");
 
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       return service.ChangeMoneyCheck(poch_num,rAttr,loginId);
    }
    
@@ -237,8 +236,8 @@ public class CywAdminController {
    public ModelAndView MyPageAlarm(HttpSession session) {
       logger.info("마이페이지알림페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+		/* String loginId = "dud"; */
       return service.MyPageAlarm(loginId);
    }
    
@@ -246,8 +245,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> AlrimPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -267,8 +266,8 @@ public class CywAdminController {
    public ModelAndView MyPageBoard(HttpSession session) {
       logger.info("마이페이지게시물페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       return service.MyPageBoard(loginId);
    }
    
@@ -276,8 +275,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> MyBoardPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -289,8 +288,8 @@ public class CywAdminController {
    public ModelAndView boardDel(HttpSession session,@RequestParam String community_boardnum,RedirectAttributes rAttr) {
       logger.info("마이페이지게시글삭제:{}",community_boardnum);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.boardDel(community_boardnum,loginId,rAttr);
    }
@@ -299,8 +298,8 @@ public class CywAdminController {
    public ModelAndView MyPageComment(HttpSession session) {
       logger.info("마이페이지댓글페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.MyPageComment(loginId);
    }
@@ -308,8 +307,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> CommentPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -321,8 +320,8 @@ public class CywAdminController {
    public ModelAndView commentDel(HttpSession session,@RequestParam String bcomment_num,RedirectAttributes rAttr) {
       logger.info("마이페이지댓글삭제:{}",bcomment_num);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.commentDel(bcomment_num,loginId,rAttr);
    }
@@ -331,8 +330,8 @@ public class CywAdminController {
    public ModelAndView MyPageLikeShop(HttpSession session) {
       logger.info("마이페이지관심매장페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.MyPageLikeShop(loginId);
    }
@@ -341,8 +340,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> MyLikeShopList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -354,8 +353,8 @@ public class CywAdminController {
    public ModelAndView LikeShopDel(HttpSession session,@RequestParam String interestshop_num,RedirectAttributes rAttr) {
       logger.info("마이페이지관심매장삭제:{}",interestshop_num);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.LikeShopDel(interestshop_num,loginId,rAttr);
    }
@@ -364,8 +363,8 @@ public class CywAdminController {
    public ModelAndView MyPageReserPage(HttpSession session) {
       logger.info("마이페이지일반회원예약목록페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.MyPageReserPage(loginId);
    }
@@ -374,8 +373,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> MyReserPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -465,8 +464,8 @@ public class CywAdminController {
       }
 
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       // 업주 회원 noPoint 에서 차감 할 포인트 변수명  businChange
       // 일반 호원 point 에서 적립 될 포인트 변수명 normalChange
@@ -479,8 +478,8 @@ public class CywAdminController {
    public ModelAndView OwnerReserPageList(HttpSession session) {
       logger.info("마이페이지업주회원예약목록페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.OwnerReserPage(loginId);
    }
@@ -488,8 +487,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> OwnerReserPageList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -504,8 +503,8 @@ public class CywAdminController {
       logger.info("마이페이지예약노쇼사업자번호:{}",busin_num);
       logger.info("마이페이지예약노쇼 금액:{}",reser_money);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.NoShowChange(reser_num,loginId, rAttr,busin_num,reser_money);
    }
@@ -517,8 +516,8 @@ public class CywAdminController {
       logger.info("마이페이지예약이용완료사업자번호:{}",busin_num);
       logger.info("마이페이지예약이용완료 금액:{}",reser_money);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.SuccessChange(reser_num,loginId, rAttr,busin_num,reser_money);
    }
@@ -527,8 +526,8 @@ public class CywAdminController {
    public ModelAndView OwnerReserLogPage(HttpSession session) {
       logger.info("마이페이지업주회원예약목록페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.OwnerReserLogPage(loginId);
    }
@@ -537,8 +536,8 @@ public class CywAdminController {
    public @ResponseBody HashMap<String, Object> ReserLogList(@RequestParam String page,@RequestParam String cnt,HttpSession session) {
       logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "dud";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       int currPage = Integer.parseInt(page);
       int pagePerCnt = Integer.parseInt(cnt);
@@ -550,8 +549,8 @@ public class CywAdminController {
    public ModelAndView ShopServicePage(HttpSession session) {
       logger.info("매장 추가 서비스 설정 페이지");
       
-      //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "cyw4328";
+      String loginId = (String) session.getAttribute("loginId");
+      //String loginId = "dud";
       
       return service.ShopServicePage(loginId);
    }
@@ -562,7 +561,7 @@ public class CywAdminController {
       logger.info("매장 소형견 서비스추가:{}",busin_num);
       
       //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "cyw4328";
+      //String loginId = "dud";
       
       return service.addShopSmallService(inputText1,serviceName1,busin_num,rAttr);
    }
@@ -573,7 +572,7 @@ public class CywAdminController {
       logger.info("매장 중형견 서비스추가");
       
       //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "cyw4328";
+      //String loginId = "dud";
       
       return service.addShopMiddleService(inputText2,serviceName2,busin_num,rAttr);
    }
@@ -584,7 +583,7 @@ public class CywAdminController {
       logger.info("매장 대형견 서비스추가");
       
       //String loginId = (String) session.getAttribute("loginId");
-      String loginId = "cyw4328";
+      //String loginId = "dud";
       
       return service.addShopBigService(inputText3,serviceName3,busin_num,rAttr);
    }
@@ -595,6 +594,8 @@ public class CywAdminController {
       
       //String loginId = (String) session.getAttribute("loginId");
       //String loginId = "cyw4328";
+      
+      
       
       return service.SreviceDel(price_num,rAttr);
    }

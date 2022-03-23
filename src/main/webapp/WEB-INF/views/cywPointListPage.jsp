@@ -263,5 +263,10 @@ $('#onerChangeBtn').click(function() {
 	window.location.href="./onerPointChange";
 })
 
+var success = "${success}" ;
+if (success > 0) {
+	alert("충전이 완료되었습니다.");
+}
+
 </script>
 </html>

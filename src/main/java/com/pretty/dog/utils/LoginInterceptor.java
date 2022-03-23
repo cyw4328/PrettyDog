@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			pass = true;
 		}else {
 			pass = false;
-			response.sendRedirect("/gudi/");
+			response.sendRedirect("/dog/loginPage");
 		}
 		
 		return pass;
@@ -31,10 +31,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView mav) throws Exception {
 		
 		HttpSession session = request.getSession();
-		
 		String id = (String) session.getAttribute("loginId");
-		String content = id + "님 반갑습니다. <button onclick=\"location.href='logout'\">logout</button>";
-		mav.addObject("loginBox", content);
+		String loginSuccessAlert = id + "님 반갑습니다.<br/> 즐거운 하루 되세요!♡";
+		
+		mav.addObject("loginSuccessAlert", loginSuccessAlert);
 	}
 	
 

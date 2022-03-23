@@ -38,14 +38,15 @@
 		input[type="submit"]{
 			width: 250px;
 			height: 30px;
-			background-color: black;
+			background-color: pink;
 			color: white;
 			font-size: 15px;
+			border: 0;
 		}
 		input[type="button"]{
 			width: 110px;
 			height: 30px;
-			background-color: #DECCDF;
+			background-color: #F8E0F1;
 			color: black;
 			font-size: 13px;
 			margin-left: 10px;
@@ -64,16 +65,16 @@
 	</div>
 	<div id="AllPage">
 		<div id="LoginSub">
-			<h2>LOGIN</h2>
+			<h2 style="color: pink">LOGIN</h2>
 		</div>
 		<div id="LoginForm">
 			<form action="login" method="post">
 				<table>
 					<tr>
-						<td><input type="text" placeholder="ID" name="idInput"/></td>
+						<td><input type="text" placeholder="ID를 입력해주세요!" name="idInput"/></td>
 					</tr>
 					<tr>
-						<td><input type="password" placeholder="PW" name="pwInput"/></td>
+						<td><input type="password" placeholder="PW를 입력해주세요!" name="pwInput"/></td>
 					</tr>
 					<tr>
 						<td id="loginBtn"><input type="submit" value="Login"/></td>

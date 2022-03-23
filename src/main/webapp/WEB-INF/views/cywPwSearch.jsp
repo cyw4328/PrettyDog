@@ -70,28 +70,30 @@
                 <div class="container"></div>
             </div>
             <div id="banner">
-                <div class="container"><h2>비밀번호 찾기</h2></div>
+                <div class="container"><h2 style="color: pink;">비밀번호 찾기</h2></div>
             </div>
             <div id="contents">
                 <div class="container">
                 	<form action="PwS" method="POST" onsubmit="return submitCheck();">
                         <table>
                             <tr>
-                                <td><input type="text" placeholder="아이디" id=id name="userId"/></td>
+                                <td><input type="text" placeholder="아이디를 입력해주세요" id=id name="userId"/></td>
                             </tr>
                             <tr>
-                                <td><input type="text" placeholder="이름" id="name" name="userName"/></td>
+                                <td><input type="text" placeholder="이름을 입력해주세요" id="name" name="userName"/></td>
                             </tr>
                             <tr>
-                                <td><input type="text" placeholder="전화번호"  id="phone" name="userPhone"/></td>
+                                <td><input type="text" placeholder="전화번호를 입력해주세요(-포함)"  id="phone" name="userPhone"/></td>
                             </tr>
                             <tr>
-                                <td><input type="email" placeholder="이메일"  id="email" name="userEmail"/>
+                                <td><input type="email" placeholder="이메일를 입력해주세요"  id="email" name="userEmail"/>
                                 <div class="alert alert-danger" id="alert-danger-pws">입력하지 않은 항목이 있습니다.</div>
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="submit"  style="background-color: black; margin:auto; display:block; cursor:pointer; font-size: 16; width:290px;height:40px; color:white; border-radius: 7px / 7px; "  value="확인"/></td>
+                                <td><input type="submit"  
+                                	style="background-color: #F8E0F1; margin:auto; display:block; cursor:pointer; 
+                                	font-size: 16; width:290px;height:40px; color:black; border-radius: 5px / 5px; border: 0; "  value="확인"/></td>
                             </tr>
 
                         </table>
@@ -111,10 +113,10 @@
     var inputPhone ="";
     var inputEmail ="";
     
-//     $("input[name='userId']").keyup(function() {
+	$("input[name='userId']").keyup(function() {
     	inputId = $("input[name='userId']").val();
     	if (inputId != "" && inputName != "" && inputPhone != "" && inputEmail != "") {
-	    		$("#alert-danger-pws").hide();
+		  		$("#alert-danger-pws").hide();
 				check = true;
 			} else {
 				$("#alert-danger-pws").show();

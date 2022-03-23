@@ -49,6 +49,7 @@
 			padding: 50px;
 			width: 420px;
 			font-size: 20px;
+			border: 1px solid lightgray;
 		}
 		#searchForm{
 			position: absolute;
@@ -59,8 +60,8 @@
 		}
 		.shoplist{
 			position: absolute;
-			top: 230px;
-			left: 110px;
+			top: 250px;
+			left: 120px;
 		}
 		img:hover{
 			cursor: pointer;
@@ -151,7 +152,7 @@
 					</c:forEach> 
 				</tbody>
 				<tr>
-					<td colspan="4" id="paging" style="text-align: center; position: absolute; left: 300px;">
+					<td colspan="4" id="paging" style="text-align: center; position: absolute; left: 300px; border: 0;">
 						<div class="container">                           
 	              			<nav aria-label="Page navigation" style="text-align:center; width:500px;">
 	                 			<ul class="pagination" id="pagination"></ul>
@@ -217,7 +218,10 @@ function test3(){
 function shopDetail(a) {
 	var $busin_num = $(this).prev().val();
 	 console.log("매장상세보기",a);
-	 alert("매장상세보기는 준비중입니다.");
+	 //alert("매장상세보기는 준비중입니다.");
+	 var memId = <%=session.getAttribute("loginId")%>;
+	 console.log("매장상세보기",memId);
+	 window.location.href="./sshShopDetail?idx="+a+"&&memId="+memId;
 }
 
 function serviceSelect(a) {
