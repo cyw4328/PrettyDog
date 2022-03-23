@@ -8,6 +8,16 @@
    	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
    	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
    	<script src="resources/js/jquery.twbsPagination.js"></script>
+   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+    <script src="resources/js/jquery.twbsPagination.js"></script>
+   	
+   	
 	<style>
 		table, th, td{
 			border : 1px solid black;
@@ -29,6 +39,11 @@
 	</style>
 </head>
 <body>
+	<section style="width: 100%; height: 84px; display: flex; background-color: rgb(66, 52, 52);">
+        <%@ include file="Header.jsp"%>
+    </section>
+
+
 	<div id="community_frame" style="margin-left: 600px">
 	
 	
@@ -79,18 +94,17 @@
 	      				<ul class="pagination" id="pagination"></ul>
 	      			</nav>
 	      		</div>
-		
-		
+	
 		
 		<br/><br/>
 		
-		<div>					
+		<div >					
 		   			<select name="searchOpt">
 		   				<option value="community_sub">제목</option>
 		   				<option value="community_cont">내용</option>
 		   				<option value="mem_id">작성자</option>
 		   			</select>
-		   			<input type="text" name="keyword" placeholder="검색어를 입력하세요">
+		   			<input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요">
 		   			<button id = "searchBtn">검색</button>
 		</div>
 	</div><!-- community_frame.e -->
@@ -104,7 +118,6 @@
 
 <script>
 	var selectValue = "";
-	
 	 
 	var currPage = 1;
 	var totalPage= 2;	  

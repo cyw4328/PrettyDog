@@ -4,6 +4,18 @@
 <head>
    <meta charset="UTF-8">
    <title>Insert title here</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+    <script src="resources/js/jquery.twbsPagination.js"></script>
+   
+   
+   
+   
    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
    
    <style>
@@ -18,6 +30,13 @@
    </style>
 </head>
 <body>
+<section style="width: 100%; height: 84px; display: flex; background-color: rgb(66, 52, 52);">
+        <%@ include file="Header.jsp"%>
+    </section>
+
+
+
+
    <table>
       <tr>
          <th>글 번호</th>
@@ -33,7 +52,7 @@
       </tr>
       <tr>
          <th>작성자</th>
-         <td>${dto.mem_id}</td>
+         <td id ="writer">${dto.mem_id}</td>
       </tr>
       <tr>
          <th>작성일</th>
@@ -51,8 +70,8 @@
      	 <tr>
          <th colspan="2">
            	 	<a href="freeList">리스트</a>
-           	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}" >수정</a>
-           	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick="return confirm('해당 게시글을 삭제하시겠습니까?');">삭제</a>
+           	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}"  onclick= "memAuthchk(event);">수정</a>
+           	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick= "memAuthchk(event);">삭제</a>
            	 	<a href="DeclaForm_Post?community_boardnum=${dto.community_boardnum}" onclick="window.open(this.href,'','width=500, height=300, scrollbars=yes'); return false;">신고</a>
          	</th>
      	</tr> 
@@ -67,8 +86,8 @@
    		<!-- commentCount -->
    			<thead>
 	   			<tr>
-	   				<th colspan="2">	   				
-	   					 <%-- ${commentCount.bcomment_cnt}	  --%>  				
+	   				<th colspan="2">	   				   				
+	   					댓글수: ${commentListCnt}	   				
 	   				</th>
 	   				<th></th>
 	   			</tr>	   			   			
@@ -77,13 +96,13 @@
     			<c:forEach items="${commentList}" var="comm">
     				<c:if test="${comm.bcomment_blind != 1}">		
     					<tr>
-    						<td style="background-color:khaki; width: 80%">${comm.mem_id}</td>
+    						<td style="background-color:khaki; width: 80%" id="comm_writer">${comm.mem_id}</td>
 							<td style="background-color:khaki;">${comm.bcomment_date}</td>	    				
     					</tr>
     					<tr>
     						<td style="height: 100px">${comm.bcomment_cont}</td>
 							<td>
-								<a  href="free_commentDelete?bcomment_num=${comm.bcomment_num}" onclick="return confirm('해당 댓글을 삭제하시겠습니까?');">삭제</a>
+								<a  href="free_commentDelete?bcomment_num=${comm.bcomment_num}" onclick= "memAuthchk(event);">삭제</a>
 							 	<a href="DeclaForm_Comment?bcomment_num=${comm.bcomment_num}" onclick="window.open(this.href,'','width=500, height=300, scrollbars=yes'); return false;">신고</a>
 							 </td>	    				
     					</tr>
@@ -122,6 +141,26 @@
    
 </body>
 <script>
+//var memberId = ${sessionScope.memberId};
+var memberId = "a1";
+var currId = document.getElementById('comm_writer').text();
+
+function memAuthchk(event){
+	
+	console.log("권한검사 메서드 실행");		
+	
+	console.log(currId);
+	
+	if(memberId != currId){
+		alert("권한이 없습니다.");
+		event.preventDefault();
+	}
+
+}
+
+
+
+
 
 
 </script>
