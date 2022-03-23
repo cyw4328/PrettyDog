@@ -31,6 +31,9 @@ public class CommunityController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired CommunityService communityService;	
 	
+	
+	//게시판 기능===========================================================================================================
+	
 	//리스트 페이지 이동, 카테고리 리스트 출력
 	@RequestMapping(value =  {"/freeList"}, method = RequestMethod.GET)
 	   public String freeList(Model model) {
@@ -55,7 +58,8 @@ public class CommunityController {
 	      //카테고리번호, 블라인드 코드, 관리자 카테고리 코드가 붙어 있어 카테고리번호만 추출해야 한다.
 	      
 	      String searchOpt = (String) params.get("searchOpt");
-	      String keyword = (String) params.get("keyword");    
+	      String keyword = ""; 
+	      keyword = (String) params.get("keyword");    
 	      
 	      logger.info(searchOpt);
 	      logger.info(keyword);
@@ -88,16 +92,73 @@ public class CommunityController {
 	   }
 	
 	 	
-		
+		//게시물 작성
 		@RequestMapping(value = "/freeWrite", method = RequestMethod.POST)
-		   // MultipartFile 을 배열 형식으로 받는 이유는 writeForm에서 input타입 설정 할때 멀티플 속성을 사용해서 이다
-		   // @RequestParam 에서 HashMap<String, String> 을 사용한 이유는 writeForm 에서 받아오는 값이 3개 이상이어서 이다.
 		   public String freeWrite(Model model, MultipartFile imgs, @RequestParam HashMap<String, Object> params, HttpServletRequest request) {
 		      logger.info("글쓰기 요청 : {}", params);
 		      //logger.info("업로드 할 파일 명 : {}", imgs.getOriginalFilename());
 		      return communityService.freeWrite(params,imgs);
 		   }
 		
+		
+		//게시물 삭제
+		@RequestMapping(value = "/freeDelete", method = RequestMethod.GET)
+		public String freeDelete(Model model, @RequestParam String community_boardnum) {
+			logger.info("delete : {}", community_boardnum);
+			
+			communityService.freeDelete(community_boardnum);
+			
+			return "redirect:/freeList";
+		}
+		
+		//업데이트폼 이동
+		@RequestMapping(value = "/freeUpdateForm", method = RequestMethod.GET)
+		public String freeUpdateForm(Model model, @RequestParam String community_boardnum) {
+			logger.info("updateForm : {}",community_boardnum);	      
+			ArrayList<CommunityDTO> arr = communityService.categoryList();
+			model.addAttribute("category",arr);
+			return communityService.freeUpdateForm(model,community_boardnum);
+		}   
+		
+		//업데이트
+		@RequestMapping(value = "/freeUpdate", method = RequestMethod.POST)
+		public String freeUpdate(Model model, MultipartFile imgs, @RequestParam HashMap<String, String> params) {
+			logger.info("수정 요청 : {}",params);
+			return communityService.freeUpdate(imgs,params);
+		}
+		
+		//상세, 댓글 출력
+		@RequestMapping(value = {"/freeDetail"}, method = RequestMethod.GET)
+		public String freeDetail(Model model,@RequestParam String community_boardnum) {
+			logger.info("상세보기 : {}",community_boardnum);
+			
+			//게시글 가져오기
+			CommunityDTO dto = communityService.freeDetail(community_boardnum);
+			logger.info("community_date:{}",dto.getCommunity_date());
+			model.addAttribute("dto", dto);
+			
+			//댓글 가져오기
+			ArrayList<CommunityDTO> commentList =  communityService.commentList(community_boardnum);
+			model.addAttribute("commentList", commentList);
+			
+			//댓글 갯수 가져오기	 
+			int commentListCnt = commentList.size();
+			System.out.println("가져온 댓글의 총 갯수 : "+commentListCnt);
+			model.addAttribute("commentListCnt",commentListCnt);
+			
+			//사진 목록 가져오기
+			ArrayList<CommunityDTO> imgs = communityService.photoList(community_boardnum);
+			
+			if(imgs.size() >0) {
+				model.addAttribute("imgs", imgs.get(0));
+			}
+			
+			// System.out.println(imgs.get(0).bphoto_newname); 
+			return "freeDetail";
+		}
+		
+		
+		//댓글기능========================================================================================================================
 		
 		// 댓글 입력
 		@RequestMapping(value = "/free_commentWrite", method = RequestMethod.POST)
@@ -146,62 +207,11 @@ public class CommunityController {
 		   }	
 	
 		
-	//게시물 삭제
-	 @RequestMapping(value = "/freeDelete", method = RequestMethod.GET)
-	   public String freeDelete(Model model, @RequestParam String community_boardnum) {
-	      logger.info("delete : {}", community_boardnum);
-	      
-	      communityService.freeDelete(community_boardnum);
-	      
-	      return "redirect:/freeList";
-	   }
-	
-	//업데이트폼 이동
-	 @RequestMapping(value = "/freeUpdateForm", method = RequestMethod.GET)
-	   public String freeUpdateForm(Model model, @RequestParam String community_boardnum) {
-	      logger.info("updateForm : {}",community_boardnum);
-	      ArrayList<CommunityDTO> arr = communityService.categoryList();
-	      model.addAttribute("category",arr);
-	      return communityService.freeUpdateForm(model,community_boardnum);
-	   }   
-	 
-	 //업데이트
-	 @RequestMapping(value = "/freeUpdate", method = RequestMethod.POST)
-	   public String freeUpdate(Model model, MultipartFile imgs, @RequestParam HashMap<String, String> params) {
-	      logger.info("수정 요청 : {}",params);
-	      return communityService.freeUpdate(imgs,params);
-	   }
-	 
-	 //상세, 댓글 출력
-	 @RequestMapping(value = {"/freeDetail"}, method = RequestMethod.GET)
-	 public String freeDetail(Model model,@RequestParam String community_boardnum) {
-		 logger.info("상세보기 : {}",community_boardnum);
-		 
-		 //게시글 가져오기
-		 CommunityDTO dto = communityService.freeDetail(community_boardnum);
-		 logger.info("community_date:{}",dto.getCommunity_date());
-		 model.addAttribute("dto", dto);
-		 
-		 //댓글 가져오기
-		 ArrayList<CommunityDTO> commentList =  communityService.commentList(community_boardnum);
-		 model.addAttribute("commentList", commentList);
-		 
-		 //댓글 갯수 가져오기	 
-
-		 
-		 //사진 목록 가져오기
-		 ArrayList<CommunityDTO> imgs = communityService.photoList(community_boardnum);
-		 
-		 if(imgs.size() >0) {
-			 model.addAttribute("imgs", imgs.get(0));
-		 }
-		 
-		// System.out.println(imgs.get(0).bphoto_newname); 
-		 return "freeDetail";
-	 }
 
 	 
-	//신고기능	
+	//신고기능	===================================================================================================================
+		 
+		 
 	 //게시물 신고 폼 출력
 	 @RequestMapping(value = "/DeclaForm_Post", method = RequestMethod.GET)
 	   public ModelAndView DeclaForm_Post(Model model, @RequestParam String community_boardnum) {

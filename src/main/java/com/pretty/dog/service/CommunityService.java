@@ -27,13 +27,6 @@ public class CommunityService {
 	@Autowired CommunityDAO communityDao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	/*
-	public ArrayList<DogDTO> freeList() {
-		logger.info("리스트 불러오기");				
-		return communityDao.freeList();
-	}
-	*/
-	
 	//카테고리 불러오기
 	public ArrayList<CommunityDTO> categoryList() {
 		logger.info("카테고리 가져오기 서비스");
@@ -41,7 +34,7 @@ public class CommunityService {
 	}
 	
 	
-	//페이징
+	//페이징, 카테고리 필터링, 검색
 		 public HashMap<String, Object> listCall(int currPage, int pagePerCnt, int catNum, String searchOpt, String keyword ) {
 		      
 			 logger.info("리스트콜 서비스 도착");
@@ -73,19 +66,6 @@ public class CommunityService {
 		      return map;
 		   }
 	
-	//게시판 검색
-	/**	 
-	public ModelAndView freeSearch(HashMap<String, String> params) {
-		ModelAndView mav = new ModelAndView();
-		ArrayList<CommunityDTO> list = communityDao.freeSearch(params);
-		mav.addObject("list", list);
-		mav.setViewName("freeList");
-		return mav;
-	}
-	**/
-		 
-	
-		
 	//게시글 작성
 	public String freeWrite( HashMap<String, Object> params, MultipartFile imgs){
 		
@@ -207,7 +187,7 @@ public class CommunityService {
 			logger.info("photo : {}",list);
 	      
 			model.addAttribute("dto",dto);
-			model.addAttribute("photos",list);
+			model.addAttribute("imgs",list);
 		
 		
 		return "freeUpdateForm";
@@ -217,9 +197,9 @@ public class CommunityService {
 	public String freeUpdate(MultipartFile imgs, HashMap<String, String> params) {
 		
 
+		
 		int community_boardnum = Integer.parseInt(params.get("community_boardnum"));
 	      String page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
-	      
 	      if(communityDao.freeUpdate(params)>0) {
 	         page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
 	         saveFile(community_boardnum,imgs);
