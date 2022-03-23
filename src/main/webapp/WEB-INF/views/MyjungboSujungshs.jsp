@@ -11,11 +11,10 @@
    #sujung_txt{
       position: relative;
       top :100px;
-      right:0px;
+      left:0px;
       float:right;
       width:900px;
-      
-      
+      padding: 20px 30px;
    }
    
    #sujung_txt p{
@@ -37,8 +36,37 @@
 	  font-size: 28px;
  	 font-style: bold;
 	}
+	
+	#btn-join{
+		font-size: 15px; 
+		font-weight: bold; 
+		border-radius: 7px; 
+		cursor: pointer;	
+		text-align: center;
+		border: 1px solid #D985B7;
+		background-color: white;
+		padding: 5px 10px;
+		color: #D985B7;
+	}
+	
+	#btn-join:hover{
+		border: 1px solid #D985B7;
+		background-color: #D985B7;
+		padding: 5px 10px;
+		color: white;
+	}
 		
-		
+	input{
+		border:1px solid #dedede;
+
+	}
+	
+	#formCs{
+		margin-top:20px;
+
+		border:1px solid #dedede;
+		width: 450px;
+	}
 
 	</style>
 </head>
@@ -56,18 +84,18 @@
    
      	 <form action="userUp" method="POST">
      	 
-     	 	<table style ="width:420px;">
+     	 	<table style="margin:20px 60px; ">
      	 		<tr>
-	            	<th>ID</th>
-	            		<td  style="border-bottom:1px solid #dedede;"><input style="border:1px solid white;" type="text" name="id"  value="${loginId}" class="formSt" readonly="readonly" /></td>
+	            	<th  style="width: 100px;">ID</th>
+	            		<td ><input style="border:1px solid white;" type="text" name="id"  value="${loginId}" class="formSt" readonly="readonly" /></td>
 	            </tr>
 	            <tr>
-	            	<th>비밀번호</th>
-	           		<td  style="border-bottom:1px solid #dedede;"><input type="password" name="pw" placeholder="새로운 비밀번호" class="pw"   style="border:1px solid #ccc;"/></td>
+	            	<th  style="width: 100px;">비밀번호</th>
+	           		<td "><input type="password" name="pw" placeholder="새로운 비밀번호" class="pw"   style="border:1px solid #ccc;"/></td>
 	           	</tr>
 	           	<tr>
 	            	<th>확인</th>
-	            	<td  style="border-bottom:1px solid #dedede;"><input type="password" name="repw" placeholder="비밀번호 확인"  class="pw" style="border:1px solid #ccc;"/></td>
+	            	<td  "><input type="password" name="repw" placeholder="비밀번호 확인"  class="pw" style="border:1px solid #ccc;"/></td>
 	            </tr>
 	            <tr>
 	        		<div class="alert alert-success" id="successPw" style = "color:#19a901; font-size: 13px;">비밀번호가 일치합니다.</div>
@@ -75,17 +103,17 @@
 	      		</tr>
 	            <tr>
 	            	<th>이름</th>
-	            	<td  style="border-bottom:1px solid #dedede;"><input type="text"  style="border:1px solid white;" value="${info.mem_name}" name="name" class="formSt" readonly="readonly"></td>
+	            	<td "><input type="text"  style="border:1px solid white;" value="${info.mem_name}" name="name" class="formSt" readonly="readonly"></td>
 	            </tr>
 	           <tr>
 	           		<th>E-MAIL</th>
-	           		<td  style="border-bottom:1px solid #dedede;"><input type="text" value="${info.mem_email}" name="email"  class="formSt"   style="border:1px solid #ccc;"></td>
+	           		<td><input type="text" value="${info.mem_email}" name="email"  class="formSt"   style="border:1px solid #ccc;"></td>
 	           		</tr>
 	           <tr>
 	           		<th>전화번호</th>
-	           		<td  style="border-bottom:1px solid #dedede;"><input type="text" value="${info.mem_tel}" name="phone" class="formSt"  style="border:1px solid #ccc;"></td>
+	           		<td ><input type="text" value="${info.mem_tel}" name="phone" class="formSt"  style="border:1px solid #ccc;"></td>
 	           	</tr>
-	            <tr><td colspan="2" style="border:0px; text-align: center; border-bottom:1px solid #dedede;"><button id="btn-join"  style="border:1px solid #fff; font-size: 15px; font-weight: bold; border-radius: 10px; cursor: pointer;" >저장</button></td></tr>
+	            <tr><td colspan="2" style="text-align: right; height: 50px;"><button id="btn-join"  >저장</button></td></tr>
 			</table>
 	      </form>
 	   </div>

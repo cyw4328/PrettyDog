@@ -107,7 +107,7 @@ public class MembersController {
 	
 	@RequestMapping(value = "/ShopInfoFormshs", method = RequestMethod.GET)
 	public String ShopInfoFormshs(Model model,HttpServletRequest request) {
-		logger.info(" 점주 회원가입 페이지");
+		logger.info(" 점주 회원가입 정보 페이지");
 		String id =request.getParameter("id");
 
 		model.addAttribute("id",id);
