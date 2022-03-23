@@ -92,26 +92,7 @@
 <body id="body">
     <!-- 상단 바 고정 -->
     <section style="width: 100%; height: 54px; display: flex; background-color: white;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                            <ul class="navbar-nav ml-md-auto">
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                                <div style="width: 10px; height: 5px;"></div>
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                            </ul>
-                            <div style="width: 66px; height: 30px;"></div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <%@ include file="APHeader.jsp"%>
     </section>
 
 
@@ -157,20 +138,16 @@
 
                         <div style="width: 10%; height: 100%;">
                             <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
-                                <option value="">일반</option>
-                                <option value="">제재</option>
-                                <option value="">휴먼</option>
-                                <option value="">탈퇴</option>
+                                <option value="99" selected="selected">매장상태</option>
+                                <option value="1">영업중</option>
+                                <option value="2">폐업</option>
+                                <option value="3">블랙</option>
                             </select>
                         </div>
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
-                                <option value="">일반회원</option>
-                                <option value="">업주회원</option>
-                                <option value="">일반관리자</option>
-                            </select>
+                            
                         </div>
                         <div style="width: 1%; height: 100%;"></div>
                         
@@ -278,7 +255,21 @@ function listDraw(list) {
     var content = '';
 
     list.forEach(function(item,busin_num) {
+    	
+    	if (item.busin_calss == 1) {
+    		mestate = "영업중";
+		}else if (item.busin_calss == 2) {
+			mestate = "폐업";
+		}else if (item.busin_calss == 3) {
+			mestate = "블랙";
+		}
+		
+		if (item.busin_juso == null) {
+    		item.busin_juso = "-";
+		}
+    	
 
+    	
     	content += '<tr>';
     	content += '<td>'+'<a href="apshopinfo?shop='+item.busin_num+'">'+item.busin_name+'</a>'+'</td>';
    		content += '<td>'+item.mem_name+'</td>';
@@ -287,7 +278,7 @@ function listDraw(list) {
     	content += '<td>'+item.busin_juso+'</td>';
     	content += '<td>'+item.busin_num+'</td>';
     	content += '<td>'+item.busin_likes+'</td>';
-    	content += '<td>'+item.busin_calss+'</td>';
+    	content += '<td>'+mestate+'</td>';
     	content += '</tr>';
 
     });
