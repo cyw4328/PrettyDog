@@ -90,26 +90,7 @@
 <body id="body">
     <!-- 상단 바 고정 -->
     <section style="width: 100%; height: 54px; display: flex; background-color: white;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                            <ul class="navbar-nav ml-md-auto">
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                                <div style="width: 10px; height: 5px;"></div>
-                                <li class="nav-item active">
-                                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                                </li>
-                            </ul>
-                            <div style="width: 66px; height: 30px;"></div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <%@ include file="APHeader.jsp"%>
     </section>
 
 

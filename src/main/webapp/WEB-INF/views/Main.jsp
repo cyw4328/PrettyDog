@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                    <div class="carousel slide" id="carousel-852840" data-ride="carousel" data-interval="1000">
+                    <div class="carousel slide" id="carousel-852840" data-ride="carousel" data-interval="5000">
                         <ol class="carousel-indicators"> 
                             <li data-slide-to="0" data-target="#carousel-852840" class="active">
                             </li>
@@ -44,21 +44,20 @@
                             <div class="carousel-item active">
                                 <img class="d-block w-100" alt="Carousel Bootstrap First" src="./resources/img/새 프로젝트.jpg" />
                                 <div class="carousel-caption">
-                                    <h4>
-                                        미용예약
-                                    </h4>
-                                    <p>
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                    </p>
-                                    <button type="button" class="btn btn-md btn-outline-secondary" style="background-color: black;">
-                                        예매하기
-                                    </button>
+	                                <a href="./ShopList" style="color: white;">
+	                                    <h4>
+	                                        미용예약
+	                                    </h4>
+	                                    <p>
+	                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                    </p>
+	                                </a>   
                                 </div>
                             </div>
                             <div class="carousel-item">
                                 <img class="d-block w-100" alt="Carousel Bootstrap Second" src="./resources/img/새 프로젝트.jpg" />
                                 <div class="carousel-caption" href="">
-                                    <a href="#" style="color: white;">
+                                    <a href="./freeList" style="color: white;">
                                         <h4>
                                             자유게시판
                                         </h4>
@@ -71,15 +70,14 @@
                             <div class="carousel-item">
                                 <img class="d-block w-100" alt="Carousel Bootstrap Third" src="./resources/img/새 프로젝트.jpg" />
                                 <div class="carousel-caption">
-                                    <h4>
-                                        트렌드
-                                    </h4>
-                                    <p>
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                    </p>
-                                    <button type="button" class="btn btn-md btn-outline-secondary" style="background-color: black;">
-                                        Button
-                                    </button>
+	                                <a href="./beautyTrendList" style="color: white;">
+	                                    <h4>
+	                                        트렌드
+	                                    </h4>
+	                                    <p>
+	                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                    </p>
+	                                </a>    
                                 </div>
                             </div>
                         </div> <a class="carousel-control-prev" href="#carousel-852840" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-852840" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
@@ -141,9 +139,9 @@
                         <a>요즘 미용 보러가기</a>
                         <div style="height: 20px;"></div>
                         <div>
-                            <button type="button" class="btn btn-md btn-outline-secondary" style="background-color: black;">
-                                Button
-                            </button>
+                            <a href="./beautyTrendList" type="button" class="btn btn-outline-info" >
+                                	GO ▷
+                            </a>
                         </div>
                     </div>
                     
@@ -151,7 +149,7 @@
                     
                 </div>
                 <div class="col-md-7">
-                    <div class="carousel slide" id="carousel-271964"  data-ride="carousel" data-interval="1000">
+                    <div class="carousel slide" id="carousel-271964"  data-ride="carousel" data-interval="2000">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" alt="Carousel Bootstrap First" src="./resources/img/dog grooming2.jpg" />
@@ -189,6 +187,9 @@
 				
 </body>
 <script>
-
+var loginSuccessAlert = "${loginSuccessAlert}" ;
+if (loginSuccessAlert > 0) {
+   alert("${loginSuccessAlert}");
+}
 </script>
 </html>
