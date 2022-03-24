@@ -27,15 +27,15 @@ public class TrendControllerSSH {
 	
 	@Autowired TrendServiceSSH trendServiceSSH;
 	
+	// 트랜드 게시물 작성 요청
 	@RequestMapping(value = "/beautyTrendWrite", method = RequestMethod.POST)
-	// MultipartFile 을 배열 형식으로 받는 이유는 writeForm에서 input타입 설정 할때 멀티플 속성을 사용해서 이다
-	// @RequestParam 에서 HashMap<String, String> 을 사용한 이유는 writeForm 에서 받아오는 값이 3개 이상이어서 이다.
 	public String beautyTrendWrite(Model model, MultipartFile photos, @RequestParam HashMap<String, Object> params) {
 		logger.info("글쓰기 요청 : {}", params);
 		logger.info("업로드 할 파일 명 : {}", photos.getOriginalFilename());
 		return trendServiceSSH.beautyTrendWrite(params, photos);
 	}
 	
+	// 트랜드 게시물 작성 페이지 이동
 	@RequestMapping(value = "/beautyTrendWriteForm", method = RequestMethod.GET)
 	public String beautyTrendWriteForm(Model model, @RequestParam String mem_id) {
 		logger.info("트렌드 게시판 등록 페이지 이동 :  "+ mem_id);
@@ -43,6 +43,7 @@ public class TrendControllerSSH {
 		return "beautyTrendWriteForm";
 	}
 	
+	// 트렌드 리스트 페이지 등록 수정 버튼 제어 요청1(멤버?)
 	@RequestMapping(value = "/idChk", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> idChk(Model model, @RequestParam String memberId) {
@@ -54,6 +55,7 @@ public class TrendControllerSSH {
 		return map;
 	}
 	
+	// 트렌드 리스트 페이지 등록 수정 버튼 제어 요청2(멤버?)
 	@RequestMapping(value = "/memberRank1", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> memberRank1(Model model, @RequestParam String memberId) {
@@ -70,6 +72,7 @@ public class TrendControllerSSH {
 		return map;
 	}
 	
+	// 트렌드 게시판 리스트 페이지 이동
 	@RequestMapping(value = "/beautyTrendList", method = RequestMethod.GET)
 	public String beautyTrendList(Model model) {
 		logger.info("트렌드 페이지 이동");
@@ -80,6 +83,7 @@ public class TrendControllerSSH {
 		return "beautyTrend";
 	}
 	
+	// 트렌드 게시판 한국맵 선택시 리스트 변경 요청
 	@RequestMapping(value = "/changeKoMap", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> changeKoMap(Model model, @RequestParam String changeKoMap) {
@@ -93,19 +97,21 @@ public class TrendControllerSSH {
 		return map;
 	}
 	
+	// 트렌드 게시판 상세보기 페이지 이동
 	@RequestMapping(value = "/beautyTrendDetail", method = RequestMethod.GET)
 	public ModelAndView beautyTrendDetail(Model model, @RequestParam String idx) {
 		logger.info("트렌드 상세보기 : "+ idx);
 		return trendServiceSSH.beautyTrendDetail(idx);
 	}
 	
+	// 트렌드 게시판 수정 페이지 이동
 	@RequestMapping(value = "/beautyTrendUpdate", method = RequestMethod.GET)
 	public ModelAndView beautyTrendUpdate(Model model, @RequestParam String idx) {
 		logger.info("트렌드 게시글 수정 : "+ idx);
 		return trendServiceSSH.beautyTrendUpdate(idx);
 	}
 	
-	
+	// 트렌드 게시판 수정 요청
 	 @RequestMapping(value = "/trendUpdate")
 	 public String trendUpdate(Model model, MultipartFile photos, @RequestParam HashMap<String, String> params) {
 		 logger.info("수정 요청 : {}", params);
@@ -113,6 +119,7 @@ public class TrendControllerSSH {
 		 return trendServiceSSH.trendUpdate(photos, params); 
 	 }
 	 
+	 // 트렌드 게시판 삭제 요청
 	 @RequestMapping(value = "/beautyTrendDelete")
 	 public String beautyTrendDelete(@RequestParam String idx, @RequestParam String newFilename) {
 		 System.out.println("삭제 요청 번호 : " + idx);
