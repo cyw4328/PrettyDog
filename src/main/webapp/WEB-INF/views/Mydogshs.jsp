@@ -61,7 +61,7 @@
 	</style>
 </head>
 <body>
-
+<%@ include file="Header.jsp"%>
 <%@ include file="cywMyPageMenuBarNomal.jsp"%>		
 
 
