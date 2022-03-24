@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- namespace : 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="com.pretty.dog.dao.HomeDAO">
+	
+	<select id="idRankChk" resultType="HashMap">
+		select *
+		from members
+		where mem_id = #{loginId}
+		and mem_state = 0
+	</select>
+	 
+	
+
+</mapper>
