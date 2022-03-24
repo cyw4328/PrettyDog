@@ -47,6 +47,8 @@ public interface MembersDAO {
 
 	String shopSaupCk(String shopSaup);
 
+	ArrayList<DogDTO> memberPassCk(String id);
+
 
 
 

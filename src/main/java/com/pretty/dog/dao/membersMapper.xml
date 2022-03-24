@@ -120,6 +120,9 @@
 		 WHERE mem_id =#{param1} AND dog_name = #{param2}
 	</update>
 	
-	
+	<!-- 개인정보수정 비밀번호 확인창 멤버 정보불러오기 -->
+	<select id="memberPassCk" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
 
 </mapper>

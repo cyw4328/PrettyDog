@@ -29,8 +29,8 @@ public class PointManagementController {
 	public ModelAndView PointInsertPage(Model model,HttpSession session) {
 		logger.info("포인트충전페이지");
 		
-		//String loginId = (String) session.getAttribute("loginId");
-		String loginId = "dud";
+		String loginId = (String) session.getAttribute("loginId");
+		//String loginId = "dud";
 		
 		return service.PointInsertPage(loginId);
 	}
@@ -39,7 +39,7 @@ public class PointManagementController {
 	public ModelAndView PointInsert(@RequestParam String point,HttpSession session,RedirectAttributes rArrt) {
 		logger.info("포인트충전");
 		String loginId = (String) session.getAttribute("loginId");
-	      //String loginId = "dud";
+		//String loginId = "dud";
 		return service.pointInsert(point,loginId,rArrt);
 	}
 	

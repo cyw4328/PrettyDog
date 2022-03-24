@@ -73,7 +73,12 @@
 <body>
 
 <%@ include file="Header.jsp"%>
-<%@ include file="cywMyPageMenuBarNomal.jsp"%>	
+		<c:if test="${info.mem_rank == 0}">
+			<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
+		</c:if>
+		<c:if test="${info.mem_rank == 1}">
+			<%@ include file="cywMyPageMenuBarOwner.jsp"%>		
+		</c:if>
 
 
 <div id="con_memberDe">

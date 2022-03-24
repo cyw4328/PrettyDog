@@ -204,6 +204,14 @@ public class MembersService {
 	}
 
 
+	public ArrayList<DogDTO> memberPassCk(String id) {
+		
+		ArrayList<DogDTO> list = dao.memberPassCk(id);
+		
+		return list;
+	}
+
+
 
 
 
