@@ -432,45 +432,56 @@
 
     function findMyDog(){
     	
-    	$.ajax({
-    		url:"/dog/findMyDog",
-    		type:"GET",
-    		dataType:"JSON",
-    		data:{
-    			"id" : loginId
-    		},    		
-    		success :function(data){
-    			
-    			console.log(data);
-    			
-    			mem_id = data[0].mem_id;
-    			mem_point = data[0].mem_point;
-    			
-    			let content = "";
-    			
-    			if(data.length>0){
-    				
-    				content += "<option value='noChoiceDog'>나의 애견</option>";
+    	if(loginId == null || loginId == "null" || loginId == 'undefine' ){
+    		content += "<option value='noMyDog'>애견 없음</option>";
+			
+			$("#myDog").empty();
+			$("#myDog").append(content);
+    	}else{
+
+        	$.ajax({
+        		url:"/dog/findMyDog",
+        		type:"GET",
+        		dataType:"JSON",
+        		data:{
+        			"id" : loginId
+        		},    		
+        		success :function(data){
         			
-        			for(let i=0; i<data.length; i++){
-        				content += "<option value='"+data[i].dog_weight+"'>"+data[i].dog_name+"</option>";
+        			console.log(data);
+        			
+        			let content = "";
+        			
+        			if(data.length>0){
+        				
+        				mem_id = data[0].mem_id;
+            			mem_point = data[0].mem_point;
+            			
+        				
+        				content += "<option value='noChoiceDog'>나의 애견</option>";
+            			
+            			for(let i=0; i<data.length; i++){
+            				content += "<option value='"+data[i].dog_weight+"'>"+data[i].dog_name+"</option>";
+            			}
+            			$("#myDog").empty();
+        				$("#myDog").append(content);
+        				
+        			}else if(data.length == 0){   				
+        				content += "<option value='noMyDog'>애견 없음</option>";
+        				
+            			$("#myDog").empty();
+        				$("#myDog").append(content);
         			}
-        			$("#myDog").empty();
-    				$("#myDog").append(content);
-    			}else{
-    				content += "<option value='noMyDog'>애견 없음</option>";
-    				
-        			$("#myDog").empty();
-    				$("#myDog").append(content);
-    			}
-    			
-    			
-    		},
-        	error : function(e){
-        		console.log(e);
-        	}
-    		
-    	})
+        			
+        			
+        		},
+            	error : function(e){
+            		console.log(e);
+            	}
+        		
+        	})
+    	}
+    	
     }
     
     //예약할 때 넘겨 줄 데이터 전역 변수로 지정
@@ -571,7 +582,7 @@
 		var ssn = $("#shopService option:checked").text();
     
     	
-    	if($("#myDog").val() == "noChoiceDog"){
+    	if($("#myDog").val() == "noChoiceDog" || $("#myDog").val() == "noMyDog"){
     		alert("서비스를 이용할 애견을 선택해주세요.");
     	}else if(($("#shopService").val() == "noChoiceService")){
     		alert("이용할 서비스를 선택해주세요.");
