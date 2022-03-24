@@ -171,17 +171,8 @@ public class CalendarController {
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> findMyDog(Model model, @RequestParam HashMap<String, Object> data) {
 		
-		if(service.findMyDog(data).size()>0){
-			return service.findMyDog(data);			
-		}else if(service.findMyDog(data).size() == 0) {
-			
-			ArrayList<HashMap<String, Object>> map = new ArrayList<HashMap<String,Object>>();
-			
-			return map;
-		}
-	
+		return service.findMyDog(data);
 	}
-	
 	
 	
 	//예약 할 때 필요한 일반 회원이 애견을 선택하면 해당 견급에 따라서 노출시켜 줄 리스트를 호출

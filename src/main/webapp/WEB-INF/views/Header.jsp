@@ -122,52 +122,67 @@
 
 		var loginId = '<%=(String)session.getAttribute("loginId")%>';
 		
-		//console.log(loginId);
-
+		console.log(loginId);
+		
 		idRankChk(loginId);
 		
 		function idRankChk(loginId){
 			
 			var contents = "";
 			
-			$.ajax({
-				url:"/dog/idRankChk",
-				type:"POST",
-				dataType:"JSON",
-				data:{
-					"loginId" : loginId
-					},
-				success : function(data){
-					//console.log(data.mem_point);
-					
-					if(data.loginId == "null"){
+			if(loginId != 'null'){
+				
+				$.ajax({
+					url:"/dog/idRankChk",
+					type:"POST",
+					dataType:"JSON",
+					data:{
+						"loginId" : loginId
+						},
+					success : function(data){
+						//console.log(data.mem_point);
 						
-					}else if(data.loginId != "null"){
-						
-						let q = data.mem_point;
-						
-						if(data.mem_rank == 0){
-							//로그인이 되면 afterlogin 이 노출
-							//berforelogin이 사라져야 함
-							$('#afterlogin').css({'display':'block'});
-							$('#afterlogin2').css({'display':'block'});
-							$('#berforelogin').css({'display':'none'});
-							$('#afterloginadmin').css({'display':'none'});
-							contents += q;
-							$('#dddd').append(contents);
-						}else if(data.mem_rank >=2){
-							$('#afterlogin').css({'display':'block'});
-							$('#afterlogin2').css({'display':'none'});
-							$('#berforelogin').css({'display':'none'});
-							$('#afterloginadmin').css({'display':'block'});
+						if(data.loginId == "null"){
+							
+						}else if(data.loginId != "null"){
+							
+							let q = data.mem_point;
+							
+							if(data.mem_rank == 0){
+								//로그인이 되면 afterlogin 이 노출
+								//berforelogin이 사라져야 함
+								$('#afterlogin').css({'display':'block'});
+								$('#afterlogin2').css({'display':'block'});
+								$('#berforelogin').css({'display':'none'});
+								$('#afterloginadmin').css({'display':'none'});
+								contents += q;
+								$('#dddd').append(contents);
+							}else if(data.mem_rank == 1){
+								$('#afterlogin').css({'display':'block'});
+								$('#afterlogin2').css({'display':'block'});
+								$('#berforelogin').css({'display':'none'});
+								$('#afterloginadmin').css({'display':'none'});
+								contents += q;
+								$('#dddd').append(contents);
+							}else if(data.mem_rank >=2){
+								$('#afterlogin').css({'display':'block'});
+								$('#afterlogin2').css({'display':'none'});
+								$('#berforelogin').css({'display':'none'});
+								$('#afterloginadmin').css({'display':'block'});
+							}
 						}
+						
+					},error : function(e){
+						console.log(e);
 					}
 					
-				},error : function(e){
-					console.log(e);
-				}
+				});
+			}else{
 				
-			});
+			}
+			
+			
+			
 			
 			
 		}
