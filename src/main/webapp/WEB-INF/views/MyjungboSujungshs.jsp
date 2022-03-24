@@ -136,6 +136,8 @@ var finalPw = null;
 var pw = $("input[name='pw']").val();
 var repw = $("input[name='repw']").val();
 
+
+
 //비밀번호 일치 체크
 $('#dangerPw').keyup(function () {
     if (pw != "" || repw != "") {
@@ -157,11 +159,25 @@ $('#dangerPw').keyup(function () {
 var pw =$("input[name='pw']").val();
 var repw = $("input[name='repw']").val();
 $("#btn-join").click(function() {
+	var email = $("input[name='email']").val();
+	var phone = $("input[name='phone']").val();
 	
 	 if (pw != repw) { 
 	      alert("비밀번호를 다시 확인해주세요");
 	      return false;
 	   } 
+	 
+	 if(email == null || email ==''){
+		 
+		 alert("이메일을 입력해주세요");
+	      return false;
+	 }
+	 
+ 	if(phone ==null || phone ==''){
+		 
+		 alert("전화번호를 입력해주세요");
+	      return false;
+	 }
 	 
 	alert('저장이 완료되었습니다.');
 	$("form").submit();
