@@ -44,7 +44,7 @@
                             <div class="carousel-item active">
                                 <img class="d-block w-100" alt="Carousel Bootstrap First" src="./resources/img/새 프로젝트.jpg" />
                                 <div class="carousel-caption">
-	                                <a href="./ShopList" style="color: white;">
+	                                <a href="./ShopList" style="color: black;">
 	                                    <h4>
 	                                        미용예약
 	                                    </h4>
@@ -54,10 +54,10 @@
 	                                </a>   
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" alt="Carousel Bootstrap Second" src="./resources/img/새 프로젝트.jpg" />
-                                <div class="carousel-caption" href="">
-                                    <a href="./freeList" style="color: white;">
+                            <div style="background-color: black;" class="carousel-item">
+                                <img class="d-block w-100" alt="Carousel Bootstrap Second" src="./resources/img/새 프로젝트2.jpg" />
+                                <div class="carousel-caption">
+                                    <a href="./freeList" style="color: black;">
                                         <h4>
                                             자유게시판
                                         </h4>
@@ -68,9 +68,9 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" alt="Carousel Bootstrap Third" src="./resources/img/새 프로젝트.jpg" />
+                                <img class="d-block w-100" alt="Carousel Bootstrap Third" src="./resources/img/새 프로젝트3-1.jpg" />
                                 <div class="carousel-caption">
-	                                <a href="./beautyTrendList" style="color: white;">
+	                                <a href="./beautyTrendList" style="color: black;">
 	                                    <h4>
 	                                        트렌드
 	                                    </h4>

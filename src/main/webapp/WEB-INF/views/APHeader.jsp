@@ -38,7 +38,7 @@
                                 </li>
                                 <div style="width: 10px; height: 5px;"></div>
                                 <li class="nav-item active">
-                                    <a href="#" type="button" class="btn btn-outline-primary">로그아웃</a>
+                                    <a href="./logout" type="button" class="btn btn-outline-primary">로그아웃</a>
                                 </li>
                             </ul>
                             <div style="width: 66px; height: 30px;"></div>
