@@ -144,8 +144,8 @@
 </body>
 <script>
 
-//var memberId = ${sessionScope.memberId};
-var memberId = "";
+var memberId = '<%=(String)session.getAttribute("loginId")%>';
+//var memberId = "";
 
 var currId_P = document.getElementById("writer").innerText;//게시물 작성자 아이디
 

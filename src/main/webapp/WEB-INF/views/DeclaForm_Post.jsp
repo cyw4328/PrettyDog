@@ -40,18 +40,17 @@
          </tr>
          <tr>
             <th colspan="2">
-            	신고자 아이디 <input type="text" name="mem_id">
-            	<br/>
-            	<br/>
-               <button onclick="self.close(); alert('신고가 접수 되었습니다.')">제출</button>
+            	<input type="hidden" name="mem_id" id="reporter">
+              	<button onclick="self.close(); alert('신고가 접수 되었습니다.')">제출</button>
             </th>
          </tr>
       </table>
    </form>
 </body>
 <script>
-//var memberId = ${sessionScope.memberId};
-var memberId = "";
+var memberId = '<%=(String)session.getAttribute("loginId")%>';
+document.getElementById("reporter").value = memberId;
+//var memberId = "";
 declaAuth_chk();
 
 function declaAuth_chk(){
