@@ -24,6 +24,7 @@ public class SshShopController {
 	
 	@Autowired SshShopListService sshShopListService;
 	
+	// 매장 리스트 페이지 이동(영우님)
 	@RequestMapping(value = "/sshShopList", method = RequestMethod.GET)
 	public String sshShopList(Model model) {
 		logger.info("shop리스트 페이지 이동");
@@ -33,6 +34,7 @@ public class SshShopController {
 		return "sshShopList";
 	}
 	
+	// 매장 상세보기 페이지 이동
 	@RequestMapping(value = "/sshShopDetail", method = RequestMethod.GET)
 	public String sshShopDetail(Model model, @RequestParam String idx, @RequestParam String memId) {
 		logger.info("sshShopDetail리스트 페이지 이동");
@@ -89,6 +91,7 @@ public class SshShopController {
 		}
 	}
 	
+	// QnA 답변 체크된 리스트 요청
 	@RequestMapping(value = "/qnaComChk", method = RequestMethod.POST)
 	@ResponseBody
 	public List<HashMap<String, Object>> qnaComChk(Model model, @RequestParam(value="a[]") List<String> a) {
@@ -105,6 +108,7 @@ public class SshShopController {
 		return qnaComChk;
 	}
 	
+	// QnA답변 달기 요청
 	@RequestMapping(value = "/QnaNnswerInsert", method = RequestMethod.GET)
 	public String QnaNnswerInsert(Model model, @RequestParam String QnaNnswerText, @RequestParam String memId, @RequestParam String qnaDivNum, @RequestParam String busin_num) {
 		logger.info("QnaNnswerText :  "+ QnaNnswerText);
@@ -116,6 +120,7 @@ public class SshShopController {
 		//return "redirect:/beautyTrendList";
 	}
 	
+	// QnA 달기 요청
 	@RequestMapping(value = "/QnaWrite", method = RequestMethod.GET)
 	public String QnaWrite(Model model, @RequestParam String qnaText,@RequestParam String memId,@RequestParam String busin_num) {
 		logger.info("QnaText QnaTextQnaText:  "+ qnaText);
@@ -126,9 +131,8 @@ public class SshShopController {
 		//return null;
 	}
 	
+	// 리뷰 달기 요청
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
-	// MultipartFile 을 배열 형식으로 받는 이유는 writeForm에서 input타입 설정 할때 멀티플 속성을 사용해서 이다
-	// @RequestParam 에서 HashMap<String, String> 을 사용한 이유는 writeForm 에서 받아오는 값이 3개 이상이어서 이다.
 	public String reviewWrite(Model model, MultipartFile photos, @RequestParam HashMap<String, Object> params) {
 		logger.info("글쓰기 요청 : {}", params);
 		logger.info("업로드 할 파일 명 : {}", photos.getOriginalFilename());
@@ -137,6 +141,7 @@ public class SshShopController {
 		//return null;
 	}
 	
+	// 리뷰 삭제 요청
 	@RequestMapping(value = "/ReviewDelete")
 	public String ReviewDelete(@RequestParam String idx, @RequestParam String newFilename,@RequestParam String memId,@RequestParam String busin_num) {
 		System.out.println("삭제 요청 번호 : " + idx);
@@ -148,6 +153,7 @@ public class SshShopController {
 		 return null;
 	 }
 
+	// 매장 좋아요 추가/삭제 제어 요청
 	@RequestMapping(value = "/myShopLike")
 	public String myShopLike(@RequestParam String likeVal, @RequestParam String memId, @RequestParam String idx) {
 		System.out.println("매장 좋아요 상태 : " + likeVal);
