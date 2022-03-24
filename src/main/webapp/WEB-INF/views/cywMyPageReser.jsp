@@ -45,6 +45,7 @@
       </style>
 </head>
 <body>
+<%@ include file="Header.jsp"%>
    <c:forEach items="${memInfo}" var="mem">
       <c:if test="${mem.mem_rank == 0}">
          <%@ include file="cywMyPageMenuBarNomal.jsp"%>      

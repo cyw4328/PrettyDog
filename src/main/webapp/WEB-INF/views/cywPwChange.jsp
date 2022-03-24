@@ -46,6 +46,7 @@
 	</style>
 </head>
 <body>
+<%@ include file="Header.jsp"%>
 	<div>
 		<a href="./"><img src="./resources/img/LOGO.PNG"/></a>
 	</div>

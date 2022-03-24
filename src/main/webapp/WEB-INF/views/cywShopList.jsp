@@ -73,6 +73,7 @@
 	</style>
 </head>
 <body>
+<%@ include file="Header.jsp"%>
 	<div id="allpage">
 		<div id="searchForm">
 			<form id="searchFormTag" action="shopSerch" method="post">

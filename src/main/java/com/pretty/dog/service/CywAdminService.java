@@ -138,11 +138,16 @@ public class CywAdminService {
    public ModelAndView MyPageBoard(String loginId) {
       ModelAndView mav = new ModelAndView();
       
-      ArrayList<DogDTO> memInfo = dao.MyBoard(loginId);
-      
-      mav.addObject("loginId", loginId);
-      mav.addObject("memInfo", memInfo);
-      mav.setViewName("cywMyPageBoard");
+      if (loginId != null) {
+    	  ArrayList<DogDTO> memInfo = dao.MyBoard(loginId);
+    	  
+    	  mav.addObject("loginId", loginId);
+    	  mav.addObject("memInfo", memInfo);
+    	  mav.setViewName("cywMyPageBoard");
+	}else {
+//		mav.setViewName("redirect:/loginPage");
+		mav.setViewName("cywMyPageBoard");
+	}
       
       return mav;
    }
