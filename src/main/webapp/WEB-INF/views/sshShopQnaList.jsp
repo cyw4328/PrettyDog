@@ -12,7 +12,6 @@
     </style>
 </head>
 <body>
-	<input id="busin_num" type="hidden" value="${sshShopDetail[0].busin_num }" />
 	<p><span id="QnaTitle"> QnA 작성</span>(욕설 및 악의적인 글은 법적인 처벌을 받을 수 있습니다.)</p>
 	<div>
 		<textarea cols="90" rows="5" placeholder="내용을 입력해 주세요" id="QnaTextWrite"></textarea><a href="#" onclick="QnaWrite()">등록</a>
@@ -37,17 +36,19 @@
 </body>
 <script>
 
-	var memId0 = '${memId}'; // 로그인 아이디
-	var memId1 = '${sshShopDetail[0].mem_id}'; // 점주 아이디
+
+var memId0 = loginId;
+var memId1 = $("#busin_mem_id_chk").val();
+
+console.log("큐앤에이에서 확인한 로그인 아이디 : "+memId0);
+console.log("큐앤에이에서 확인한 점주 아이디 : "+memId1);
 	//console.log(memId0);
 //	console.log(memId1);
 	var content = "";
 	var textLength = 0;
 	
 	//var busin_num = "";
-	
-	console.log($("#busin_num").val());
-	
+
 	/* var a = new Array();
 	var b = '${sshShopQnaIdChk}'.length;
 	a = '${sshShopQnaIdChk}'.slice(1,(b-1)).split(',');
@@ -173,7 +174,7 @@
 		bb = b;
 		$("#answerDiv"+b).text("답글 닫기");
 		console.log("응답바람");
-		console.log($(this));
+
 		answerBtnNew += '<textarea name="answerFinish" class="answerDivFn" cols="90" rows="3">';
 		answerBtnNew += '</textarea>';
 		answerBtnNew += '<button class="answerFinishBtn" onclick="answerFinishBtn()">답글 작성</button>';
@@ -188,7 +189,7 @@
 			bb = b;
 			$("#answerDiv"+b).text("답글 닫기");
 			console.log("응답바람");
-			console.log($(this));
+
 			answerBtnNew += '<textarea name="answerFinish" class="answerDivFn2" cols="90" rows="3">';
 			answerBtnNew += '</textarea>';
 			answerBtnNew += '<button class="answerFinishBtn" onclick="answerFinishBtn2()">답글 작성</button>';

@@ -25,7 +25,8 @@
 	</section>
 
 	<!-- <h2>여긴 매장 상세페이지</h2> -->
-	<input type="hidden" name="busin_num" value="${sshShopDetail[0].busin_num }"/>
+	<input type="hidden" name="busin_num" id="busin_mem_chk" value="${sshShopDetail[0].busin_num }"/>
+	<input type="hidden" name="mem_id" id="busin_mem_id_chk" value="${sshShopDetail[0].mem_id }"/>
 	<div style="position: absolute; left: 20px; top: 100px; margin-left: 300px;">
 		<img width="300px" height="300px" src="resources/img/${sshShopDetail[0].interior_newname }"/>
 	</div>
@@ -60,7 +61,10 @@
 </div>
 </body>
 <script>
-	console.log('${memId}');
+	//console.log(loginId);
+	
+	var busin_mem_chk = $("#busin_mem_chk").val();
+	
 	likeChk();
 	function likeChk() {
 		if('${sshMyInterestShop_size}' > 0){
@@ -80,7 +84,7 @@
 			location.href='myShopLike?likeVal='+${sshMyInterestShop_size}+'&memId='+'${memId}'+'&idx='+'${sshShopDetail[0].busin_num }';
 		}
 	})
-
+	
 	/*
 	var busin_num = '${sshShopDetail[0].busin_num }';
 	console.log("busin_num busin_num busin_num" + busin_num);

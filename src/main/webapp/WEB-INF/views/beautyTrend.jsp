@@ -67,8 +67,8 @@
 
    idChk();
    function idChk() {
-      //var memberId = ${sessionScope.loginId};
-      var memberId = 'a1';
+      var memberId = '<%=(String)session.getAttribute("loginId")%>';
+      //var memberId = 'a1';
       
       var memberRank = 0;
       
