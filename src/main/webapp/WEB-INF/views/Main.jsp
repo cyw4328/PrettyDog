@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-md-9" style="height: 200px;">
                     <h2>
-                        Heading
+                       		예약하기
                     </h2>
                     <p>
                         Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
@@ -113,7 +113,7 @@
             <div class="row" style="height: 200px;">
                 <div class="col-md-9" style="height: 200px;">
                     <h2>
-                        Heading
+                        	트렌드
                     </h2>
                     <p>
                         Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
