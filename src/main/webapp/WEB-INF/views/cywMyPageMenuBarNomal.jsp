@@ -88,14 +88,15 @@ a{
 		<%-- 	<c:if test="${loginId} != null">
 			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
 			</c:if> --%>
-		<c:choose>
+			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
+		<%-- <c:choose>
 			<c:when test="${loginId} != null">
 				<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
 			</c:when>
 			<c:otherwise>
 				<p style="text-align: center;"><b style="font-size: 20px;">로그인해주세요</b></p>
 			</c:otherwise>
-		</c:choose>
+		</c:choose> --%>
 			
 		</div>
 		
