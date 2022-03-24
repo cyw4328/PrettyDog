@@ -75,7 +75,7 @@ public class MembersService {
 				logger.info(oriFileName+" => "+newFileName);
 				
 				byte[] bytes =shopPhoto.getBytes();
-				Path path = Paths.get("C:/dogupload/"+newFileName);
+				Path path = Paths.get("C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/interior/"+newFileName);
 				
 				Files.write(path, bytes);
 				logger.info(oriFileName+"save OK!!");
@@ -120,7 +120,6 @@ public class MembersService {
 
 	public int DogUp(String id, String dogname, String dogage, String dogweight, String dogchar) {
 		
-		
 		return dao.DogUp(id,dogname,dogage,dogweight,dogchar);
 
 	}
@@ -134,7 +133,6 @@ public class MembersService {
 		logger.info("size",list.size());
 		mav.addObject("size",list.size());
 		mav.addObject("list",list);
-		
 		mav.setViewName("Mydogshs");
 		
 		return mav;
@@ -198,8 +196,8 @@ public class MembersService {
 			hashText = encoder.encode(pw);
 			params.put("pw", hashText);
 		}
-		logger.info("현재 비밀번호  : {}",params.get("pw"));
 		
+		logger.info("현재 비밀번호  : {}",params.get("pw"));
 		int row = dao.userUp(params);
 		logger.info("입력된 건수  : {}",row);
 		
