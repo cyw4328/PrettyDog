@@ -50,7 +50,16 @@
    </form>
 </body>
 <script>
+//var memberId = ${sessionScope.memberId};
+var memberId = "";
+declaAuth_chk();
 
+function declaAuth_chk(){
+	if (memberId==""){
+		alert("로그인 후 이용 가능합니다.");
+		window.close();
+	}
+}
 
 
 </script>

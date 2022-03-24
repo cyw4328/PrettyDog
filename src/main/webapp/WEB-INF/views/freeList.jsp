@@ -87,7 +87,7 @@
 	     
 	   </table>
 		
-		<button onclick="location.href='freeWriteForm'">글작성</button>
+		<button onclick="writeAuthchk();">글작성</button>
 		
 	      		<div calss="continer" style="margin-right: 600px ">
 	      			<nav area-label="Page navigation" style="text-align:center">
@@ -241,7 +241,24 @@
 	
 	}
 
- 
+ 	
+	// var memberId = ${sessionScope.memberId};
+	var memberId = "";
+	
+	
+	function writeAuthchk(){// 게시물 작성 권한 검사
+		if(memberId == ""){
+			alert("로그인 후 이용해주세요.");
+			location.href = 'freeList';
+		}else{
+			location.href='freeWriteForm'
+		}
+	}
+	
+	
+	
+	
+	
  
  
 
