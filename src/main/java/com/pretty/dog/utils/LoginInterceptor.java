@@ -32,9 +32,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("loginId");
-		String loginSuccessAlert = id + "님 반갑습니다.<br/> 즐거운 하루 되세요!♡";
-		
-		mav.addObject("loginSuccessAlert", loginSuccessAlert);
+		/*
+		 * String loginSuccessAlert = id + "님 반갑습니다.<br/> 즐거운 하루 되세요!♡";
+		 * 
+		 * mav.addObject("loginSuccessAlert", loginSuccessAlert);
+		 */
 	}
 	
 
