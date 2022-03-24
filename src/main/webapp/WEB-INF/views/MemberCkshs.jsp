@@ -76,7 +76,8 @@
 	</style>
 </head>
 <body>
-<%@ include file="cywMyPageMenuBarOwner.jsp"%>	
+<%@ include file="Header.jsp"%>
+<%@ include file="cywMyPageMenuBarNomal.jsp"%>	
 
 <div id="con_memberDe">
 <div id="sujung_txt">
