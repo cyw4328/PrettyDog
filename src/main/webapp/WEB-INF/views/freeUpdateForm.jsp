@@ -72,7 +72,7 @@
             </td>
          </tr>
          <tr style="height: 5%">      
-            <td><input type="text" name="mem_id"  id="writer" value="${dto.mem_id}"/></td>
+            <td><input type="hidden" name="mem_id"  id="writer" value="${dto.mem_id}"/></td>
          </tr>
          <tr style="height: 60%">     
             <td>
@@ -106,7 +106,8 @@
 
 
 <script>
-
+var memberId = '<%=(String)session.getAttribute("loginId")%>';
+document.getElementById("writer").value = memberId;
 
 
 

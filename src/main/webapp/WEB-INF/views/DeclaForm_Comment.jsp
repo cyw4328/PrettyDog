@@ -64,9 +64,9 @@ function declaAuth_chk(){
 
 
 function declaMsg(event){	
-	alert('신고가 접수 되었습니다.')
-	this.submit();
-	window.close(); 
+
+	alert('신고가 접수 되었습니다.');
+	self.close(); 
 }
 
 

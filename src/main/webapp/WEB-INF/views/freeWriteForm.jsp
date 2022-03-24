@@ -59,7 +59,7 @@
             </td>
          </tr>
          <tr style="height: 5%">      
-            <td><input type="text" name="mem_id" id="writer"/></td>
+            <td><input type="hidden" name="mem_id" id="writer"/></td>
          </tr>
          <tr style="height: 60%">     
             <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"></textarea></td>
@@ -90,8 +90,8 @@
 
 
 <script>
-	// var memberId = ${sessionScope.memberId};
-	var memberId = "admin";
+	var memberId = '<%=(String)session.getAttribute("loginId")%>';
+	document.getElementById("writer").value = memberId;
 	
 	memRankChk();
 	
