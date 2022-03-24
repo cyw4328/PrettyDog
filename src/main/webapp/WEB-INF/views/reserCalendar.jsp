@@ -279,12 +279,15 @@
         ChoiceDate = document.getElementById("calYear").innerText + "-" + document.getElementById("calMonth").innerText + "-" + document.getElementsByClassName("choiceDay")[0].innerText ; 
         //console.log(ChoiceDate);
         
+        //console.log("예약 날짜 클릭 했을 때 시간 정보를 가져오기 위한 busin_mem_chk : " + busin_mem_chk);
+        
+        
         $.ajax({
         	url:"/dog/dateInfo",
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"busin_num": "202-1234-468522",
+        		"busin_num": busin_mem_chk,
         		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
@@ -434,7 +437,7 @@
     		type:"GET",
     		dataType:"JSON",
     		data:{
-    			"id" : "testshs25"
+    			"id" : loginId
     		},    		
     		success :function(data){
     			
@@ -500,7 +503,7 @@
             	url:"/dog/shopServiceInfo",
             	type:"GET",
             	data:{
-            		"busin_num" : "202-1234-468522",
+            		"busin_num" : busin_mem_chk,
             		"add_num" : add_num 
             	},
             	dataType:"JSON",
