@@ -120,9 +120,9 @@
 </body>
 <script>
 
-		var loginId = 	'<%=(String)session.getAttribute("loginId")%>';
+		var loginId = '<%=(String)session.getAttribute("loginId")%>';
 		
-		console.log(loginId);
+		//console.log(loginId);
 
 		idRankChk(loginId);
 		

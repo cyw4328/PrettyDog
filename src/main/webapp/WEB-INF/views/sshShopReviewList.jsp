@@ -59,9 +59,6 @@
 </body>
 <script>
 
-	var memId = '${memId}'; // 로그인 아이디
-	
-	
 </script>
 </html>
 
