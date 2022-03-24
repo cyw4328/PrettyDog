@@ -208,8 +208,9 @@ public class MembersController {
 
 			String Page ="redirect:/loginPage";
 			if(id != null) {
-				session.getAttribute("loginId");
-				
+				String loginId = (String) session.getAttribute("loginId");
+				model.addAttribute("loginId", loginId);
+				model.addAttribute("memInfo",service.memberPassCk(id)); 
 				Page ="MemberCkshs";
 			}	
 
