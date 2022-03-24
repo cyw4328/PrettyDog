@@ -24,7 +24,7 @@
 			border-collapse: collapse;
 			}
 	table{
-		width: 800px;
+		width: 1000px;
 	}
    
    </style>
@@ -36,8 +36,9 @@
 
 
 
-
-   <table>
+<div id="detail_frame"  style="margin-left: 400px" >
+	<h1>자유게시판  상세</h1>
+   <table >
       <tr>
          <th>글 번호</th>
          <td>${dto.community_boardnum}</td>
@@ -47,8 +48,8 @@
          <td>${dto.community_sub}</td>     
       </tr>
       <tr>
-      	<th></th>
-      	<td>카테고리: ${dto.category_name} | 조회수: ${dto.community_view}</td>
+      	<th colspan = "2">카테고리: ${dto.category_name} | 조회수: ${dto.community_view}</th>
+      	<td></td>
       </tr>
       <tr>
          <th>작성자</th>
@@ -70,8 +71,8 @@
      	 <tr>
          <th colspan="2">
            	 	<a href="freeList">리스트</a>
-           	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}"  onclick= "memAuthchk(event);">수정</a>
-           	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick= "memAuthchk(event);">삭제</a>
+           	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}"  onclick= "memAuthchk_postUp(event);">수정</a>
+           	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick= "memAuthchk_postDel(event);">삭제</a>
            	 	<a href="DeclaForm_Post?community_boardnum=${dto.community_boardnum}" onclick="window.open(this.href,'','width=500, height=300, scrollbars=yes'); return false;">신고</a>
          	</th>
      	</tr> 
@@ -86,8 +87,8 @@
    		<!-- commentCount -->
    			<thead>
 	   			<tr>
-	   				<th colspan="2">	   				   				
-	   					댓글수: ${commentListCnt}	   				
+	   				<th colspan="2" style="background-color: lightgrey">	   				   				
+	   					댓글수: ${commentListCnt}	개   				
 	   				</th>
 	   				<th></th>
 	   			</tr>	   			   			
@@ -102,7 +103,7 @@
     					<tr>
     						<td style="height: 100px">${comm.bcomment_cont}</td>
 							<td>
-								<a  href="free_commentDelete?bcomment_num=${comm.bcomment_num}" onclick= "memAuthchk(event);">삭제</a>
+								<a href="#" onclick= "memAuthchk_comm('${comm.mem_id}','${comm.bcomment_num}');">삭제</a>
 							 	<a href="DeclaForm_Comment?bcomment_num=${comm.bcomment_num}" onclick="window.open(this.href,'','width=500, height=300, scrollbars=yes'); return false;">신고</a>
 							 </td>	    				
     					</tr>
@@ -112,7 +113,7 @@
    			
     </tbody>
    		</table>
-   		<form action="free_commentWrite" method="post">
+   		<form action="free_commentWrite" name="freeCommForm"  method="post" onsubmit="commSubmitchk();" >
    			<div id="commentWriter">
    			<table>
    			<tr>
@@ -123,7 +124,7 @@
    			</tr>
    			<tr>	
    				<td>
-	   				<textarea name="bcomment_cont" placeholder="댓글 내용을 입력하세요" style="width: 100%;height: 100px "></textarea>   				
+	   				<textarea name="bcomment_cont" id="comm_cont" placeholder="댓글 내용을 입력하세요" onclick="commAuthchk('${dto.community_boardnum}');" style="width: 100%;height: 100px "></textarea>   				
    				</td>
    			</tr>
    			<tr>	
@@ -136,30 +137,83 @@
 
    			</div>
    		</form>
-   		<button id="addBtn" onclick="moreList();"><span> 댓글 더보기</span></button>
+   		
    </div>
+</div>
    
 </body>
 <script>
-//var memberId = ${sessionScope.memberId};
-var memberId = "a1";
-var currId = document.getElementById('comm_writer').text();
 
-function memAuthchk(event){
+//var memberId = ${sessionScope.memberId};
+var memberId = "";
+
+var currId_P = document.getElementById("writer").innerText;//게시물 작성자 아이디
+
+
+function memAuthchk_comm(currId_this, currCnum){//댓글삭제 권한 검사
 	
-	console.log("권한검사 메서드 실행");		
+	console.log("권한검사 메서드 실행");			
+	console.log(currId_this);
+	console.log(currCnum);
 	
-	console.log(currId);
-	
-	if(memberId != currId){
+	if(memberId != currId_this){
 		alert("권한이 없습니다.");
+		event.preventDefault();
+	}else{
+		alert("삭제 되었습니다.");
+		location.href="free_commentDelete?bcomment_num="+currCnum;  
+	}
+
+}
+
+function memAuthchk_postDel(event){//게시물 삭제 권한 검사
+	
+	console.log("권한검사 메서드 실행");			
+	console.log(currId_P);
+	
+	var delChk = confirm("게시물을 삭제하시겠습니까?");	
+
+	if(delChk == true){		
+		if(memberId != currId_P){
+			alert("권한이 없습니다.");
+			event.preventDefault();
+		}else{
+			alert("삭제되었습니다.")
+			
+		}
+		
+		
+	}else{
 		event.preventDefault();
 	}
 
 }
 
+function memAuthchk_postUp(){// 게시물 수정 권한 검사
+	
+	if(memberId != currId_P){
+		alert("권한이 없습니다.");
+		event.preventDefault();
+	}
+	
+}
+
+function commAuthchk(currBnum){// 댓글작성 권한 검사
+	if(memberId == ""){
+		alert("로그인 후 이용해주세요.");
+		location.href= "freeDetail?community_boardnum="+currBnum
+	}
+}
 
 
+var commenter = document.getElementById('comm_cont').value;
+function commSubmitchk(){
+	if(commenter == ""){
+		alert("댓글 내용을 기입해 주세요")
+		document.freeCommForm.bcomment_cont.focus();
+		event.preventDefault();
+	}
+}
 
 
 

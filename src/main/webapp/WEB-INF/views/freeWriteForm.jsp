@@ -95,7 +95,7 @@
 	
 	memRankChk();
 	
-	function memRankChk(){
+	function memRankChk(){ // 관리자 등급 회원이 글 작성시 공지사항 카테고리 추가
 		$.ajax({
 			type:'get',
 			url:'idChk',
@@ -113,7 +113,7 @@
 		});
 	}
 	
-function submit_chk(event){
+function submit_chk(event){// 게시글 작성 유효성 검사
 	var sub = document.getElementById('subject').value;
 	var cat = document.getElementById('category').value;
 	var con = document.getElementById('content').value;
@@ -139,7 +139,7 @@ function submit_chk(event){
 
 
 
-function setThumbnail(event) { 
+function setThumbnail(event) { //업로드 파일 섬네일
 	var reader = new FileReader(); 
 	console.log("섬네일 생성하기");
 	reader.onload = function(event) { 
@@ -153,7 +153,7 @@ function setThumbnail(event) {
 	}
 	
 	
-function listChk(){
+function listChk(){//리스트 페이지 이동시 확인메세지
 	if(confirm("저장하지 않은 내용은 지워집니다. 이동하시겠습니까?") == true){
 		location = './freeList';
 	}else{

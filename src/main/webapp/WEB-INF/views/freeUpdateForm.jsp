@@ -30,7 +30,7 @@
 			}
 		
 		table{
-			width: 800px;
+			width: 1000px;
 			height: 500px;
 			margin-left: 500px; 
 			margin-top: 100px;
