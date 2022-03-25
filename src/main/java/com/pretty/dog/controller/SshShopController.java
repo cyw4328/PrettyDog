@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,10 @@ public class SshShopController {
 	
 	// 매장 상세보기 페이지 이동
 	@RequestMapping(value = "/sshShopDetail", method = RequestMethod.GET)
-	public String sshShopDetail(Model model, @RequestParam String idx, @RequestParam String memId) {
+	public String sshShopDetail(Model model, @RequestParam String idx, HttpSession session) {
 		logger.info("sshShopDetail리스트 페이지 이동");
 		System.out.println("매장번호" + idx);
+		String memId = (String) session.getAttribute("loginId");
 		System.out.println("로그인한 아이디"+memId);
 		String page = "sshShopDetail";
 		ArrayList<HashMap<String,Object>> sshShopDetail = sshShopListService.sshShopDetail(idx);
@@ -110,24 +113,26 @@ public class SshShopController {
 	
 	// QnA답변 달기 요청
 	@RequestMapping(value = "/QnaNnswerInsert", method = RequestMethod.GET)
-	public String QnaNnswerInsert(Model model, @RequestParam String QnaNnswerText, @RequestParam String memId, @RequestParam String qnaDivNum, @RequestParam String busin_num) {
+	public String QnaNnswerInsert(Model model, @RequestParam String QnaNnswerText, HttpSession session, @RequestParam String qnaDivNum, @RequestParam String busin_num) {
 		logger.info("QnaNnswerText :  "+ QnaNnswerText);
-		logger.info("memId :  "+ memId);
+		String memId = (String) session.getAttribute("loginId");
+		System.out.println("로그인한 아이디"+memId);
 		logger.info("qnaDivNum :  "+ qnaDivNum);
 		logger.info("busin_num :  "+ busin_num);
 		sshShopListService.QnaNnswerInsert(QnaNnswerText, memId, qnaDivNum);
-		return "redirect:/sshShopDetail?idx="+busin_num+"&memId="+memId;
+		return "redirect:/sshShopDetail?idx="+busin_num;
 		//return "redirect:/beautyTrendList";
 	}
 	
 	// QnA 달기 요청
 	@RequestMapping(value = "/QnaWrite", method = RequestMethod.GET)
-	public String QnaWrite(Model model, @RequestParam String qnaText,@RequestParam String memId,@RequestParam String busin_num) {
+	public String QnaWrite(Model model, @RequestParam String qnaText, HttpSession session,@RequestParam String busin_num) {
 		logger.info("QnaText QnaTextQnaText:  "+ qnaText);
-		logger.info("memId memIdmemId:  "+ memId);
+		String memId = (String) session.getAttribute("loginId");
+		System.out.println("로그인한 아이디"+memId);
 		logger.info("busin_num busin_numbusin_num:  "+ busin_num);
 		sshShopListService.QnaWrite(qnaText,memId,busin_num);
-		return "redirect:/sshShopDetail?idx="+busin_num+"&memId="+memId;
+		return "redirect:/sshShopDetail?idx="+busin_num;
 		//return null;
 	}
 	
@@ -143,10 +148,11 @@ public class SshShopController {
 	
 	// 리뷰 삭제 요청
 	@RequestMapping(value = "/ReviewDelete")
-	public String ReviewDelete(@RequestParam String idx, @RequestParam String newFilename,@RequestParam String memId,@RequestParam String busin_num) {
+	public String ReviewDelete(@RequestParam String idx, @RequestParam String newFilename, HttpSession session,@RequestParam String busin_num) {
 		System.out.println("삭제 요청 번호 : " + idx);
 		 System.out.println("삭제 요청 이미지 이름 : " + newFilename);
-		 System.out.println("삭제 요청 아이디 : " + memId);
+		 String memId = (String) session.getAttribute("loginId");
+		 System.out.println("로그인한 아이디"+memId);
 		 System.out.println("삭제 요청 사업자번호 : " + busin_num);
 		 //sshShopListService.ReviewDelete(idx, newFilename);
 		 //return "redirect:/sshShopDetail?idx="+busin_num+"&memId="+memId;
@@ -155,11 +161,12 @@ public class SshShopController {
 
 	// 매장 좋아요 추가/삭제 제어 요청
 	@RequestMapping(value = "/myShopLike")
-	public String myShopLike(@RequestParam String likeVal, @RequestParam String memId, @RequestParam String idx) {
+	public String myShopLike(@RequestParam String likeVal, HttpSession session, @RequestParam String idx) {
 		System.out.println("매장 좋아요 상태 : " + likeVal);
-		System.out.println("로그인한 아이디 : " + memId);
+		String memId = (String) session.getAttribute("loginId");
+		 System.out.println("로그인한 아이디"+memId);
 		System.out.println("매장 번호 : " + idx);
-		String page = "redirect:/sshShopDetail?idx="+idx+"&memId="+memId;
+		String page = "redirect:/sshShopDetail?idx="+idx;
 		if(likeVal.equals("0")) {
 			sshShopListService.myShopLikeInsert(memId, idx);
 			sshShopListService.shopLikeUpdate(idx);
