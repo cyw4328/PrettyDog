@@ -12,7 +12,7 @@
 		#allpage{
 			position: relative;
 			left: 300px;
-			top: 100px;
+			top: 40px;
 		}
 		#pointInfo{
 			position: absolute;
