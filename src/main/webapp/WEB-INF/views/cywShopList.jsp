@@ -15,7 +15,7 @@
 		}
 		#allpage{
 			position: relative;
-			width: 1400px;
+			width: 100%;
 			height: 1500px;
 		}
 		select{
@@ -26,6 +26,7 @@
 			border: 1px solid #999; border-radius: 0px;
 			-webkit-appearance: none;
 			-moz-appearance: none; appearance: none;
+			height: 50px;
 		}
 		#inputShop{
 			width: 250px;
@@ -53,15 +54,15 @@
 		}
 		#searchForm{
 			position: absolute;
-			left: 200px;
+			left: 340px;
 			top: 140px;
 			background-color: white;
 			height: 50px;
 		}
 		.shoplist{
 			position: absolute;
-			top: 250px;
-			left: 120px;
+			top: 260px;
+			left: 250px;
 		}
 		img:hover{
 			cursor: pointer;
@@ -70,6 +71,7 @@
 			border: 0;
 			outline: 0;
 		}
+
 	</style>
 </head>
 <body>
