@@ -234,13 +234,13 @@ public class CommunityController {
 	 //게시글 신고 입력
 	 @PostMapping(value = "/DeclaSend_post")
 	   public ModelAndView DeclaSend_post(@RequestParam HashMap<String, Object> params) {
-	      logger.info("신고하기 : {}", params);
+	      logger.info("게시글 신고하기 : {}", params);
 	      return communityService.DeclaSend_post(params);
 	   }
 	 //댓글 신고 입력
 	 @PostMapping(value = "/DeclaSend_comment")
 	   public ModelAndView DeclaSend_comment(@RequestParam HashMap<String, Object> params) {
-	      logger.info("신고하기 : {}", params);
+	      logger.info("댓글 신고하기 : {}", params);
 	      return communityService.DeclaSend_comment(params);
 	   }
 

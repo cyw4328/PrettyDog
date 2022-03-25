@@ -51,15 +51,15 @@
 					<option value="">카테고리를 선택하세요</option> 
 						<c:forEach items="${category}" var="sel"> 
 			
-														
+							<c:if test="${sel.category_num != 3 && sel.category_blind != 1 &&  sel.category_admin != 1 }">					
 								<option value="${sel.category_num}">${sel.category_name}</option>		
-																									
+							</c:if>																		
 						</c:forEach> 
 				</select>	
             </td>
          </tr>
          <tr style="height: 5%">      
-            <td><input type="text" name="mem_id" id="writer"/></td>
+            <td><input type="hidden" name="mem_id" id="writer"/></td>
          </tr>
          <tr style="height: 60%">     
             <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"></textarea></td>
@@ -90,8 +90,8 @@
 
 
 <script>
-	// var memberId = ${sessionScope.memberId};
-	var memberId = "admin";
+	var memberId = '<%=(String)session.getAttribute("loginId")%>';
+	document.getElementById("writer").value = memberId;
 	
 	memRankChk();
 	

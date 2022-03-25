@@ -118,7 +118,7 @@
    			<table>
    			<tr>
    				<td>
-	   				<input type="text" name="mem_id"> 				
+	   				<input type="hidden" name="mem_id" id="comm_writer"> 				
 	   				<input type="hidden" name='community_boardnum' value='${dto.community_boardnum}'>
    				</td>
    			</tr>
@@ -144,8 +144,8 @@
 </body>
 <script>
 
-//var memberId = ${sessionScope.memberId};
-var memberId = "";
+var memberId = '<%=(String)session.getAttribute("loginId")%>';
+document.getElementById("comm_writer").value = memberId;
 
 var currId_P = document.getElementById("writer").innerText;//게시물 작성자 아이디
 

@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>게시물  신고</h1>
-   <form action="DeclaSend_post" method="POST">
+   <form method="POST" id="declaForm">
       <table>
          <tr>
             <th>게시물 작성자</th>
@@ -40,27 +40,39 @@
          </tr>
          <tr>
             <th colspan="2">
-            	신고자 아이디 <input type="text" name="mem_id">
-            	<br/>
-            	<br/>
-               <button onclick="self.close(); alert('신고가 접수 되었습니다.')">제출</button>
+            	<input type="hidden" name="mem_id" id="reporter">
+              	<button onclick = "declaMsg(); return false">제출</button>
             </th>
          </tr>
       </table>
    </form>
 </body>
 <script>
-//var memberId = ${sessionScope.memberId};
-var memberId = "";
+var memberId = '<%=(String)session.getAttribute("loginId")%>';
+document.getElementById("reporter").value = memberId;
+//var memberId = "";
 declaAuth_chk();
 
-function declaAuth_chk(){
-	if (memberId==""){
-		alert("로그인 후 이용 가능합니다.");
-		window.close();
-	}
+function declaMsg(){// 신고뒤 창닫음
+	
+	var declaData = $('#declaForm').serialize();
+	
+	$.ajax({
+	    url: '/dog/DeclaSend_post',
+	    type: 'POST',
+	    data : declaData,
+	    cache: false,
+	    success: function(data){
+	    	console.log(data);
+	      	alert('신고가 접수 되었습니다.');
+	      	self.close(); 
+	    },
+	    error:function(e){
+	        console.log(e);
+	     }
+	  });
+	 
 }
-
 
 </script>
 </html>
