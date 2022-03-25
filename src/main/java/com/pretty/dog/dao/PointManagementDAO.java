@@ -30,6 +30,8 @@ public interface PointManagementDAO {
 
 	void insertOnerPoint(String loginId, int w);
 
+	int OnerPointCheck(String loginId);
+
 
 	
 	
