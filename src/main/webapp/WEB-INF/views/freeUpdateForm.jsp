@@ -47,7 +47,7 @@
 
 
 	<h1>자유게시판 게시물 수정</h1>
-	<form action="freeWrite" name="freeForm" method="POST" enctype="multipart/form-data" onsubmit="submit_chk(event);"><!-- 여러가지~ -->
+	<form action="freeUpdate" name="freeForm" method="POST" enctype="multipart/form-data" onsubmit="submit_chk(event);"><!-- 여러가지~ -->
       	<table>
          <tr style="height: 5%">
             <td>
@@ -57,7 +57,7 @@
             	
 	            	<select name="category_num" id="category" > 
 	            	
-						<option value="${sel.category_num}"  selected="selected">${dto.category_name}</option> 
+						<option value="${dto.category_num}"  selected="selected">${dto.category_name}</option> 
 						
 							<c:forEach items="${category}" var="sel"> 
 								<!-- 트렌드 게시판 , 블라인드된 카테고리, 관리자용 카테고리 필터링-->
