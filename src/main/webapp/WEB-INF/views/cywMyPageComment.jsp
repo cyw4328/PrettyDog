@@ -146,13 +146,20 @@ function listDraw(list) {
 		content += '<td>'+date.getFullYear()+"-"
 	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date.getDate()).slice(-2);+'</td>'
-		content += '<td>'+'<a href="commentDel?bcomment_num='+item.bcomment_num+'">삭제</a>'+'</td>';   
+		content += '<td>'+'<a onclick=commentDel('+item.bcomment_num+')>'+"삭제"+'</a>'+'</td>';   
 		content +='</tr>';
 		
 
     });
     $('#list').empty();
     $('#list').append(content);
+}
+
+function commentDel(a) {
+	let yn = confirm("진짜 댓글 지우개?");
+	if(yn){
+	window.location.href="commentDel?bcomment_num="+a;
+	}
 }
 
 var msg = "${msg}";

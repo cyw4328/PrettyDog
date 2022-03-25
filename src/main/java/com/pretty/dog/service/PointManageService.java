@@ -70,9 +70,13 @@ public class PointManageService {
 		ModelAndView mav = new ModelAndView();
 		
 		int memPoint = dao.onerPointChange(loginId);
-		int AllCountPoint = dao.onerAllCount(loginId);
+		int OnerPointCheck = dao.OnerPointCheck(loginId);
 		
-		mav.addObject("pointSum", AllCountPoint);
+		if (OnerPointCheck != 0) {
+			int AllCountPoint = dao.onerAllCount(loginId);
+			mav.addObject("pointSum", AllCountPoint);
+		}
+		
 		mav.addObject("memPoint", memPoint);
 		mav.addObject("loginId", loginId);
 		mav.setViewName("cywOnerPointChange");

@@ -154,7 +154,7 @@
 				<b style="color: red; font-size: 30px;">${mem.mem_point}</b>POINT</h5>
 				
 				<c:if test="${mem.mem_rank == 1}">
-					<h5 style="font-size: 25px; position: absolute; left: 450px; width: 330px; top: 0px;" id="onerFix">${mem.mem_id} 님의 현재 확정 전 포인트<br/>
+					<h5 style="font-size: 25px; position: absolute; left: 450px; width: 360px; top: 0px;" id="onerFix">${mem.mem_id} 님의 현재 확정 전 포인트<br/>
 					<b style="color: red; font-size: 30px;">${mem.mem_nopoint}</b> POINT</h5>				
 				</c:if>
 			</div>

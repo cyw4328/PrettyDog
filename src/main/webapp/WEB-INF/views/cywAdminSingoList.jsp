@@ -288,7 +288,7 @@ function listDraw(list) {
    		content += '<td>'+item.dec_id+'</td>';
    		content += '<td>'+item.decO_cont+'</td>';
    		content += target;
-    	content += '<td>'+item.dec_targetNum+'번'+'</td>';
+    	content += '<td>'+'<a href="./freeDetail?community_boardnum='+item.dec_targetNum+'">'+item.dec_targetNum+'번'+'</td>';
     	content += '<td>'+date.getFullYear()+"-"
 	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date.getDate()).slice(-2);+'</td>'

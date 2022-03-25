@@ -220,9 +220,9 @@ function shopDetail(a) {
 	var $busin_num = $(this).prev().val();
 	 console.log("매장상세보기",a);
 	 //alert("매장상세보기는 준비중입니다.");
-	 var memId = <%=session.getAttribute("loginId")%>;
-	 console.log("매장상세보기",memId);
-	 window.location.href="./sshShopDetail?idx="+a+"&&memId="+memId;
+	<%--  var memId = <%=session.getAttribute("loginId")%>;
+	 console.log("매장상세보기",memId); --%>
+	 window.location.href="./sshShopDetail?idx="+a;
 }
 
 function serviceSelect(a) {

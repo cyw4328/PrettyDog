@@ -151,12 +151,19 @@ function listDraw(list) {
 		content += '<td>'+date.getFullYear()+"-"
 	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
 	      +("0" + date.getDate()).slice(-2);+'</td>'
-		content += '<td>'+'<a href="boardDel?community_boardnum='+item.community_boardnum+'">삭제</a>'+'</td>';   
+		content += '<td>'+'<a onclick=boardDel('+item.community_boardnum+')>'+"삭제"+'</a>'+'</td>';   
 		content +='</tr>';
 
     });
     $('#list').empty();
     $('#list').append(content);
+}
+
+function boardDel(a) {
+	let yn = confirm("진짜 게시글 지우개?");
+	if(yn){
+	window.location.href="boardDel?community_boardnum="+a;
+	}
 }
 
 var msg = "${msg}";
