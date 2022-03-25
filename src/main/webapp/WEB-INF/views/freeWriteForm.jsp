@@ -51,9 +51,9 @@
 					<option value="">카테고리를 선택하세요</option> 
 						<c:forEach items="${category}" var="sel"> 
 			
-														
+							<c:if test="${sel.category_num != 3 && sel.category_blind != 1 &&  sel.category_admin != 1 }">					
 								<option value="${sel.category_num}">${sel.category_name}</option>		
-																									
+							</c:if>																		
 						</c:forEach> 
 				</select>	
             </td>

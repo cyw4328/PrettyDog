@@ -152,17 +152,25 @@
 	  var searchOpt ="";
 	  var keyword =  "";
 
-	document.getElementById("searchBtn").onclick = function () {
+	  
+	 //검색기능 
+	document.getElementById("searchBtn").onclick = function () { 
     
 	  searchOpt =   document.getElementsByName("searchOpt")[0].value;
 	  keyword =  document.getElementsByName("keyword")[0].value;
+	  if(keyword == ""){
+		  alert("검색어를 입력해주세요");
+		  event.preventDefault();
+	  }else{
+		  
+		  listCall(currPage, 10, selectValue);
+	  }
 	  
 	  console.log(searchOpt);
 	  console.log(keyword);
-	  listCall(currPage, 10, selectValue);
 	 };
 	
-	 
+	 //리스트콜
 	function listCall(page, cnt, selectValue){
 		//var selectValue = $("#category_selecter").val();
 		if(selectValue == '' || selectValue == "unsearchOptdifined" || selectValue == null){
@@ -244,8 +252,8 @@
 	var memberId = '<%=(String)session.getAttribute("loginId")%>';
 	//var memberId = "";
 	
-	
-	function writeAuthchk(){// 게시물 작성 권한 검사
+	// 게시물 작성 권한 검사
+	function writeAuthchk(){
 		if(memberId == ""){
 			//console.log(loginId);
 			alert("로그인 후 이용해주세요.");
