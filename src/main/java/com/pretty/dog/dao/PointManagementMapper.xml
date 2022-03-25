@@ -47,6 +47,11 @@
 		SELECT * FROM pointCh WHERE mem_id = #{param1} ORDER BY poch_num DESC LIMIT #{param2} OFFSET #{param3}
 	</select>
 	
+	<!-- 업주포인트 존재 유무 -->
+	<select id="OnerPointCheck" resultType="int">
+		SELECT count(poch_money) FROM pointCh WHERE mem_id = #{param1}
+	</select>
+	
 	<!-- 업주회원 환전가능포인트 -->
 	<select id="onerAllCount" resultType="int">
 		SELECT sum(poch_money) FROM pointCh WHERE mem_id = #{param1}
