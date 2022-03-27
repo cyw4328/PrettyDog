@@ -131,6 +131,34 @@ $("#btn-join").on("click", function(e) {
    var phone = $("input[name='phone']").val();
    var email = $("input[name='email']").val();
    
+   
+   
+   //회원가입 버튼 중복체크 재확인
+   $.ajax({
+ 		type:'get',
+ 		async:false,
+ 		url:'overlayid',
+ 		data:{'id':id},
+ 		dataType:'json',
+ 		success:function(data){
+ 			console.log(data);
+ 			
+ 			if(data.overlay){
+ 				checkId = false;
+ 			}
+
+ 		},
+ 		error:function(e){
+ 			console.log(e);
+ 		}
+ 	});
+   
+   
+   
+   
+   
+   
+   
     
    //아이디,비밀번호 유효성 검사
    if (id == null || id == "") { 

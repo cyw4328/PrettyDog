@@ -53,7 +53,7 @@
                         <th>E-mail</th>
                         <td><input type="text" name="email" class = "joinCL" placeholder="@gmail.com" />
                         <input type="button" id="mailCheck" value="메일발송"/></td>
-                        </td>
+                        
                     <tr id="enumber">
                         <th>인증번호</th>
                         <td><input type="text" name="ecode" class = "joinCL"  />
@@ -61,7 +61,6 @@
       					<div class="alert alert-success" id="alert-success-email" style = "color:#19a901; font-size: 13px;">인증번호가 일치합니다.</div>
       					<div class="alert alert-danger" id="alert-danger-email" style = "color:#e70026; font-size: 13px;">인증번호가 일치하지 않습니다.</div>
                         </td>
-                    </tr>
                     </tr>
 <!--                     <tr>
                         <th>닉네임</th>
@@ -79,7 +78,7 @@
         </div>
         
     </div>
-    </div>
+
 
 
 </body>
@@ -128,6 +127,44 @@ $("#btn-join").on("click", function(e) {
    var phone = $("input[name='phone']").val();
    var email = $("input[name='email']").val();
    
+   
+ //회원가입 버튼 중복체크 재확인
+   $.ajax({
+  		type:'get',
+  		async:false,
+  		url:'overlayid',
+  		data:{'id':id},
+  		dataType:'json',
+  		success:function(data){
+  			console.log(data);
+  			
+  			if(data.overlay){
+  				checkId = false;
+  			}
+
+  		},
+  		error:function(e){
+  			console.log(e);
+  		}
+  	});
+   
+   
+   
+   
+   
+
+   			
+
+   
+   
+   
+   
+   
+   
+   	
+   
+   
+   
     
    //아이디,비밀번호 유효성 검사
    if (id == null || id == "") { 
@@ -161,23 +198,34 @@ $("#btn-join").on("click", function(e) {
       return false;
    } 
    
+   
+
+   
    if (checkId == false) { 
 	      alert("중복체크 확인 해주세요");
 	      return false;
 	   }
    
-
    
+
    if (!phone.match("-")) { 
 	      alert("전화번호 '-' 를 확인해 주세요.");
 	      return false;
 	   } 
    
    
-  
+   
+		
+
+   
+   
+   
+   
+   
    
   
    
+
    var param = {'id':id};
    param.pw = pw;
    param.name = name;
@@ -189,8 +237,7 @@ $("#btn-join").on("click", function(e) {
    console.log('서버전송 시작');
    alert("회원가입이 완료 되었습니다.");
    $("form").submit();
-   
-  
+
    
 });
 
