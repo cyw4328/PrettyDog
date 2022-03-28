@@ -201,7 +201,7 @@ public class CommunityService {
 		int community_boardnum = Integer.parseInt(params.get("community_boardnum"));
 	      String page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
 	      if(communityDao.freeUpdate(params)>0) {
-	         page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
+	         page = "redirect:/freeDetail?community_boardnum="+community_boardnum;
 	         saveFile(community_boardnum,imgs);
 	      }
 	      

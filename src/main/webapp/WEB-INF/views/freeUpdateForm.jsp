@@ -72,7 +72,10 @@
             </td>
          </tr>
          <tr style="height: 5%">      
-            <td><input type="hidden" name="mem_id"  id="writer" value="${dto.mem_id}"/></td>
+            <td>
+            	<input type="hidden" name="mem_id"  id="writer" value="${dto.mem_id}"/>
+            	<input type="hidden" name="community_boardnum"  value="${dto.community_boardnum}"/>
+            </td>
          </tr>
          <tr style="height: 60%">     
             <td>
@@ -94,7 +97,7 @@
          <tr style="height: 10%">
             <th colspan="2">
                <input type="button" onclick="listChk();" value="목록"/>
-               <button>수정</button>
+             	<button>제출</button>
             </th>
          </tr>
       </table>
