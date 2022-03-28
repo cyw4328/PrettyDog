@@ -134,6 +134,7 @@
 		currPage = 1;
 		console.log('체인지 셀렉터 메서드');
 		var selectValue = $("#category_selecter").val();
+		
 		listCall(currPage,10,selectValue);
 	}
 	

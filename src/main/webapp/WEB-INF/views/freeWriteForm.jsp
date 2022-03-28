@@ -71,7 +71,7 @@
             	
             	</div>
             	
-            		<input type="file" name="imgs" onchange="setThumbnail(event);"/>
+            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);"/>
             	
             </td>
          </tr>
@@ -148,12 +148,18 @@ function setThumbnail(event) { //업로드 파일 섬네일
 		img.setAttribute('height', '120px');
 		img.setAttribute('width', '120px');
 		document.querySelector("div#image_container").appendChild(img); 
+		
+			
+			
+	
 	}; 
 	reader.readAsDataURL(event.target.files[0]); 
 	}
 	
-	
-function listChk(){//리스트 페이지 이동시 확인메세지
+
+
+//리스트 페이지 이동시 확인메세지
+function listChk(){
 	if(confirm("저장하지 않은 내용은 지워집니다. 이동하시겠습니까?") == true){
 		location = './freeList';
 	}else{
@@ -161,8 +167,31 @@ function listChk(){//리스트 페이지 이동시 확인메세지
 	}
 	
 }
-	
-	
+
+
+//업로드 파일 용량 제한
+$("input[name=imgs]").off().on("change", function(){
+
+	if (this.files && this.files[0]) {
+
+		var maxSize = 2 * 1024 * 1024;
+		var fileSize = this.files[0].size;
+
+		if(fileSize > maxSize){
+			alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+			$(this).val('');
+			//document.getElementById('image_container').empty();
+			document.getElementById('image_container').remove('img');
+			//document.getElementsByTagName('img').remove();
+			//$("img").removeAttr("src");
+			//img.setAttribute("src", "#"); 
+			
+		}
+		
+		
+		
+	}
+});	
 	
 	
 	

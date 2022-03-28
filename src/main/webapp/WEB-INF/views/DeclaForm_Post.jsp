@@ -21,7 +21,7 @@
             <th>게시물 작성자</th>
             <td>
             <input type="hidden" name="dec_targetNum" value = "${dto.community_boardnum}">
-            <input type="text" name="dec_id" value="${dto.mem_id}" readonly="readonly">
+            <input type="text" id="dec_id" name="dec_id" value="${dto.mem_id}" readonly="readonly">
            </td>
          </tr>
          <tr>
@@ -50,8 +50,17 @@
 <script>
 var memberId = '<%=(String)session.getAttribute("loginId")%>';
 document.getElementById("reporter").value = memberId;
+
+
 //var memberId = "";
-declaAuth_chk();
+/* $(document).ready(function(){
+		
+decId = document.getElementById("dec_id").value;
+		if(memberId == dec_id){
+			window.close();
+		}
+	});  */
+
 
 function declaMsg(){// 신고뒤 창닫음
 	
