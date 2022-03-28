@@ -170,8 +170,12 @@ public class MembersService {
 
 
 	public void shopup(HashMap<String, String> params) {
-		
-		dao.shopup(params);
+		String id = params.get("id");
+		String busin_name = params.get("busin_name");
+		logger.info("확인 : {}",id+"/"+busin_name);
+		//String idck = dao.shopIdck(id);
+		//logger.info("idck확인 : {}",idck);
+		//dao.shopup(params);
 }
 
 	public HashMap<String, Object> shopSaupCk(String shopSaup) {

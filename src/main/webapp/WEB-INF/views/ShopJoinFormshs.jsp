@@ -70,7 +70,7 @@
                     </tr> -->
                     
                     <tr>
-                        <td colspan="2" style="border:0px; text-align: center; font-size: 13px;" ><input type="checkbox" checked>개인정보동의(필수)</td>
+                        <td colspan="2" style="border:0px; text-align: center; font-size: 13px;" ><input type="checkbox"  id ="infoCh">개인정보동의(필수)</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border:0px; text-align: right;"><input type="submit" value="회원가입" id="btn-join"></td>
@@ -130,7 +130,7 @@ $("#btn-join").on("click", function(e) {
    var name = $("input[name='name']").val();
    var phone = $("input[name='phone']").val();
    var email = $("input[name='email']").val();
-   
+   var infoCh = $('#infoCh').is(':checked');
    
    
    //회원가입 버튼 중복체크 재확인
@@ -204,6 +204,11 @@ $("#btn-join").on("click", function(e) {
 	      return false;
 	   } 
   
+   if(infoCh == false){
+	    alert("개인정보동의를 확인해주세요.");
+	    return false;
+	}
+   
    
   
    
