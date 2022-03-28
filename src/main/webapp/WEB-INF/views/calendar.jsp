@@ -81,6 +81,38 @@
     document.addEventListener("DOMContentLoaded", function() {
         buildCalendar();
     });
+    
+    var loginId = '<%=(String)session.getAttribute("loginId")%>';
+	
+	var busin_num = "";
+	
+	busin_num_chk(loginId);
+	
+	function busin_num_chk(loginId){
+		
+		if(loginId != null && loginId != 'null'){
+			
+			$.ajax({
+				url:'/dog/businNumChk',
+				type:"GET",
+				dataType:"JSON",
+				async:false,
+				data:{"loginId" : loginId},
+				success : function(data){
+					//console.log(data);
+					busin_num = data.busin_num;
+					//console.log(busin_num);
+				},error : function(e){
+					//console.log(e);
+				}
+				
+				
+			});
+			
+		}
+		
+	}
+	
 
     var today = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
     var date = new Date();  // @param 전역 변수, today의 Date를 세어주는 역할
@@ -278,7 +310,7 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"busin_num": "378-1234-468522",
+        		"busin_num": busin_num,
         		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){

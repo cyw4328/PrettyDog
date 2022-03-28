@@ -190,6 +190,37 @@
 	var businHours = {0:"00:00", 1:"01:00", 2:"02:00", 3:"03:00", 4:"04:00", 5:"05:00", 6:"06:00", 7:"07:00", 8:"08:00", 9:"09:00"
 		, 10:"10:00", 11:"11:00", 12:"12:00", 13:"13:00", 14:"14:00", 15:"15:00", 16:"16:00", 17:"17:00", 18:"18:00", 19:"19:00"
 		, 20:"20:00", 21:"21:00", 22:"22:00", 23:"23:00"};
+		
+	var loginId = '<%=(String)session.getAttribute("loginId")%>';
+		
+		var busin_num = "";
+		
+		busin_num_chk(loginId);
+		
+		function busin_num_chk(loginId){
+			
+			if(loginId != null && loginId != 'null'){
+				
+				$.ajax({
+					url:'/dog/businNumChk',
+					type:"GET",
+					dataType:"JSON",
+					async:false,
+					data:{"loginId" : loginId},
+					success : function(data){
+						//console.log(data);
+						busin_num = data.busin_num;
+						//console.log(busin_num);
+					},error : function(e){
+						//console.log(e);
+					}
+					
+					
+				});
+				
+			}
+			
+	}
 	
 	//전역 변수들 
 	//예약이 찬 시간에 대한 정보를 담기 위한 배열 생성
@@ -401,7 +432,7 @@
         	type:"POST",
         	dataType:"JSON",
         	data:{
-        		"busin_num": "202-1234-468522",
+        		"busin_num": busin_num,
         		"ChooseDate" : ChoiceDate
         		},
         	success :function(data){
@@ -515,6 +546,8 @@
 	function oneDay(){
 		//console.log(ChoiceDate); //연 월 일 데이터 추출 성공
 
+		workingHours = [];
+		
 		//영업 시간의 시작 시간과 마감 시간을 뽑아옴
 		var st = $("#startTime").val();
 		var ed = $("#endTime").val();
@@ -620,9 +653,9 @@
 		//console.log(objt);	
 		
 		
-		var sendData = {"busin_num" : "202-1234-468522", "set_date" : ChoiceDate, "set_time" : JSON.stringify(objt)};
+		var sendData = {"busin_num" : busin_num, "set_date" : ChoiceDate, "set_time" : JSON.stringify(objt)};
 		
-		console.log(sendData);
+		console.log(workingHours);
 		
 		if(ChoiceDate == "" || ChoiceDate == null){
 			alert("설정하실 날짜를 선택해주세요.");
@@ -659,6 +692,8 @@
 	
 	
 	function allDay(){
+		
+		workingHours = [];
 		
 		var st = $("#startTime").val();
 		var ed = $("#endTime").val();
@@ -717,6 +752,8 @@
 				alert("두 번째 브레이크 타임이 첫 번째 브레이크 타임보다 이릅니다. 브레이크 타임 설정을 다시 확인해주세요.");
 			}else if((ed-st)==((btetOne-btstOne)+(btetTwo-btstTwo))){
 				alert("영업 시간 전체가 브레이크 타임으로 설정될 수 없습니다. 설정 시간을 다시 확인해주세요.");
+			}else if(btstOne == btstTwo && btetOne == btetTwo){
+				alert("브레이크 타임이 겹칩니다. 다시 확인해주세요.");
 			}else{
 				//console.log("브레이크 타임이 두개인 경우");
 				var beforeBreakTime = Object.values(obj).slice(st,btstOne);
@@ -894,130 +931,140 @@
 		
 		//console.log(totalDelDay);
 		
-		$.ajax({
-        	url:"/dog/totalReserEx",
-        	type:"POST",
-        	dataType:"JSON",
-        	data:{"busin_num" : "202-1234-468522"},
-        	success :function(data){
-        		
-        		console.log(data);
-        		
-        		for(var i=0; i<data.length; i++){
-        			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
-            		let comDay = data[i].set_date;
-            		let comDate = new Date(comDay)
-            		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
-            		//console.log(reserDate);
-            		
-            		let obj = JSON.parse(data[i].set_time);
-            		let reserTime = Object.values(obj);
-            		//console.log(reserTime);
-        			
-        			if(reserTime.filter(v => v == 1).length >=1){
-        				noCancleDate.push(reserDate);
-            		}
-        		}
-        		
-        		if(noCancleDate.length == 0){
-        			//에약이 없을 경우 일괄 수정시 
-        			
-        			console.log(totalDay);
+		if(workingHours.length>0){
+			let yn = confirm("예약 설정이 가능합니다. \n일괄 저장은 예약이 있는 날짜를 제외하고 적용 됩니다.\n일괄 저장을 하시겠습니까?");
+			
+			if(yn){
+				
+				$.ajax({
+		        	url:"/dog/totalReserEx",
+		        	type:"POST",
+		        	dataType:"JSON",
+		        	data:{"busin_num" : busin_num},
+		        	success :function(data){
+		        		
+		        		console.log(data);
+		        		
+		        		for(var i=0; i<data.length; i++){
+		        			//가져온 데이터에서 날짜를 yyyy-mm-dd 형식으로 변환
+		            		let comDay = data[i].set_date;
+		            		let comDate = new Date(comDay)
+		            		let reserDate = (comDate.getFullYear()+ "-" +("0"+(comDate.getMonth()+1)).slice(-2)+"-"+("0" + comDate.getDate()).slice(-2));
+		            		//console.log(reserDate);
+		            		
+		            		let obj = JSON.parse(data[i].set_time);
+		            		let reserTime = Object.values(obj);
+		            		//console.log(reserTime);
+		        			
+		        			if(reserTime.filter(v => v == 1).length >=1){
+		        				noCancleDate.push(reserDate);
+		            		}
+		        		}
+		        		
+		        		if(noCancleDate.length == 0){
+		        			//에약이 없을 경우 일괄 수정시 
+		        			
+		        			console.log(totalDay);
 
-        			$.ajax({
-    		        	url:"/dog/noReserAllDate",
-    		        	type:"POST",
-    		        	dataType:"JSON",
-    		        	data:{"busin_num" : "202-1234-468522", "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(totalDelDay)},
-    		        	success :function(data){
-    		        		//console.log(data);
-    		        		if(data >= 1){
-    		        			location.reload();
-    		        		}
-    		        	},
-    		        	error : function(e){
-    		        		console.log(e);
-    		        	}
-    		        });	
-        			
-        			
-        		}else{
-        			
-        			
-        			
-        			//요청한 영업일에서 휴무와 예약이 있는 날짜를 저장할 배열
-        			var upsertDate = [];
-        			var delDate = [];
-            		
-        			
-            		
-        			i = 0;
-            		
-        			//설정 변경을 요청한 총 영업일에서 예약이 있는 날짜 제거
-        			for(var j=0; j<totalDay.length; j++){
+		        			$.ajax({
+		    		        	url:"/dog/noReserAllDate",
+		    		        	type:"POST",
+		    		        	dataType:"JSON",
+		    		        	data:{"busin_num" : busin_num, "totalDay" :JSON.stringify(totalDay), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(totalDelDay)},
+		    		        	success :function(data){
+		    		        		//console.log(data);
+		    		        		if(data >= 1){
+		    		        			location.reload();
+		    		        		}
+		    		        	},
+		    		        	error : function(e){
+		    		        		console.log(e);
+		    		        	}
+		    		        });	
+		        			
+		        			
+		        		}else{
+		        			
+		        			
+		        			
+		        			//요청한 영업일에서 휴무와 예약이 있는 날짜를 저장할 배열
+		        			var upsertDate = [];
+		        			var delDate = [];
+		            		
+		        			
+		            		
+		        			i = 0;
+		            		
+		        			//설정 변경을 요청한 총 영업일에서 예약이 있는 날짜 제거
+		        			for(var j=0; j<totalDay.length; j++){
 
-        				if(totalDay[j] == noCancleDate[i]){
-        					i++;
-        				}else{
-        					upsertDate.push(totalDay[j]);
-        				}
-            			
-            		}
-        			
-        			//설정 변경을 요청한 총 휴무일에서 예약이 있는 날짜 제거
-        			for(var j=0; j<totalDelDay.length; j++){
-        				
-        				if(totalDelDay[j] == noCancleDate[i]){
-        					i++;
-        				}else{
-        					delDate.push(totalDelDay[j]);
-        				}
-        					
-        			}
-        			
-        			console.log(sendWorkingTime);
-        			console.log(objt);
-        			
-        			//아작스 들어갈 부분
-        			
-        			
-        			$.ajax({
-    		        	url:"/dog/noReserAllDate",
-    		        	type:"POST",
-    		        	dataType:"JSON",
-    		        	data:{"busin_num" : "202-1234-468522", "totalDay" :JSON.stringify(upsertDate), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(delDate)},
-    		        	success :function(data){
-    		        		//console.log(data);
-    		        		if(data >= 1){
-    		        			location.reload();
-    		        		}
-    		        	},
-    		        	error : function(e){
-    		        		console.log(e);
-    		        	}
-    		        });	
-        			
-        			
-        			
-        			/*
-        			console.log(noCancleDate);
-        			console.log("==============================================");
-        			console.log(totalDay);
-        			console.log(totalDelDay);
-        			console.log("==============================================");
-            		console.log(upsertDate);
-            		console.log(delDate);
-            		*/
-        		}
-        		
-        		
-        		
-        		
-        	},
-        	error : function(e){
-        		console.log(e);
-        	}
-        });
+		        				if(totalDay[j] == noCancleDate[i]){
+		        					i++;
+		        				}else{
+		        					upsertDate.push(totalDay[j]);
+		        				}
+		            			
+		            		}
+		        			
+		        			//설정 변경을 요청한 총 휴무일에서 예약이 있는 날짜 제거
+		        			for(var j=0; j<totalDelDay.length; j++){
+		        				
+		        				if(totalDelDay[j] == noCancleDate[i]){
+		        					i++;
+		        				}else{
+		        					delDate.push(totalDelDay[j]);
+		        				}
+		        					
+		        			}
+		        			
+		        			console.log(sendWorkingTime);
+		        			console.log(objt);
+		        			
+		        			//아작스 들어갈 부분
+		        			
+		        			
+		        			$.ajax({
+		    		        	url:"/dog/noReserAllDate",
+		    		        	type:"POST",
+		    		        	dataType:"JSON",
+		    		        	data:{"busin_num" : busin_num, "totalDay" :JSON.stringify(upsertDate), "set_time" : JSON.stringify(sendWorkingTime), "totalDelDay" : JSON.stringify(delDate)},
+		    		        	success :function(data){
+		    		        		//console.log(data);
+		    		        		if(data >= 1){
+		    		        			location.reload();
+		    		        		}
+		    		        	},
+		    		        	error : function(e){
+		    		        		console.log(e);
+		    		        	}
+		    		        });	
+		        			
+		        			
+		        			
+		        			/*
+		        			console.log(noCancleDate);
+		        			console.log("==============================================");
+		        			console.log(totalDay);
+		        			console.log(totalDelDay);
+		        			console.log("==============================================");
+		            		console.log(upsertDate);
+		            		console.log(delDate);
+		            		*/
+		        		}
+		        		
+		        		
+		        		
+		        		
+		        	},
+		        	error : function(e){
+		        		console.log(e);
+		        	}
+		        });
+			}
+		}
+		
+		
+		
 		
 		
 		/*

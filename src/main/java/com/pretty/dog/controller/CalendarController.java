@@ -238,4 +238,20 @@ public class CalendarController {
 	}
 	
 	
+	//마이 페이지에서 예약 설정 및 확인 할 때 필요한 busin_num 을 조회
+	@RequestMapping(value = "/businNumChk")
+	@ResponseBody
+	public HashMap<String, Object> busin_num_chk(Model model, @RequestParam HashMap<String, Object> businId) {
+		
+		//System.out.println("마이페이지에서 사용할 사업자 번호를 조회하기 위해 받아오 아이디 정보 : "+businId);
+		
+		return service.busin_num_chk(businId);
+	}
+	
+	
+	
+	
+	
+	
+	
 }
