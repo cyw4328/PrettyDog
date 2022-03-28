@@ -83,6 +83,11 @@ public class CalendarService {
 			dao.businPointList(point);
 		}
 
+		public HashMap<String, Object> busin_num_chk(HashMap<String, Object> businId) {
+			
+			return dao.busin_num_chk(businId);
+		}
+
 	
 		
 }

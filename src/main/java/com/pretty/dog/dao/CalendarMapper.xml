@@ -121,6 +121,12 @@
 		values(#{busin_mem_id}, #{servicePrice}, "예약금 적립", 0)
 	</insert>
 	   
+	   
+	<select id="busin_num_chk" resultType="HashMap">
+		select *
+		from shop
+		where mem_id = #{loginId}
+	</select>
 	
 	
 </mapper>

@@ -36,5 +36,7 @@ public interface CalendarDao {
 
 	void businPointList(HashMap<String, Object> point);
 
+	HashMap<String, Object> busin_num_chk(HashMap<String, Object> businId);
+
 
 }
