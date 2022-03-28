@@ -60,21 +60,22 @@
 	            	<th>아이디</th>
 	            	<td><input style="border:1px solid white;" type="text" name="id"  value="${loginId}" class="formSt" readonly="readonly" /></td>
 	            </tr>
+	            <tr>
 	            	<th>매장명</th>
-	            	<td ><input type="text"  style="border:1px solid white;" value="${shopinfo.busin_name}" name="busin_name" class="formSt" readonly="readonly"></td>
+	            	<td ><input type="text"  style="border:1px solid #ccc;" value="${shopinfo.busin_name}" name="busin_name" class="formSt"></td>
 	            	<th>사업자번호</th>
-	            	<td><input type="text"  style="border:1px solid white;" value="${shopinfo.busin_num}" name="busin_num" class="formSt" ></td>
+	            	<td><input type="text" style="border:1px solid #ccc;"  value="${shopinfo.busin_num}" name="busin_num" class="formSt" ></td>
 	            	<th>취급강아지</th>
-	            	<td>
+	            		<td>
                         	<input type="checkbox" name="smallD"  value="1" checked>소형견
                         	<input type="checkbox" name="middleD" value="1" checked>중형견
                         	<input type="checkbox" name="bigD" value="1" checked>대형견
                         </td>    
 	            </tr>
 	           <tr>
-	           		<th>지역</th>
+	           		<th>지  &nbsp;&nbsp;&nbsp;역</th>
 	           		<td colspan="3"  >
-		           			<select name="addr" >
+		           			<select name="addr" style="border:1px solid #ccc;" >
 		           				<option value="${shopinfo.busin_area}">${shopinfo.busin_area}</option>
 		                         <option value="서울특별시">서울특별시</option>
 		                         <option value="인천광역시">인천광역시</option>
@@ -98,9 +99,10 @@
 	           		</tr>
 	           <tr>
 	           		<th>매장소개</th>
-	           		<td colspan="5"><textarea name="shopSogae"  class="formSt" style="width:100%; height: 200px;" >${shopinfo.busin_info}</textarea></td>
+	           		<td colspan="5"><textarea name="shopSogae"  class="formSt" style="width:100%; height: 200px; border:1px solid #ccc;" >${shopinfo.busin_info}</textarea></td>
 	           	</tr>
-	            <tr><td colspan="6" style="border:0px; text-align: center; border-bottom:1px solid #dedede;"><button id="btn-join"  style="border:1px solid #fff; font-size: 15px; font-weight: bold; border-radius: 10px; cursor: pointer;" >저장</button></td></tr>
+	            <tr><td colspan="6" style="border:0px; text-align: center; border-bottom:1px solid #dedede;">
+	            <button id="btn-join"  style="border:1px solid #fff; font-size: 15px; font-weight: bold; border-radius: 10px; cursor: pointer;" >저장</button></td></tr>
 			</table>
 	      </form>
 	   </div>
@@ -113,22 +115,50 @@
 $("#btn-join").click(function() {
 	   var shopSogae = $("textarea[name='shopSogae']").val();
 	   var shopSaup = $("input[name='shopSaup']").val();
-	   var addr = $("input[name='addr']").val();
+	   var addr = $("select[name='addr']").val();
 	   var shopAddr = $("input[name='shopAddr']").val();
 	   var smallD = $("input[name='smallD']").val();
 	   var middleD = $("input[name='middleD']").val();
 	   var bigD = $("input[name='bigD']").val();
+	   var shopName = $("input[name='busin_name']").val();
+	   var shopNum = $("input[name='busin_num']").val();
 	   
 	 //유효성검사
-	   if (shopSogae == null || shopSogae == "") { 
-	      alert("매장소개를 입력해주세요");
+	 
+	  if (shopName == null || shopName == "") { 
+	      alert("매장명을 입력해주세요");
 	      return false;
 	   } 
 	   
-	   if (shopAddr == null || shopAddr == "") { 
-		      alert("상세주소를 입력해주세요");
+	  if (shopNum == null || shopNum == "") { 
+		      alert("사업자번호를 입력해주세요");
 		      return false;
 		   } 
+	 
+	  if (addr == null || addr == "") { 
+		     alert("지역을 선택해주세요");
+		     return false;
+	   }
+	  
+	  if (shopAddr == null || shopAddr == "") { 
+	      alert("상세주소를 입력해주세요");
+	      return false;
+	   } 
+	  
+	  if (shopSogae == null || shopSogae == "") { 
+	      alert("매장소개를 입력해주세요");
+	      return false;
+	   }
+	 
+	  
+	   
+	  
+	   
+	   
+	   
+	 
+	   
+	  
 	   
 
 	
