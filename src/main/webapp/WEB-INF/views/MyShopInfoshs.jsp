@@ -43,7 +43,7 @@
 	</style>
 </head>
 <body>
-
+<%@ include file="Header.jsp"%>
 <%@ include file="cywMyPageMenuBarOwner.jsp"%>	
 <div id="con_memberDe">
 
