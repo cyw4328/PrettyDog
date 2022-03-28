@@ -313,8 +313,15 @@
 				}
         		$("#viewtimearea").append(rowContent);	
         		
-        		console.log(Object.keys(obj));
-        		console.log(compaTime);
+        		//console.log(Object.keys(obj));
+        		//console.log(compaTime);
+        		
+        		console.log(document.getElementsByClassName("choiceDay")[0].innerText);
+        		console.log(date.getDate());
+        		
+        		if(document.getElementsByClassName("choiceDay")[0].innerText == date.getDate()){
+        			console.log("당일 선택");
+        		}
         		
         		//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
 				for(i=0; i<Object.keys(obj).length; i++){
