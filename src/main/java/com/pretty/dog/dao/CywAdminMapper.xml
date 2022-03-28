@@ -175,7 +175,7 @@
    
    <!-- 예약취소 후 포인트테이블 업주 회원 등록 -->
    <insert id="reserDelOwnerPointTable">
-      INSERT INTO pointList (mem_id,point_cdc,point_cont,point_distin) values ((select mem_id from shop where busin_num = #{param2}),-#{param1},"예약취소",1)
+      INSERT INTO pointList (mem_id,point_cdc,point_cont,point_distin) values ((select mem_id from shop where busin_num = #{param2}),#{param1},"예약취소",1)
    </insert>
    
    <!-- 업주회원 예약관리 -->

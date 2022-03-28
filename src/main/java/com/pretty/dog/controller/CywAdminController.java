@@ -560,7 +560,7 @@ public class CywAdminController {
          @RequestParam String serviceName1,@RequestParam String busin_num,RedirectAttributes rAttr) {
       logger.info("매장 소형견 서비스추가:{}",busin_num);
       
-      //String loginId = (String) session.getAttribute("loginId");
+      String loginId = (String) session.getAttribute("loginId");
       //String loginId = "dud";
       
       return service.addShopSmallService(inputText1,serviceName1,busin_num,rAttr);
@@ -571,7 +571,7 @@ public class CywAdminController {
          @RequestParam String serviceName2,@RequestParam String busin_num,RedirectAttributes rAttr) {
       logger.info("매장 중형견 서비스추가");
       
-      //String loginId = (String) session.getAttribute("loginId");
+      String loginId = (String) session.getAttribute("loginId");
       //String loginId = "dud";
       
       return service.addShopMiddleService(inputText2,serviceName2,busin_num,rAttr);
@@ -582,7 +582,7 @@ public class CywAdminController {
          @RequestParam String serviceName3,@RequestParam String busin_num,RedirectAttributes rAttr) {
       logger.info("매장 대형견 서비스추가");
       
-      //String loginId = (String) session.getAttribute("loginId");
+      String loginId = (String) session.getAttribute("loginId");
       //String loginId = "dud";
       
       return service.addShopBigService(inputText3,serviceName3,busin_num,rAttr);
@@ -592,7 +592,7 @@ public class CywAdminController {
    public ModelAndView SreviceDel(HttpSession session,@RequestParam String price_num,RedirectAttributes rAttr) {
       logger.info("매장 추가 서비스 삭제");
       
-      //String loginId = (String) session.getAttribute("loginId");
+      String loginId = (String) session.getAttribute("loginId");
       //String loginId = "cyw4328";
       
       

@@ -14,18 +14,18 @@
 		#Sub{
 			
 			position: absolute;
-			top: 110px;
+			top: 20px;
 			left: 50px;
 			font-size: 25px;
 		}
 		#ContForm{
 			position: absolute;
-			top: 220px;
+			top: 130px;
 			left: 50px;
 		}
 		#ContText{
 			position: absolute;
-			top: 550px;
+			top: 450px;
 			left: 50px;
 		}
 		td{
