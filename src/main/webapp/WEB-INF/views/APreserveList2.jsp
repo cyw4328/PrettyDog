@@ -57,7 +57,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;

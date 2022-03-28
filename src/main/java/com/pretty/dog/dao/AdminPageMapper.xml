@@ -85,11 +85,20 @@
 	
 	<!-- 매장 조회 -->
 	<select id="apshoplist3Count" resultType="int">
-			select count(busin_name) from shop
+			select count(busin_name) from shop where 1=1
+				<if test="param1 != '' and param1 != '99' ">and busin_name LIKE CONCAT('%',#{param1},'%')</if>
+				<if test="param2 != '' and param2 != 99 ">and busin_calss = #{param2}</if>
 	</select>
 	<select id="apshoplist3" resultType="dog">
-			select * from members mem join shop sh on mem.mem_id = sh.mem_id where sh.busin_num ORDER BY sh.busin_date DESC LIMIT #{param1} OFFSET #{param2}
+			select * from members mem join shop sh on mem.mem_id = sh.mem_id where sh.busin_num 
+				<if test="param3 != '' and param3 != '99' ">and busin_name LIKE CONCAT('%',#{param3},'%')</if>
+				<if test="param4 != '' and param4 != 99 ">and busin_calss = #{param4}</if>
+				<if test="param4 == 0">and busin_calss = 0</if>
+				ORDER BY sh.busin_date DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
+	
+	
 	
 	
 	
