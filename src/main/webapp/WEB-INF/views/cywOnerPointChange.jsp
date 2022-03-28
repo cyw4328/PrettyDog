@@ -47,7 +47,7 @@
 		}
 		#AllPage{
 			position: relative;
-		    top: 110px;
+		    top: 30px;
 		    left: 300px;
 		}
 		#MainSub{

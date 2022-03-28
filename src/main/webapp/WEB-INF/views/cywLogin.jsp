@@ -33,9 +33,9 @@
 		}
 		input[type="text"],input[type="password"]{
 			height: 30px;
-			width: 250px
+			width: 260px
 		}
-		input[type="submit"]{
+		#loginBtn{
 			width: 250px;
 			height: 30px;
 			background-color: pink;
@@ -68,7 +68,7 @@
 			<h2 style="color: pink">LOGIN</h2>
 		</div>
 		<div id="LoginForm">
-			<form action="login" method="post">
+			<form action="login" method="post" id="login">
 				<table>
 					<tr>
 						<td><input type="text" placeholder="ID를 입력해주세요!" name="idInput"/></td>
@@ -77,7 +77,7 @@
 						<td><input type="password" placeholder="PW를 입력해주세요!" name="pwInput"/></td>
 					</tr>
 					<tr>
-						<td id="loginBtn"><input type="submit" value="Login"/></td>
+						<td id="loginBtn"><input type="button" value="Login" id="loginBtn"/></td>
 					</tr>
 				</table>
 			</form>
@@ -91,6 +91,20 @@
 	</div>	
 </body>
 <script>
+$('#loginBtn').click(function() {
+	var $idInput = $('input[name="idInput"]')
+	var $pwInput = $('input[name="pwInput"]')
+	console.log($idInput.val());	
+	if ($idInput.val() == '') {
+		alert("아이디를 입력해주랑개~");
+	}else if ($pwInput.val() == '') {
+		alert("비밀번호를 입력하랑개~");
+	}else {
+		login.submit();
+	}
+});
+
+
 var msg = "${msg}";
 
 if (msg != "") {
