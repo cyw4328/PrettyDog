@@ -142,7 +142,7 @@
 					            </tr>
 					            <tr>
 					                <td>매장상태</td>
-					                <td>${shopinfo.busin_calss}</td>
+					                <td><input type="text" name="shrank"  value="${shopinfo.busin_calss}" disabled/></td>
 					            </tr>
 					            <tr>
 					                <td>매장지역</td>
@@ -206,7 +206,7 @@
 					    
 					    
 					    
-						<form action="apshopupdate" method="post">
+						<form id="shrank" action="apshopupdate" method="post">
 							
 					        <input style="display: none;" type="text" name="name" value="${shopinfo.busin_name}" readonly/>
 					        <input style="display: none;" type="text" name="shop" value="${shopinfo.busin_num}" readonly/>
@@ -256,6 +256,23 @@
 				
 </body>
 <script>
+var valueshrank = $('[name=shrank]').val();
+
+$(document).ready(function() {
+	
+	if (valueshrank == 1) {
+		$('[name=shrank]').val('영업중');
+	}else if (valueshrank == 2) {
+		$('[name=shrank]').val('폐업');
+		$('#shrank').css({'display':'none'});
+	}else if (valueshrank == 3) {
+		$('[name=shrank]').val('블랙');
+	}
+
+});
+
+
+
 
 </script>
 </html>

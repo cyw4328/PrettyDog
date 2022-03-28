@@ -146,7 +146,7 @@
 				            </tr>
 				            <tr>
 				                <td>회원상태</td>
-				                <td>${info.mem_state}</td>
+				                <td><input type="text" name="mstate"  value="${info.mem_state}" disabled/></td>
 				            </tr>
 				            <tr>
 				                <td>가입일</td>
@@ -156,7 +156,7 @@
 				            </tr>
 				            <tr>
 				                <td>회원등급</td>
-				                <td>${info.mem_rank}</td>
+				                <td><input type="text" name="mrank"  value="${info.mem_rank}" disabled/></td>
 				            </tr>
 				            <tr>
 				                <td>이메일</td>
@@ -170,35 +170,47 @@
 				    </form>
 				    
 					<form action="apuserupdate" method="post">
-						<table border="1" width="400px">
-				        	
-				        	<input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/>
-				        	
-				        	<tr>
-				        		<td colspan="2" align="center">회원상태</td>
-				        	</tr>
-				        	
-				        	
-				            <tr>
-								<td colspan="2" align="center">
-									<input type="radio" name="state" value="0" 
-									<c:if test="${info.mem_state eq '0'}"> checked</c:if>
-									/> 일반
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="state" value="1" 
-									<c:if test="${info.mem_state eq '1'}"> checked</c:if>
-									/> 제재
-									<input style="display: none;" type="radio" name="state" value="2" 
-									<c:if test="${info.mem_state eq '2'}"> checked</c:if>
-									/>
-									<input style="display: none;" type="radio" name="state" value="3" 
-									<c:if test="${info.mem_state eq '3'}"> checked</c:if>
-									/>
-								</td>
-							</tr>
-				        </table>
+						<div id="apstate" >
+							<table border="1" width="400px">
+					        	
+					        	<input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/>
+					        	
+					        	<tr>
+					        		<td colspan="2" align="center">회원상태</td>
+					        	</tr>
+					        	
+					        	
+					            <tr>
+									<td colspan="2" align="center">
+										<input type="radio" name="state" value="0" 
+										<c:if test="${info.mem_state eq '0'}"> checked</c:if>
+										/> 일반
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="state" value="1" 
+										<c:if test="${info.mem_state eq '1'}"> checked</c:if>
+										/> 제재
+										<input style="display: none;" type="radio" name="state" value="2" 
+										<c:if test="${info.mem_state eq '2'}"> checked</c:if>
+										/>
+										<input style="display: none;" type="radio" name="state" value="3" 
+										<c:if test="${info.mem_state eq '3'}"> checked</c:if>
+										/>
+									</td>
+								</tr>
+					        </table>
+						</div>	
+						
+				        <div id="apbt">
+					        <table>
+					            <tr>
+					                <td colspan="2" align="center">
+					                    <input type="submit" value="수정" >
+					                </td>
+					            </tr>
+					        </table>
+				        </div>
 				        &nbsp;&nbsp;&nbsp;&nbsp;
-				        <div name="aprank" >
+				        <div id="aprank" >
 					        <table id="aprank" border="1" width="400px">
 					        	<tr>
 					        		<td colspan="2" align="center">회원등급</td>
@@ -223,17 +235,19 @@
 					        </table>
 				        
 				        </div>
-				        &nbsp;&nbsp;&nbsp;&nbsp;
-				        <table>
-				            <tr>
-				                <td colspan="2" align="center">
-				                    <input type="submit" value="수정" >
-				                </td>
-				            </tr>
-				        </table>
+				        
+				        <div id="apbt2">
+					        <table>
+					            <tr>
+					                <td colspan="2" align="center">
+					                    <input type="submit" value="수정" >
+					                </td>
+					            </tr>
+					        </table>
+				        </div>
 				    </form>
 				
-				    <form action="appointupdate" method="post">
+				    <form id="apadmin" action="appointupdate" method="post">
 				        <table border="1" width="400px">
 				        	<input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/>
 				        	<tr>
@@ -288,23 +302,53 @@
 				
 </body>
 <script>
-/* $(function(info){
-	var con = document.getElementsByClassName("aprank");
-	if(info.mem_rank == 2){
-		con.style.display = "none";
-	}
-}) */
+var valuemstate = $('[name=mstate]').val();
+var valuemrank = $('[name=mrank]').val();
 
-/* $(function(info){
-	if (info.mem_state == 0) {
-		mestate = "일반";
-	}else if (info.mem_state == 1) {
-		mestate = "제재";
-	}else if (info.mem_state == 2) {
-		mestate = "휴먼";
-	}else if (info.mem_state == 3) {
-		mestate = "탈퇴";
+$(document).ready(function() {
+	
+	if (valuemstate == 0) {
+		$('[name=mstate]').val('일반');
+	}else if (valuemstate == 1) {
+		$('[name=mstate]').val('제재');
+	}else if (valuemstate == 2) {
+		$('[name=mstate]').val('휴먼');
+		$('#apstate').css({'display':'none'});
+		$('#apbt').css({'display':'none'});
+	}else if (valuemstate == 3) {
+		$('[name=mstate]').val('탈퇴');
+		$('#apstate').css({'display':'none'});
+		$('#apbt').css({'display':'none'});
 	}
-}) */
+	
+	
+	if (valuemrank == 0) {
+		$('[name=mrank]').val('일반회원');
+	}else if (valuemrank == 1) {
+		$('[name=mrank]').val('업주회원');
+		$('#aprank').css({'display':'none'});
+		$('#apbt2').css({'display':'none'});
+	}else if (valuemrank == 2) {
+		$('[name=mrank]').val('관리자');
+		$('[name=mstate]').val('관리자');
+		$('#aprank').css({'display':'none'});
+		$('#apbt2').css({'display':'none'});
+		$('#apstate').css({'display':'none'});
+		$('#apbt').css({'display':'none'});
+		$('#apadmin').css({'display':'none'});
+	}else if (valuemrank == 3) {
+		$('[name=mrank]').val('일반관리자');
+	}
+	
+
+	
+	
+	
+});
+
+
+
+
+
 </script>
 </html>
