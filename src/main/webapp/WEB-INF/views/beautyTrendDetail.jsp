@@ -35,7 +35,7 @@
 
 function goToDetail(){
 	//location.href='sshShopDetail?idx=${beautyTrendDetail.busin_num}&memId='+loginId;
-	location.href='sshShopDetail?idx='+${beautyTrendDetail.busin_num};
+	location.href='sshShopDetail?idx='+'${beautyTrendDetail.busin_num}';
 }
 
 </script>

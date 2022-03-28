@@ -94,7 +94,7 @@
 		</div>
 		<div id="ChangeOkList">
 			<c:forEach var="list" items="${ShopServiceList}">
-				<c:if test="${list.busin_smalldog == 0}">
+				<c:if test="${list.busin_smalldog == 1}">
 					<table class="table1">
 						<thead>
 							<tr><th colspan="3" style="background-color: black; color: white;">소형견</th></tr>
@@ -139,7 +139,7 @@
 			</c:forEach>
 						
 			<c:forEach var="list" items="${ShopServiceList}">
-				<c:if test="${list.busin_middledog == 0}">	
+				<c:if test="${list.busin_middledog == 1}">	
 					<table class="table1">
 						<thead>
 							<tr><th colspan="3" style="background-color: black; color: white;">중형견</th></tr>
@@ -185,7 +185,7 @@
 			</c:forEach>					
 
 		<c:forEach var="list" items="${ShopServiceList}">
-			<c:if test="${list.busin_bigdog == 0}">	
+			<c:if test="${list.busin_bigdog == 1}">	
 				<table class="table1">
 						<thead>
 							<tr><th colspan="3" style="background-color: black; color: white;">대형견</th></tr>
