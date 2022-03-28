@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+	<%-- <input id="busin_num" type="text" value="${sshShopDetail[0].shop_boardnum}" class="shopBoardNum"/> --%>
 	<p><span id="QnaTitle"> QnA 작성</span>(욕설 및 악의적인 글은 법적인 처벌을 받을 수 있습니다.)</p>
 	<div>
 		<textarea cols="90" rows="5" placeholder="내용을 입력해 주세요" id="QnaTextWrite"></textarea><a href="#" onclick="QnaWrite()">등록</a>
@@ -20,7 +21,6 @@
 	<div class="textarea">
 		<p style="font-weight: bold; margin-bottom: -5px;">${sshShopQnaList.mem_id }</p>
 		<p>${sshShopQnaList.shop_boarddate }</p>
-		<input type="hidden" value="${sshShopQnaList.shop_boardnum}" class="shopBoardNum"/>
 		<textarea style="margin-top: -10px;" class="${sshShopQnaList.shop_boardnum}" cols="90" rows="3">${sshShopQnaList.shop_boardcont }</textarea>
 		<c:forEach items="${sshShopQnaNnswerList }" var="sshShopQnaNnswerList">
 			<c:if test="${sshShopQnaList.shop_boardnum == sshShopQnaNnswerList.shop_boardnum }">
@@ -214,12 +214,12 @@ console.log("큐앤에이에서 확인한 점주 아이디 : "+memId1);
 		//$(".answerDivFn").text();
 		var QnaNnswerText = $('.answerDivFn').val();
 		var memId = memId0;
-		var busin_num = $("#busin_num").val();
+		var busin_num = $("#busin_mem_chk").val();
 		console.log(QnaNnswerText);
 		console.log(memId);
 		console.log(bb);
 		console.log(busin_num);
-		location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&memId='+memId+'&qnaDivNum='+bb+'&busin_num='+busin_num;
+		location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&qnaDivNum='+bb+'&busin_num='+busin_num;
 		//location.href='doFindMemberId?name='+name+'&email='+email;
 	}
 	 
@@ -228,23 +228,24 @@ console.log("큐앤에이에서 확인한 점주 아이디 : "+memId1);
 			//$(".answerDivFn").text();
 			var QnaNnswerText = $('.answerDivFn2').val();
 			var memId = memId0;
-			var busin_num = $("#busin_num").val();
+			var busin_num = $("#busin_mem_chk").val();
 			console.log(QnaNnswerText);
 			console.log(memId);
 			console.log(bb);
 			console.log(busin_num);
-			location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&memId='+memId+'&qnaDivNum='+bb+'&busin_num='+busin_num;
+			location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&qnaDivNum='+bb+'&busin_num='+busin_num;
 			//location.href='doFindMemberId?name='+name+'&email='+email;
 	}
 	 
 	function QnaWrite() {
 		console.log("QnaWrite() 확인");
 		var qnaText = $("#QnaTextWrite").val();
-		var busin_num = $("#busin_num").val();
+		var busin_num = $("#busin_mem_chk").val();
 		console.log(qnaText);
 		console.log(memId0);
 		console.log(busin_num);
-		location.href='QnaWrite?qnaText='+qnaText+'&memId='+memId0+'&busin_num='+busin_num;
+		location.href='QnaWrite?qnaText='+qnaText+'&busin_num='+busin_num;
+		//location.href='QnaWrite?qnaText='+qnaText+'&memId='+memId0+'&busin_num='+busin_num;
 	}
 	
 </script>
