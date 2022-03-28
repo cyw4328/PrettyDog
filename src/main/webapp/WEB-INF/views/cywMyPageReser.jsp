@@ -54,7 +54,7 @@
          <%@ include file="cywMyPageMenuBarOwner.jsp"%>      
       </c:if>
    </c:forEach>
-   <div style="position: relative; top: 70px; left: 250px;">
+   <div style="position: relative; left: 250px;">
       <div style="position: absolute; top: 50px; left: 20px;">
          <h4 style="font-size: 25px;">${loginId }님의 예약 목록</h4>   
       </div>
