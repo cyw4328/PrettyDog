@@ -57,7 +57,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -127,17 +127,17 @@
                     <div style="width: 5%; height: 100%;"></div>
                     <div style="width: 90%; height: 100%; display: flex; border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
                         <div style="width: 50%; height: 100%;">
-                            <input class="form-control border-0.5 shadow-0" style="width: 100%; height: 100%; font-size: 15px;" type="text" name="search" placeholder="원하는 검색어를 입력하세요~">
+                            <input class="form-control border-0.5 shadow-0" style="width: 100%; height: 100%; font-size: 15px;" type="text" name="search" placeholder="검색할 매장명을 입력하세요~">
                         </div>
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <button class="btn btn-secondary btn-lg" style="width: 100%; height: 100%; font-size: 15px;" type="submit">Search </button>
+                            <button id="searchBtr" name="btnSearch" class="btn btn-secondary btn-lg" style="width: 100%; height: 100%; font-size: 15px;">Search </button>
                         </div>
                         <div style="width: 1%; height: 100%;"></div>
 
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" onchange=""> <!-- onchange 함수 필요함 -->
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1" >
                                 <option value="99" selected="selected">매장상태</option>
                                 <option value="1">영업중</option>
                                 <option value="2">폐업</option>
@@ -212,17 +212,19 @@
 <script>
 var currPage = 1;
 var totalPage = 2;
+var a = '99';
+var b ='99';
 
-apshoplist3(currPage,10);
+apshoplist3(currPage,10,a,b);
 
 
-function apshoplist3(page,cnt) {
+function apshoplist3(page,cnt,a,b) {
 	
 	// 페이지 도착하자마자 ajax 실행
 	$.ajax({
 		type:'POST',
 		url:'apshoplist3',
-		data:{'page':page,'cnt':cnt}, 
+		data:{'page':page,'cnt':cnt,'a':a,'b':b}, 
 		dataType:'JSON',
 		success:function(data) {
 
@@ -238,7 +240,9 @@ function apshoplist3(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						apshoplist3(page,10);
+						a = $('input[name="search"]').val();
+						b = $('select[name="shOrder1"]').val();
+						apshoplist3(page,10,a,b);
 					}
 				});
 			}
@@ -285,6 +289,20 @@ function listDraw(list) {
     $('#list').empty();
     $('#list').append(content);
 }
+
+$('#searchBtr').click(function() {
+	a = $('input[name="search"]').val();
+	b = $('select[name="shOrder1"]').val();
+	console.log(a);
+	console.log(b);
+	/* if (a == "") {
+		alert("아이디를 입력하세요");
+	} */
+	
+	apshoplist3(currPage,10,a,b);
+	
+})
+
 
 
 </script>

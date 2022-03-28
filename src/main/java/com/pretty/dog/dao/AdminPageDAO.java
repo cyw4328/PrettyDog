@@ -22,9 +22,9 @@ public interface AdminPageDAO {
 	void adminPointAdd(String id, String cHpoint, String pointstate);
 	
 	//관리자 매장
-	int apshoplist3Count();
+	int apshoplist3Count(String a, int b1);
 
-	ArrayList<DogDTO> apshoplist3(int pagePerCnt, int offset);
+	ArrayList<DogDTO> apshoplist3(int pagePerCnt, int offset, String a, int b1);
 	
 
 	DogDTO shopdetail(String shop);

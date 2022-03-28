@@ -57,7 +57,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -248,6 +248,16 @@ function listDraw(list) {
     var content = '';
 
     list.forEach(function(item,mem_id) {
+    	var date = new Date(item.point_date);
+    	
+    	if (item.point_distin == 0) {
+    		mestate = "적립";
+		}else if (item.point_distin == 1) {
+			mestate = "차감";
+		}
+    	
+    	
+    	
 
     	content += '<tr>';
     	content += '<td>'+item.mem_id+'</td>';
@@ -255,7 +265,7 @@ function listDraw(list) {
     	content += '<td>'+item.point_date+'</td>';
     	content += '<td>'+item.point_cont+'</td>';
     	content += '<td>'+item.point_cdc+'</td>';
-    	content += '<td>'+item.point_distin+'</td>';
+    	content += '<td>'+mestate+'</td>';
     	content += '</tr>';
 
     });
