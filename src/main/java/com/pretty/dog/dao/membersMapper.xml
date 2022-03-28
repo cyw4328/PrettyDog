@@ -84,7 +84,9 @@
 			busin_juso=#{shopAddr},
 			busin_smalldog=#{smallD},
 			busin_middledog=#{middleD},
-			busin_bigdog=#{bigD}
+			busin_bigdog=#{bigD},
+			busin_name=#{busin_name},
+			busin_num=#{busin_num}
 			WHERE mem_id =#{id}
 	</update>
 	 
