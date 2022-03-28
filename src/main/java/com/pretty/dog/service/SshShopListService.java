@@ -80,7 +80,7 @@ public class SshShopListService {
 
 	@Transactional
 	public String reviewWrite(HashMap<String, Object> params, MultipartFile photos) {
-		String page = "sshShopDetail";
+		String page = "redirect:/sshShopDetail?idx="+params.get("busin_num");
 		HashMap<String, Object> reviewWrite = new HashMap<String, Object>();
 		reviewWrite.put("busin_num", params.get("busin_num"));
 		reviewWrite.put("apprai_cont", params.get("apprai_cont"));
