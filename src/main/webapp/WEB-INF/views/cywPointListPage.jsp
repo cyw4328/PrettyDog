@@ -209,7 +209,7 @@ function memPointList(page,cnt) {
 		data:{'page':page,'cnt':cnt}, 
 		dataType:'JSON',
 		success:function(data) {
-
+			console.log(data);
 			totalPage = data.pages;
 			listDraw(data.list);
 			console.log(data.list);
