@@ -75,7 +75,7 @@
             </div>
             <div id="contents">
                 <div class="container">
-                	<form action="PwS" method="POST" onsubmit="return submitCheck();">
+                	<form action="PwS" method="POST" onsubmit="return submitCheck();" id="PwS">
                         <table>
                             <tr>
                                 <td><input type="text" placeholder="아이디를 입력해주세요" id=id name="userId"/></td>
@@ -92,9 +92,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="submit"  
+                                <td><input type="button"  
                                 	style="background-color: #F8E0F1; margin:auto; display:block; cursor:pointer; 
-                                	font-size: 16; width:290px;height:40px; color:black; border-radius: 5px / 5px; border: 0; "  value="확인"/></td>
+                                	font-size: 16; width:290px;height:40px; color:black; border-radius: 5px / 5px; border: 0; "  value="확인" id="PwSearchBtn"/></td>
                             </tr>
 
                         </table>
@@ -159,20 +159,42 @@
     }); 
 
     
-   		 function submitCheck() {
-    	   if(check != true) {
-    		  
-    	   		return false;
-			}	
-    	  		return true
-    	}
-   		 
-   		var msg = "${msg}";
+	 function submitCheck() {
+  	   if(check != true) {
+  		  
+  	   		return false;
+	}	
+  	  		return true
+  	}
+ 		 
+	var msg = "${msg}";
 
-   		if (msg != "") {
-   			alert(msg);
-   		}
-   		 
+	if (msg != "") {
+		alert(msg);
+	}
+		 
+	$('#PwSearchBtn').click(function() {
+		var $id = $('#id').val();
+		var $name = $('#name').val();
+		var $email = $('#email').val();
+		var $phone = $('#phone').val();
+		
+		if ($id == '') {
+			alert("아이디를 입력해주랑개~");
+		}else if ($name == '') {
+			alert("이름을 입력해주랑개~");
+		}else if ($phone == '') {
+			alert("전화번호를 입력해주랑개~");
+		}else if ($email == '') {
+			alert("이메일을 입력해주랑개~");
+		}else {
+			$('#PwS').submit();
+		}
+		
+		
+	})
+  		
+   		
     </script>
 
 </html>

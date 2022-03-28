@@ -79,20 +79,27 @@
 	 var $name = $('input[name="nameInput"]').val();
 	 var $email = $('input[name="emailInput"]').val();
 	 
-	 $.ajax({
-			type:'post',
-			url:'idSearch',
-			data:{"name":$name,"email":$email},
-			dataType:'json',
-			success:function(data) {
-				console.log(data);
-				drawList(data.list);
-			},
-			error:function(e) {
-				console.log(e);
-			}
-		});
-	
+	 if ($name == '') {
+		alert("이름을 입력하랑개~");
+	}else if ($email == '') {
+		alert("이메일을 입력하랑개~");
+	}else {
+		
+		 $.ajax({
+				type:'post',
+				url:'idSearch',
+				data:{"name":$name,"email":$email},
+				dataType:'json',
+				success:function(data) {
+					console.log(data);
+					drawList(data.list);
+				},
+				error:function(e) {
+					console.log(e);
+				}
+			});
+	}
+	 
 })
 
 function drawList(list) {
