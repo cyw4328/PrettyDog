@@ -119,14 +119,14 @@ public class AdminPageService {
 		return mav;
 	}
 
-	public HashMap<String, Object> apshoplist3(int currPage, int pagePerCnt) {
+	public HashMap<String, Object> apshoplist3(int currPage, int pagePerCnt, String a, int b1) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		//어디서부터 보여줘야 하는가?
 		int offset = ((currPage-1) * pagePerCnt-1) >= 0 ? ((currPage-1) * pagePerCnt-1) : 0; 
 		logger.info("offset:{}",offset);
 		
-		int totalCount = dao.apshoplist3Count(); 
+		int totalCount = dao.apshoplist3Count(a,b1); 
 		
 		int range = totalCount%pagePerCnt > 0 ?  (totalCount/pagePerCnt+1) : (totalCount/pagePerCnt);
 		
@@ -134,11 +134,13 @@ public class AdminPageService {
 		logger.info("만들수 있는 총 페이지 :{}",range);
 		
 		map.put("pages", range);
-		map.put("list", dao.apshoplist3(pagePerCnt,offset));
+		map.put("list", dao.apshoplist3(pagePerCnt,offset,a,b1));
 		
 		return map;
 	}	
 
+	
+	
 	
 	
 

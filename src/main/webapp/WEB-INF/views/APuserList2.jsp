@@ -57,7 +57,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -141,7 +141,7 @@
 
 
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1"> <!-- onchange 함수 필요함 -->
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder1" name="shOrder1"> 
                                 <option value="99" selected="selected">전체회원상태</option>
                                 <option value="0">일반</option>
                                 <option value="1">제재</option>
@@ -152,10 +152,11 @@
 
                         <div style="width: 1%; height: 100%;"></div>
                         <div style="width: 10%; height: 100%;">
-                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder2" name="shOrder2"> <!-- onchange 함수 필요함 -->
+                            <select class="btn btn-light" style="width: 100%; height: 100%; background-color: white; font-size: 15px;" id="shOrder2" name="shOrder2"> 
                                 <option value="99" selected="selected">전체회원</option>
                                 <option value="0">일반회원</option>
                                 <option value="1">업주회원</option>
+                                <option value="2">관리자</option>
                                 <option value="3">일반관리자</option>
                             </select>
                         </div>
