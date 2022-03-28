@@ -173,9 +173,15 @@ public class MembersService {
 		String id = params.get("id");
 		String busin_name = params.get("busin_name");
 		logger.info("확인 : {}",id+"/"+busin_name);
-		//String idck = dao.shopIdck(id);
-		//logger.info("idck확인 : {}",idck);
-		//dao.shopup(params);
+		int idck = dao.shopIdck(id);
+		logger.info("idck확인 : {}",idck);
+		
+		if(idck>0) {
+			dao.shopup(params);
+		}else {
+			dao.shopIn(params);
+		}
+		
 }
 
 	public HashMap<String, Object> shopSaupCk(String shopSaup) {
