@@ -89,6 +89,21 @@
 			busin_num=#{busin_num}
 			WHERE mem_id =#{id}
 	</update>
+	
+	
+	<!-- MY 매장정보 수정을 위한 아이디 체크-->
+	<select id="shopIdck" resultType="Integer">
+		select COUNT(*) from shop WHERE mem_id =#{param1}
+	</select>
+	
+	
+	<!-- MY 매장 회원가입 단계에서 매장정보 등록을 안했을때-->
+	<insert id="shopIn" parameterType = "hashmap">
+	      INSERT INTO shop (busin_num,mem_id,busin_name,busin_info,busin_smalldog,busin_middledog,busin_bigdog,busin_area,busin_juso)
+	        VALUES(#{busin_num},#{id},#{busin_name},#{shopSogae},#{smallD},#{middleD},#{bigD},#{addr},#{shopAddr})
+	 </insert>
+	
+	
 	 
 	 
 	 <!-- MY강아지 등록 -->

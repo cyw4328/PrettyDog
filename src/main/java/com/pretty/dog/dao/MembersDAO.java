@@ -49,6 +49,10 @@ public interface MembersDAO {
 
 	ArrayList<DogDTO> memberPassCk(String id);
 
+	int shopIdck(String id);
+
+	int shopIn(HashMap<String, String> params);
+
 
 
 
