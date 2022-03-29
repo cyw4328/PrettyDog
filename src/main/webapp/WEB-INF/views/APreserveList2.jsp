@@ -81,11 +81,11 @@
 			border-bottom: 1px solid #ccc;
 		}
 		
-		#HangmokList{
+		/* #HangmokList{
 			position: absolute;
 			top: 120px;
 			/* left: 10px; */
-		}
+		} */
  
    </style>
 
@@ -100,7 +100,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -251,17 +251,54 @@ function listDraw(list) {
     var content = '';
 
     list.forEach(function(item,reser_num) {
+	    var date = new Date(item.reser_askdate);
+	    var time = new Date(item.reser_visitday);
+	    var dateup = new Date(item.reser_updateday);
+	    	    
+	    if (item.reser_dog == 1) {
+    		mestate = "소형견";
+		}else if (item.reser_dog == 2) {
+			mestate = "중형견";
+		}else if (item.reser_dog == 3) {
+			mestate = "대형견";
+		}
+	    
+	    if (item.reser_state == 0) {
+    		mestate2 = "예약완료";
+		}else if (item.reser_state == 1) {
+    		mestate2 = "노쇼";
+		}else if (item.reser_state == 2) {
+			mestate2 = "예약취소";
+		}else if (item.reser_state == 3) {
+			mestate2 = "이용완료";
+		}else if (item.reser_state == 4) {
+			mestate2 = "리뷰작성완료";
+		}
+	    
 
     	content += '<tr>';
     	content += '<td>'+item.reser_num+'</td>';
    		content += '<td>'+item.busin_name+'</td>';
     	content += '<td>'+item.mem_id+'</td>';
-    	content += '<td>'+item.reser_askdate+'</td>';
-    	content += '<td>'+item.reser_visitday+'</td>';
-    	content += '<td>'+item.reser_dog+'</td>';
-    	content += '<td>'+item.reser_updateday+'</td>';
+    	content += '<td>'+date.getFullYear()+"-"
+	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
+	      +("0" + date.getDate()).slice(-2)+"  /  "
+	      +("0" + date.getHours()).slice(-2)+" : "
+	      +("0" + date.getMinutes()).slice(-2)+" : "
+	      +("0" + date.getSeconds()).slice(-2)+'</td>'
+	      content += '<td>'+time.getFullYear()+"-"
+	      +("0"+(time.getMonth()+1)).slice(-2)+"-"
+	      +("0" + time.getDate()).slice(-2)+"  /  "
+	      +("0" + time.getHours()).slice(-2)+"시 "+'</td>'
+    	content += '<td>'+mestate+'</td>';
+    	content += '<td>'+dateup.getFullYear()+"-"
+	      +("0"+(dateup.getMonth()+1)).slice(-2)+"-"
+	      +("0" + dateup.getDate()).slice(-2)+"  /  "
+	      +("0" + dateup.getHours()).slice(-2)+" : "
+	      +("0" + dateup.getMinutes()).slice(-2)+" : "
+	      +("0" + dateup.getSeconds()).slice(-2)+'</td>'
     	content += '<td>'+item.reser_money+'</td>';
-    	content += '<td>'+item.reser_state+'</td>';
+    	content += '<td>'+mestate2+'</td>';
     	content += '</tr>';
 
     });

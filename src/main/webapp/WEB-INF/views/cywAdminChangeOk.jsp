@@ -47,7 +47,7 @@
 
 
 
-		#AllPage{
+		/* #AllPage{
 		position: relative;
 		top: 50px;
 		left: 50px;
@@ -62,14 +62,13 @@
 			position: absolute;
 			top: 70px;
 			left: 10px;
-		}
-		table {
+		} */
+		/* table {
 			border-collapse: collapse;
-			/* text-align: left; */
+
 			line-height: 1.5;
 			border: 1px solid #ccc;
 			margin: 20px 10px;
-			/* width: 600px; */
 		}
 		table thead {
 			border-right: 1px solid #ccc;
@@ -109,13 +108,48 @@
 		#ChangeOkList{
 			position: absolute;
 			top: 120px;
-			/* left: 10px; */
+			
 		}
 		.table1{
 			width: 60%;
 		    max-width: 100%;
 		    margin-bottom: 20px;
 			table-layout: fixed;
+		} */
+		
+		table {
+			width: 100%;
+			/* text-align: left; */
+			line-height: 1.5;
+			border: 1px solid #ccc;
+			margin: 15px 0px;
+			/* width: 600px; */
+		}
+		table thead {
+			border-right: 1px solid #ccc;
+			border-left: 1px solid #ccc;
+			background: #7092b0;
+		}
+		table thead th {
+			padding: 10px;
+			font-weight: bold;
+			vertical-align: top;
+			color: #fff;
+		}
+		table tbody th {
+			width: 150px;
+			padding: 10px;
+			font-weight: bold;
+			vertical-align: top;
+			border-bottom: 1px solid #ccc;
+			background: #fcf1f4;
+		}
+		table td {
+			width: auto;
+			height: 50px;
+			padding: 10px; 
+			vertical-align: top;
+			border-bottom: 1px solid #ccc;
 		}
  
    </style>
@@ -131,7 +165,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -152,16 +186,18 @@
         <!-- 내용 -->
         <div style="width: 87%; height: 100%;">
             <!-- 검색 바 -->
-            <div style="width: 100%; height: 5%;">
+            <div style="width: 100%; height: 11%;">
                 
             </div>
 
-            <div style="width: 100%; height: 85%; display: flex;">
+            <div style="width: 100%; height: 75%; display: flex;">
                 <div style="width: 5%; height: 100%;"></div>
                 <!-- 내용 -->
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
 					<div id="Allpage">
-						<div id="AddForm">
+						<div style="height: 20px;"></div>
+						<div id="AddForm" style="display: flex;">
+							<div style="width: 20px; height: 20px;"></div>
 							<input type="button" value="미처리된 환급목록보기" id="SingoList"/>
 						</div>
 						<div id="ChangeOkList">
@@ -213,7 +249,7 @@
 var currPage = 1;
 var totalPage = 2;
 
-ChangeOkList(currPage,10);
+ChangeOkList(currPage,8);
 
 
 function ChangeOkList(page,cnt) {
@@ -238,7 +274,7 @@ function ChangeOkList(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						ChangeOkList(page,10);
+						ChangeOkList(page,8);
 					}
 				});
 			}

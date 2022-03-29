@@ -98,7 +98,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color:rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -126,51 +126,207 @@
             <div style="width: 100%; height: 85%; display: flex;">
                 <div style="width: 5%; height: 100%;"></div>
                 <!-- 내용 -->
-                <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
-					<form>
-				        <table border="1" width="400px">
-				        	<tr>
-				        		<td colspan="2" align="center">회원정보</td>
-				        	</tr>
-				            <tr>
-				                <td>아이디</td>
-				                <td>${info.mem_id}</td>
-				            </tr>
-				            <tr>
-				                <td>닉네임</td>
-				                <td>${info.mem_nick}</td>
-				            </tr>
-				            <tr>
-				                <td>이름</td>
-				                <td>${info.mem_name}</td>
-				            </tr>
-				            <tr>
-				                <td>회원상태</td>
-				                <td><input type="text" name="mstate"  value="${info.mem_state}" disabled/></td>
-				            </tr>
-				            <tr>
-				                <td>가입일</td>
-				                <td>
-				                	${info.mem_date}
-				                </td>
-				            </tr>
-				            <tr>
-				                <td>회원등급</td>
-				                <td><input type="text" name="mrank"  value="${info.mem_rank}" disabled/></td>
-				            </tr>
-				            <tr>
-				                <td>이메일</td>
-				                <td>${info.mem_email}</td>
-				            </tr>
-				            <tr>
-				                <td>전화번호</td>
-				                <td>${info.mem_tel}</td>
-				            </tr> 
-				        </table>
+                <div style="display: flex; width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
+                	<div style="width: 2.5%; height: 100%;"></div>
+					<form style="width: 30%; height: 100%;">
+						<div style="width: 100%;  height: 100%;">
+							<div style="width: 100%;  height: 5%;"></div>
+							<div style="width: 100%;  height: 90%;background-color: #dbdbdb3d;  border: 0px solid transparent; border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 5px;" >
+							
+								<div style="width: 100%;  height: 10.4%; background-color: #9f8ac1; border : 0px solid transparent; border-radius: 20px 20px 0px 0px;
+								display: flex; justify-content: center; align-items: center;">
+									<b  style="color: white; text-align: center; font-size: 22px;">회원정보</b>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">아이디</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+									<a style="width: 52%; height: 60%; font-size: 20px;">${info.mem_id}</a>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">이름</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+					                <a style="width: 52%; height: 60%; font-size: 20px;">${info.mem_name}</a>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">회원상태</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+					                <a style="width: 52%; height: 60%; font-size: 20px;"><input type="text" name="mstate"  value="${info.mem_state}" disabled/></a>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">가입일</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+									<a style="width: 52%; height: 60%; font-size: 20px;">${info.mem_date} </a>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">회원등급</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+					                <a style="width: 52%; height: 60%; font-size: 20px;"><input type="text" name="mrank"  value="${info.mem_rank}" disabled/></a>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">이메일</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+					                <a style="width: 52%; height: 60%; font-size: 20px;">${info.mem_email}</a>
+								</div>
+								<div style="width: 100%;  height: 12.8%; border : 0px solid transparent; border-radius: 0px 0px 20px 20px; 
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 23%; height: 60%; font-size: 20px;">전화번호</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+					                <a style="width: 52%; height: 60%; font-size: 20px;">${info.mem_tel}</a>
+								</div>
+							</div>
+							<div style="width: 100%;  height: 5%;"></div>
+					        
+						</div>
 				    </form>
 				    
-					<form action="apuserupdate" method="post">
-						<div id="apstate" >
+					
+					<div style="width: 2.5%; height: 100%;"></div>
+				    <form style="width: 30%; height: 100%;" id="apadmin" action="appointupdate" method="post">
+				    
+				    	<div style="width: 100%;  height: 100%;">
+							<div style="width: 100%;  height: 20%;"><input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/></div>
+							<div style="width: 100%;  height: 45%;background-color: #dbdbdb3d;  border: 0px solid transparent; border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 5px;" >
+							
+								<div style="width: 100%;  height: 20%; background-color: #9f8ac1; border : 0px solid transparent; border-radius: 20px 20px 0px 0px;
+								display: flex; justify-content: center; align-items: center;">
+									<b  style="color: white; text-align: center; font-size: 22px;">포인트 수정</b>
+								</div>
+								<div style="width: 100%;  height: 20%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+									<a style="width: 25%; height: 60%; font-size: 20px;">보유 포인트</a>
+									<a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+									<a style="width: 50%; height: 60%; font-size: 20px;">${info.mem_point}</a>
+								</div>
+								<div style="width: 100%;  height: 20%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+					                <a style="width: 25%; height: 60%; font-size: 20px;">처리 내용</a>
+					                <a style="width: 5%; height: 60%; font-size: 20px;"> : </a>
+					                <a style="width: 50%; height: 60%; font-size: 20px;">관리자 임의 수정</a>
+								</div>
+								<div style="width: 100%;  height: 20%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+					                <a style=" height: 60%; font-size: 20px;">
+					                <input type="radio" id="bbb" name="pointstate" value="0" onchange="setDisplay()" checked="checked"> 적립
+				    				<input type="radio" id="aaa" name="pointstate" value="1" onchange="setDisplay()"> 차감
+				    				</a>
+								</div>
+								<div style="width: 100%;  height: 20%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+					                <a style=" height: 60%; font-size: 20px;"><input type="text" name="CHpoint" value="${info.point_cdc}" placeholder="ex) 100(적립), -100(차감)"/></a>
+								</div>
+							</div>
+							<div style="width: 100%;  height: 1%;"></div>
+							<div style="width: 100%;  height: 10%; ">
+								<div style="width: 100%;  height: 100%;
+								display: flex; justify-content: center; align-items: center;">
+									<input style="width: 25%; height: 65%; box-shadow: 2px 2px 2px;" type="submit" class="btn btn-outline-secondary" value="수정" >	
+								</div>
+							</div>
+							<div style="width: 100%;  height: 20%;"></div>
+						</div>
+
+				        
+				    </form> 
+				    
+				    
+				    
+				    
+				    
+				    
+					
+					<div style="width: 2.5%; height: 100%;"></div>
+					<form style="width: 30%; height: 100%;" action="apuserupdate" method="post">
+					
+						<div style="width: 100%;  height: 100%;">
+						
+							<div style="width: 100%;  height: 10%;"> <input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/></div>
+							
+							<div id="apstate" style="width: 100%;  height: 30%;background-color: #dbdbdb3d;  border: 0px solid transparent; border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 5px;" >
+							
+								<div style="width: 100%;  height: 30%; background-color: #9f8ac1; border : 0px solid transparent; border-radius: 20px 20px 0px 0px;
+								display: flex; justify-content: center; align-items: center;">
+									<b  style="color: white; text-align: center; font-size: 22px;">회원상태</b>
+								</div>
+								<div style="width: 100%;  height: 70%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+					                <a style="font-size: 20px;">
+					                	<input type="radio" name="state" value="0" 
+										<c:if test="${info.mem_state eq '0'}"> checked</c:if>/> 일반
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="state" value="1" 
+										<c:if test="${info.mem_state eq '1'}"> checked</c:if>/> 제재
+										<input style="display: none;" type="radio" name="state" value="2" 
+										<c:if test="${info.mem_state eq '2'}"> checked</c:if>/>
+										<input style="display: none;" type="radio" name="state" value="3" 
+										<c:if test="${info.mem_state eq '3'}"> checked</c:if>/>
+				    				</a>
+								</div>
+							</div>
+							
+							<div style="width: 100%;  height: 2%;"></div>
+							
+							<div id="apbt" style="width: 100%;  height: 5%; ">
+								<div style="width: 100%;  height: 100%;
+								display: flex; justify-content: center; align-items: center;">
+									<input style="width: 25%; height: 100%; box-shadow: 2px 2px 2px;" type="submit" class="btn btn-outline-secondary" value="수정" >	
+								</div>
+							</div>
+							
+							
+							<div style="width: 100%;  height: 4%;"></div>
+							
+							<div id="aprank" style="width: 100%;  height: 30%;background-color: #dbdbdb3d;  border: 0px solid transparent; border-radius: 20px 20px 20px 20px; box-shadow: 5px 5px 5px;" >
+							
+								<div style="width: 100%;  height: 30%; background-color: #9f8ac1; border : 0px solid transparent; border-radius: 20px 20px 0px 0px;
+								display: flex; justify-content: center; align-items: center;">
+									<b  style="color: white; text-align: center; font-size: 22px;">회원등급</b>
+								</div>
+								<div style="width: 100%;  height: 70%; border : 0px solid transparent;
+								display: flex; justify-content: center; align-items: center;">
+					                <a style="font-size: 20px;">
+					                
+										<input type="radio" name="rank" value="0" 
+										<c:if test="${info.mem_rank eq '0'}"> checked</c:if>
+										/> 일반회원
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<input style="display: none;" type="radio" name="rank" value="1" 
+										<c:if test="${info.mem_rank eq '1'}"> checked</c:if>
+										/>
+										<input style="display: none;" type="radio" name="rank" value="2" 
+										<c:if test="${info.mem_rank eq '2'}"> checked</c:if>
+										/>
+										<input type="radio" name="rank" value="3" 
+										<c:if test="${info.mem_rank eq '3'}"> checked</c:if>
+										/> 일반관리자
+				    				</a>
+								</div>
+							</div>
+							
+							<div style="width: 100%;  height: 2%;"></div>
+							
+							<div id="apbt2" style="width: 100%;  height: 5%; ">
+								<div style="width: 100%;  height: 100%;
+								display: flex; justify-content: center; align-items: center;">
+									<input style="width: 25%; height: 100%; box-shadow: 2px 2px 2px;" type="submit" class="btn btn-outline-secondary" value="수정" >	
+								</div>
+							</div>
+							
+							<div style="width: 100%;  height: 10%;"></div>
+							
+						</div>
+					
+					
+					
+					
+					
+					
+						<%-- <div id="apstate" >
 							<table border="1" width="400px">
 					        	
 					        	<input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/>
@@ -245,46 +401,12 @@
 					            </tr>
 					        </table>
 				        </div>
+ --%>				    
+				    
+				    
 				    </form>
+				    <div style="width: 2.5%; height: 100%;"></div>
 				
-				    <form id="apadmin" action="appointupdate" method="post">
-				        <table border="1" width="400px">
-				        	<input style="display: none" type="text" name="id" value="${info.mem_id}" readonly/>
-				        	<tr>
-				        		<td colspan="2" align="center">포인트 수정</td>
-				        	</tr>
-				        	<tr>
-				        		<td>보유 포인트</td>
-				        		<td name="point">${info.mem_point}</td>
-				        	</tr>
-				        	<tr>
-				        		<td>처리 내용</td>
-				        		<td>관리자 임의 수정</td>
-				        	</tr>
-				        	<tr>
-								<td colspan="2" align="center">
-									<input type="radio" id="bbb" name="pointstate" value="0" onchange="setDisplay()" checked="checked"> 적립
-				    				<input type="radio" id="aaa" name="pointstate" value="1" onchange="setDisplay()"> 차감
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" id="divId0">
-									<input type="text" name="CHpoint" value="${info.point_cdc}" placeholder="ex) 100(적립), -100(차감)"/>
-									
-								</td>
-							</tr>	
-				        </table>
-				         &nbsp;&nbsp;&nbsp;&nbsp;
-				        <table>
-				            <tr>
-				                <td colspan="2" align="center">
-				                    <input type="submit" value="수정" >
-				                </td>
-				            </tr>
-				        </table>
-				    </form>
-					
-					
                 </div>
                 
             </div>

@@ -100,7 +100,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -274,7 +274,7 @@ function listDraw(list) {
     var content = '';
 
     list.forEach(function(item,mem_id) {
-    	
+    	var date = new Date(item.mem_date);
     	
     	if (item.mem_rank == 0) {
     		mestate2 = "일반회원";
@@ -301,14 +301,15 @@ function listDraw(list) {
     	content += '<tr>';
    		content += '<td>'+item.mem_name+'</td>';
     	content += '<td>'+'<a href="apuserdetail?id='+item.mem_id+'">'+item.mem_id+'</a>'+'</td>';
-    	content += '<td>'+item.mem_date+'</td>';
+    	content += '<td>'+date.getFullYear()+"-"
+	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
+	      +("0" + date.getDate()).slice(-2)+'</td>'
     	content += '<td>'+item.mem_email+'</td>';
     	content += '<td>'+item.mem_tel+'</td>';
     	content += '<td>'+item.mem_point+'</td>';
     	content += '<td>'+mestate+'</td>';
     	content += '<td>'+mestate2+'</td>';
     	content += '</tr>';
-    	
     	
     	
 

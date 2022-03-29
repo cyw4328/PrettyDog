@@ -100,7 +100,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -259,6 +259,8 @@ function listDraw(list) {
     var content = '';
 
     list.forEach(function(item,busin_num) {
+    	var date = new Date(item.busin_date);
+    	
     	
     	if (item.busin_calss == 1) {
     		mestate = "영업중";
@@ -278,12 +280,18 @@ function listDraw(list) {
     	content += '<td>'+'<a href="apshopinfo?shop='+item.busin_num+'">'+item.busin_name+'</a>'+'</td>';
    		content += '<td>'+item.mem_name+'</td>';
     	content += '<td>'+item.mem_id+'</td>';
-    	content += '<td>'+item.busin_date+'</td>';
+    	content += '<td>'+date.getFullYear()+"-"
+	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
+	      +("0" + date.getDate()).slice(-2);+'</td>'
     	content += '<td>'+item.busin_juso+'</td>';
     	content += '<td>'+item.busin_num+'</td>';
     	content += '<td>'+item.busin_likes+'</td>';
     	content += '<td>'+mestate+'</td>';
     	content += '</tr>';
+    	
+    	
+    	
+    	
 
     });
     $('#list').empty();
