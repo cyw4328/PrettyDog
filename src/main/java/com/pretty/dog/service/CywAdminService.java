@@ -19,15 +19,17 @@ public class CywAdminService {
    Logger logger = LoggerFactory.getLogger(this.getClass());
    @Autowired CywAdminDAO dao;
    
-   public ModelAndView categoryPage() {
+   public ModelAndView categoryPage(String loginId) {
       ModelAndView mav = new ModelAndView();
       
-      /*
-       * ArrayList<DogDTO> list = dao.categoryPage();
-       * 
-       * mav.addObject("list", list);
-       */
-      mav.setViewName("cywCateGory");
+      int categoryPage = dao.SingoHangmokPage(loginId);
+      
+	  	if (categoryPage == 1) {
+			mav.setViewName("cywCateGory");
+		}else {
+			mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+			mav.setViewName("Main");
+		}
       
       return mav;
    }
@@ -494,14 +496,14 @@ public class CywAdminService {
    
    // 밑에부터 신고 부분
    
-   public ModelAndView SingoHangmokPage() {
+/*   public ModelAndView SingoHangmokPage() {
       
       ModelAndView mav = new ModelAndView();
       
       mav.setViewName("cywAdminSingoHangmok");
       
       return mav;
-   }
+   }*/
 
    public HashMap<String, Object> SingoHangmokList(int currPage, int pagePerCnt) {
       HashMap<String, Object> map = new HashMap<String, Object>();
@@ -572,10 +574,17 @@ public class CywAdminService {
       return mav;
    }
 
-   public ModelAndView SingoListPage() {
-      ModelAndView mav = new ModelAndView();
+   public ModelAndView SingoListPage(String loginId) {
       
-      mav.setViewName("cywAdminSingoList");
+      ModelAndView mav = new ModelAndView();
+  	
+	  	int AdminCheck = dao.SingoHangmokPage(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("cywAdminSingoList");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}
       
       return mav;
    }
@@ -621,10 +630,16 @@ public class CywAdminService {
       return mav;
    }
    
-   public ModelAndView SingoProcessListPage() {
+   public ModelAndView SingoProcessListPage(String loginId) {
       ModelAndView mav = new ModelAndView();
-      
-      mav.setViewName("cywAdminSingoProcess");
+    	
+	  	int AdminCheck = dao.SingoHangmokPage(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("cywAdminSingoProcess");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}
       
       return mav;
    }
@@ -650,10 +665,17 @@ public class CywAdminService {
       return map;
    }
 
-   public ModelAndView AdminServicePage() {
+   public ModelAndView AdminServicePage(String loginId) {
       ModelAndView mav = new ModelAndView();
       
-      mav.setViewName("cywAdminAddService");
+      int AdminCheck = dao.SingoHangmokPage(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("cywAdminAddService");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}
+      
       
       return mav;
    }
@@ -730,10 +752,16 @@ public class CywAdminService {
       return mav;
    }
 
-   public ModelAndView ChangeListPage() {
+   public ModelAndView ChangeListPage(String loginId) {
       ModelAndView mav = new ModelAndView();
-      
-      mav.setViewName("cywAdminChangeList");
+
+      int AdminCheck = dao.SingoHangmokPage(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("cywAdminChangeList");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	} 
       
       return mav;
    }
@@ -777,11 +805,15 @@ public class CywAdminService {
       return mav;
    }
 
-   public ModelAndView ChangeOkListPage() {
+   public ModelAndView ChangeOkListPage(String loginId) {
       ModelAndView mav = new ModelAndView();
-      
-      mav.setViewName("cywAdminChangeOk");
-      
+      int AdminCheck = dao.SingoHangmokPage(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("cywAdminChangeOk");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}  
       return mav;
    }
 
@@ -898,6 +930,21 @@ public class CywAdminService {
       
       return mav;
    }
+
+public ModelAndView SingoHangmokPage(String loginId) {
+	
+	ModelAndView mav = new ModelAndView();
+	
+	int AdminCheck = dao.SingoHangmokPage(loginId);
+	if (AdminCheck == 1) {
+		mav.setViewName("cywAdminSingoHangmok");
+	}else {
+		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+		mav.setViewName("Main");
+	}
+	
+	return mav;
+}
 
    
    
