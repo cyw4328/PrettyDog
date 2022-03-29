@@ -21,19 +21,19 @@
         <%@ include file="Header.jsp"%>
 	</section>
 
-	<h2>미용 트렌드</h2>
+	<h2 style="margin-left: 70px;">미용 트렌드</h2>
 	<form method="post" enctype="multipart/form-data" action="#">
 		<input type="hidden" name="mem_id" value="${mem_id }">
-		<h4>제목</h4>
-		<input type="text" name="community_sub"/>
-		<h4>내용</h4>
-		<input type="text" name="community_cont"/>
+		<h4 style="margin-left: 70px;">제목</h4>
+		<input style="margin-left: 70px;" type="text" name="community_sub"/>
+		<h4 style="margin-left: 70px;">내용</h4>
+		<input style="margin-left: 70px;" type="text" name="community_cont"/>
 		<div id='image_preview'>
-	    	<input type='file' id='btnAtt' name="photos" multiple='multiple' />
+	    	<input style="margin-left: 70px;" type='file' id='btnAtt' name="photos" multiple='multiple' />
 	    	<div id='att_zone'
 	      data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
 	  	</div>
-		<button onclick="fileSend()">등록</button>
+		<button onclick="fileSend()" style="margin-left: 70px;">등록</button>
 	</form>
 </body>
 <script>

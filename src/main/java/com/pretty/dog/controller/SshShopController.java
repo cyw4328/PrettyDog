@@ -143,6 +143,8 @@ public class SshShopController {
       logger.info("글쓰기 요청 : {}", params);
       logger.info("업로드 할 파일 명 : {}", photos.getOriginalFilename());
       System.out.println("컨트롤러 reser_num : " + params.get("reser_num"));
+      String page  = sshShopListService.reviewWrite(params, photos);
+      System.out.println("pagepagepagepage:" + page);
       return sshShopListService.reviewWrite(params, photos);
       //return null;
    }

@@ -83,6 +83,7 @@ public class SshShopListService {
 		String busin_num = (String)params.get("busin_num");
 		System.out.println("Service busin_numbusin_numbusin_num : " + busin_num);
 		String page = "redirect:/sshShopDetail?idx="+busin_num;
+		//String page = "sshShopDetail?idx="+busin_num;
 		HashMap<String, Object> reviewWrite = new HashMap<String, Object>();
 		reviewWrite.put("busin_num", params.get("busin_num"));
 		reviewWrite.put("apprai_cont", params.get("apprai_cont"));

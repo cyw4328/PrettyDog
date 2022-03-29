@@ -15,19 +15,19 @@
 	<input id="busin_num" type="hidden" value="${sshShopDetail[0].busin_num }" />
 	<p><span id="QnaTitle"> QnA 작성</span>(욕설 및 악의적인 글은 법적인 처벌을 받을 수 있습니다.)</p>
 	<div>
-		<textarea cols="90" rows="5" placeholder="내용을 입력해 주세요" id="QnaTextWrite"></textarea><a href="#" onclick="QnaWrite()">등록</a>
+		<textarea style="width: 530px; font-size: 12px;" cols="90" rows="5" placeholder="내용을 입력해 주세요" id="QnaTextWrite" onclick="logChk()"></textarea><a href="#" onclick="QnaWrite()" style="font-size: 15px;">등록</a>
 	</div>
 	<c:forEach items="${sshShopQnaList }" var="sshShopQnaList">
 	<div class="textarea">
 		<p style="font-weight: bold; margin-bottom: -5px;">${sshShopQnaList.mem_id }</p>
 		<p>${sshShopQnaList.shop_boarddate }</p>
 		<input type="hidden" value="${sshShopQnaList.shop_boardnum}" class="shopBoardNum"/>
-		<textarea style="margin-top: -10px;" class="${sshShopQnaList.shop_boardnum}" cols="90" rows="3">${sshShopQnaList.shop_boardcont }</textarea>
+		<textarea style="margin-top: -10px; width: 530px; font-size: 12px;" class="${sshShopQnaList.shop_boardnum}" cols="90" rows="3">${sshShopQnaList.shop_boardcont }</textarea>
 		<c:forEach items="${sshShopQnaNnswerList }" var="sshShopQnaNnswerList">
 			<c:if test="${sshShopQnaList.shop_boardnum == sshShopQnaNnswerList.shop_boardnum }">
 				<p style="margin-left: 50px; font-weight: bold; margin-bottom: -5px;">${sshShopDetail[0].busin_name }</p>
 				<p style="margin-left: 50px; margin-bottom: -5px;">${sshShopQnaNnswerList.scomment_date }</p>
-				<textarea style="margin-left: 50px; margin-bottom: 3px;" cols="90" rows="3">${sshShopQnaNnswerList.scomment_cont }</textarea>
+				<textarea style="margin-left: 50px; margin-bottom: 3px; font-size: 12px; margin-top: 2px;" cols="90" rows="3">${sshShopQnaNnswerList.scomment_cont }</textarea>
 			</c:if>
 		</c:forEach>
 		<div id="qnaBoard${sshShopQnaList.shop_boardnum }"></div>
@@ -74,6 +74,14 @@
 	console.log($(".textarea").children("input")[1]);
 	console.log($(".textarea").children("input")[2]);
 	*/
+	function logChk(){
+		console.log("logChk 확인 : " + memId0);
+		if(memId0 == "null"){
+			alert("로그인 하고 이용하세요");
+		}
+	}
+	
+	
 	var a = new Array();
 	
 	for(var i=0; i<$(".textarea").children("input").length; i++){
@@ -144,7 +152,7 @@
 						 for(var i=0; i<a.length; i++){
 							 content = "";
 								//console.log("아"); <button onclick="location.href='beautyTrendList'">
-								content = "<a href='#' id='answerDiv"+a[i]+"' onclick='answerBtn0("+a[i]+")'>답글 달기</a>";
+								content = "<a href='#' id='answerDiv"+a[i]+"' onclick='answerBtn0("+a[i]+")' style='font-size: larger'>답글 달기</a>";
 								$("#qnaBoard"+a[i]).append(content);
 						 }
 					 }
@@ -154,7 +162,7 @@
 						 for(var i=0; i<a1.length; i++){
 							 content = "";
 								//console.log("아"); <button onclick="location.href='beautyTrendList'">
-								content = "<a href='#' id='answerDiv"+a1[i]+"' onclick='answerBtn("+a1[i]+")'>답글 달기</a>";
+								content = "<a href='#' id='answerDiv"+a1[i]+"' onclick='answerBtn("+a1[i]+")' style='font-size: larger'>답글 달기</a>";
 								$("#qnaBoard"+a1[i]).append(content);
 						 }					 
 					 }
@@ -218,7 +226,7 @@
 		console.log(memId);
 		console.log(bb);
 		console.log(busin_num);
-		location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&memId='+memId+'&qnaDivNum='+bb+'&busin_num='+busin_num;
+		location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&qnaDivNum='+bb+'&busin_num='+busin_num;
 		//location.href='doFindMemberId?name='+name+'&email='+email;
 	}
 	 
@@ -232,7 +240,7 @@
 			console.log(memId);
 			console.log(bb);
 			console.log(busin_num);
-			location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&memId='+memId+'&qnaDivNum='+bb+'&busin_num='+busin_num;
+			location.href='QnaNnswerInsert?QnaNnswerText='+QnaNnswerText+'&qnaDivNum='+bb+'&busin_num='+busin_num;
 			//location.href='doFindMemberId?name='+name+'&email='+email;
 	}
 	 
