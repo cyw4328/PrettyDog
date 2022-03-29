@@ -596,7 +596,13 @@
 							
 		}else if(document.getElementById("breakTimeTwo")){
 			
-			if(btstTwo >= btetTwo){
+			if(btstOne == btetOne || btstOne > btetOne){
+				alert("첫 번째 브레이크 타임 설정을 확인해주세요.");
+			}else if(btstOne < st || btetOne > ed){
+				alert("브레이크 타임은 영업시간 내로 설정해주세요.");
+			}else if(btstOne == st && btetOne == ed) {
+				alert("영업 시간 전체가 브레이크 타임으로 설정될 수 없습니다. 설정 시간을 다시 확인해주세요.");
+			}else if(btstTwo >= btetTwo){
 				alert("두 번째 브레이크 타임 설정을 확인해주세요.");
 			}else if(btstTwo < st || btetTwo > ed){
 				alert("브레이크 타임은 영업시간 내로 설정해주세요.");
@@ -742,7 +748,13 @@
 							
 		}else if(document.getElementById("breakTimeTwo")){
 			
-			if(btstTwo >= btetTwo){
+			if(btstOne == btetOne || btstOne > btetOne){
+				alert("첫 번째 브레이크 타임 설정을 확인해주세요.");
+			}else if(btstOne < st || btetOne > ed){
+				alert("브레이크 타임은 영업시간 내로 설정해주세요.");
+			}else if(btstOne == st && btetOne == ed) {
+				alert("영업 시간 전체가 브레이크 타임으로 설정될 수 없습니다. 설정 시간을 다시 확인해주세요.");
+			}else if(btstTwo >= btetTwo){
 				alert("두 번째 브레이크 타임 설정을 확인해주세요.");
 			}else if(btstTwo < st || btetTwo > ed){
 				alert("브레이크 타임은 영업시간 내로 설정해주세요.");
@@ -752,8 +764,6 @@
 				alert("두 번째 브레이크 타임이 첫 번째 브레이크 타임보다 이릅니다. 브레이크 타임 설정을 다시 확인해주세요.");
 			}else if((ed-st)==((btetOne-btstOne)+(btetTwo-btstTwo))){
 				alert("영업 시간 전체가 브레이크 타임으로 설정될 수 없습니다. 설정 시간을 다시 확인해주세요.");
-			}else if(btstOne == btstTwo && btetOne == btetTwo){
-				alert("브레이크 타임이 겹칩니다. 다시 확인해주세요.");
 			}else{
 				//console.log("브레이크 타임이 두개인 경우");
 				var beforeBreakTime = Object.values(obj).slice(st,btstOne);

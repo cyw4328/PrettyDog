@@ -489,7 +489,7 @@ console.log("당일 선택");
     
 
     function findMyDog(){
-    	
+    		
     	if(loginId == null || loginId == "null" || loginId == 'undefine' ){
     		content += "<option value='noMyDog'>애견 없음</option>";
 			
@@ -551,6 +551,8 @@ console.log("당일 선택");
     $(function() {
 
         $("#myDog").change(function() {
+
+        	$("#servicePrice").text("0 Point");
         	
             var v = $("#myDog").val();
             
@@ -566,6 +568,8 @@ console.log("당일 선택");
             	add_num = 2;
             }else if(v == "대형견"){
             	add_num = 3;
+            }else if(v == "noChoiceDog"){
+            	add_num = 4;
             }
             
             $.ajax({
@@ -578,38 +582,45 @@ console.log("당일 선택");
             	dataType:"JSON",
             	success : function(data){
             		
-            		console.log(add_num);
+            		$("#shopService").empty();
+            		let content = "";
             		
             		if(data.length>0){
             			
             			busin_name = data[0].busin_name;
                 		busin_num = data[0].busin_num;
                 		busin_mem_id = data[0].mem_id;
-                		
-            			let content = "";
             			
                 		if(data.length>0){
-            				
+                			
+                			$("#shopService").empty();
+                			
             				content += "<option value='noChoiceService'>이용 서비스</option>";
                 			
                 			for(let i=0; i<data.length; i++){
                 				content += "<option value='"+data[i].price_cost+"'>"+data[i].add_sub+"</option>";
                 			}
-                			$("#shopService").empty();
+                			
             				$("#shopService").append(content);
             			}
             		}else{
-        				if(add_num == 1){
+            			if(add_num == 4){
+            				content += "<option value='noServiceInfo'>서비스 없음</option>";
+            				$("#shopService").append(content);
+                		}else if(add_num == 1){
 	        				alert("본 매장은 소형견 서비스가 없습니다.");
+	        				content += "<option value='noServiceInfo'>서비스 없음</option>";
+	        				$("#shopService").append(content);
         				}else if(add_num == 2){
 	        				alert("본 매장은 중형견 서비스가 없습니다.");
+	        				content += "<option value='noServiceInfo'>서비스 없음</option>";
+	        				$("#shopService").append(content);
         				}else if(add_num == 3){
 	        				alert("본 매장은 대형견 서비스가 없습니다.");
+	        				content += "<option value='noServiceInfo'>서비스 없음</option>";
+	        				$("#shopService").append(content);
         				}
-        				content += "<option value='noServiceInfo'>서비스 없음</option>";
         				
-            			$("#shopService").empty();
-        				$("#shopService").append(content);
         			}
             		
             		
@@ -630,7 +641,7 @@ console.log("당일 선택");
     $(function() {
 
         $("#shopService").change(function() {
-    		    	
+        
         	//shopServicePrice
         	var ssp = $("#shopService").val();
         	//console.log(ssp);
@@ -649,7 +660,7 @@ console.log("당일 선택");
     	
     	if($("#myDog").val() == "noChoiceDog" || $("#myDog").val() == "noMyDog"){
     		alert("서비스를 이용할 애견을 선택해주세요.");
-    	}else if(($("#shopService").val() == "noChoiceService")){
+    	}else if(($("#shopService").val() == "noChoiceService") || ($("#shopService").val() == "noServiceInfo") ){
     		alert("이용할 서비스를 선택해주세요.");
     	}else if(ChoiceDate == ""){
     		alert("예약하실 날짜를 선택해주세요.");
