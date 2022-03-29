@@ -53,6 +53,8 @@ public interface AdminPageDAO {
 
 	ArrayList<DogDTO> apreservelist3(int pagePerCnt, int offset);
 
+	int AdminPageCheck(String loginId);
+
 	/*
 	 * int apuserlist30Count(String a, int b1, int c1);
 	 * 

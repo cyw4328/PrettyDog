@@ -22,11 +22,16 @@ public class AdminPageService {
 	@Autowired AdminPageDAO dao;
 	
 	//관리자 회원리스트
-	public ModelAndView apuserlist2() {
+	public ModelAndView apuserlist2(String loginId) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("APuserList2");
-		
+		int AdminCheck = dao.AdminPageCheck(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("APuserList2");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}  
 		return mav;
 	}
 
@@ -111,11 +116,16 @@ public class AdminPageService {
 	}
 
 	//관리자 매장
-	public ModelAndView apshoplist2() {
+	public ModelAndView apshoplist2(String loginId) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("APshopList2");
-		
+		int AdminCheck = dao.AdminPageCheck(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("APshopList2");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}  
 		return mav;
 	}
 
@@ -216,10 +226,16 @@ public class AdminPageService {
 	
 	
 	//관리자 포인트
-	public ModelAndView appointlist2() {
+	public ModelAndView appointlist2(String loginId) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("APpointList2");
+		int AdminCheck = dao.AdminPageCheck(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("APpointList2");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}  
 		
 		return mav;
 	}
@@ -244,11 +260,18 @@ public class AdminPageService {
 	}
 	
 	//관리자 예약
-	public ModelAndView apreservelist2() {
+	public ModelAndView apreservelist2(String loginId) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("APreserveList2");
+		int AdminCheck = dao.AdminPageCheck(loginId);
+	  	if (AdminCheck == 1) {
+	  		mav.setViewName("APreserveList2");
+	  	}else {
+	  		mav.addObject("loginSuccessAlert", "관리자만 사용할수 있는 페이지입니다.");
+	  		mav.setViewName("Main");
+	  	}  
+		
 		
 		return mav;
 	}

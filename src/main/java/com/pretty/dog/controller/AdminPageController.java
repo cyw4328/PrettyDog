@@ -34,8 +34,10 @@ public class AdminPageController {
 	@RequestMapping(value = "/apuserlist2")
 	public ModelAndView apuserlist2(HttpSession session) {
 		logger.info("관리자 리스트 페이지");
-
-		return service.apuserlist2();
+		
+		String loginId = (String) session.getAttribute("loginId");
+		
+		return service.apuserlist2(loginId);
 	}
 	
 	@RequestMapping(value = "/apuserlist3", method = RequestMethod.POST) 
@@ -106,7 +108,9 @@ public class AdminPageController {
 	public ModelAndView apshoplist2(HttpSession session) {
 		logger.info("매장 리스트 페이지");
 
-		return service.apshoplist2();
+		String loginId = (String) session.getAttribute("loginId");
+		
+		return service.apshoplist2(loginId);
 	}
 	
 	@RequestMapping(value = "/apshoplist3", method = RequestMethod.POST) 
@@ -180,8 +184,9 @@ public class AdminPageController {
 	@RequestMapping(value = "/appointlist2")
 	public ModelAndView appointlist2(HttpSession session) {
 		logger.info("포인트 리스트 페이지");
-
-		return service.appointlist2();
+		String loginId = (String) session.getAttribute("loginId");
+		
+		return service.appointlist2(loginId);
 	}
 	
 	@RequestMapping(value = "/appointlist3", method = RequestMethod.POST) 
@@ -198,8 +203,10 @@ public class AdminPageController {
 	@RequestMapping(value = "/apreservelist2")
 	public ModelAndView apreservelist2(HttpSession session) {
 		logger.info("예약 리스트 페이지");
-
-		return service.apreservelist2();
+		
+		String loginId = (String) session.getAttribute("loginId");
+		
+		return service.apreservelist2(loginId);
 	}
 	
 	@RequestMapping(value = "/apreservelist3", method = RequestMethod.POST) 

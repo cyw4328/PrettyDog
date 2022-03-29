@@ -446,4 +446,11 @@
       and busin_num = #{param1}
    </update>
    
+   <!-- 관리자페이지 접속불가 아이디 검색 -->
+   <select id="SingoHangmokPage" resultType="int">
+   		SELECT count(mem_id) FROM members WHERE mem_id = #{param1} and mem_rank >= 2
+   </select>
+   
+   
+   
 </mapper>
