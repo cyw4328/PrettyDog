@@ -44,6 +44,7 @@ public class SshShopController {
       String memId = (String) session.getAttribute("loginId");
       System.out.println("로그인한 아이디"+memId);
       String page = "sshShopDetail";
+      //String page = "sshShopDetail?idx="+idx;
       ArrayList<HashMap<String,Object>> sshShopDetail = sshShopListService.sshShopDetail(idx);
       ArrayList<HashMap<String,Object>> sshMyInterestShopList = sshShopListService.sshMyInterestShopList(memId, idx);
       ArrayList<HashMap<String,Object>> sshShopQnaList = sshShopListService.sshShopQnaList(idx);
@@ -142,6 +143,8 @@ public class SshShopController {
       logger.info("글쓰기 요청 : {}", params);
       logger.info("업로드 할 파일 명 : {}", photos.getOriginalFilename());
       System.out.println("컨트롤러 reser_num : " + params.get("reser_num"));
+      String page  = sshShopListService.reviewWrite(params, photos);
+      System.out.println("pagepagepagepage:" + page);
       return sshShopListService.reviewWrite(params, photos);
       //return null;
    }

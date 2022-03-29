@@ -55,7 +55,7 @@
 		<li><a href="#tabmenu_02" data-toggle="tab">QnA</a></li>
 	</ul>
 	<div class="tab-content" style="position: absolute; left: 20px; top: 1400px; margin-left: 300px;">
-		<div class="tab-pane fade in active" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div>
+		<div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div>
 		<div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div>
 	</div>
 </div>
