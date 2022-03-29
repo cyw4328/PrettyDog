@@ -174,5 +174,7 @@ public interface CywAdminDAO {
    int reserDelOwnerPointAdd(int businChange, String busin_num);
 
    int reserStateChange(String busin_num, String reserDay, String canReserTime);
+
+   int SingoHangmokPage(String loginId);
    
 }
