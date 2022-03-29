@@ -56,7 +56,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -79,38 +79,7 @@
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 		}
-		/* #Allpage{
-			position: relative;
-			top: 150px;
-			left: 300px;
-		}
-		#AddForm{
-			position: absolute;
-			top: 50px;
-			left: 10px;
-		}
-		#HangmokList{
-			position: absolute;
-			top: 120px;
-			/* left: 10px; */
-		} */
-		/* input[name="SingoSub"]{
-			width: 300px;
-			height: 100px;
-		} */
-		input[name="AddBtn"] {
-			background-color: pink;
-			height: 60px;
-			width: 100px;
-			text-align: center;
-		}
-		./* table1{
-			width: 40%;
-		    max-width: 100%;
-		    margin-bottom: 20px;
-			table-layout: fixed;
-		} */
- 
+		
    </style>
 
 <body id="body">
@@ -124,7 +93,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -155,10 +124,12 @@
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
 					<div id="Allpage">
 						<div style="width: 300px; height: 20px;"></div>
-						<div id="AddForm">
-							<form action="SingoHangmokAdd" id="SingoHangmokAdd">
-								<input type="text" placeholder="추가할 항목이름을 적어주세요." name="SingoSub" id="SingoSub" style="width: 300px; height: 60px;"/>
-								<input t	ype="button" value="추가" name="AddBtn" id="AddBtn"  style="width: 100px; height: 60px; text-align: center; background-color: pink;"  />
+						<div id="AddForm" style="width: 600px; height: 50px; ">
+							<form action="SingoHangmokAdd" id="SingoHangmokAdd" style="display: flex;">
+								<div style="width: 20px;"></div>
+								<input type="text" class="form-control border-0.5 shadow-0" placeholder="추가할 항목이름을 적어주세요." name="SingoSub" id="SingoSub" style="width: 300px; height: 50px;"/>
+								<div style="width: 5px;"></div>
+								<input t	ype="button" class="btn btn-outline-primary" value="추가" name="AddBtn" id="AddBtn"  style="width: 80px; height: 50px; text-align: center;"  />
 							</form>
 						</div>
 						<div id="HangmokList">
@@ -207,7 +178,7 @@
 var currPage = 1;
 var totalPage = 2;
 
-SingoHangmokList(currPage,10);
+SingoHangmokList(currPage,8);
 
 
 function SingoHangmokList(page,cnt) {
@@ -232,7 +203,7 @@ function SingoHangmokList(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						SingoHangmokList(page,10);
+						SingoHangmokList(page,8);
 					}
 				});
 			}

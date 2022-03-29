@@ -47,7 +47,7 @@
 
 
 
-		#AllPage{
+		/* #AllPage{
 		position: relative;
 		top: 50px;
 		left: 50px;
@@ -62,19 +62,21 @@
 			position: absolute;
 			top: 70px;
 			left: 10px;
-		}
+		} */
+		
+		
 		table {
-			border-collapse: collapse;
-			text-align: left;
+			width: 100%;
+			/* text-align: left; */
 			line-height: 1.5;
 			border: 1px solid #ccc;
-			margin: 20px 10px;
-			width: 600px;
+			margin: 15px 0px;
+			/* width: 600px; */
 		}
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -91,12 +93,17 @@
 			background: #fcf1f4;
 		}
 		table td {
-			width: 350px;
+			width: auto;
+			height: 50px;
 			padding: 10px; 
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 		}
-		input[name="categoryName"]{
+		
+		
+		
+		
+		/* input[name="categoryName"]{
 			width: 300px;
 			height: 50px;
 		}
@@ -109,7 +116,7 @@
 		}
 		input[name="categoryBtn"]:hover {
 			background-color: black;
-		}
+		} */
  
    </style>
 
@@ -124,7 +131,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -155,11 +162,16 @@
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
 					<div id="AllPage">
 						<div id="CateGoryAdd">
-							<form action="cateGoryAdd" id="addForm">
-								<input type="text" placeholder="내용을 입력해주세요." name="categoryName"/>&nbsp;
-								<input type="radio" value="0" name="categoryClass"/>&nbsp;일반회원용&nbsp;&nbsp;
-								<input type="radio" value="1" name="categoryClass"/>&nbsp;관리자용&nbsp;&nbsp;
-								<input type="button" value="추가" id="categoryBtn" name="categoryBtn"/>
+							<div style="width: 20px; height: 20px;"></div>
+							<form action="cateGoryAdd" id="addForm" style="display: flex;">
+								<div style="width: 20px;"></div>
+								<input class="form-control border-0.5 shadow-0" type="text" placeholder="내용을 입력해주세요." name="categoryName" style="width: 300px; height: 50px;"/>
+								<div style="width: 5px;"></div>
+								<div style="display: flex; justify-content: center; align-items: center; ">
+									<input type="radio" value="0" name="categoryClass"/>&nbsp;일반회원용&nbsp;&nbsp;
+									<input type="radio" value="1" name="categoryClass"/>&nbsp;관리자용&nbsp;&nbsp;
+								</div>
+								<input class="btn btn-outline-primary" type="button" value="추가" id="categoryBtn" name="categoryBtn" style="width: 80px; height: 50px;"/>
 							</form>
 						</div>
 						<div id="categoryListDiv">
@@ -218,7 +230,7 @@
 var currPage = 1;
 var totalPage = 2;
 
-listCall(currPage,5);
+listCall(currPage,8);
 
 
 function listCall(page,cnt) {
@@ -241,7 +253,7 @@ function listCall(page,cnt) {
 				onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 					console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 					console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-					listCall(page,5);
+					listCall(page,8);
 				}
 			});
 			

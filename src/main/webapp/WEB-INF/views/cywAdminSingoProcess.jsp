@@ -56,7 +56,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -118,7 +118,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -174,10 +174,10 @@
                 <div style="width: 5%; height: 100%;"></div>
                 <!-- 내용 -->
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
-                		<div style="height: 5px;"></div>
+                		<div style="height: 20px;"></div>
 						
 						<div id="AddForm" style="display: flex;">
-							<div style="width: 30px; height: 30px; he background-color: balck;">
+							<div style="width: 20px; height: 30px;">
 							</div>
 							<div>
 								<input type="button" value="미처리된 신고목록보기" id="SingoList"/>
@@ -228,7 +228,7 @@
 var currPage = 1;
 var totalPage = 2;
 
-SingoProcessList(currPage,10);
+SingoProcessList(currPage,8);
 
 
 function SingoProcessList(page,cnt) {
@@ -253,7 +253,7 @@ function SingoProcessList(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						SingoProcessList(page,10);
+						SingoProcessList(page,8);
 					}
 				});
 			}
