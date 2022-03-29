@@ -182,8 +182,8 @@ function listDraw(list) {
       	content += '<td>'+date1.getFullYear()+"-"
       	+("0"+(date1.getMonth()+1)).slice(-2)+"-"
       	+("0" + date1.getDate()).slice(-2)+" "
-	      +("0" + date.getHours()).slice(-2)+":"
-	      +("0" + date.getMinutes()).slice(-2)+'</td>';
+	      +("0" + date1.getHours()).slice(-2)+":"
+	      +("0" + date1.getMinutes()).slice(-2)+'</td>';
 		content +='<td>'+dogClass+'</td>';
 		content +='<td>'+item.reser_service+'</td>';
 		content +='<td>'+item.reser_money+'</td>';
