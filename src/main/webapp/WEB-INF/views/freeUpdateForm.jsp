@@ -51,7 +51,7 @@
       	<table>
          <tr style="height: 5%">
             <td>
-            	<input type="text" name="community_sub" id="subject" style="width: 70%" value = "${dto.community_sub}">
+            	<input type="text" name="community_sub" id="subject" style="width: 70%" value = "${dto.community_sub}"  maxlength='20'>
             	
             	<div id="selecterBox">
             	
@@ -79,7 +79,7 @@
          </tr>
          <tr style="height: 60%">     
             <td>
-            	<textarea name="community_cont" id="content" style="width: 100%; height: 100%">${dto.community_cont}</textarea>
+            	<textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000'>${dto.community_cont}</textarea>
            	</td>
          </tr>
          

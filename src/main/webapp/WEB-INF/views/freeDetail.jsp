@@ -118,13 +118,13 @@
    			<table>
    			<tr>
    				<td>
-	   				<input type="hidden" name="mem_id" id="comm_writer"> 				
+	   				<input type="text" name="mem_id" id="comm_writer" class="comm_writer_class"> 			
 	   				<input type="hidden" name='community_boardnum' value='${dto.community_boardnum}'>
    				</td>
    			</tr>
    			<tr>	
    				<td>
-	   				<textarea name="bcomment_cont" id="comm_cont" placeholder="댓글 내용을 입력하세요" onclick="commAuthchk('${dto.community_boardnum}');" style="width: 100%;height: 100px "></textarea>   				
+	   				<textarea name="bcomment_cont" id="comm_cont" placeholder="댓글 내용을 입력하세요"  style="width: 100%;height: 100px " maxlength='300'></textarea>   				
    				</td>
    			</tr>
    			<tr>	
@@ -145,9 +145,17 @@
 <script>
 
 var memberId = '<%=(String)session.getAttribute("loginId")%>';
-document.getElementById("comm_writer").value = memberId;
+console.log(memberId);
+//document.getElementById("comm_writer").value = memberId;
 
 var currId_P = document.getElementById("writer").innerText;//게시물 작성자 아이디
+
+var loginIda = loginId;
+console.log("loginIda : "+loginIda);
+loginIdb();
+function loginIdb() {
+	$(".comm_writer_class").val(loginIda);
+}
 
 
 function memAuthchk_comm(currId_this, currCnum){//댓글삭제 권한 검사
@@ -198,17 +206,19 @@ function memAuthchk_postUp(){// 게시물 수정 권한 검사
 	
 }
 
-function commAuthchk(currBnum){// 댓글작성 권한 검사
-	if(memberId == ""){
+/* function commAuthchk(currBnum){// 댓글작성 권한 검사
+		console.log("클릭");
+	if(memberId.equals("")||memberId.equals("")){
+		console.log("클릭2");
 		alert("로그인 후 이용해주세요.");
-		location.href= "freeDetail?community_boardnum="+currBnum
+		location.href= "freeDetail?community_boardnum="+currBnum;
 	}
-}
+} */
 
 
-var commenter = document.getElementById('comm_cont').value;
+var commenter = document.getElementById('comm_cont');
 function commSubmitchk(){
-	if(commenter == ""){
+	if(commenter.value == ""){
 		alert("댓글 내용을 기입해 주세요")
 		document.freeCommForm.bcomment_cont.focus();
 		event.preventDefault();

@@ -46,7 +46,7 @@
       	<table>
          <tr style="height: 5%">
             <td>
-            	<input type="text" name="community_sub" id="subject" style="width: 70%" placeholder="제목을 입력하세요"/>
+            	<input type="text" name="community_sub" id="subject" style="width: 70%" placeholder="제목을 입력하세요" maxlength='20'/>
             	<select name="category_num" id="category"> 
 					<option value="">카테고리를 선택하세요</option> 
 						<c:forEach items="${category}" var="sel"> 
@@ -62,7 +62,7 @@
             <td><input type="hidden" name="mem_id" id="writer"/></td>
          </tr>
          <tr style="height: 60%">     
-            <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"></textarea></td>
+            <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000'></textarea></td>
          </tr>
          
        <tr style="height: 20%">
@@ -71,7 +71,7 @@
             	
             	</div>
             	
-            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);"/>
+            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
             	
             </td>
          </tr>
@@ -174,7 +174,7 @@ $("input[name=imgs]").off().on("change", function(){
 
 	if (this.files && this.files[0]) {
 
-		var maxSize = 2 * 1024 * 1024;
+		var maxSize = 5 * 1024 * 1024;
 		var fileSize = this.files[0].size;
 
 		if(fileSize > maxSize){
