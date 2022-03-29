@@ -19,13 +19,13 @@ public class PointManageService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired PointManagementDAO dao;
 	
-	public ModelAndView pointInsert(String point, String loginId, RedirectAttributes rArrt) {
+	public ModelAndView pointInsert(int insertPoint, String loginId, RedirectAttributes rArrt) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		int row = dao.pointInsert(point,loginId);
+		int row = dao.pointInsert(insertPoint,loginId);
 		if (row > 0) {
-			dao.memPointAdd(point,loginId);
+			dao.memPointAdd(insertPoint,loginId);
 		}
 		logger.info("포인트들어갔니?:{}",row);
 		rArrt.addFlashAttribute("success", row);

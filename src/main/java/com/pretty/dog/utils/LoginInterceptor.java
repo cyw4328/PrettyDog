@@ -13,7 +13,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean pass = false;
-		
+		System.out.println("PreHandle 통과");
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute("loginId") != null) {
@@ -29,14 +29,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView mav) throws Exception {
-		
+		System.out.println("postHandle 통과");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("loginId");
-		/*
-		 * String loginSuccessAlert = id + "님 반갑습니다.<br/> 즐거운 하루 되세요!♡";
-		 * 
-		 * mav.addObject("loginSuccessAlert", loginSuccessAlert);
-		 */
+		
+		 
 	}
 	
 

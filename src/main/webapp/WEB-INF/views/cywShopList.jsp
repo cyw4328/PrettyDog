@@ -105,7 +105,7 @@
 					</c:forEach> --%>
 				</select> 
 				
-				<input type="text" placeholder="매장명입력" name="nameScope" id="inputShop"/>
+				<input type="text" placeholder="매장명입력" name="nameScope" id="inputShop" value="${params.nameScope}"/>
 				
 				<input type="submit" value="검색" id="serchBtn"/> 
 			</form>

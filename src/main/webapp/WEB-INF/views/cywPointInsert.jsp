@@ -46,7 +46,7 @@
 <body>
 <%@ include file="Header.jsp"%>
 	<c:forEach items="${memInfo}" var="mem">
-		<c:if test="${mem.mem_rank == 0}">
+		<c:if test="${mem.mem_rank == 0 or mem.mem_rank == 2}">
 			<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
 		</c:if>
 		<c:if test="${mem.mem_rank == 1}">
@@ -64,24 +64,24 @@
 			<form action="pointInsert" id="pointadd">
 				<table>
 					<tr>
-						<td><input type="radio" value="5000" name="point">&nbsp;5,000POINT</td>
-						<td>&nbsp;<input type="radio" value="10000" name="point">&nbsp;10,000POINT</td>
+						<td><input type="radio" value="1" name="point">&nbsp;5,000POINT</td>
+						<td>&nbsp;<input type="radio" value="2" name="point">&nbsp;10,000POINT</td>
 					</tr>
 					<tr>
-						<td><input type="radio" value="15000" name="point">&nbsp;15,000POINT</td>
-						<td>&nbsp;<input type="radio" value="20000" name="point">&nbsp;20,000POINT</td>
+						<td><input type="radio" value="3" name="point">&nbsp;15,000POINT</td>
+						<td>&nbsp;<input type="radio" value="4" name="point">&nbsp;20,000POINT</td>
 					</tr>
 					<tr>
-						<td><input type="radio" value="25000" name="point">&nbsp;25,000POINT</td>
-						<td>&nbsp;<input type="radio" value="30000" name="point">&nbsp;30,000POINT</td>
+						<td><input type="radio" value="5" name="point">&nbsp;25,000POINT</td>
+						<td>&nbsp;<input type="radio" value="6" name="point">&nbsp;30,000POINT</td>
 					</tr>
 					<tr>
-						<td><input type="radio" value="35000" name="point">&nbsp;35,000POINT</td>
-						<td>&nbsp;<input type="radio" value="40000" name="point">&nbsp;40,000POINT</td>
+						<td><input type="radio" value="7" name="point">&nbsp;35,000POINT</td>
+						<td>&nbsp;<input type="radio" value="8" name="point">&nbsp;40,000POINT</td>
 					</tr>
 					<tr>
-						<td><input type="radio" value="45000" name="point">&nbsp;45,000POINT</td>
-						<td>&nbsp;<input type="radio" value="50000" name="point">&nbsp;50,000POINT</td>
+						<td><input type="radio" value="9" name="point">&nbsp;45,000POINT</td>
+						<td>&nbsp;<input type="radio" value="10" name="point">&nbsp;50,000POINT</td>
 					</tr>
 				</table>
 				<%-- <input type="hidden" value="${loginId}" name="AddPointId"/> --%>
