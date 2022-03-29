@@ -100,7 +100,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -251,9 +251,9 @@ function listDraw(list) {
     	var date = new Date(item.point_date);
     	
     	if (item.point_distin == 0) {
-    		mestate = "적립";
+    		mestate = '<b  style="color: blue;">'+"적립"+'</b>';
 		}else if (item.point_distin == 1) {
-			mestate = "차감";
+			mestate = '<b  style="color: red;">'+"차감"+'</b>';
 		}
     	
     	
@@ -262,7 +262,12 @@ function listDraw(list) {
     	content += '<tr>';
     	content += '<td>'+item.mem_id+'</td>';
    		content += '<td>'+item.mem_name+'</td>';
-    	content += '<td>'+item.point_date+'</td>';
+   		content += '<td>'+date.getFullYear()+"-"
+	      +("0"+(date.getMonth()+1)).slice(-2)+"-"
+	      +("0" + date.getDate()).slice(-2)+"  /  "
+	      +("0" + date.getHours()).slice(-2)+"시 "
+	      +("0" + date.getMinutes()).slice(-2)+"분 "
+	      +("0" + date.getSeconds()).slice(-2)+"초"+'</td>'
     	content += '<td>'+item.point_cont+'</td>';
     	content += '<td>'+item.point_cdc+'</td>';
     	content += '<td>'+mestate+'</td>';

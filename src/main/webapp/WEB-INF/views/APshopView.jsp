@@ -98,7 +98,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -126,7 +126,7 @@
             <div style="width: 100%; height: 85%; display: flex;">
                 <div style="width: 5%; height: 100%;"></div>
                 <!-- 내용 -->
-                <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
+                <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px; display: flex;">
 					    <form>
 					        <table border="1" width="400px">
 					        	<tr>

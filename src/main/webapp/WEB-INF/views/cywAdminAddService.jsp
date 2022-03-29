@@ -45,18 +45,20 @@
             background-color: rgb(167, 167, 167);
         }
 
+		
+		
 		table {
-			border-collapse: collapse;
+			width: 100%;
 			/* text-align: left; */
 			line-height: 1.5;
 			border: 1px solid #ccc;
-			margin: 20px 10px;
+			margin: 15px 0px;
 			/* width: 600px; */
 		}
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: #7092b0;
 		}
 		table thead th {
 			padding: 10px;
@@ -73,33 +75,22 @@
 			background: #fcf1f4;
 		}
 		table td {
-			width: 350px;
+			width: auto;
+			height: 50px;
 			padding: 10px; 
 			vertical-align: top;
 			border-bottom: 1px solid #ccc;
 		}
-		#Allpage{
-			position: relative;
-			top: 150px;
-			left: 300px;
-		}
-		#AddForm{
-			position: absolute;
-			top: 70px;
-			left: 12px;
-		}
-		#HangmokList{
-			position: absolute;
-			top: 120px;
-			/* left: 10px; */
-		}
-		.table1{
+		
+		
+		
+		/* .table1{
 			width: 40%;
 		    max-width: 100%;
 		    margin-bottom: 20px;
 			table-layout: fixed;
-		}
-		select{
+		} */
+		/* select{
 			height: 50px;
 	    	width: 150px;
 		}
@@ -113,7 +104,7 @@
 		    font-size: 15px;
 		    border: 0;
 		    background-color: pink
-		}
+		} */
  
    </style>
 
@@ -128,7 +119,7 @@
     <section style="width: 100%; height: 914px; display: flex;">
         
         <!-- 사이드 바 고정 -->
-        <div style="width: 13%; height: 100%; background-color: rgb(0, 0, 0);"> 
+        <div style="width: 13%; height: 100%; background-color: rgb(75 70 70);"> 
 
             <div style="width: 100%; height: 9%;;"></div>
 
@@ -159,15 +150,19 @@
                 <div style="width: 90%; height: 100%; background-color:rgb(255, 255, 255); border : 1px solid transparent; border-radius: 20px 20px 20px 20px;">
 					<div id="Allpage">
 						<div id="AddForm">
-							<form action="ServiceHangmokAdd" id="ServiceHangmokAdd">
-								<select name="ServiceDog">
+							<div style="width: 20px; height: 20px;"></div>
+							<form style="display: flex;" action="ServiceHangmokAdd" id="ServiceHangmokAdd">
+								<div style="width: 20px;"></div>
+								<select class="btn btn-outline-secondary" name="ServiceDog" style="width: 110px; height: 50px;">
 									<option selected="selected" value="">견종선택</option>
 									<option value="1">소형견</option>
 									<option value="2">중형견</option>
 									<option value="3">대형견</option>
 								</select>
-								<input type="text" placeholder="추가할 항목이름을 적어주세요." name="ServiceSub" id="ServiceSub"/>
-								<input type="button" value="추가" name="AddBtn" id="AddBtn"/>
+								<div style="width: 5px;"></div>
+								<input class="form-control border-0.5 shadow-0" type="text" placeholder="추가할 항목이름을 적어주세요." name="ServiceSub" id="ServiceSub" style="width: 300px; height: 50px;"/>
+								<div style="width: 5px;"></div>
+								<input class="btn btn-outline-primary" type="button" value="추가" name="AddBtn" id="AddBtn" style="width: 80px; height: 50px;"/>
 							</form>
 						</div>
 						<div id="HangmokList">
@@ -216,7 +211,7 @@
 var currPage = 1;
 var totalPage = 2;
 
-ServiceHangmokList(currPage,10);
+ServiceHangmokList(currPage,8);
 
 
 function ServiceHangmokList(page,cnt) {
@@ -241,7 +236,7 @@ function ServiceHangmokList(page,cnt) {
 					onPageClick:function(event,page) { // 해당 페이지 번호를 클릭 했을때 일어날 일들
 						console.log(event); // 현재 일어나는 클릭 이벤트 관련 정보들
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
-						ServiceHangmokList(page,10);
+						ServiceHangmokList(page,8);
 					}
 				});
 			}

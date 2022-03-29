@@ -51,11 +51,11 @@
                             <ul class="navbar-nav ml-md-auto">
                                 <div style="width: 150px;">
                                     <div style="width: 150px; height: 15px;"></div>
-                                    <div style="width: 100px; font-size: 15px;">
+                                    <div style="width: 150px; font-size: 15px;">
                                     	<!-- 로그인 후 관리자-->
                                         <a id="afterloginadmin" href="./apuserlist2" style="color: rgb(80, 80, 80); display: none;">관리자 페이지</a>
                                         <!-- 로그인 후 일반-->
-                                        <a id="afterlogin2" style="display: none;" >포인트 :<b id="dddd"></b> </a>
+                                        <a id="afterlogin2" style="display: none;" >포인트 : <b id="dddd"></b> </a>
                                     </div>
                                 </div>
                                 
