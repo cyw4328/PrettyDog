@@ -29,8 +29,10 @@ public class CywAdminController {
    @RequestMapping(value = "/categoryPage")
    public ModelAndView idSearchPage(Model model,HttpSession session) {
       logger.info("카테고리페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.categoryPage();
+      return service.categoryPage(loginId);
    }
    
    
@@ -62,8 +64,10 @@ public class CywAdminController {
    @RequestMapping(value = "/SingoHangmokPage")
    public ModelAndView SingoHangmokPage(HttpSession session) {
       logger.info("신고항목 페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.SingoHangmokPage();
+      return service.SingoHangmokPage(loginId);
    }
    
    @RequestMapping(value = "/SingoHangmokList", method = RequestMethod.POST) 
@@ -97,8 +101,10 @@ public class CywAdminController {
    @RequestMapping(value = "/SingoListPage")
    public ModelAndView SingoListPage(HttpSession session) {
       logger.info("신고리스트 페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.SingoListPage();
+      return service.SingoListPage(loginId);
    }
    
    @RequestMapping(value = "/SingoNoCheckList", method = RequestMethod.POST) 
@@ -124,8 +130,10 @@ public class CywAdminController {
    @RequestMapping(value = "/SingoProcessListPage")
    public ModelAndView SingoProcessListPage(HttpSession session) {
       logger.info("신고리스트 페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.SingoProcessListPage();
+      return service.SingoProcessListPage(loginId);
    }
    
    @RequestMapping(value = "/SingoProcessList", method = RequestMethod.POST) 
@@ -141,8 +149,10 @@ public class CywAdminController {
    @RequestMapping(value = "/AdminServicePage")
    public ModelAndView AdminServicePage(HttpSession session) {
       logger.info("추가서비스항목 페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.AdminServicePage();
+      return service.AdminServicePage(loginId);
    }
    
    @RequestMapping(value = "/ServiceHangmokList", method = RequestMethod.POST) 
@@ -180,8 +190,10 @@ public class CywAdminController {
    @RequestMapping(value = "/ChangeListPage")
    public ModelAndView ChangeListPage(HttpSession session) {
       logger.info("환전신청목록 페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.ChangeListPage();
+      return service.ChangeListPage(loginId);
    }
    
    @RequestMapping(value = "/ChangeList", method = RequestMethod.POST) 
@@ -206,8 +218,10 @@ public class CywAdminController {
    @RequestMapping(value = "/ChangeOkListPage")
    public ModelAndView ChangeOkListPage(HttpSession session) {
       logger.info("환전완료목록 페이지");
+      
+      String loginId = (String) session.getAttribute("loginId");
 
-      return service.ChangeOkListPage();
+      return service.ChangeOkListPage(loginId);
    }
 
    @RequestMapping(value = "/ChangeOkList", method = RequestMethod.POST) 
