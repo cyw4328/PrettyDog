@@ -320,68 +320,119 @@
         		console.log(date.getDate());
         		
         		if(document.getElementsByClassName("choiceDay")[0].innerText == date.getDate()){
-        			console.log("당일 선택");
+console.log("당일 선택");
+        			
+        			//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
+    				for(i=0; i<Object.keys(obj).length; i++){
+    					
+    					//console.log(Object.keys(obj)[i]);
+    					if(i%3 == 0){
+    						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
+    							content += "<tr>";
+    							content += "<td class='pastBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}else if(Object.values(obj)[i]==0){
+    							content += "<tr>";
+    							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}else{
+    							content += "<tr>";
+    							content += "<td class='noBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}
+    					}else if(i%3 == 1){
+    						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
+    							content += "<td class='pastBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}else if(Object.values(obj)[i]==0){
+    							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}else{
+    							content += "<td class='noBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}
+    					}else if(i%3 == 2){
+    						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
+    							content += "<td class='pastBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    							content += "</tr>";	
+    						}else if(Object.values(obj)[i]==0){
+    							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    							content += "</tr>";	
+    						}else{
+    							content += "<td class='noBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    							content += "</tr>";
+    						}	
+    					}
+    					
+    					
+    				}
+    		    	$("#viewtimearea").empty();
+    				$("#viewtimearea").append(content);	
+
+        		}else{
+        			
+					console.log("당일 이외 선택");
+        			
+        			//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
+    				for(i=0; i<Object.keys(obj).length; i++){
+    					
+    					//console.log(Object.keys(obj)[i]);
+    					if(i%3 == 0){
+    						if(Object.values(obj)[i]==0){
+    							content += "<tr>";
+    							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}else{
+    							content += "<tr>";
+    							content += "<td class='noBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}
+    					}else if(i%3 == 1){
+    						if(Object.values(obj)[i]==0){
+    							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}else{
+    							content += "<td class='noBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    						}
+    					}else if(i%3 == 2){
+    						if(Object.values(obj)[i]==0){
+    							content += "<td class='timeBtn' onclick='selectTime(this)'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    							content += "</tr>";	
+    						}else{
+    							content += "<td class='noBtn'>";
+    							content += "<span>"+Object.keys(obj)[i]+"</span>";
+    							content += "</td>";
+    							content += "</tr>";
+    						}	
+    					}
+    					
+    					
+    				}
+    		    	$("#viewtimearea").empty();
+    				$("#viewtimearea").append(content);	
+        			
         		}
         		
-        		//키값만 분리한 녀석들은 배열에 집어넣는 작업 (시간을 영역에 노출 해 주기 위해서)
-				for(i=0; i<Object.keys(obj).length; i++){
-					
-					//console.log(Object.keys(obj)[i]);
-					if(i%3 == 0){
-						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
-							content += "<tr>";
-							content += "<td class='pastBtn'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-						}else if(Object.values(obj)[i]==0){
-							content += "<tr>";
-							content += "<td class='timeBtn' onclick='selectTime(this)'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-						}else{
-							content += "<tr>";
-							content += "<td class='noBtn'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-						}
-					}else if(i%3 == 1){
-						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
-							content += "<td class='pastBtn'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-						}else if(Object.values(obj)[i]==0){
-							content += "<td class='timeBtn' onclick='selectTime(this)'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-						}else{
-							content += "<td class='noBtn'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-						}
-					}else if(i%3 == 2){
-						if(Object.values(obj)[i]==0 && Object.keys(obj)[i] <= compaTime){
-							content += "<td class='pastBtn'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-							content += "</tr>";	
-						}else if(Object.values(obj)[i]==0){
-							content += "<td class='timeBtn' onclick='selectTime(this)'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-							content += "</tr>";	
-						}else{
-							content += "<td class='noBtn'>";
-							content += "<span>"+Object.keys(obj)[i]+"</span>";
-							content += "</td>";
-							content += "</tr>";
-						}	
-					}
-					
-					
-				}
-		    	$("#viewtimearea").empty();
-				$("#viewtimearea").append(content);	
-
+        	
         	},
         	error : function(e){
         		console.log(e)
@@ -505,7 +556,7 @@
             
             var dogName = $("#myDog option:checked").text();
             
-            console.log(mem_point);
+            //console.log(mem_point);
             
             //alert("선택하신 애견은 "+dogName+"입니다.");
             
@@ -527,27 +578,32 @@
             	dataType:"JSON",
             	success : function(data){
             		
-            		busin_name = data[0].busin_name;
-            		busin_num = data[0].busin_num;
-            		busin_mem_id = data[0].mem_id;
+            		console.log(add_num);
             		
-        			let content = "";
-        			
             		if(data.length>0){
-        				
-        				content += "<option value='noChoiceService'>이용 서비스</option>";
             			
-            			for(let i=0; i<data.length; i++){
-            				content += "<option value='"+data[i].price_cost+"'>"+data[i].add_sub+"</option>";
+            			busin_name = data[0].busin_name;
+                		busin_num = data[0].busin_num;
+                		busin_mem_id = data[0].mem_id;
+                		
+            			let content = "";
+            			
+                		if(data.length>0){
+            				
+            				content += "<option value='noChoiceService'>이용 서비스</option>";
+                			
+                			for(let i=0; i<data.length; i++){
+                				content += "<option value='"+data[i].price_cost+"'>"+data[i].add_sub+"</option>";
+                			}
+                			$("#shopService").empty();
+            				$("#shopService").append(content);
             			}
-            			$("#shopService").empty();
-        				$("#shopService").append(content);
-        			}else{
-        				if(add_num = 1){
+            		}else{
+        				if(add_num == 1){
 	        				alert("본 매장은 소형견 서비스가 없습니다.");
-        				}else if(add_num = 2){
+        				}else if(add_num == 2){
 	        				alert("본 매장은 중형견 서비스가 없습니다.");
-        				}else if(add_num = 3){
+        				}else if(add_num == 3){
 	        				alert("본 매장은 대형견 서비스가 없습니다.");
         				}
         				content += "<option value='noServiceInfo'>서비스 없음</option>";
@@ -555,6 +611,8 @@
             			$("#shopService").empty();
         				$("#shopService").append(content);
         			}
+            		
+            		
             		
             		
             	},error : function(e){
