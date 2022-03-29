@@ -107,7 +107,7 @@
 	
 	<update id="plusPoint">
 		update members
-		set mem_nopoint = (mem_point + #{servicePrice})
+		set mem_nopoint = (mem_nopoint + #{servicePrice})
 		where mem_id = #{busin_mem_id}
 	</update>
 	

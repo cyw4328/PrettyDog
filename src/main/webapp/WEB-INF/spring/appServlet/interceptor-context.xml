@@ -37,6 +37,7 @@
 			<mvc:exclude-mapping path="/freeList*"/>
 			<mvc:exclude-mapping path="/listCall*"/>
 			<mvc:exclude-mapping path="/freeDetail*"/>	
+			<mvc:exclude-mapping path="/dateInfo*"/>	
 			<!-- <mvc:exclude-mapping path="/MyPageBoard*"/> -->
 			<!-- 영우,현선,승혁,근원 완료 -->
 
