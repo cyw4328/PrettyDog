@@ -40,7 +40,32 @@ public class PointManagementController {
 		logger.info("포인트충전");
 		String loginId = (String) session.getAttribute("loginId");
 		//String loginId = "dud";
-		return service.pointInsert(point,loginId,rArrt);
+		int insertPoint = 0;
+		int a = Integer.parseInt(point);
+		if (a == 1) {
+			insertPoint = 5000;
+		}else if (a == 2) {
+			insertPoint = 10000;
+		}else if (a == 3) {
+			insertPoint = 15000;
+		}else if (a == 4) {
+			insertPoint = 20000;
+		}else if (a == 5) {
+			insertPoint = 25000;
+		}else if (a == 6) {
+			insertPoint = 30000;
+		}else if (a == 7) {
+			insertPoint = 35000;
+		}else if (a == 8) {
+			insertPoint = 40000;
+		}else if (a == 9) {
+			insertPoint = 45000;
+		}else if (a == 10) {
+			insertPoint = 50000;
+		}else {
+			insertPoint = 0;
+		}
+		return service.pointInsert(insertPoint,loginId,rArrt);
 	}
 	
 	

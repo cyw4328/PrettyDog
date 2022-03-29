@@ -30,7 +30,7 @@ public class CywMemController {
 		ModelAndView mav = new ModelAndView();
 		
 		if (service.login(idInput,pwInput)) {
-			mav.addObject("loginSuccessAlert", idInput+"님 반갑습니다.<br/> 즐거운 하루 되세요!♡");
+			mav.addObject("loginSuccessAlert", idInput+"님 반갑습니다. 즐거운 하루 되세요!♡");
 			mav.setViewName("Main");
 			session.setAttribute("loginId", idInput);
 		}else {

@@ -230,7 +230,7 @@ $('#changeBtn').click(function() {
 	//console.log($pointResult.val());
 	
 		if ($changePoint.val() == '') {
-			alert('충전금액을 입력해 주세요.');
+			alert('환전금액을 입력해 주세요.');
 			$changePoint.focus();
 		}else if ($bankName.val() == '') {
 			alert('이용하실 은행을 입력해 주세요.');

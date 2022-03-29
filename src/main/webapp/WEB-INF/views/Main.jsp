@@ -188,7 +188,7 @@
 </body>
 <script>
 var loginSuccessAlert = "${loginSuccessAlert}" ;
-if (loginSuccessAlert != null) {
+if (loginSuccessAlert != "") {
    alert("${loginSuccessAlert}");
 }
 </script>

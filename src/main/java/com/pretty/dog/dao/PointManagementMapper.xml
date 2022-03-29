@@ -14,7 +14,8 @@
 	
 	<!-- 회원테이블 포인트부분 수정 -->
 	<update id="memPointAdd">
-		update members set mem_point = (select sum(point_cdc) from pointlist where mem_id = #{param2}) where mem_id = #{param2}
+		<!-- update members set mem_point = (select sum(point_cdc) from pointlist where mem_id = #{param2}) where mem_id = #{param2} -->
+		update members set mem_point = (select mem_point from members where mem_id = #{param2})+#{param1} where mem_id = #{param2}
 	</update>
 
 	<!-- 포인트리스트페이지 정보 -->

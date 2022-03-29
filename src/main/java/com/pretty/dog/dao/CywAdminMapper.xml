@@ -267,7 +267,7 @@
    <!-- 예약히스토리 리스트  -->
    <select id="ReserLogList" resultType="dog">
       select * from history h join shop s on h.busin_num = s.busin_num 
-         where s.mem_id = #{param1}ORDER BY history_num DESC LIMIT #{param1} OFFSET #{param2};
+         where s.mem_id = #{param3}ORDER BY history_num DESC LIMIT #{param1} OFFSET #{param2};
    </select>
    
 

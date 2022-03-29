@@ -47,7 +47,7 @@
 <body>
 <%@ include file="Header.jsp"%>
 	<c:forEach items="${memInfo}" var="mem">
-		<c:if test="${mem.mem_rank == 0}">
+		<c:if test="${mem.mem_rank == 0 or mem.mem_rank == 2}">
 			<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
 		</c:if>
 		<c:if test="${mem.mem_rank == 1}">

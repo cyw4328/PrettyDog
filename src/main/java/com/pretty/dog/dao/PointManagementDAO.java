@@ -6,9 +6,9 @@ import com.pretty.dog.dto.DogDTO;
 
 public interface PointManagementDAO {
 
-	int pointInsert(String point, String loginId);
+	int pointInsert(int insertPoint, String loginId);
 
-	void memPointAdd(String point, String loginId);
+	void memPointAdd(int insertPoint, String loginId);
 
 	ArrayList<DogDTO> memPointSelect(String loginId);
 

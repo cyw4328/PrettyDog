@@ -73,7 +73,7 @@
 <body>
 
 <%@ include file="Header.jsp"%>
-		<c:if test="${info.mem_rank == 0}">
+		<c:if test="${info.mem_rank == 0 or mem.mem_rank == 2}">
 			<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
 		</c:if>
 		<c:if test="${info.mem_rank == 1}">
