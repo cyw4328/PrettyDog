@@ -44,6 +44,7 @@ public class SshShopController {
       String memId = (String) session.getAttribute("loginId");
       System.out.println("로그인한 아이디"+memId);
       String page = "sshShopDetail";
+      //String page = "sshShopDetail?idx="+idx;
       ArrayList<HashMap<String,Object>> sshShopDetail = sshShopListService.sshShopDetail(idx);
       ArrayList<HashMap<String,Object>> sshMyInterestShopList = sshShopListService.sshMyInterestShopList(memId, idx);
       ArrayList<HashMap<String,Object>> sshShopQnaList = sshShopListService.sshShopQnaList(idx);

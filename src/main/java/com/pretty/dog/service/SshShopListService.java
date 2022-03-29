@@ -80,7 +80,9 @@ public class SshShopListService {
 
 	@Transactional
 	public String reviewWrite(HashMap<String, Object> params, MultipartFile photos) {
-		String page = "redirect:/sshShopDetail?idx="+params.get("busin_num");
+		String busin_num = (String)params.get("busin_num");
+		System.out.println("Service busin_numbusin_numbusin_num : " + busin_num);
+		String page = "redirect:/sshShopDetail?idx="+busin_num;
 		HashMap<String, Object> reviewWrite = new HashMap<String, Object>();
 		reviewWrite.put("busin_num", params.get("busin_num"));
 		reviewWrite.put("apprai_cont", params.get("apprai_cont"));
@@ -101,7 +103,7 @@ public class SshShopListService {
 		String reser_num = (String)reviewWrite.get("reser_num");
 		System.out.println("서비스 reser_num : " + reser_num);
 		if(shop_boardnum > 0) {
-			page = "redirect:/sshShopDetail?idx="+reviewWrite.get("busin_num")+"&memId="+reviewWrite.get("mem_id");
+			page = "redirect:/sshShopDetail?idx="+busin_num;
 			if(photoName == "") {
 				System.out.println("shop_boardnum : "+ shop_boardnum);
 				sshShopListDAO.recommendationWrite(shop_boardnum,apprai_cont);
