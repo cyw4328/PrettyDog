@@ -297,7 +297,9 @@ public class MembersController {
 				
 			String id = (String) session.getAttribute("loginId");
 			logger.info("세션아이디 값 : {}",id);
-		
+			DogDTO memInfo = service.MyDogInfoshs(id);
+			model.addAttribute("memInfo", memInfo);
+			
 		return "MyDogInfoshs";
 	}		
 		

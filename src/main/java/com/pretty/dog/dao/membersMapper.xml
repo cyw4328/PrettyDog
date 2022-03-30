@@ -142,4 +142,11 @@
 		SELECT * FROM members WHERE mem_id = #{param1}
 	</select>
 
+
+	<!-- 영우 페이지 이동시 세션 로그인 등급 확인 -->
+	<select id="MyDogInfoshs" resultType="dog">
+		SELECT * FROM members WHERE mem_id = #{param1}
+	</select>
+
+
 </mapper>

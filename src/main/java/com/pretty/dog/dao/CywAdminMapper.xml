@@ -113,6 +113,11 @@
       DELETE FROM interest_shop WHERE interestshop_num = #{param1}
    </delete>
    
+   <!-- 매장 추천수 -1 하기 -->
+   <update id="shopLikeCount">
+		update shop set busin_likes = busin_likes - 1 where busin_num = (select busin_num from interest_shop where interestshop_num = #{param1})
+   </update>
+   
    <!-- 예약목록페이지이동 -->
    <select id="MyPageReserPage" resultType="dog">
       SELECT * FROM members WHERE mem_id = #{param1}
