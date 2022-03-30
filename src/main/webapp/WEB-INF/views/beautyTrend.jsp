@@ -17,7 +17,28 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
-   <style></style>
+   <style>
+   	.btn{  
+      text-decoration: none;
+      font-size:2rem;
+      color:white;
+      padding:10px 20px 10px 20px;
+      margin:20px;
+      display:inline-block;
+      border-radius: 10px;
+      transition:all 0.1s;
+    }
+    .btn:active{
+      transform: translateY(3px);
+    }
+    .btn.blue{
+      background-color: #1f75d9;
+      border-bottom:5px solid #165195;
+    }
+    .btn.blue:active{
+      border-bottom:2px solid #165195;
+    }
+   </style>
 </head>
 <body>
 
@@ -60,7 +81,7 @@
    </c:forEach>
    </div>
    <div id="memberRankDiv" style="position: absolute; top:970px; left: 70px;">
-      <a href="#" id="memberRank">등록</a>
+      <a href="#" id="memberRank" class="btn blue">등록</a>
    </div>
 </body>
 <script>
