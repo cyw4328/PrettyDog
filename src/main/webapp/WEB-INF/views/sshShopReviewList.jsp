@@ -39,7 +39,7 @@
 	</form>	
 	</c:if>
 	<c:if test="${revLength_size == 0 }">
-		
+		<p>(이용완료하신 회원님께서만 작성 가능합니다.)</p>
 	</c:if>
 	<c:forEach items="${sshShopRevList }" var="sshShopRevList">
 	<input type="hidden" name="shop_boardnum" value="${sshShopRevList.shop_boardnum }"/>
