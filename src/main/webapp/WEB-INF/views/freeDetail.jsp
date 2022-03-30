@@ -118,7 +118,7 @@
    			<table>
    			<tr>
    				<td>
-	   				<input type="text" name="mem_id" id="comm_writer" class="comm_writer_class"> 			
+	   				<input type="hidden" name="mem_id" id="comm_writer" class="comm_writer_class"> 			
 	   				<input type="hidden" name='community_boardnum' value='${dto.community_boardnum}'>
    				</td>
    			</tr>
