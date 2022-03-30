@@ -82,14 +82,17 @@
             	<textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000'>${dto.community_cont}</textarea>
            	</td>
          </tr>
+        
          
        <tr style="height: 20%">
             <td>
             	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
-            	 	<img width="120px" height="120px" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';" onclick="imgRmeove();"/>
+            	          	
+	            	<img width="120px" height="120px" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';" onclick="imgRmeove();"/>
+   
             	</div>
-            	
-            		<input type="file" name="imgs" onchange="setThumbnail(event);"/>
+            		
+            		<input type="file" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
             		
             		
             </td>

@@ -69,6 +69,8 @@
             <td>
             	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
             	
+            		<img width="120px" height="120px" id = "oldImg" src=# onerror="this.style.display='none';"/>
+            		
             	</div>
             	
             		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
@@ -137,13 +139,15 @@ function submit_chk(event){// 게시글 작성 유효성 검사
 	
 }
 
-
+var container = document.getElementById("image_container");
+var oldImg = document.getElementById("oldImg");
 
 function setThumbnail(event) { //업로드 파일 섬네일
 	var reader = new FileReader(); 
-	console.log("섬네일 생성하기");
+	container.removeChild(oldImg);
 	reader.onload = function(event) { 
 		var img = document.createElement("img"); 
+		img.setAttribute("id", "oldImg"); 
 		img.setAttribute("src", event.target.result); 
 		img.setAttribute('height', '120px');
 		img.setAttribute('width', '120px');
