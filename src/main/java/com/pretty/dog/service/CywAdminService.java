@@ -275,6 +275,7 @@ public class CywAdminService {
    public ModelAndView LikeShopDel(String interestshop_num, String loginId, RedirectAttributes rAttr) {
       ModelAndView mav =new ModelAndView();
       
+      int success = dao.shopLikeCount(interestshop_num,loginId);
       int row = dao.LikeShopDel(interestshop_num,loginId);
       
       if (row > 0) {

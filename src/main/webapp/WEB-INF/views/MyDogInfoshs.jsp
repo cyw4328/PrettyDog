@@ -44,14 +44,12 @@
 </head>
 <body>
 <%@ include file="Header.jsp"%>
-	<c:forEach items="${memInfo}" var="mem">
-		<c:if test="${mem.mem_rank == 0}">
+		<c:if test="${memInfo.mem_rank == 0 or memInfo.mem_rank == 2}">
 			<%@ include file="cywMyPageMenuBarNomal.jsp"%>		
 		</c:if>
-		<c:if test="${mem.mem_rank == 1}">
+		<c:if test="${memInfo.mem_rank == 1}">
 			<%@ include file="cywMyPageMenuBarOwner.jsp"%>		
 		</c:if>
-	</c:forEach>
 <div id="con_memberDe">
 <div id="sujung_txt">
 <p id="headTxt">강아지 등록</p>

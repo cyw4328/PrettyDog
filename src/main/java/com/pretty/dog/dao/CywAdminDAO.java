@@ -176,5 +176,7 @@ public interface CywAdminDAO {
    int reserStateChange(String busin_num, String reserDay, String canReserTime);
 
    int SingoHangmokPage(String loginId);
+
+int shopLikeCount(String interestshop_num, String loginId);
    
 }
