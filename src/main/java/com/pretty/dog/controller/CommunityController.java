@@ -124,6 +124,7 @@ public class CommunityController {
 		@RequestMapping(value = "/freeUpdate", method = RequestMethod.POST)
 		public String freeUpdate(Model model, MultipartFile imgs, @RequestParam HashMap<String, String> params) {
 			logger.info("수정 요청 : {}",params);
+			
 			String page = communityService.freeUpdate(imgs,params);
 			return page;
 		}

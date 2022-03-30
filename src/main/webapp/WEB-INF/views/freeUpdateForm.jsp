@@ -114,10 +114,8 @@
 <script>
 var memberId = '<%=(String)session.getAttribute("loginId")%>';
 document.getElementById("writer").value = memberId;
-
-
-
 memRankChk();
+
 
 function memRankChk(){
 	$.ajax({
@@ -169,12 +167,13 @@ var oldImage = document.getElementById("oldImg");
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
 
+	container.removeChild(oldImage);
 	reader.onload = function(event) { 
-		container.removeChild(oldImage);
 		var img = document.createElement("img"); 
 		img.setAttribute("src", event.target.result); 
 		img.setAttribute('height', '120px');
 		img.setAttribute('width', '120px');
+		img.setAttribute("id", "oldImg");
 		document.querySelector("div#image_container").appendChild(img); 
 	}; 
 	reader.readAsDataURL(event.target.files[0]); 
