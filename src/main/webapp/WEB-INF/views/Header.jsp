@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-white bg-white fixed-top" style="border-bottom-style: solid; border-width: 1px;">
                         <div>
-                            <a href="./"><img src="./resources/img/LOGO.PNG"/></a>
+                            <a href="./"><img src="/photo/LOGO.PNG"/></a>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="navbar-nav">

@@ -81,7 +81,7 @@
      	 	
 	     	 	<c:forEach items="${list}" var="doginfo">
 	     	 		<tr>
-	     	 			<th><img alt="썸네일" src="./resources/img/images.png" width="100px" height="100px"></th>
+	     	 			<th><img alt="썸네일" src="/photo/images.png" width="100px" height="100px"></th>
 	     	 			<td>
 	     	 				<span class="dogName">${doginfo.dog_name}</span>(${doginfo.dog_age}살)<br>
 	     	 				${doginfo.dog_weight}<br>

@@ -48,7 +48,7 @@
 <body>
 <%@ include file="Header.jsp"%>
 	<div>
-		<a href="./"><img src="./resources/img/LOGO.PNG"/></a>
+		<a href="./"><img src="/photo/LOGO.PNG"/></a>
 	</div>
 	<div id="AllPage">
 		<form action="PwChange" method="post" onsubmit="return submitCheck();">
