@@ -83,7 +83,7 @@
 	     	 		<tr>
 	     	 			<th><img alt="썸네일" src="/photo/images.png" width="100px" height="100px"></th>
 	     	 			<td>
-	     	 				<span class="dogName">${doginfo.dog_name}</span>(${doginfo.dog_age}살)<br>
+	     	 				<span class="dogName">${doginfo.dog_name}</span><span hidden="hidden" id="dogNum">${doginfo.dog_num}</span>(${doginfo.dog_age}살)<br>
 	     	 				${doginfo.dog_weight}<br>
 	     	 				등록일 : ${doginfo.dog_date}
 	     	 			</td>
@@ -107,6 +107,7 @@
 var id = $('#loginId').html();
 var dogName = $('.dogName').html();
 
+
 function MyDogsujungshs(dogName) {
 		//console.log('수정 로그');
 		//console.log(id,dogName);
@@ -120,9 +121,10 @@ function MyDogsujungshs(dogName) {
 	function dogDel() {
 		//console.log('삭제 로그');
 		confirm('등록된 강아지 정보를 삭제하시겠습니까?');
-		//console.log(id,dogName);
+		var dogNum = $(this).attr("id");
+		console.log(dogNum);
 		
-		$.ajax({
+		/* $.ajax({
 			type:'get',
 			url:'DogDel',
 			data:{'id':id,'dogName':dogName},
@@ -134,7 +136,7 @@ function MyDogsujungshs(dogName) {
 			error:function(e){
 				console.log(e);
 			}
-		});
+		}); */
 		
 	
 	
