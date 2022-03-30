@@ -19,10 +19,39 @@
    	
    	
 	<style>
-		table, th, td{
-			border : 1px solid black;
+		table {
 			border-collapse: collapse;
-			}
+			text-align: left;
+			line-height: 1.5;
+			border: 1px solid #ccc;
+			margin: 20px 10px;
+			width: 900px;
+		}
+		table thead {
+			border-right: 1px solid #ccc;
+			border-left: 1px solid #ccc;
+			background: #e7708d;
+		}
+		table thead th {
+			padding: 10px;
+			font-weight: bold;
+			vertical-align: top;
+			color: #fff;
+		}
+		table tbody th {
+			/* width: 150px; */
+			padding: 10px;
+			font-weight: bold;
+			vertical-align: top;
+			border-bottom: 1px solid #ccc;
+			background: #fcf1f4;
+		}
+		table td {
+			/* width: 350px; */
+			padding: 10px;
+			vertical-align: top;
+			/* border-bottom: 1px solid #ccc; */
+		}
 			
 		a {
   			text-decoration-line: none;
