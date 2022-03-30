@@ -195,27 +195,6 @@ public class CommunityService {
 
 	//게시글 수정
 	
-	/*
-	 * public String freeUpdate(MultipartFile imgs, HashMap<String, String> params)
-	 * {
-	 * 
-	 * 
-	 * 
-	 * int community_boardnum = Integer.parseInt(params.get("community_boardnum"));
-	 * System.out.println("updateBoard:" + community_boardnum);
-	 * System.out.println("uploadFile:" + imgs.getOriginalFilename()); String page =
-	 * "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
-	 * if(communityDao.freeUpdate(params)>0) {
-	 * 
-	 * page = "redirect:/freeDetail?community_boardnum="+community_boardnum;
-	 * 
-	 * saveFile(community_boardnum,imgs);//파일저장 }
-	 * 
-	 * return page;
-	 * 
-	 * }
-	 */
-	
 	
 	
 	public String freeUpdate(MultipartFile imgs, HashMap<String, String> params) {
@@ -228,21 +207,31 @@ public class CommunityService {
 
 	      String page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
 
-
+	      ArrayList<CommunityDTO> dto = new ArrayList<CommunityDTO>();
+	   
 	      if(communityDao.freeUpdate(params)>0) {
 
 	         page = "redirect:/freeDetail?community_boardnum="+community_boardnum;
-	         ArrayList<CommunityDTO> dto = communityDao.photoList(Integer.toString(community_boardnum));
-	         //상세보기에서 게시물 정보 추출 
 	         
-	         System.out.println("bphoto_newname 확인" + dto.get(0).getBphoto_newname());
-	         File file = new File("C:/STUDY/PrettyDog/src/main/webapp/resources/commu/" + dto.get(0).getBphoto_newname());
-	         boolean yn = file.delete();
-	         String NewFileName = (String)dto.get(0).getBphoto_newname();// 추출된 정보에서 새 파일 이름 get
-	         System.out.println("NewFileName = " + NewFileName);
-	         communityDao.free_imgDelete(NewFileName);//해당 파일명 삭제
-	         logger.info(dto.get(0).getBphoto_newname() +"delete : " + yn);
-	         saveFile(community_boardnum, imgs); // 파일 저장 처리
+	         if(communityDao.photoList(Integer.toString(community_boardnum)).size() > 0 && imgs.getOriginalFilename() != "")//기존이미지가 있을경우 삭제 뒤 새로 삽입
+	         {//상세보기에서 게시물 정보 추출 
+	        	 dto = communityDao.photoList(Integer.toString(community_boardnum));
+	        	 System.out.println("사진이 있을 경우");
+	        	 System.out.println("bphoto_newname 확인" + dto.get(0).getBphoto_newname());
+		         File file = new File("C:/STUDY/PrettyDog/src/main/webapp/resources/commu/" + dto.get(0).getBphoto_newname());
+		         boolean yn = file.delete();
+		         String NewFileName = (String)dto.get(0).getBphoto_newname();// 추출된 정보에서 새 파일 이름 get
+		         System.out.println("기존게시물 이미지 = " + NewFileName);
+		         logger.info(dto.get(0).getBphoto_newname() +"delete : " + yn);
+		         communityDao.free_imgDelete(NewFileName);//해당 파일명 삭제 
+	        	 saveFile(community_boardnum, imgs);
+	        	 
+	         }else{
+	        	 //사진 딜리트 제외하고 일반 글쓰기처럼 일반 업데이트
+	        	 System.out.println("사진이 없을 경우 ");
+	        	 saveFile(community_boardnum, imgs);
+	        	 
+	         }	         
 	      }
 	      return page;
 	   }
@@ -346,34 +335,6 @@ public class CommunityService {
 	}
 
 
-	
-	
 
-
-	
-
-	
-	
-
-
-	
-
-
-	
-
-
-
-
-
-	
-
-
-
-	
-	
-	
-	
-	
-	
 	
 }

@@ -88,7 +88,7 @@
             <td>
             	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
             	          	
-	            	<img width="120px" height="120px" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';" onclick="imgRmeove();"/>
+	            	<img width="120px" height="120px" id="oldImg" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';"/>
    
             	</div>
             		
@@ -114,10 +114,8 @@
 <script>
 var memberId = '<%=(String)session.getAttribute("loginId")%>';
 document.getElementById("writer").value = memberId;
-
-
-
 memRankChk();
+
 
 function memRankChk(){
 	$.ajax({
@@ -162,15 +160,20 @@ function submit_chk(event){
 	
 }
 
+
+var container = document.getElementById("image_container");
+var oldImage = document.getElementById("oldImg");
 	
 function setThumbnail(event) { 
 	var reader = new FileReader(); 
 
+	container.removeChild(oldImage);
 	reader.onload = function(event) { 
 		var img = document.createElement("img"); 
 		img.setAttribute("src", event.target.result); 
 		img.setAttribute('height', '120px');
 		img.setAttribute('width', '120px');
+		img.setAttribute("id", "oldImg");
 		document.querySelector("div#image_container").appendChild(img); 
 	}; 
 	reader.readAsDataURL(event.target.files[0]); 
