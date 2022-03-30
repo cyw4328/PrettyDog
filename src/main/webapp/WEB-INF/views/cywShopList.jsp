@@ -258,6 +258,13 @@ function listDraw(list) {
 var currPage = 1;
 var totalPage = 2;
 
+$('#serchBtn').click(function(){
+	   
+	   $('#pagination').twbsPagination('destroy');
+	   shopListPageList(currPage,6);
+	   currPage = 1;
+	});
+
 shopListPageList(currPage,6);
 
 function shopListPageList(page,cnt) {

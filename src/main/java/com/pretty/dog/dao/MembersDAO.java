@@ -53,6 +53,8 @@ public interface MembersDAO {
 
 	int shopIn(HashMap<String, String> params);
 
+	DogDTO MyDogInfoshs(String id);
+
 
 
 

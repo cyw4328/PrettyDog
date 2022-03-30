@@ -222,6 +222,13 @@ public class MembersService {
 	}
 
 
+	public DogDTO MyDogInfoshs(String id) {
+		
+		return dao.MyDogInfoshs(id);
+		
+	}
+
+
 
 
 

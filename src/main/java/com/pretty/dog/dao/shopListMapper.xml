@@ -82,7 +82,7 @@
 	
 		<!-- 샵리스트 갯수 -->
 	<select id="ShopListCount" resultType="int">
-		SELECT count(*) FROM 
+		SELECT count(distinct s.busin_num) FROM 
 			price_list pl join shop s
 			on pl.busin_num = s.busin_num	
 			join interior i 
