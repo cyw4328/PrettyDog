@@ -138,9 +138,16 @@
    </update>
    
 	<!-- 게시글 삭제 ~ 블라인드 -->
-	<delete id="freeDelete">
+	<update id="freeDelete">
       update community_board set community_blind = 1 where community_boardnum = #{param1}
+   </update>
+   
+   <delete id="free_imgDelete">
+   		delete from community_board_photo where bphoto_newname = #{param1}
    </delete>
+   
+   
+   
       
    <!--  게시글 수정 -->
    <update id="freeUpdate" parameterType="HashMap">

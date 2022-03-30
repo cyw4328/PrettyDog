@@ -52,14 +52,21 @@ var memberId = '<%=(String)session.getAttribute("loginId")%>';
 document.getElementById("reporter").value = memberId;
 
 
-//var memberId = "";
-/* $(document).ready(function(){
-		
-decId = document.getElementById("dec_id").value;
-		if(memberId == dec_id){
-			window.close();
-		}
-	});  */
+var decId = document.getElementById("dec_id").value;
+var reporter = document.getElementById("reporter").value;
+
+
+if(decId==reporter){
+	autoClose();
+}
+
+function autoClose(){
+	alert("권한이 없습니다.");
+	self.close();
+}
+
+
+
 
 
 function declaMsg(){// 신고뒤 창닫음

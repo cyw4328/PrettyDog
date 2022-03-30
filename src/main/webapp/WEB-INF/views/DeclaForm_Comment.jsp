@@ -22,7 +22,7 @@
             <td>
             <input type="hidden" name="dec_targetNum" value = "${dto.community_boardnum}">
             
-            <input type="text" name="dec_id" value="${dto.mem_id}" readonly="readonly">
+            <input type="text" name="dec_id" id="dec_id" value="${dto.mem_id}" readonly="readonly">
            </td>
          </tr>
          <tr>
@@ -54,6 +54,26 @@ var memberId = '<%=(String)session.getAttribute("loginId")%>';
 document.getElementById("reporter").value = memberId;
 //var memberId = "";
 declaAuth_chk();
+
+
+
+var decId = document.getElementById("dec_id").value;
+var reporter = document.getElementById("reporter").value;
+
+
+if(decId==reporter){
+	autoClose();
+}
+
+function autoClose(){
+	alert("권한이 없습니다.");
+	self.close();
+}
+
+
+
+
+
 
 function declaAuth_chk(){
 	if (memberId==""){

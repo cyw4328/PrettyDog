@@ -51,7 +51,7 @@
       	<table>
          <tr style="height: 5%">
             <td>
-            	<input type="text" name="community_sub" id="subject" style="width: 70%" value = "${dto.community_sub}">
+            	<input type="text" name="community_sub" id="subject" style="width: 70%" value = "${dto.community_sub}"  maxlength='20'>
             	
             	<div id="selecterBox">
             	
@@ -72,21 +72,27 @@
             </td>
          </tr>
          <tr style="height: 5%">      
-            <td><input type="hidden" name="mem_id"  id="writer" value="${dto.mem_id}"/></td>
+            <td>
+            	<input type="hidden" name="mem_id"  id="writer" value="${dto.mem_id}"/>
+            	<input type="hidden" name="community_boardnum"  value="${dto.community_boardnum}"/>
+            </td>
          </tr>
          <tr style="height: 60%">     
             <td>
-            	<textarea name="community_cont" id="content" style="width: 100%; height: 100%">${dto.community_cont}</textarea>
+            	<textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000'>${dto.community_cont}</textarea>
            	</td>
          </tr>
+        
          
        <tr style="height: 20%">
             <td>
             	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
-            	 	<img width="120px" height="120px" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';" onclick="imgRmeove();"/>
+            	          	
+	            	<img width="120px" height="120px" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';" onclick="imgRmeove();"/>
+   
             	</div>
-            	
-            		<input type="file" name="imgs" onchange="setThumbnail(event);"/>
+            		
+            		<input type="file" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
             		
             		
             </td>
@@ -94,7 +100,7 @@
          <tr style="height: 10%">
             <th colspan="2">
                <input type="button" onclick="listChk();" value="목록"/>
-               <button>수정</button>
+             	<button>제출</button>
             </th>
          </tr>
       </table>

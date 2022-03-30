@@ -46,7 +46,7 @@
       	<table>
          <tr style="height: 5%">
             <td>
-            	<input type="text" name="community_sub" id="subject" style="width: 70%" placeholder="제목을 입력하세요"/>
+            	<input type="text" name="community_sub" id="subject" style="width: 70%" placeholder="제목을 입력하세요" maxlength='20'/>
             	<select name="category_num" id="category"> 
 					<option value="">카테고리를 선택하세요</option> 
 						<c:forEach items="${category}" var="sel"> 
@@ -62,16 +62,18 @@
             <td><input type="hidden" name="mem_id" id="writer"/></td>
          </tr>
          <tr style="height: 60%">     
-            <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"></textarea></td>
+            <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000'></textarea></td>
          </tr>
          
        <tr style="height: 20%">
             <td>
             	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
             	
+            		<img width="120px" height="120px" id = "oldImg" src=# onerror="this.style.display='none';"/>
+            		
             	</div>
             	
-            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);"/>
+            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
             	
             </td>
          </tr>
@@ -137,13 +139,15 @@ function submit_chk(event){// 게시글 작성 유효성 검사
 	
 }
 
-
+var container = document.getElementById("image_container");
+var oldImg = document.getElementById("oldImg");
 
 function setThumbnail(event) { //업로드 파일 섬네일
 	var reader = new FileReader(); 
-	console.log("섬네일 생성하기");
+	container.removeChild(oldImg);
 	reader.onload = function(event) { 
 		var img = document.createElement("img"); 
+		img.setAttribute("id", "oldImg"); 
 		img.setAttribute("src", event.target.result); 
 		img.setAttribute('height', '120px');
 		img.setAttribute('width', '120px');
@@ -174,7 +178,7 @@ $("input[name=imgs]").off().on("change", function(){
 
 	if (this.files && this.files[0]) {
 
-		var maxSize = 2 * 1024 * 1024;
+		var maxSize = 5 * 1024 * 1024;
 		var fileSize = this.files[0].size;
 
 		if(fileSize > maxSize){
