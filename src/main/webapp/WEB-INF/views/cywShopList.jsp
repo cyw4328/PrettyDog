@@ -130,7 +130,7 @@
 						</c:if> 
 						<td class="shopPaging">
 							<input type="hidden" value="${list.busin_num}" id="shopDetail"/> 
-							<img src="resources/img/${list.interior_newname}"/ style="width: 200px;height: 250px" class="shopimg"/>
+							<img src="/photo/${list.interior_newname}" style="width: 200px;height: 250px" class="shopimg"/>
 	
 						<br/>
 						${list.busin_name} 
@@ -321,7 +321,7 @@ function shopListDraw(list) {
     	
     	content +='<td class="shopPaging">';
    		content +='<input type="hidden" value="'+item.busin_num+'" id="shopDetail"/>';
-   		content +='<a onclick="shopDetail(\''+item.busin_num+'\')">'+'<img src="resources/img/'+item.interior_newname+'" style="width: 200px;height: 250px" class="shopimg"/>'+'</a>';
+   		content +='<a onclick="shopDetail(\''+item.busin_num+'\')">'+'<img src="/photo/'+item.interior_newname+'" style="width: 200px;height: 250px" class="shopimg"/>'+'</a>';
    		content +='<br/>';
    		content += '<b style="font-size: 20px;">'+item.busin_name+'</b>';
    		content += '<b style="font-size: 15px; color:gray;">'+"  "+"추천수 : "+item.busin_likes+'</b>';

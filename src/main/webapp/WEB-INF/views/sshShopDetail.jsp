@@ -28,7 +28,7 @@
 	<input type="hidden" name="busin_num" id="busin_mem_chk" value="${sshShopDetail[0].busin_num }"/>
 	<input type="hidden" name="mem_id" id="busin_mem_id_chk" value="${sshShopDetail[0].mem_id }"/>
 	<div style="position: absolute; left: 20px; top: 100px; margin-left: 300px;">
-		<img width="300px" height="300px" src="resources/img/${sshShopDetail[0].interior_newname }"/>
+		<img width="300px" height="300px" src="/photo/${sshShopDetail[0].interior_newname }"/>
 	</div>
 	<div style="position: absolute; left: 20px; top: 100px; margin-left: 650px; margin-top: 20px;">
 		<p style="font-weight: bold; font-size: x-large;">${sshShopDetail[0].busin_name }</p>

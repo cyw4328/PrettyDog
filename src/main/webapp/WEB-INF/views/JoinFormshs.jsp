@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body bgcolor="#EAEAEA">
-	<a href="./"><img alt="logo" src="./resources/img/LOGO02.png"></a>
+	<a href="./"><img alt="logo" src="/photo/LOGO02.png"></a>
 	<div class="container">
 		<div class="formDiv">
         	<form action="joinShs" method="post">

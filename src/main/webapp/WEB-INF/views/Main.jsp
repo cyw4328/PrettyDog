@@ -42,7 +42,7 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" alt="Carousel Bootstrap First" src="./resources/img/새 프로젝트.jpg" />
+                                <img class="d-block w-100" alt="Carousel Bootstrap First" src="/photo/새 프로젝트.jpg" />
                                 <div style="display: flex; justify-content: center; align-items: center;" class="carousel-caption">
                                 	<div  style="background-color: #ffffff59; padding: 20px;">
 		                                <a href="./ShopList" style="color: black;">
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div style="background-color: black;" class="carousel-item">
-                                <img class="d-block w-100" alt="Carousel Bootstrap Second" src="./resources/img/새 프로젝트2.jpg" />
+                                <img class="d-block w-100" alt="Carousel Bootstrap Second" src="/photo/새 프로젝트2.jpg" />
                                 <div style="display: flex; justify-content: center; align-items: center;" class="carousel-caption">
                                 	<div  style="background-color: #ffffff59; padding: 20px;">
 	                                    <a href="./freeList" style="color: black;">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" alt="Carousel Bootstrap Third" src="./resources/img/새 프로젝트3-1.jpg" />
+                                <img class="d-block w-100" alt="Carousel Bootstrap Third" src="/photo/새 프로젝트3-1.jpg" />
                                 <div style="display: flex; justify-content: center; align-items: center;" class="carousel-caption">
 	                                <div  style="background-color: #ffffff59; padding: 20px;">
 		                                <a href="./beautyTrendList" style="color: black;">
@@ -97,7 +97,7 @@
         <div class="container" style="">
             <div class="row" style="height: 200px;">
                 <div class="col-md-3" style="height: 200px;">
-                    <img style=" height: 100%;" alt="Bootstrap Image Preview" src="./resources/img/핑크 독.png" class="rounded-circle" />
+                    <img style=" height: 100%;" alt="Bootstrap Image Preview" src="/photo/핑크 독.png" class="rounded-circle" />
                 </div>
                 <div class="col-md-9" style="height: 200px;">
                     <h2>
@@ -129,7 +129,7 @@
                     </p>
                 </div>
                 <div class="col-md-3" style="height: 200px;">
-                    <img style=" height: 100%;" alt="Bootstrap Image Preview" src="./resources/img/스카이 독.png" class="rounded-circle" />
+                    <img style=" height: 100%;" alt="Bootstrap Image Preview" src="/photo/스카이 독.png" class="rounded-circle" />
                 </div>
             </div>
             <div style="width: 100%; height: 10px;"></div>
@@ -158,13 +158,13 @@
                     <div class="carousel slide" id="carousel-271964"  data-ride="carousel" data-interval="2000">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" alt="Carousel Bootstrap First" src="./resources/img/dog grooming2.jpg" />
+                                <img class="d-block w-100" alt="Carousel Bootstrap First" src="/photo/dog grooming2.jpg" />
                                 <div class="carousel-caption">
                                     
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" alt="Carousel Bootstrap Third" src="./resources/img/dog grooming1.jpg" />
+                                <img class="d-block w-100" alt="Carousel Bootstrap Third" src="/photo/dog grooming1.jpg" />
                                 <div class="carousel-caption">
                                     
                                 </div>

@@ -10,7 +10,7 @@
 <body>
 	<div>
 		<h2>${code}</h2>
-		<img src="../resources/img/errorImg.PNG" width="1200px" height="800px">
+		<img src="/photo/errorImg.PNG" width="1200px" height="800px">
 	</div>
 </body>
 <script></script>
