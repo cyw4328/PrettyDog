@@ -195,27 +195,6 @@ public class CommunityService {
 
 	//게시글 수정
 	
-	/*
-	 * public String freeUpdate(MultipartFile imgs, HashMap<String, String> params)
-	 * {
-	 * 
-	 * 
-	 * 
-	 * int community_boardnum = Integer.parseInt(params.get("community_boardnum"));
-	 * System.out.println("updateBoard:" + community_boardnum);
-	 * System.out.println("uploadFile:" + imgs.getOriginalFilename()); String page =
-	 * "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
-	 * if(communityDao.freeUpdate(params)>0) {
-	 * 
-	 * page = "redirect:/freeDetail?community_boardnum="+community_boardnum;
-	 * 
-	 * saveFile(community_boardnum,imgs);//파일저장 }
-	 * 
-	 * return page;
-	 * 
-	 * }
-	 */
-	
 	
 	
 	public String freeUpdate(MultipartFile imgs, HashMap<String, String> params) {
