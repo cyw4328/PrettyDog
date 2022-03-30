@@ -64,6 +64,7 @@
 		join doginfo di
 		on m.mem_id = di.mem_id 
 		where m.mem_id = #{id}
+		and dog_state = 0
 	</select>
 	
 	
