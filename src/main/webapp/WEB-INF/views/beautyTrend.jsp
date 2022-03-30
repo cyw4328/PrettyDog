@@ -18,26 +18,7 @@
     <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
    <style>
-   	.btn{  
-      text-decoration: none;
-      font-size:2rem;
-      color:white;
-      padding:10px 20px 10px 20px;
-      margin:20px;
-      display:inline-block;
-      border-radius: 10px;
-      transition:all 0.1s;
-    }
-    .btn:active{
-      transform: translateY(3px);
-    }
-    .btn.blue{
-      background-color: #1f75d9;
-      border-bottom:5px solid #165195;
-    }
-    .btn.blue:active{
-      border-bottom:2px solid #165195;
-    }
+   	
    </style>
 </head>
 <body>
@@ -74,14 +55,14 @@
       <a href="beautyTrendDetail?idx=${TrendListInfo.community_boardnum }">
       <%-- "C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/trend/${beautyTrendDetail.bphoto_newname }" --%>
       <img alt="" src="resources/trend/${TrendListInfo.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px"/>
-      <p style="margin-left: 70px;">${TrendListInfo.busin_name }</p><p style="margin-left: 70px;"><fmt:formatDate value="${TrendListInfo.community_date }" pattern="yyyy-MM-dd"/></p>
-      <p style="margin-left: 70px;">${TrendListInfo.community_sub }</p>
+      <p style="margin-left: 70px;font-size: 17px;">${TrendListInfo.busin_name }</p><p style="margin-left: 70px; margin-top: -15px;"><fmt:formatDate value="${TrendListInfo.community_date }" pattern="yyyy-MM-dd"/></p>
+      <p style="margin-left: 70px; margin-top: -15px; font-size: 15px;">${TrendListInfo.community_sub }</p>
       </a>
    </div>
    </c:forEach>
    </div>
    <div id="memberRankDiv" style="position: absolute; top:970px; left: 70px;">
-      <a href="#" id="memberRank" class="btn blue">등록</a>
+      <a href="#" id="memberRank" style="font-size: 20px;"></a>
    </div>
 </body>
 <script>
@@ -168,10 +149,10 @@
          content += '<a href="beautyTrendDetail?idx='+idx+'">';
          content += '<div style="float: left; width: 33%;">';
          content += '<img src="resources/trend/'+list[i].bphoto_newname+'" width="350px" height="350px" style="padding-left: 70px"/>';
-         content += '<p style="margin-left: 70px;">'+list[i].busin_name+'</p><p style="margin-left: 70px;">'+date.getFullYear()+"-"
+         content += '<p style="margin-left: 70px; font-size: 17px;">'+list[i].busin_name+'</p><p style="margin-left: 70px; margin-top: -15px;">'+date.getFullYear()+"-"
             +("0"+(date.getMonth()+1)).slice(-2)+"-"
             +("0" + date.getDate()).slice(-2)+'</p>';
-         content += '<p style="margin-left: 70px;">'+list[i].community_sub+'</p>';
+         content += '<p style="margin-left: 70px; margin-top: -15px; font-size: 15px;">'+list[i].community_sub+'</p>';
          content += '</div>';
          content +="</a>";
       }
