@@ -9,7 +9,7 @@
 
 	
 	<!--  게시물 카테고리 목록 출력 -->
-	<select id="categoryList" resultType="com.pretty.dog.dto.CommunityDTO">
+	<select id="categoryList" resultType="dog">
 		select category_num, category_name,category_admin,category_blind  
 		from community_category	
 		where category_num not in(3)
@@ -18,7 +18,7 @@
 	
 	<!-- 게시물 리스트 페이징 & 검색-->
 	
-	<select id="listCall" resultType="com.pretty.dog.dto.CommunityDTO" parameterType="HashMap">
+	<select id="listCall" resultType="dog" parameterType="HashMap">
      	select cb.community_boardnum, cb.category_num, cb.community_sub, cb.mem_id ,
      	cb.community_date, cb.community_view, cb.community_likes, cb.community_blind,
 		cc.category_num,cc.category_name,cc.category_admin,cc.category_blind,
@@ -82,7 +82,7 @@
    useGeneratedKeys="true" 
    keyProperty="community_boardnum"
    keyColumn="community_boardnum"
-   parameterType="com.pretty.dog.dto.CommunityDTO">
+   parameterType="dog">
    		INSERT INTO community_board(community_sub,community_cont,mem_id,category_num)VALUES(#{community_sub},#{community_cont},#{mem_id},#{category_num})  
    </insert >
    
@@ -94,7 +94,7 @@
 	
 	
 	<!-- 게시글 상세보기 -->
-	<select id="freeDetail" resultType="com.pretty.dog.dto.CommunityDTO">
+	<select id="freeDetail" resultType="dog">
    		
 	select cb.community_boardnum, cb.category_num, cb.community_sub, cb.mem_id , cb.community_date,  cb.community_cont, cb.community_view, cb.community_likes, cb.community_blind,
 		cc.category_num,cc.category_name,cc.category_admin,cc.category_blind
@@ -105,20 +105,20 @@
    </select>
    
    <!--  게시글 상세보기 ~ 이미지 출력 -->
-   <select id="photoList" resultType="com.pretty.dog.dto.CommunityDTO">
+   <select id="photoList" resultType="dog">
       select bphoto_oriname, bphoto_newname from community_board_photo where community_boardnum = #{param1}
    </select>
 	
    
    <!-- 게시글 상세보기 ~ 댓글 리스트 출력 -->
-   <select id="commentList" resultType="com.pretty.dog.dto.CommunityDTO">
+   <select id="commentList" resultType="dog">
    		select * from community_board_comment 
    		where community_boardnum = #{param1} 
    		and bcomment_blind = 0
    </select>
   	
   	<!-- 댓글갯수 가져오기 -->
-   <select id="commentCount" resultType="com.pretty.dog.dto.CommunityDTO">
+   <select id="commentCount" resultType="dog">
    		select count(*) from community_board_comment
 		where community_boardnum = #{param1} 
 		and bcomment_blind = 0
@@ -164,7 +164,7 @@
    </update>
   
   <!-- 댓글작성 -->
-  <insert id="free_commentWrite" parameterType="com.pretty.dog.dto.CommunityDTO">
+  <insert id="free_commentWrite" parameterType="dog">
   	insert into community_board_comment (community_boardnum,mem_id, bcomment_cont)
 	values
 	( #{community_boardnum}, #{mem_id}, #{bcomment_cont})
@@ -173,13 +173,13 @@
 
    
 <!-- 신고옵션 출력 (게시글) -->	
-<select id="declalist" resultType="com.pretty.dog.dto.CommunityDTO">
+<select id="declalist" resultType="dog">
 		select * 
 		from decOption where decO_blind = 0;
 </select> 
 
 <!-- 신고옵션 출력 (댓글) -->	
-<select id="declalistC" resultType="com.pretty.dog.dto.CommunityDTO">
+<select id="declalistC" resultType="dog">
 		select * 
 		from decOption where decO_blind = 0;
 </select> 
@@ -195,7 +195,7 @@
 </insert>
 
 <!-- 신고하기 ~ 댓글 정보 불러오기 -->
-<select id="commentDetail" resultType="com.pretty.dog.dto.CommunityDTO">
+<select id="commentDetail" resultType="dog">
 		 select * from community_board_comment where bcomment_num = #{param1};
 </select> 
 

@@ -848,5 +848,37 @@ public class DogDTO {
 		this.set_time = set_time;
 	}
 	
+	public int bphoto_num;
+	public String bphoto_oriname;
+	public String bphoto_newname;
+	public Timestamp bphoto_date;
+
+	public int getBphoto_num() {
+		return bphoto_num;
+	}
+	public void setBphoto_num(int bphoto_num) {
+		this.bphoto_num = bphoto_num;
+	}
+	public String getBphoto_oriname() {
+		return bphoto_oriname;
+	}
+	public void setBphoto_oriname(String bphoto_oriname) {
+		this.bphoto_oriname = bphoto_oriname;
+	}
+	public String getBphoto_newname() {
+		return bphoto_newname;
+	}
+	public void setBphoto_newname(String bphoto_newname) {
+		this.bphoto_newname = bphoto_newname;
+	}
+	public Timestamp getBphoto_date() {
+		return bphoto_date;
+	}
+	public void setBphoto_date(Timestamp bphoto_date) {
+		this.bphoto_date = bphoto_date;
+	}
+	
+	
+	
 	
 }
