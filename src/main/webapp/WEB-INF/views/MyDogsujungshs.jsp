@@ -60,7 +60,7 @@
 	            </tr>
 	            <tr>
 	            	<td>나이</td>
-	            	<td ><input  type="text" name="dogage" class="formSt" value ="${doginfo.dog_age}"/></td>
+	            	<td ><input  type="number" name="dogage" class="formSt" value ="${doginfo.dog_age}"/></td>
 	            </tr>
 	            <tr>
 	            	<td>견종</td>
