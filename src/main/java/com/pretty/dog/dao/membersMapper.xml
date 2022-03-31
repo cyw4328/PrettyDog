@@ -119,7 +119,7 @@
 	
 	<!-- MY 강아지 등록 정보 삭제 -->
 	<update id="DogDel">
-		update doginfo set dog_state = '1' WHERE mem_id =#{param1} AND dog_name = #{param2}
+		update doginfo set dog_state = '1' WHERE mem_id =#{param1} AND dog_num = #{param2}
 	</update>
 	
 	<!-- MY 강아지 정보 확인 -->
