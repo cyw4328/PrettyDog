@@ -28,7 +28,7 @@
 		<input style="margin-left: 70px;" type="text" name="community_sub" value="${beautyTrendDetail.community_sub }">
 		<h4 style="margin-left: 70px;">내용</h4>
 		<input style="margin-left: 70px;" type="text" name="community_cont" value="${beautyTrendDetail.community_cont }">
-		<img src="resources/trend/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/>
+		<img src="/photo/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/>
 		<div style="margin-left: 70px;" id='image_preview'>
 		    <input type='file' id='btnAtt' name="photos" multiple='multiple' />
 		    <div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>

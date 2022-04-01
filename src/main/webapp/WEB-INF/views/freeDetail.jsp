@@ -83,7 +83,7 @@
      
       <tr>
          <td colspan="4">        
-         	<img width="300px" height="300px" src="resources/commu/${imgs.bphoto_newname}" onerror="this.style.display='none';"/>
+         	<img width="300px" height="300px" src="/photo/${imgs.bphoto_newname}" onerror="this.style.display='none';"/>
          	<br/>
         	 <br/>
          	${dto.community_cont}

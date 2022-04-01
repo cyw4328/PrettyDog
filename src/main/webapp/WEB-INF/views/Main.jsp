@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                    <div class="carousel slide" id="carousel-852840" data-ride="carousel" data-interval="100000">
+                    <div class="carousel slide" id="carousel-852840" data-ride="carousel" data-interval="5000">
                         <ol class="carousel-indicators"> 
                             <li data-slide-to="0" data-target="#carousel-852840" class="active">
                             </li>

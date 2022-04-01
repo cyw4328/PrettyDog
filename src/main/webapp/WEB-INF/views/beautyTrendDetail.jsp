@@ -30,7 +30,7 @@
 		<h4 style="margin-left: 70px; margin-bottom: 10px;">내용</h4>
 		<p style="margin-left: 70px;">${beautyTrendDetail.community_cont }</p>
 		<%-- <img src="resources/trend/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/> --%>
-		<img src="photo/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/>
+		<img src="/photo/${beautyTrendDetail.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px; display: block;"/>
 		<button style="position: absolute;top: 10px;left: 410px;width: 100px;border: 0;background-color: black;color: white;" onclick="location.href='beautyTrendList'">뒤로가기</button>
 		<button style="margin-left: 30px;position: absolute;top: 10px;left: 500px;background-color: black;color: white;width: 100px;border: 0;" onclick="goToDetail()">매장이동</button>
 		<%-- <button onclick="location.href='beautyTrendUpdate?idx=${beautyTrendDetail.community_boardnum}'">수정</button> --%>

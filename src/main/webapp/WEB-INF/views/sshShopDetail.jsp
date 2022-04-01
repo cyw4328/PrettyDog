@@ -16,49 +16,82 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
-   <style></style>
+   <style>
+   
+   </style>
 </head>
 <body>
-
-	<section style="width: 100%; height: 84px; display: flex; background-color: rgb(66, 52, 52);">
+	<!-- 헤더 -->
+	<section style="width: 100%; height: 85px; display: flex; background-color: rgb(66, 52, 52);">
         <%@ include file="Header.jsp"%>
 	</section>
-
+	
+	<div style="display: flex; height: 50px"></div>
+	
+	
 	<!-- <h2>여긴 매장 상세페이지</h2> -->
 	<input type="hidden" name="busin_num" id="busin_mem_chk" value="${sshShopDetail[0].busin_num }"/>
 	<input type="hidden" name="mem_id" id="busin_mem_id_chk" value="${sshShopDetail[0].mem_id }"/>
-	<div style="position: absolute; left: 20px; top: 100px; margin-left: 300px;">
-		<img width="300px" height="300px" src="/photo/${sshShopDetail[0].interior_newname }"/>
-	</div>
-	<div style="position: absolute; left: 20px; top: 100px; margin-left: 650px; margin-top: 20px;">
-		<p style="font-weight: bold; font-size: x-large;">${sshShopDetail[0].busin_name }</p>
-		<p style="font-weight: bold; font-size: large; margin-top: 20px;">${sshShopDetail[0].busin_juso }</p>
-		<p style="font-weight: bold; font-size: large; margin-bottom: 60px;">${sshShopDetail[0].mem_tel }</p>
-		<c:if test="${sshShopDetail[0].busin_smalldog == 1 }">
-			<button style="width: 90px; height: 40px; font-size: large;">소형견</button>
-		</c:if>
-		<c:if test="${sshShopDetail[0].busin_middledog == 1 }">
-			<button style="width: 90px; height: 40px; font-size: large;">중형견</button>
-		</c:if>
-		<c:if test="${sshShopDetail[0].busin_bigdog == 1 }">
-			<button style="width: 90px; height: 40px; font-size: large;">대형견</button>
-		</c:if>
-		<p id="like" style="font-size: xx-large; font-size: 50px; cursor : pointer;">${sshMyInterestShop_size }</p><span style="font-size: large; position: absolute; left: 60px; top: 255px;">${sshShopDetail[0].busin_likes }</span>
-	</div>
-		<textarea style="position: absolute; left: 20px; top: 430px; margin-left: 300px;" cols="100" rows="10" readonly>${sshShopDetail[0].busin_info }</textarea>
-		<div style="position: absolute; left: 320px; top: 640px;">
-		<jsp:include page="/WEB-INF/views/reserCalendar.jsp"/>
+	
+	<div class="container" style="display: flex;">
+		<div style="width: 50%; height: 300px;">
+			<img src="/photo/${sshShopDetail[0].interior_newname }" style="width: 100%; height: 300px;"/>
 		</div>
-	<div style='width:800px;margin:0 auto;margin-top:50px;'>
-	<ul class="nav nav-tabs" style="position: absolute; left: 20px; top: 1350px; margin-left: 300px;">
-		<li class='active'><a href="#tabmenu_01" data-toggle="tab">리뷰</a></li>
-		<li><a href="#tabmenu_02" data-toggle="tab">QnA</a></li>
-	</ul>
-	<div class="tab-content" style="position: absolute; left: 20px; top: 1400px; margin-left: 300px;">
-		<div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div>
-		<div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div>
+		<div style="width: 5%;"></div>
+		<div style="width: 45%; ">
+			<p style="font-weight: bold; font-size: x-large;">${sshShopDetail[0].busin_name }</p>
+			<p style="font-weight: bold; font-size: large; margin-top: 20px;">${sshShopDetail[0].busin_juso }</p>
+			<p style="font-weight: bold; font-size: large; margin-bottom: 60px;">${sshShopDetail[0].mem_tel }</p>
+			<c:if test="${sshShopDetail[0].busin_smalldog == 1 }">
+				<button style="width: 90px; height: 40px; font-size: large;">소형견</button>
+			</c:if>
+			<c:if test="${sshShopDetail[0].busin_middledog == 1 }">
+				<button style="width: 90px; height: 40px; font-size: large;">중형견</button>
+			</c:if>
+			<c:if test="${sshShopDetail[0].busin_bigdog == 1 }">
+				<button style="width: 90px; height: 40px; font-size: large;">대형견</button>
+			</c:if>
+			<div style="display: flex;" >
+				<p id="like" style="font-size: xx-large; cursor : pointer;">${sshMyInterestShop_size }</p>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="font-size: large; width: 60px; height: 50px; padding-top: 10px; ">${sshShopDetail[0].busin_likes }</a>
+			</div>
+		</div>
 	</div>
-</div>
+	
+	<div style="display: flex; height: 40px; background-color: aliceblue;"></div>
+	
+	<div class="container" style="display: flex;">
+		<textarea style="width: 100%; font-size: 15px; " cols="100" rows="10" readonly>${sshShopDetail[0].busin_info }</textarea>
+	</div>
+	
+	<div style="display: flex; height: 60px; background-color: aliceblue;"></div>
+	
+	<div class="container" style="">
+		<jsp:include page="/WEB-INF/views/reserCalendar.jsp"/>
+	</div>
+	
+	<div style="display: flex; height: 60px; background-color: aliceblue;"></div>
+	
+	
+	<div class="container" style="">
+		<div>
+			<ul class="nav nav-tabs" style="font-size: 15px;">
+				<li class='active'><a href="#tabmenu_01" data-toggle="tab">리뷰</a></li>
+				<li ><a href="#tabmenu_02" data-toggle="tab">QnA</a></li>
+			</ul>
+		</div>
+		
+		<div style="width: 100%; height: 30px;"></div>
+		
+		<div class="tab-content" style="">
+			<div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div>
+			<div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div>
+		</div>
+	</div>
+	
+	
+
 </body>
 <script>
 	//console.log(loginId);
@@ -110,145 +143,6 @@
 	*/
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

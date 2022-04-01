@@ -7,76 +7,106 @@
 <style type="text/css">
     a { color:#000000;text-decoration:none; }
     .scriptCalendar { text-align:center; }
-    .scriptCalendar > thead > tr > td { width:50px;height:50px; }
+    .scriptCalendar > thead > tr > td { width:70px;height:70px; }
     .scriptCalendar > thead > tr:first-child > td { font-weight:bold; }
     .scriptCalendar > thead > tr:last-child > td { background-color:#90EE90; }
-    .scriptCalendar > tbody > tr > td { width:50px;height:50px; }
+    .scriptCalendar > tbody > tr > td { width:70px;height:70px; }
     
     .timeBtn{
     	cursor : pointer;
     	background-color : skyblue;
     	color : white;
     	padding: 10px;
+    	width:70px;
+    	height:50px;
     }
     
     .noBtn{
     	background-color: gray;
     	color : white;
     	padding: 10px;
+    	width:70px;
+    	height:50px;
     }
     
     .pastBtn{
 		background-color: gray;
     	color : white;
     	padding: 10px;
+    	width:70px;
+    	height:50px;
     }
   
 </style>
 
 </head>
 <body>
- <%@ include file="Header.jsp"%>
-<table class="scriptCalendar" style="float:left;">
-    <thead>
-        <tr>
-            <td onClick="prevCalendar();" style="cursor:pointer;">&#60;&#60;</td>
-            <td colspan="5">
-                <span id="calYear">YYYY</span>년
-                <span id="calMonth">MM</span>월
-            </td>
-            <td onClick="nextCalendar();" style="cursor:pointer;">&#62;&#62;</td>
-        </tr>
-        <tr>
-            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-<table id="reservationTime" style="float:left; border-spacing: 10px 10px;">
-	<tr>
-		<td colspan="3">이용 가능 시간</td>
-	</tr>
-	<tr id="viewtimearea">
-	</tr>
-</table>
-<div style="position: absolute; left: 20px; top: 450px;">
-	<span style="font-weight: bold; padding:0px 40px 40px 0px;">나의 애견 선택</span>
-	<span style="font-weight: bold; padding:0px 40px 40px 0px;">이용 가능한 서비스</span>
-	<br/>
-	<select id="myDog" style="margin: 10px 70px 10px 10px;">
+<div style="display: flex;">
+	<div style="width: 40px;"></div>
+	<table class="scriptCalendar" style="float:left;">
+	    <thead>
+	        <tr>
+	            <td onClick="prevCalendar();" style="cursor:pointer;">&#60;&#60;</td>
+	            <td colspan="5">
+	                <span id="calYear">YYYY</span>년
+	                <span id="calMonth">MM</span>월
+	            </td>
+	            <td onClick="nextCalendar();" style="cursor:pointer;">&#62;&#62;</td>
+	        </tr>
+	        <tr>
+	            <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+	        </tr>
+	    </thead>
+	    <tbody></tbody>
+	</table>
+	
+	<div style="width: 40px;"></div>
+	<div>
+		<div style="width: 100%; height: 4%;"></div>
+		<div style="width: 100%; height: 10%; display: flex; justify-content: center; align-items: center;">
+			<a style="font-size: 16px;">이용 가능 시간</a>
+		</div>
+		<table id="reservationTime" style="float:left; border-spacing: 10px 10px; width: 210px">
+			<tr>
+				<td colspan="3" style="font-size: 16px;"></td>
+			</tr>
+			<tr id="viewtimearea">
+			</tr>
+		</table>
+	</div>
+	
+	<div style="width: 40px;"></div>
+	
+	<div style="">
+		<div style="width: 100%; height: 15%"></div>
+		<div style="width: 100%; height: 40%">
+			<div>
+				<span style="font-weight: bold; padding:0px 40px 40px 0px; font-size: 15px;">나의 애견 선택</span>
+				<select id="myDog" style="margin: 10px 70px 10px 10px;">
+				</select>
+			</div>
+			<div style="width: 100%; height: 40px"></div>
+			<div>
+				<span style="font-weight: bold; padding:0px 10px 10px 0px; font-size: 15px;">이용 가능한 서비스</span>
+				<select id="shopService" style="margin: 10px;">
+					<option value="0">이용 서비스</option>
+				</select>
+			</div>
+		</div>
 		
-	</select>
-	<select id="shopService" style="margin: 10px;">
-		<option value="0">이용 서비스</option>
-	</select>
+		<div style="width: 100%; height: 45%">
+			<h3>결제 금액 :&nbsp;&nbsp;&nbsp;<span id="servicePrice" style="color : red; font-weight: bold; font-size: x-large;">0 Point</span> </h3> 
+			<button id="reserVation" onclick="reserVation()"
+			style="cursor : pointer; background-color : lightGray; border: 0px; outline: 0px; font-size: large;"
+			>예약 하기</button>
+			<a style="font-size: small; cursor : pointer;" onclick="refundRegulation()">환불 규정</a>
+		</div>
+	</div>
+	
 </div>
-<div style="position: absolute; left: 20px; top: 600px; text-align: left;">
-	<h3>결제 금액 :&nbsp;&nbsp;&nbsp;<span id="servicePrice" style="color : red; font-weight: bold; font-size: x-large;">0 Point</span> </h3> 
-	<button id="reserVation" onclick="reserVation()"
-	style="cursor : pointer; background-color : lightGray; border: 0px; outline: 0px; font-size: large;"
-	>예약 하기</button>
-	<a style="font-size: small; cursor : pointer;" onclick="refundRegulation()">환불 규정</a>
-</div>
+
+
+
 </body>
 </html>
 <script type="text/javascript">

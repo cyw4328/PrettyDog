@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-white bg-white fixed-top" style="border-bottom-style: solid; border-width: 1px;">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-white bg-white fixed-top" style="border-bottom: 1px; border-bottom-style: solid; border-width: 1px; border-bottom-color: black;">
                         <div>
                             <a href="./"><img src="/photo/LOGO.PNG"/></a>
                         </div>

@@ -13,27 +13,83 @@
 </head>
 <body>
 	<input id="busin_num" type="hidden" value="${sshShopDetail[0].busin_num }" />
-	<p><span id="QnaTitle"> QnA 작성</span>(욕설 및 악의적인 글은 법적인 처벌을 받을 수 있습니다.)</p>
-	<div>
-		<textarea style="width: 530px; font-size: 12px;" cols="90" rows="5" placeholder="내용을 입력해 주세요" id="QnaTextWrite" onclick="logChk()"></textarea><a href="#" onclick="QnaWrite()" style="font-size: 15px;">등록</a>
+	
+	<div style="width: 100%; height: auto; background-color: #d3d3d359; border : 0px solid transparent; border-radius: 10px 10px 10px 10px; display: flex;">
+		<div style="width: 2%;"></div>
+		
+		<div style="width: 96%; height: auto;">
+			<div>
+				<p style="font-size: 15px;"><span id="QnaTitle"> QnA 작성</span>(욕설 및 악의적인 글은 법적인 처벌을 받을 수 있습니다.)</p>
+			</div>
+			<div>
+				<textarea style="width: 100%; font-size: 15px;" cols="90" rows="5" placeholder="내용을 입력해 주세요" id="QnaTextWrite" onclick="logChk()"></textarea>
+				<div style="width: 100%; height: 10px; display: flex;"></div>
+				<div style="width: 100%; height: auto; display: flex;">
+					<div style="width: 95%; height: 20px;"></div>
+					<div style="width: 5%; height: auto;">
+						<a class="btn btn-light" href="#" onclick="QnaWrite()" style="font-size: 15px;">등록</a>
+					</div>
+				</div>
+				<div style="width: 100%; height: 10px; display: flex;"></div>
+			</div>
+		</div>
+		
+		<div style="width: 2%;"></div>
 	</div>
-	<c:forEach items="${sshShopQnaList }" var="sshShopQnaList">
-	<div class="textarea">
-		<p style="font-weight: bold; margin-bottom: -5px;">${sshShopQnaList.mem_id }</p>
-		<p>${sshShopQnaList.shop_boarddate }</p>
-		<input type="hidden" value="${sshShopQnaList.shop_boardnum}" class="shopBoardNum"/>
-		<textarea style="margin-top: -10px; width: 530px; font-size: 12px;" class="${sshShopQnaList.shop_boardnum}" cols="90" rows="3">${sshShopQnaList.shop_boardcont }</textarea>
-		<c:forEach items="${sshShopQnaNnswerList }" var="sshShopQnaNnswerList">
-			<c:if test="${sshShopQnaList.shop_boardnum == sshShopQnaNnswerList.shop_boardnum }">
-				<p style="margin-left: 50px; font-weight: bold; margin-bottom: -5px;">${sshShopDetail[0].busin_name }</p>
-				<p style="margin-left: 50px; margin-bottom: -5px;">${sshShopQnaNnswerList.scomment_date }</p>
-				<textarea style="margin-left: 50px; margin-bottom: 3px; font-size: 12px; margin-top: 2px;" cols="90" rows="3">${sshShopQnaNnswerList.scomment_cont }</textarea>
-			</c:if>
-		</c:forEach>
-		<div id="qnaBoard${sshShopQnaList.shop_boardnum }"></div>
-		<div id="qnaBoard2${sshShopQnaList.shop_boardnum }"></div>
+	
+	<div style="width: 100%; height: 10px;"></div>
+	
+	
+	<div style="width: 100%; height: auto; background-color: #d3d3d359; border : 0px solid transparent; border-radius: 10px 10px 10px 10px;">
+		
+		<div style="width: 100%; height: 30px;"></div>
+		<div style="width: 100%; height: auto; display: flex;">	
+		
+			<div style="width: 5%; height: 100%;"></div>
+			<div style="width: 90%; height: auto;">
+				<c:forEach items="${sshShopQnaList }" var="sshShopQnaList">
+				
+					<div class="textarea">
+						<div style="display: flex;">
+							<div style="width: 20%; font-size: 20px;">
+								<p style="font-weight: bold; margin-bottom: 0px;">${sshShopQnaList.mem_id }</p>
+							</div>
+							<div style="width: 50%; font-size: 15px; margin-bottom: 0px;">
+								<p style="font-size: 15px; margin-top: 8px;">${sshShopQnaList.shop_boarddate }</p>
+							</div>
+						</div>
+						
+						<div style="width: 100%; height: 10px;"></div>
+						
+						<input type="hidden" value="${sshShopQnaList.shop_boardnum}" class="shopBoardNum"/>
+						
+						<textarea style="width: 530px; font-size: 15px; width: 100%;" class="${sshShopQnaList.shop_boardnum}" cols="90" rows="3" readonly>${sshShopQnaList.shop_boardcont }</textarea>
+						
+						<c:forEach items="${sshShopQnaNnswerList }" var="sshShopQnaNnswerList">
+							<c:if test="${sshShopQnaList.shop_boardnum == sshShopQnaNnswerList.shop_boardnum }">
+								<p style="margin-left: 50px; font-weight: bold;">${sshShopDetail[0].busin_name }</p>
+								<p style="margin-left: 50px;">${sshShopQnaNnswerList.scomment_date }</p>
+								<textarea style="margin-left: 50px; margin-bottom: 3px; font-size: 12px; margin-top: 2px;" cols="90" rows="3">${sshShopQnaNnswerList.scomment_cont }</textarea>
+							</c:if>
+						</c:forEach>
+						
+						<div id="qnaBoard${sshShopQnaList.shop_boardnum }"></div>
+						<div id="qnaBoard2${sshShopQnaList.shop_boardnum }"></div>
+						
+					</div>
+					
+					
+					<div style="width: 100%; height: 25px;"></div>
+					<div style="width: 100%; height: 2px; background-color: white;"></div>
+					<div style="width: 100%; height: 25px;"></div>
+				</c:forEach>
+			</div>
+			<div style="width: 5%; height: 100%;"></div>
+		</div>
+		<div style="width: 100%; height: 30px;"></div>
 	</div>
-	</c:forEach>
+	
+	
 </body>
 <script>
 
