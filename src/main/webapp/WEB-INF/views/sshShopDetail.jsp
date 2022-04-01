@@ -81,16 +81,22 @@
 	<div class="container" style="">
 		<div>
 			<ul class="nav nav-tabs" style="font-size: 15px;">
-				<li class='active'><a href="#tabmenu_01" data-toggle="tab">리뷰</a></li>
-				<li ><a href="#tabmenu_02" data-toggle="tab">QnA</a></li>
+				<li class='active'><a data-toggle="tab" onclick="review()">리뷰</a></li>
+				<li ><a data-toggle="tab" onclick="qna()">QnA</a></li>
 			</ul>
 		</div>
 		
 		<div style="width: 100%; height: 100px;"></div>
 		
-		<div class="tab-content">
-			<div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div>
-			<div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div>
+		<div class="tab-content" id="review" style="display: block;">
+			<%-- <div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div> --%>
+			<%-- <div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div> --%>
+			<%@ include file="sshShopReviewList.jsp"%>
+		</div>
+		<div class="tab-content" id="QnA" style="display: none;">
+			<%-- <div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div> --%>
+			<%-- <div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div> --%>
+			<%@ include file="sshShopQnaList.jsp"%>
 		</div>
 	</div>
 	
@@ -122,29 +128,15 @@
 		}
 	})
 	
-	/*
-	var busin_num = '${sshShopDetail[0].busin_num }';
-	console.log("busin_num busin_num busin_num" + busin_num);
-	$.ajax({
-		url: "updateLike",
-		type: "GET",
-		data: {'busin_num':busin_num},
-		dataType: "JSON",
-		success: function (data) {
-				console.log(data.msg);
-				if (data.msg != null) {
-					alert(data.msg)
-				}else if(data.LikeCheck == 1) {
-					alert("매장 추천 취소했당개!");
-				}else{
-					alert("추천 완료했당개");
-				}			
-		},					
-		error : function () {
-			alert("추천에 실패했당개");
-		}
-	});
-	*/
+	function review() {
+			$('#review').css({'display':'block'});
+			$('#QnA').css({'display':'none'});
+	}
+	
+	function qna() {
+		$('#review').css({'display':'none'});
+		$('#QnA').css({'display':'block'});
+	}
 </script>
 </html>
 

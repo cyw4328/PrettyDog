@@ -82,24 +82,24 @@
 		<div style="width: 100%; height: 40%">
 			<div>
 				<span style="font-weight: bold; padding:0px 40px 40px 0px; font-size: 15px;">나의 애견 선택</span>
-				<select id="myDog" style="margin: 10px 70px 10px 10px;">
+				<select id="myDog" style="margin: 10px;height: 40px;font-size: 15;width: 200px;">
 				</select>
 			</div>
 			<div style="width: 100%; height: 40px"></div>
 			<div>
 				<span style="font-weight: bold; padding:0px 10px 10px 0px; font-size: 15px;">이용 가능한 서비스</span>
-				<select id="shopService" style="margin: 10px;">
+				<select id="shopService" style="margin: 10px;width: 200px;font-size: 15px;height: 40px;">
 					<option value="0">이용 서비스</option>
 				</select>
 			</div>
 		</div>
 		
-		<div style="width: 100%; height: 45%">
+		<div style="width: 100%;height: 45%;margin-top: 30px;">
 			<h3>결제 금액 :&nbsp;&nbsp;&nbsp;<span id="servicePrice" style="color : red; font-weight: bold; font-size: x-large;">0 Point</span> </h3> 
 			<button id="reserVation" onclick="reserVation()"
-			style="cursor : pointer; background-color : lightGray; border: 0px; outline: 0px; font-size: large;"
+			style="cursor : pointer;background-color: pink;border: 0px;outline: 0px;font-size: large;height: 50px;margin-top: 20px;"
 			>예약 하기</button>
-			<a style="font-size: small; cursor : pointer;" onclick="refundRegulation()">환불 규정</a>
+			<a style="font-size: small;cursor : pointer; color: gray;" onclick="refundRegulation()">환불 규정</a>
 		</div>
 	</div>
 	

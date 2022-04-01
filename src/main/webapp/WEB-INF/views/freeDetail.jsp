@@ -27,11 +27,13 @@
 	.commentArea{
 			
 			}		
-	table{
+	.postArea{
 		width: 1000px;
+    height: 500px;
+    text-align: center;
 	}
    th{
-   		background-color: lightgrey;
+   		background-color: #F8E0F7;
    }
    
    #commBtn{
@@ -52,6 +54,11 @@
     	resize: none;
    
    }
+   th a{
+   		padding: 10px;
+    border: 1px solid;
+    margin: 10px;
+   }
    </style>
 </head>
 <body>
@@ -61,8 +68,10 @@
 
 
 
-<div id="detail_frame"   style="margin-left: 400px" >
-	<h1>자유게시판  상세</h1>
+<div id="detail_frame"  style="margin-left: 400px;margin-top: 50px;">
+	<h1 style="
+    margin-bottom: 30px;
+">자유게시판  상세</h1>
    <table class="postArea">
       <tr>
          <th>제목</th>
@@ -90,7 +99,7 @@
          </td>
       </tr>
      	 <tr>
-         <th colspan="4" style="text-align: center;">
+         <th colspan="4" style="text-align: center;height: 70px;">
            	 	<a href="freeList">리스트</a>
            	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}"  onclick= "memAuthchk_postUp(event);">수정</a>
            	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick= "memAuthchk_postDel(event);">삭제</a>
@@ -104,7 +113,9 @@
    <!--댓글영역 ------------------------------------------------------------------------------------------------------ -->
    
    <div id="free_commentList">
-   		<table >
+   		<table style="
+    width: 1000px;
+">
    		<!-- commentCount -->
    			<thead>
 	   			<tr>
@@ -135,7 +146,9 @@
    		</table>
    		<form action="free_commentWrite" name="freeCommForm"  method="post" onsubmit="commSubmitchk();" >
    			<div id="commentWriter">
-   			<table>
+   			<table style="
+    width: 1000px;
+">
    			<tr>
    				<td>
 	   				<input type="hidden" name="mem_id" id="comm_writer" class="comm_writer_class"> 			

@@ -42,6 +42,10 @@
       #subject{
          width:200px; 
       }
+      .delBtn:hover{
+      	cursor: pointer;
+      	color: pink;
+      }
       </style>
 </head>
 <body>
@@ -54,7 +58,7 @@
          <%@ include file="cywMyPageMenuBarOwner.jsp"%>      
       </c:if>
    </c:forEach>
-   <div style="position: relative; left: 250px;">
+   <div style="position: relative;left: 250px;top: 100px;">
       <div style="position: absolute; top: 50px; left: 20px;">
          <h4 style="font-size: 25px;">${loginId }님의 예약 목록</h4>   
       </div>
@@ -166,12 +170,17 @@ function listDraw(list) {
        }else{
           dateMonth = dateMonth;
        }
+       if(dateDay<10){
+    	   dateDay = "0" + dateDay;
+       }else{
+    	   dateDay = dateDay;
+       }
        
        let reserDay = dateYear+"-"+dateMonth+"-"+dateDay;
        
        if (item.reser_state == 0) {
          reserState = "예약완료";
-         reserState1 = '<a onclick="cancleReser(\''+item.reser_num+'\',\''+item.reser_money+'\',\''+item.busin_num+'\',\''+reserDay+'\',\''+reserTime+'\')">취소하기</a>';
+         reserState1 = '<a class="delBtn" onclick="cancleReser(\''+item.reser_num+'\',\''+item.reser_money+'\',\''+item.busin_num+'\',\''+reserDay+'\',\''+reserTime+'\')">취소하기</a>';
          //reserState1 = '<input type="button" id="btn" onclick="func()" value="예약취소"/>'
        }else if (item.reser_state == 1) {
          reserState = "노쇼";
@@ -230,6 +239,8 @@ function func() {
 function cancleReser(reser_num, reser_money, busin_num, reserDay, reserTime){
    
    console.log(reser_num + "," + reser_money + "," + busin_num + "," + reserDay + "," + reserTime);
+   
+   
    
    location.href="reserDel?reser_num="+reser_num+"&&reser_money="+reser_money+"&&busin_num="+busin_num+"&&reserDay="+reserDay+"&&reserTime="+reserTime
 }

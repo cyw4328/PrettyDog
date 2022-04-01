@@ -85,7 +85,7 @@ a{
 
 <div id="memuBar">
 		<div id = "left">
-			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
+			<p style="text-align: center;"><b style="font-size: 10px;">${loginId}</b> 의 마이페이지</p>
 		</div>
 		
 		<a href="./memberPassCk"><div class= "tab00" id="tab1">개인정보수정</div></a>

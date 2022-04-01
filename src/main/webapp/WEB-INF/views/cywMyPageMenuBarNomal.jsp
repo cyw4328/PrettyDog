@@ -88,7 +88,7 @@ a{
 		<%-- 	<c:if test="${loginId} != null">
 			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
 			</c:if> --%>
-			<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>
+			<p style="text-align: center;"><b style="font-size: 10px;">${loginId}</b> 의 마이페이지</p>
 		<%-- <c:choose>
 			<c:when test="${loginId} != null">
 				<p style="text-align: center;"><b style="font-size: 20px;">${loginId}</b> 의 마이페이지</p>

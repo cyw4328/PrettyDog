@@ -8,7 +8,7 @@
 	<style>
 		#AllPage{
 			position: relative;
-			top: 20px;
+			top: 150px;
 			left: 270px;
 		}
 		#Sub{
