@@ -229,7 +229,7 @@ var a = '99';
 var b ='99';
 var c = '99';
 
-apuserlist3(currPage,10,a,b,c);
+apuserlist3(currPage,8,a,b,c);
 
 
 function apuserlist3(page,cnt,a,b,c) {
@@ -257,7 +257,7 @@ function apuserlist3(page,cnt,a,b,c) {
 						a = $('input[name="search"]').val();
 						b = $('select[name="shOrder1"]').val();
 						c = $('select[name="shOrder2"]').val();
-						apuserlist3(page,10,a,b,c);
+						apuserlist3(page,8,a,b,c);
 					}
 				});
 			}
@@ -329,7 +329,7 @@ $('#searchBtr').click(function() {
 		alert("아이디를 입력하세요");
 	} */
 	
-	apuserlist3(currPage,10,a,b,c);
+	apuserlist3(currPage,8,a,b,c);
 	
 })
 

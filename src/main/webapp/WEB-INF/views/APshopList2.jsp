@@ -215,7 +215,7 @@ var totalPage = 2;
 var a = '99';
 var b ='99';
 
-apshoplist3(currPage,10,a,b);
+apshoplist3(currPage,8,a,b);
 
 
 function apshoplist3(page,cnt,a,b) {
@@ -242,7 +242,7 @@ function apshoplist3(page,cnt,a,b) {
 						console.log(page); // 몇 페이지를 클릭 했는지에 대한 정보
 						a = $('input[name="search"]').val();
 						b = $('select[name="shOrder1"]').val();
-						apshoplist3(page,10,a,b);
+						apshoplist3(page,8,a,b);
 					}
 				});
 			}
@@ -307,7 +307,7 @@ $('#searchBtr').click(function() {
 		alert("아이디를 입력하세요");
 	} */
 	
-	apshoplist3(currPage,10,a,b);
+	apshoplist3(currPage,8,a,b);
 	
 })
 

@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 100%; height: 50px; background-color: aliceblue;">  </div>
+        <div style="width: 100%; height: 50px; ">  </div>
 
         <!-- 교차 이미지 텍스트-->
         <div class="container" style="">
@@ -99,12 +99,12 @@
                 <div class="col-md-3" style="height: 200px;">
                     <img style=" height: 100%;" alt="Bootstrap Image Preview" src="/photo/핑크 독.png" class="rounded-circle" />
                 </div>
-                <div class="col-md-9" style="height: 200px;">
+                <div class="col-md-9" style="height: 200px;padding-top: 40px;">
                     <h2>
-                       		예약하기
+                       		멋쟁이 애견의 기준이 되다.
                     </h2>
                     <p>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        	전국 지역에 있는 실력있는 애견미용사분들이 직접 선택한 트렌디한 사진을 보고 우리 애견을 스타일링 시켜보세요. 지역,견종,서비스 별 원하는 조건에 따라 검색 후 편한 예약 서비스 까지 즐겨보세요♡
                     </p>
                     <p>
                         <!-- <a class="btn" href="#">View details »</a> -->
@@ -114,15 +114,15 @@
             <div style="width: 100%; height: 10px;"></div>
             <div style="width: 100%; height: 2px; background-color: rgb(200, 200, 200);"></div>
         </div>
-        <div style="width: 100%; height: 50px; background-color: aliceblue;">  </div>
+        <div style="width: 100%; height: 50px; ">  </div>
         <div class="container">
             <div class="row" style="height: 200px;">
-                <div class="col-md-9" style="height: 200px;">
+                <div class="col-md-9" style="height: 200px;padding-top: 40px;">
                     <h2>
-                        	트렌드
+                        	애견인들과의 소통의 장
                     </h2>
                     <p>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                        	우리 애견은 어떤지 , 다른 애견들도 똑같은지 이러한 정보를 서로 공유하며 우리의 친구들이 좀 더 편한 감정을 느끼게 해보세요. 친구가 생기면 같이 산책도 하며 힐링을 시켜주세요~
                     </p>
                     <p>
                         <!-- <a class="btn" href="#">View details »</a> -->
@@ -135,7 +135,7 @@
             <div style="width: 100%; height: 10px;"></div>
             <div style="width: 100%; height: 2px; background-color: rgb(200, 200, 200);"></div>
         </div>
-        <div style="width: 100%; height: 50px; background-color: aliceblue;">  </div>
+        <div style="width: 100%; height: 50px; ">  </div>
 
         <div class="container">
             <div class="row">
@@ -176,7 +176,7 @@
             <div style="width: 100%; height: 10px;"></div>
             <div style="width: 100%; height: 2px; background-color: rgb(200, 200, 200);"></div>
         </div>
-        <div style="width: 100%; height: 50px; background-color: aliceblue;">  </div>
+        <div style="width: 100%; height: 50px; ">  </div>
 
 
 

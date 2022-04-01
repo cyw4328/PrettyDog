@@ -98,7 +98,7 @@
 
 				</select>
 				
-				<select name="serviceScope" id="addService" style="width: 300px;">
+				<select name="serviceScope" id="addService" style="width: 350px;">
 					<option <c:if test="${empty params.serviceScope}">selected="selected"</c:if> value="0">서비스선택(견종을 먼저 선택해주세요)</option>
 					<%-- <c:forEach items="${fn:split(selectServiceScope,',')}" var="item3" varStatus="status">
 						<option value="${status.count}" <c:if test="${status.count eq params.serviceScope }">selected="selected"</c:if>>${item3 }</option>

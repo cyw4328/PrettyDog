@@ -59,19 +59,23 @@
 		</div>
 	</div>
 	
-	<div style="display: flex; height: 40px; background-color: aliceblue;"></div>
-	
+	<div style="display: flex; height: 40px; "></div>
+	<h1 style="
+    margin-left: 400px;
+    font-size: 30px;
+    margin-bottom: 20px;
+">매장정보</h1>
 	<div class="container" style="display: flex;">
-		<textarea style="width: 100%; font-size: 15px; " cols="100" rows="10" readonly>${sshShopDetail[0].busin_info }</textarea>
+		<textarea style="width: 100%; font-size: 15px; border:0; " cols="100" rows="10" readonly>${sshShopDetail[0].busin_info }</textarea>
 	</div>
 	
-	<div style="display: flex; height: 60px; background-color: aliceblue;"></div>
+	<div style="display: flex; height: 60px;"></div>
 	
 	<div class="container" style="">
 		<jsp:include page="/WEB-INF/views/reserCalendar.jsp"/>
 	</div>
 	
-	<div style="display: flex; height: 60px; background-color: aliceblue;"></div>
+	<div style="display: flex; height: 60px; "></div>
 	
 	
 	<div class="container" style="">
@@ -82,9 +86,9 @@
 			</ul>
 		</div>
 		
-		<div style="width: 100%; height: 30px;"></div>
+		<div style="width: 100%; height: 100px;"></div>
 		
-		<div class="tab-content" style="">
+		<div class="tab-content">
 			<div class="tab-pane fade" id="tabmenu_01"><jsp:include page="/WEB-INF/views/sshShopReviewList.jsp"/></div>
 			<div class="tab-pane fade" id="tabmenu_02"><jsp:include page="/WEB-INF/views/sshShopQnaList.jsp"/></div>
 		</div>

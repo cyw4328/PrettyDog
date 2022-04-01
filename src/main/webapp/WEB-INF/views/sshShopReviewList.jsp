@@ -98,7 +98,7 @@
 					
 					<div style="display: flex;">
 						<div>
-							<img style="width: 200px; height: 200px;" src="resources/rev/${sshShopRevList.sphoto_newname }"/>
+							<img style="width: 200px; height: 200px;" src="/photo/${sshShopRevList.sphoto_newname }"/>
 						</div>
 						
 						<div style="width:5%;"></div>
