@@ -219,7 +219,213 @@ public class AdminPageController {
 		return service.apreservelist3(currPage,pagePerCnt);
 	}		
 	
-	
+	   @RequestMapping(value = "/categoryPage")
+	   public ModelAndView idSearchPage(Model model,HttpSession session) {
+	      logger.info("카테고리페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.categoryPage(loginId);
+	   }
+	   
+	   
+	   @RequestMapping(value = "/categoryListCall", method = RequestMethod.GET) 
+	   public @ResponseBody HashMap<String, Object> categoryListCall(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.categoryListCall(currPage,pagePerCnt);
+	   }
+	   
+	   
+	   @RequestMapping(value = "/cateGoryAdd")
+	   public ModelAndView cateGoryAdd(@RequestParam String categoryName,@RequestParam String categoryClass,RedirectAttributes rAttr) {
+	      logger.info("카테고리 추가");
+
+	      return service.cateGoryAdd(categoryName,categoryClass,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/categoryDel")
+	   public ModelAndView categoryDel(@RequestParam String category_num,RedirectAttributes rAttr) {
+	      logger.info("카테고리 삭제:{}",category_num);
+
+	      return service.categoryDel(category_num,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/SingoHangmokPage")
+	   public ModelAndView SingoHangmokPage(HttpSession session) {
+	      logger.info("신고항목 페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.SingoHangmokPage(loginId);
+	   }
+	   
+	   @RequestMapping(value = "/SingoHangmokList", method = RequestMethod.POST) 
+	   public @ResponseBody HashMap<String, Object> SingoHangmokList(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.SingoHangmokList(currPage,pagePerCnt);
+	   }
+	   
+	   @RequestMapping(value = "/SingoHangmokAdd")
+	   public ModelAndView SingoHangmokAdd(@RequestParam String SingoSub,RedirectAttributes rAttr) {
+
+	      return service.SingoHangmokAdd(SingoSub,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/HangmokReUse")
+	   public ModelAndView HangmokReUse(@RequestParam String decO_num,RedirectAttributes rAttr) {
+
+	      return service.HangmokReUse(decO_num,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/HangmokDel")
+	   public ModelAndView HangmokDel(@RequestParam String decO_num,RedirectAttributes rAttr) {
+
+	      return service.HangmokDel(decO_num,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/SingoListPage")
+	   public ModelAndView SingoListPage(HttpSession session) {
+	      logger.info("신고리스트 페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.SingoListPage(loginId);
+	   }
+	   
+	   @RequestMapping(value = "/SingoNoCheckList", method = RequestMethod.POST) 
+	   public @ResponseBody HashMap<String, Object> SingoNoCheckList(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.SingoNoCheckList(currPage,pagePerCnt);
+	   }
+	   
+	   @RequestMapping(value = "/SingoProcess")
+	   public ModelAndView SingoProcess(HttpSession session,@RequestParam String decl_num,RedirectAttributes rAttr) {
+	      logger.info("신고처리",decl_num);
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+	      //String loginId = "dud";
+	      
+	      return service.SingoProcess(decl_num,rAttr,loginId);
+	   }
+	   
+	   @RequestMapping(value = "/SingoProcessListPage")
+	   public ModelAndView SingoProcessListPage(HttpSession session) {
+	      logger.info("신고리스트 페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.SingoProcessListPage(loginId);
+	   }
+	   
+	   @RequestMapping(value = "/SingoProcessList", method = RequestMethod.POST) 
+	   public @ResponseBody HashMap<String, Object> SingoProcessList(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.SingoProcessList(currPage,pagePerCnt);
+	   }
+	   
+	   @RequestMapping(value = "/AdminServicePage")
+	   public ModelAndView AdminServicePage(HttpSession session) {
+	      logger.info("추가서비스항목 페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.AdminServicePage(loginId);
+	   }
+	   
+	   @RequestMapping(value = "/ServiceHangmokList", method = RequestMethod.POST) 
+	   public @ResponseBody HashMap<String, Object> ServiceHangmokList(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.ServiceHangmokList(currPage,pagePerCnt);
+	   }
+	   
+	   @RequestMapping(value = "/UseServiceChange")
+	   public ModelAndView UseServiceChange(HttpSession session,@RequestParam String add_num,RedirectAttributes rAttr) {
+	      logger.info("서비스 사용으로 바꾸기");
+
+	      return service.UseServiceChange(add_num,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/NoUseServiceChange")
+	   public ModelAndView NoUseServiceChange(HttpSession session,@RequestParam String add_num,RedirectAttributes rAttr) {
+	      logger.info("서비스 사용으로 바꾸기");
+
+	      return service.NoUseServiceChange(add_num,rAttr);
+	   }
+	   
+	   @RequestMapping(value = "/ServiceHangmokAdd")
+	   public ModelAndView ServiceHangmokAdd(HttpSession session,@RequestParam String ServiceDog,@RequestParam String ServiceSub,RedirectAttributes rAttr) {
+	      logger.info("서비스 추가");
+
+	      return service.ServiceHangmokAdd(ServiceDog,ServiceSub,rAttr);
+	   }
+	   
+	   
+	   @RequestMapping(value = "/ChangeListPage")
+	   public ModelAndView ChangeListPage(HttpSession session) {
+	      logger.info("환전신청목록 페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.ChangeListPage(loginId);
+	   }
+	   
+	   @RequestMapping(value = "/ChangeList", method = RequestMethod.POST) 
+	   public @ResponseBody HashMap<String, Object> ChangeList(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.ChangeList(currPage,pagePerCnt);
+	   }
+	   
+	   @RequestMapping(value = "/ChangeMoneyCheck")
+	   public ModelAndView ChangeMoneyCheck(HttpSession session,@RequestParam String poch_num,RedirectAttributes rAttr) {
+	      logger.info("환전신청완료하기");
+
+	      String loginId = (String) session.getAttribute("loginId");
+	      //String loginId = "dud";
+	      return service.ChangeMoneyCheck(poch_num,rAttr,loginId);
+	   }
+	   
+	   @RequestMapping(value = "/ChangeOkListPage")
+	   public ModelAndView ChangeOkListPage(HttpSession session) {
+	      logger.info("환전완료목록 페이지");
+	      
+	      String loginId = (String) session.getAttribute("loginId");
+
+	      return service.ChangeOkListPage(loginId);
+	   }
+
+	   @RequestMapping(value = "/ChangeOkList", method = RequestMethod.POST) 
+	   public @ResponseBody HashMap<String, Object> ChangeOkList1(@RequestParam String page,@RequestParam String cnt) {
+	      logger.info("리스트 요청:{} 페이지, {} 개 씩",page,cnt);
+	      
+	      int currPage = Integer.parseInt(page);
+	      int pagePerCnt = Integer.parseInt(cnt);
+
+	      return service.ChangeOkList(currPage,pagePerCnt);
+	   }
 	
 	
 }

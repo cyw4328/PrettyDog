@@ -30,7 +30,7 @@
 		table thead {
 			border-right: 1px solid #ccc;
 			border-left: 1px solid #ccc;
-			background: #e7708d;
+			background: lightgray;
 		}
 		table thead th {
 			padding: 10px;
@@ -73,12 +73,17 @@
     </section>
 
 
-	<div id="community_frame" style="margin-left: 600px">
+	<div id="community_frame" style="position: relative; top: 60px; left: 200px;">
 	
 	
-		<h1>자유게시판</h1>
+		<h1 style="font-size: 30px;">자유게시판</h1>
 		
-		<div>
+		<div style="
+    font-size: 20px;
+    margin-top: 20px;
+    position: absolute;
+    left: 675px;
+">
 			<label>카테고리 선택  </label>		
 			<select id="category_selecter" onchange="change_selecter()"> 
 				<option value="999">전체</option> 
@@ -116,10 +121,20 @@
 	     
 	   </table>
 		
-		<button onclick="writeAuthchk();">글작성</button>
+		<button onclick="writeAuthchk();" style="
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    width: 75px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    border: 0;
+    font-size: 13px;
+">글작성</button>
 		
 	      		<div calss="continer" style="margin-right: 600px ">
-	      			<nav area-label="Page navigation" style="text-align:center">
+	      			<nav area-label="Page navigation" style="text-align:center;position: absolute;left: 300px;">
 	      				<ul class="pagination" id="pagination"></ul>
 	      			</nav>
 	      		</div>
@@ -127,14 +142,28 @@
 		
 		<br/><br/>
 		
-		<div >					
-		   			<select name="searchOpt">
+		<div style="
+    position: absolute;
+    top: 70px;
+    left: 200px;
+">					
+		   			<select name="searchOpt" style="
+    width: 100px;
+    height: 25px;
+">
 		   				<option value="community_sub">제목</option>
 		   				<option value="community_cont">내용</option>
 		   				<option value="mem_id">작성자</option>
 		   			</select>
-		   			<input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요">
-		   			<button id = "searchBtn">검색</button>
+		   			<input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" style="
+    width: 250px;
+    height: 25px;
+">
+		   			<button id = "searchBtn" style="
+    width: 50px;
+    height: 25px;
+    border: 0;
+">검색</button>
 		</div>
 	</div><!-- community_frame.e -->
 		

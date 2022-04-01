@@ -67,9 +67,85 @@ public interface AdminPageDAO {
 	
 
 	
+	   int categoryListCount();
 
+	   ArrayList<DogDTO> categoryListCall(int pagePerCnt, int offset);
 
+	   int cateGoryAdd(String categoryName, String categoryClass);
 
+	   int categoryDel(String category_num);
+
+	   int SingoHangmokListCount();
+
+	   ArrayList<DogDTO> SingoHangmokList(int pagePerCnt, int offset);
+
+	   int SingoHangmokAdd(String singoSub);
+
+	   int HangmokReUse(String decO_num);
+
+	   int HangmokDel(String decO_num);
+
+	   int SingoNoCheckListCount();
+
+	   ArrayList<DogDTO> SingoNoCheckList(int pagePerCnt, int offset);
+
+	   int SingoProcess(String decl_num);
+
+	   int decAdminInsert(String decl_num, String loginId);
+
+	   int SingoProcessListCount();
+
+	   ArrayList<DogDTO> SingoProcessList(int pagePerCnt, int offset);
+
+	   int ServiceHangmokListCount();
+
+	   ArrayList<DogDTO> ServiceHangmokList(int pagePerCnt, int offset);
+
+	   int UseServiceChange(String add_num);
+
+	   int NoUseServiceChange(String add_num);
+
+	   int ServiceHangmokAdd(String serviceDog, String serviceSub);
+
+	   int ChangeListCount();
+
+	   ArrayList<DogDTO> ChangeList(int pagePerCnt, int offset);
+
+	   int ChangeMoneyCheck(String poch_num);
+
+	   void pointChOkAdd(String poch_num, String loginId);
+
+	   int ChangeOkListCount();
+
+	   ArrayList<DogDTO> ChangeOkList(int pagePerCnt, int offset);
+
+	   ArrayList<DogDTO> ShopServiceList(String loginId);
+	   
+	   ArrayList<DogDTO> ShopService(String loginId);
+
+	   int SreviceDel(String price_num);
+
+	   ArrayList<DogDTO> AddSmallServiceName();
+
+	   ArrayList<DogDTO> AddMiddleServiceName();
+
+	   ArrayList<DogDTO> AddBigServiceName();
+
+	   int addShopSmallService(String inputText1, String serviceName1, String busin_num);
+
+	   int addShopMiddleService(String inputText2, String serviceName2, String busin_num);
+
+	   int addShopBigService(String inputText3, String serviceName3, String busin_num);
+
+	   int reserDelOwnerPointChange(int businChange, String busin_num);
+
+	   int reserDelOwnerPointAdd(int businChange, String busin_num);
+
+	   int reserStateChange(String busin_num, String reserDay, String canReserTime);
+
+	   int SingoHangmokPage(String loginId);
+
+	   
 	
 
 	

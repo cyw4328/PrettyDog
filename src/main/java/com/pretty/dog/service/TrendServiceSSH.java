@@ -97,7 +97,7 @@ public class TrendServiceSSH {
 				logger.info(oriFileName + " = >" + newFileName);
 				byte[] bytes = photos.getBytes(); // photo에 여러개의 정보(파일명/크기/byte... 등등)가 있지만 byte만 뽑아와서 byte[]배열에 담아준다
 				// C:\STUDY\PrettyDog\PrettyDog\src\main\webapp\resources\trend
-				Path path = Paths.get("C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/trend/" + newFileName); // 파일을 저장할 경로와 파일 이름을 설정해 준다.
+				Path path = Paths.get("C:/upload/" + newFileName); // 파일을 저장할 경로와 파일 이름을 설정해 준다.
 				// 스트림을 사용 안해서 Files가  nio 라는걸 알수 있다 Files의 라이트 메서드를 사용해서(저장할 위치와 photo로부터 뽑아온 byte[]의 값을 사용해서 저장한다.)
 				// 이때는 그냥 컴퓨터에 저장을 하는것(DB에 저장은 dao로 해야 한다.)
 				System.out.println(path);

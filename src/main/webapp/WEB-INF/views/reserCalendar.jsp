@@ -35,6 +35,7 @@
 
 </head>
 <body>
+ <%@ include file="Header.jsp"%>
 <table class="scriptCalendar" style="float:left;">
     <thead>
         <tr>

@@ -54,7 +54,7 @@
 		}
 		#searchForm{
 			position: absolute;
-			left: 340px;
+			left: 200px;
 			top: 140px;
 			background-color: white;
 			height: 50px;
@@ -62,7 +62,7 @@
 		.shoplist{
 			position: absolute;
 			top: 260px;
-			left: 250px;
+			left: 180px;
 		}
 		img:hover{
 			cursor: pointer;
@@ -249,12 +249,12 @@ function listDraw(list) {
     var content = '<option <c:if test="${empty params.serviceScope}">'+'selected="selected"'+'</c:if>'+'value="0">'+"서비스선택(견종을 먼저 선택해주세요)"+'</option>';
     
     list.forEach(function(item,add_num) {
-		content += '<option value="'+item.dog_num+'"<c:if test="${params.serviceScope eq '+item.dog_num+' }">selected="selected"</c:if>>'+item.add_sub+'</option>'
+		content += '<option value="'+item.add_num+'"<c:if test="${'+item.add_num+'eq params.serviceScope}">selected="selected"</c:if>>'+item.add_sub+'</option>'
     });
    $('#addService').empty();
     $('#addService').append(content);
 }
-
+<c:if test="${status.count eq params.dogScope }">selected="selected"</c:if>
 var currPage = 1;
 var totalPage = 2;
 

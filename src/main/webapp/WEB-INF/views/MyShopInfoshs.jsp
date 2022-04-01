@@ -64,7 +64,7 @@
 	            	<th>매장명</th>
 	            	<td ><input type="text"  style="border:1px solid #ccc;" value="${shopinfo.busin_name}" name="busin_name" class="formSt"></td>
 	            	<th>사업자번호</th>
-	            	<td><input type="text" style="border:1px solid #ccc;"  value="${shopinfo.busin_num}" name="busin_num" class="formSt" ></td>
+	            	<td><input type="text" style="border:1px solid #ccc;"  value="${shopinfo.busin_num}" name="busin_num" class="formSt"  readonly="readonly"></td>
 	            	<th>취급강아지</th>
 	            		<td>
                         	<input type="checkbox" name="smallD"  value="1" checked>소형견

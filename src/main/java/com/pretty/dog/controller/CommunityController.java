@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pretty.dog.dto.CommunityDTO;
+import com.pretty.dog.dto.DogDTO;
 import com.pretty.dog.service.CommunityService;
 
 @Controller
@@ -38,7 +38,7 @@ public class CommunityController {
 	@RequestMapping(value =  {"/freeList"}, method = RequestMethod.GET)
 	   public String freeList(Model model) {
 	      logger.info("리스트 페이지로 이동, 카테고리 출력");
-	      ArrayList<CommunityDTO> arr = communityService.categoryList();//카테고리 출력
+	      ArrayList<DogDTO> arr = communityService.categoryList();//카테고리 출력
 	      model.addAttribute("category",arr);
 	      return "freeList";
 	   }
@@ -86,7 +86,7 @@ public class CommunityController {
 	@RequestMapping(value = "/freeWriteForm", method = RequestMethod.GET)
 	   public String writeForm(Model model) {
 	      logger.info("자유게시판 글쓰기 페이지 요청, 카테고리 출력");
-	      ArrayList<CommunityDTO> arr = communityService.categoryList();
+	      ArrayList<DogDTO> arr = communityService.categoryList();
 	      model.addAttribute("category",arr);
 	      return "freeWriteForm";
 	   }
@@ -115,7 +115,7 @@ public class CommunityController {
 		@RequestMapping(value = "/freeUpdateForm", method = RequestMethod.GET)
 		public String freeUpdateForm(Model model, @RequestParam String community_boardnum) {
 			logger.info("updateForm : {}",community_boardnum);	      
-			ArrayList<CommunityDTO> arr = communityService.categoryList();
+			ArrayList<DogDTO> arr = communityService.categoryList();
 			model.addAttribute("category",arr);
 			return communityService.freeUpdateForm(model,community_boardnum);
 		}   
@@ -135,12 +135,12 @@ public class CommunityController {
 			logger.info("상세보기 : {}",community_boardnum);
 			
 			//게시글 가져오기
-			CommunityDTO dto = communityService.freeDetail(community_boardnum);
+			DogDTO dto = communityService.freeDetail(community_boardnum);
 			logger.info("community_date:{}",dto.getCommunity_date());
 			model.addAttribute("dto", dto);
 			
 			//댓글 가져오기
-			ArrayList<CommunityDTO> commentList =  communityService.commentList(community_boardnum);
+			ArrayList<DogDTO> commentList =  communityService.commentList(community_boardnum);
 			model.addAttribute("commentList", commentList);
 			
 			//댓글 갯수 가져오기	 
@@ -149,7 +149,7 @@ public class CommunityController {
 			model.addAttribute("commentListCnt",commentListCnt);
 			
 			//사진 목록 가져오기
-			ArrayList<CommunityDTO> imgs = communityService.photoList(community_boardnum);
+			ArrayList<DogDTO> imgs = communityService.photoList(community_boardnum);
 			
 			if(imgs.size() >0) {
 				model.addAttribute("imgs", imgs.get(0));
@@ -170,7 +170,7 @@ public class CommunityController {
 			
 			System.out.println("컨단으로 넘어온 커뮤글 번호 : "+community_boardnum);
 			
-			CommunityDTO dto = new CommunityDTO();
+			DogDTO dto = new DogDTO();
 			
 			dto.setCommunity_boardnum(community_boardnum);
 			
@@ -218,7 +218,7 @@ public class CommunityController {
 	 @RequestMapping(value = "/DeclaForm_Post", method = RequestMethod.GET)
 	   public ModelAndView DeclaForm_Post(Model model, @RequestParam String community_boardnum) {
 		 logger.info("신고하기 :{} ",community_boardnum);
-		 CommunityDTO dto = communityService.DeclaForm_Post(community_boardnum);
+		 DogDTO dto = communityService.DeclaForm_Post(community_boardnum);
 		 model.addAttribute("dto", dto);
 	     	 
 	     return communityService.declalist();
@@ -228,7 +228,7 @@ public class CommunityController {
 	 @RequestMapping(value="/DeclaForm_Comment")
 		public ModelAndView DeclaForm_Comment(Model model, @RequestParam String bcomment_num) {
 			logger.info("신고하기 :{} ",bcomment_num);
-			CommunityDTO dto = communityService.DeclaForm_Comment(bcomment_num);
+			DogDTO dto = communityService.DeclaForm_Comment(bcomment_num);
 			model.addAttribute("dto", dto);					
 			return communityService.declalistC();
 		}
@@ -247,17 +247,6 @@ public class CommunityController {
 	   }
 
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-
+	
 	
 }

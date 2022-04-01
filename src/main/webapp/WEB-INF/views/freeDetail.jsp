@@ -19,14 +19,39 @@
    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
    
    <style>
-   	table, th, td{
-			border : 1px solid black;
+   	.postArea > td,tr,th{
+			border : 1px solid ;
 			border-collapse: collapse;
 			}
+			
+	.commentArea{
+			
+			}		
 	table{
 		width: 1000px;
 	}
+   th{
+   		background-color: lightgrey;
+   }
    
+   #commBtn{
+   		width: 100%;
+   		background-color: grey;
+   		color:white;
+   		border: none;
+   		font-weight:bolder;
+   }
+   a:visited{
+   		color: black;  		
+   }
+   a:link{
+   		color: black;
+   }
+   textarea{
+   		border: none;
+    	resize: none;
+   
+   }
    </style>
 </head>
 <body>
@@ -36,40 +61,36 @@
 
 
 
-<div id="detail_frame"  style="margin-left: 400px" >
+<div id="detail_frame"   style="margin-left: 400px" >
 	<h1>자유게시판  상세</h1>
-   <table >
-      <tr>
-         <th>글 번호</th>
-         <td>${dto.community_boardnum}</td>
-      </tr>
+   <table class="postArea">
       <tr>
          <th>제목</th>
-         <td>${dto.community_sub}</td>     
+         <td colspan = "3">${dto.community_sub}</td>     
       </tr>
       <tr>
-      	<th colspan = "2">카테고리: ${dto.category_name} | 조회수: ${dto.community_view}</th>
-      	<td></td>
+      	<th>카테고리</th> 
+      	<td> ${dto.category_name}</td>
+      	<th>조회수</th>
+      	<td>${dto.community_view}</td>     	
       </tr>
       <tr>
          <th>작성자</th>
          <td id ="writer">${dto.mem_id}</td>
-      </tr>
-      <tr>
          <th>작성일</th>
          <td>${dto.community_date}</td>
       </tr>
+     
       <tr>
-         <td colspan="2">        
+         <td colspan="4">        
          	<img width="300px" height="300px" src="resources/commu/${imgs.bphoto_newname}" onerror="this.style.display='none';"/>
          	<br/>
         	 <br/>
          	${dto.community_cont}
          </td>
-         <td></td>
       </tr>
      	 <tr>
-         <th colspan="2">
+         <th colspan="4" style="text-align: center;">
            	 	<a href="freeList">리스트</a>
            	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}"  onclick= "memAuthchk_postUp(event);">수정</a>
            	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick= "memAuthchk_postDel(event);">삭제</a>
@@ -78,31 +99,30 @@
      	</tr> 
    </table>
    
-   <hr/>
+   <br/>
    
    <!--댓글영역 ------------------------------------------------------------------------------------------------------ -->
    
    <div id="free_commentList">
-   		<table>
+   		<table >
    		<!-- commentCount -->
    			<thead>
 	   			<tr>
 	   				<th colspan="2" style="background-color: lightgrey">	   				   				
 	   					댓글수: ${commentListCnt}	개   				
 	   				</th>
-	   				<th></th>
 	   			</tr>	   			   			
     		</thead>
     		<tbody>
     			<c:forEach items="${commentList}" var="comm">
     				<c:if test="${comm.bcomment_blind != 1}">		
     					<tr>
-    						<td style="background-color:khaki; width: 80%" id="comm_writer">${comm.mem_id}</td>
-							<td style="background-color:khaki;">${comm.bcomment_date}</td>	    				
+    						<th style="background-color:gray; color:white; width: 80%" id="comm_writer">&nbsp;&nbsp;${comm.mem_id}</th>
+							<th style="background-color:gray; color:white;">${comm.bcomment_date}</th>	    				
     					</tr>
     					<tr>
-    						<td style="height: 100px">${comm.bcomment_cont}</td>
-							<td>
+    						<td style="height: 100px ">${comm.bcomment_cont}</td>
+							<td style="text-align: center; border: none">
 								<a href="#" onclick= "memAuthchk_comm('${comm.mem_id}','${comm.bcomment_num}');">삭제</a>
 							 	<a href="DeclaForm_Comment?bcomment_num=${comm.bcomment_num}" onclick="window.open(this.href,'','width=500, height=300, scrollbars=yes'); return false;">신고</a>
 							 </td>	    				
@@ -124,12 +144,12 @@
    			</tr>
    			<tr>	
    				<td>
-	   				<textarea name="bcomment_cont" id="comm_cont" placeholder="댓글 내용을 입력하세요"  style="width: 100%;height: 100px " maxlength='300'></textarea>   				
+	   				<textarea name="bcomment_cont" id="comm_cont" placeholder="댓글 내용을 입력하세요"  style="width: 100%; height: 100px; resize: none " maxlength='300'></textarea>   				
    				</td>
    			</tr>
    			<tr>	
    				<td>
-	   				<button>댓글 작성</button>		
+	   				<button id="commBtn">댓글 작성</button>		
    				</td>
    			</tr>
 				

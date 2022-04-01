@@ -18,7 +18,9 @@
     <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
     <script src="resources/js/jquery.twbsPagination.js"></script>
    <style>
-   	
+   		a:link { color: black; text-decoration: none;}
+		 a:visited { color: black; text-decoration: none;}
+		 a:hover { color: red; text-decoration: none;}
    </style>
 </head>
 <body>
@@ -28,8 +30,8 @@
 </section>
 
 
-   <h2 style="margin-left: 70px;">애견 미용 트렌드</h2>
-   <select id="koMap" style="margin-left: 1000px;">
+   <h2 style="margin-left: 210px;font-size: 30px;margin-top: 40px;">애견 미용 트렌드</h2>
+   <select id="koMap" style="margin-left: 1170px;width: 150px;height: 40px;">
       <option>지역전체</option>
       <option value="서울특별시">서울특별시</option>
       <option value="경기도">경기도</option>
@@ -49,12 +51,12 @@
       <option value="경상남도">경상남도</option>
       <option value="제주도">제주도</option>
    </select>
-   <div id="divA" style="width: 100%;">
+   <div id="divA" style="width: 60%;margin-left: 150px;margin-top: 20px;">
    <c:forEach items="${beautyTrendList }" var="TrendListInfo">
    <div class="orgDiv" style="float: left; width: 33%;">
       <a href="beautyTrendDetail?idx=${TrendListInfo.community_boardnum }">
       <%-- "C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/trend/${beautyTrendDetail.bphoto_newname }" --%>
-      <img alt="" src="resources/trend/${TrendListInfo.bphoto_newname }" width="350px" height="350px" style="padding-left: 70px"/>
+      <img alt="" src="/photo/${TrendListInfo.bphoto_newname }" width="300px" height="300px" style="padding-left: 70px"/>
       <p style="margin-left: 70px;font-size: 17px;">${TrendListInfo.busin_name }</p><p style="margin-left: 70px; margin-top: -15px;"><fmt:formatDate value="${TrendListInfo.community_date }" pattern="yyyy-MM-dd"/></p>
       <p style="margin-left: 70px; margin-top: -15px; font-size: 15px;">${TrendListInfo.community_sub }</p>
       </a>

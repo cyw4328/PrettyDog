@@ -152,7 +152,7 @@
 						<tbody>
  						<c:forEach var="list1" items="${ServiceInfoList}">
 							<c:if test="${list1.price_class == 2}">
-								<tbody style="text-align: center;">
+								<tbody>
 									<tr>
 										<td>${list1.add_sub}</td>
 										<td>${list1.price_cost}</td>
@@ -198,7 +198,7 @@
 						<tbody>
  						<c:forEach var="list1" items="${ServiceInfoList}">
 							<c:if test="${list1.price_class == 3}">
-								<tbody style="text-align: center;">
+								<tbody>
 									<tr>
 										<td>${list1.add_sub}</td>
 										<td>${list1.price_cost}</td>

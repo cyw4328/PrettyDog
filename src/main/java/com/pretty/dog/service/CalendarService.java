@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pretty.dog.dao.CalendarDao;
+import com.pretty.dog.dto.DogDTO;
 
 @Service
 public class CalendarService {
@@ -87,6 +88,14 @@ public class CalendarService {
 			
 			return dao.busin_num_chk(businId);
 		}
+
+		public void reserSuccess(HashMap<String, Object> reserHistory) {
+			HashMap<String, Object> list = dao.reserSuccess(reserHistory);
+			dao.reserSuccessAlarm(list);
+			dao.reserOwnerSuccess(list);
+		}
+
+
 
 	
 		

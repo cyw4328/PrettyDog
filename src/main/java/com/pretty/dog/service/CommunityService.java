@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pretty.dog.dao.CommunityDAO;
-import com.pretty.dog.dto.CommunityDTO;
 import com.pretty.dog.dto.DogDTO;
 
 
@@ -28,7 +27,7 @@ public class CommunityService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//카테고리 불러오기
-	public ArrayList<CommunityDTO> categoryList() {
+	public ArrayList<DogDTO> categoryList() {
 		logger.info("카테고리 가져오기 서비스");
 		return communityDao.categoryList();
 	}
@@ -115,7 +114,7 @@ public class CommunityService {
 	            logger.info(oriFileName + " = >" + newFileName);
 	            byte[] bytes = imgs.getBytes(); // photo에 여러개의 정보(파일명/크기/byte... 등등)가 있지만 byte만 뽑아와서 byte[]배열에 담아준다
 	            
-	            Path path = Paths.get("C:/STUDY/PrettyDog/src/main/webapp/resources/commu/" + newFileName); // 파일을 저장할 경로와 파일 이름을 설정해 준다.
+	            Path path = Paths.get("C:/upload/"+ newFileName); // 파일을 저장할 경로와 파일 이름을 설정해 준다.
 	            // 파일을 저장할 경로와 파일 이름을 설정해 준다.
 	            //"C:/STUDY/PrettyDog/PrettyDog/src/main/webapp/resources/trend/" + newFileName);
 	            
@@ -134,9 +133,9 @@ public class CommunityService {
 	   }
 	
 	//상세보기   
-	public CommunityDTO freeDetail(String community_boardnum) {
+	public DogDTO freeDetail(String community_boardnum) {
 
-		CommunityDTO dto = null;
+		DogDTO dto = null;
 		int success=communityDao.community_view(community_boardnum);
 		
 		if(success>0) {
@@ -149,7 +148,7 @@ public class CommunityService {
 	
 	
 	//사진 출력
-	public ArrayList<CommunityDTO> photoList(String community_boardnum) {
+	public ArrayList<DogDTO> photoList(String community_boardnum) {
 		logger.info("사진 출력");
 		return communityDao.photoList(community_boardnum);
 	}
@@ -157,7 +156,7 @@ public class CommunityService {
 	//게시글 삭제
 	public void freeDelete(String community_boardnum) {
 		 //1. 게시물에 사진이 있는지 확인
-	      ArrayList<CommunityDTO> list = communityDao.photoList(community_boardnum);
+	      ArrayList<DogDTO> list = communityDao.photoList(community_boardnum);
 	      
 	      //2. 게시물 삭제
 	      int success = communityDao.freeDelete(community_boardnum);
@@ -165,7 +164,7 @@ public class CommunityService {
 	      //3. 삭제가 완료되면 D:/upload/ 에 해당 파일 삭제(이때 newFileName을 이용)
 	      
 	      if(success>0) {
-	         for(CommunityDTO dto : list) {
+	         for(DogDTO dto : list) {
 	            //4. 있으면 업로드 된 사진 이름(newFileName) 알아오기
 	            File file = new File("C:/STUDY/PrettyDog/src/main/webapp/resources/commu/" + dto.getBphoto_newname());
 	            boolean yn = file.delete();      
@@ -178,8 +177,8 @@ public class CommunityService {
 	//게시글 수정폼 이동
 	public String freeUpdateForm(Model model, String community_boardnum) {
 
-			CommunityDTO dto = communityDao.freeDetail(community_boardnum);
-			ArrayList<CommunityDTO> list = communityDao.photoList(community_boardnum);
+		DogDTO dto = communityDao.freeDetail(community_boardnum);
+			ArrayList<DogDTO> list = communityDao.photoList(community_boardnum);
 	      
 			logger.info("subject : "+dto.getCommunity_sub());
 			logger.info("category : "+dto.getCategory_num());
@@ -207,7 +206,7 @@ public class CommunityService {
 
 	      String page = "redirect:/freeUpdateForm?community_boardnum="+community_boardnum;
 
-	      ArrayList<CommunityDTO> dto = new ArrayList<CommunityDTO>();
+	      ArrayList<DogDTO> dto = new ArrayList<DogDTO>();
 	   
 	      if(communityDao.freeUpdate(params)>0) {
 
@@ -239,7 +238,7 @@ public class CommunityService {
 	
 
 	//댓글리스트 출력
-	public ArrayList<CommunityDTO> commentList(String community_boardnum) {
+	public ArrayList<DogDTO> commentList(String community_boardnum) {
 		return communityDao.commentList(community_boardnum);
 	}
 
@@ -257,21 +256,21 @@ public class CommunityService {
 	}
 
 	// 댓글 작성
-	public void free_commentWrite(CommunityDTO dto) {
+	public void free_commentWrite(DogDTO dto) {
 		logger.info("댓글입력 서비스");
 		communityDao.free_commentWrite(dto);
 		
 	}
 
 	//게시글 신고 폼 
-	public CommunityDTO DeclaForm_Post(String community_boardnum) {
-		CommunityDTO dto = communityDao.freeDetail(community_boardnum);				
+	public DogDTO DeclaForm_Post(String community_boardnum) {
+		DogDTO dto = communityDao.freeDetail(community_boardnum);				
 		return dto;
 	}
 	
 	//댓글 신고 폼
-	public CommunityDTO DeclaForm_Comment(String bcomment_num) {
-		CommunityDTO dto = communityDao.commentDetail(bcomment_num);
+	public DogDTO DeclaForm_Comment(String bcomment_num) {
+		DogDTO dto = communityDao.commentDetail(bcomment_num);
 		return dto;
 	}
 	
@@ -280,7 +279,7 @@ public class CommunityService {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<CommunityDTO> list = communityDao.declalist();
+		ArrayList<DogDTO> list = communityDao.declalist();
 		
 		System.out.println(list);
 		
@@ -294,7 +293,7 @@ public class CommunityService {
 	public ModelAndView declalistC() {
 		ModelAndView mav = new ModelAndView();
 		
-		ArrayList<CommunityDTO> list = communityDao.declalistC();
+		ArrayList<DogDTO> list = communityDao.declalistC();
 		
 		System.out.println(list);
 		

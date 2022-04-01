@@ -129,5 +129,17 @@
 		where mem_id = #{loginId}
 	</select>
 	
+	<select id="reserSuccess" resultType="hashmap" parameterType="HashMap">
+		SELECT * from reservation where mem_id = #{mem_id} and  busin_num = #{busin_num} and reser_dog = #{add_num} 
+		and reser_service = #{service} and reser_money = #{servicePrice} and reser_visitday=#{reserTime} and reser_state = 0
+	</select>
+	
+	<insert id="reserSuccessAlarm">
+		insert into alarm (mem_id,reser_num,alarm_class)values(#{mem_id},#{reser_num},0)
+	</insert>
+	
+	<insert id="reserOwnerSuccess">
+		insert into alarm (mem_id,reser_num,alarm_class)values((select mem_id from shop where busin_num=#{busin_num}),#{reser_num},1)
+	</insert>
 	
 </mapper>

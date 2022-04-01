@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.pretty.dog.dto.DogDTO;
+
 public interface CalendarDao {
 
 	HashMap<Object, Object> dateInfo(HashMap<String, Object> data);
@@ -37,6 +39,12 @@ public interface CalendarDao {
 	void businPointList(HashMap<String, Object> point);
 
 	HashMap<String, Object> busin_num_chk(HashMap<String, Object> businId);
+
+	HashMap<String, Object> reserSuccess(HashMap<String, Object> reserHistory);
+
+	void reserSuccessAlarm(HashMap<String, Object> list);
+
+	void reserOwnerSuccess(HashMap<String, Object> list);
 
 
 }

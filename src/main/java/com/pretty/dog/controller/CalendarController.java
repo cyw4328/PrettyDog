@@ -198,7 +198,7 @@ public class CalendarController {
 		String str = (String) data.get("ChoiceTime");
 		String ct = str.replaceAll("\'", ""); 
 		String ChoiceTime = "$."+ct;
-		
+
 		System.out.println(ChoiceTime);
 		
 		//예약 상태 변경할 떄 보낼 데이터
@@ -222,7 +222,9 @@ public class CalendarController {
 		service.reserState(reserState);
 		
 		int cnt = service.reserHistory(reserHistory);
-		
+		if (cnt > 0) {
+			service.reserSuccess(reserHistory);
+		}
 		map.put("inHistory", cnt);
 		
 		return map;

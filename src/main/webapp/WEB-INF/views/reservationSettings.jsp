@@ -30,6 +30,7 @@
 </style>
 </head>
 <body>
+ <%@ include file="Header.jsp"%>
 <%@ include file="cywMyPageMenuBarOwner.jsp"%>
 <div style="position: absolute; left: 300px; top: 100px;">
 	<h3>${busin_name} 매장의 영업시간 수정 페이지입니다.</h3>

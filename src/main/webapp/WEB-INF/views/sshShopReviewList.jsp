@@ -47,7 +47,7 @@
 	<input type="hidden" name="busin_num" value="${sshShopRevList.busin_num }"/>
 	<p style="font-weight: bold; font-size: 13px;">${sshShopRevList.mem_id }</p>
 	<p style="margin-top: -10px;">${sshShopRevList.shop_boarddate }<span> 평점 : ${sshShopRevList.apprai_cont }</span></p>
-	<img style="width: 50px; height: 50px;" src="resources/rev/${sshShopRevList.sphoto_newname }"/>
+	<img style="width: 50px; height: 50px;" src="/photo/${sshShopRevList.sphoto_newname }"/>
 	<p style="font-size: 15px;">${sshShopRevList.shop_boardcont }</p>
 	<!--  
 	<c:if test="${memId == sshShopRevList.mem_id }">
