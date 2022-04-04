@@ -25,16 +25,12 @@
    	<script src="resources/js/jquery.twbsPagination.js"></script>
 	<style>
 		table{
-			border : 1px solid black;
+			border : 0;
 			border-collapse: collapse;
-			}
-		
-		table{
 			width: 1000px;
 			height: 500px;
-			margin-left: 500px; 
-			margin-top: 100px;
-		}	
+			}
+		
 			
 		
 	</style>
@@ -46,16 +42,16 @@
 
 
 
-	<h1>자유게시판 게시물 수정</h1>
+	<h1 style="position: relative;top: 50px;font-size: 30px;left: 300px;">자유게시판 게시물 수정</h1>
 	<form action="freeUpdate" name="freeForm" method="POST" enctype="multipart/form-data" onsubmit="submit_chk(event);"><!-- 여러가지~ -->
-      	<table>
+      	<table  style="position: absolute;top: 200px;left: 300px;">
          <tr style="height: 5%">
             <td>
             	<input type="text" name="community_sub" id="subject" style="width: 70%" value = "${dto.community_sub}"  maxlength='20'>
             	
-            	<div id="selecterBox">
             	
-	            	<select name="category_num" id="category" > 
+            	
+	            	<select name="category_num" id="category" style="width: 150px;height: 27px;" > 
 	            	
 						<option value="${dto.category_num}"  selected="selected">${dto.category_name}</option> 
 						
@@ -68,7 +64,7 @@
 							</c:forEach> 
 					</select>	
             	
-            	</div>
+            	
             </td>
          </tr>
          <tr style="height: 5%">      
@@ -88,19 +84,19 @@
             <td>
             	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
             	          	
-	            	<img width="120px" height="120px" id="oldImg" src="resources/commu/${imgs[0].bphoto_newname}" onerror="this.style.display='none';"/>
+	            	<img width="120px" height="120px" id="oldImg" src="/photo/${imgs[0].bphoto_newname}" onerror="this.src='/photo/photoerror.PNG';"/>
    
             	</div>
             		
-            		<input type="file" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
+            		<input type="file" name="imgs" onchange="setThumbnail(event);" accept ="image/*"  style="margin-top: 10px;"/>
             		
             		
             </td>
          </tr>
          <tr style="height: 10%">
             <th colspan="2">
-               <input type="button" onclick="listChk();" value="목록"/>
-             	<button>제출</button>
+               <input type="button" onclick="listChk();" value="목록"  style="width: 150px;height: 30px;position: absolute;top: -60px;left: 600px;border: 0;background: pink;"/>
+             	<button  style="border: 0;background-color: pink;width: 200px;height: 50px;margin-top: 10px;">제출</button>
             </th>
          </tr>
       </table>

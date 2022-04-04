@@ -18,6 +18,12 @@ public interface HomeDAO {
 	int pwSearch(String userId, String userName, String userPhone, String userEmail);
 
 	int pwChange(String id, String pw);
+
+
+	int snsUser(String idInput);
+
+
+	int snsInsert(String idInput);
 	
 
 

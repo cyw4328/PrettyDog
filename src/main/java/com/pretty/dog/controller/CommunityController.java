@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -216,8 +217,10 @@ public class CommunityController {
 		 
 	 //게시물 신고 폼 출력
 	 @RequestMapping(value = "/DeclaForm_Post", method = RequestMethod.GET)
-	   public ModelAndView DeclaForm_Post(Model model, @RequestParam String community_boardnum) {
+	   public ModelAndView DeclaForm_Post(Model model, @RequestParam String community_boardnum,HttpSession session) {
 		 logger.info("신고하기 :{} ",community_boardnum);
+		 
+
 		 DogDTO dto = communityService.DeclaForm_Post(community_boardnum);
 		 model.addAttribute("dto", dto);
 	     	 

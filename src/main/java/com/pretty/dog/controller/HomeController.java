@@ -65,7 +65,18 @@ public class HomeController {
 	@PostMapping(value = "/login")
 	public ModelAndView login(@RequestParam String idInput,@RequestParam String pwInput,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		if (pwInput == null || pwInput.equals("")) {
+			int sns = service.SnsLogin(idInput);
+			if (sns > 0) {
+				mav.addObject("loginSuccessAlert", idInput+"님 반갑습니다. 즐거운 하루 되세요!♡");
+				mav.setViewName("Main");
+				session.setAttribute("loginId", idInput);				
+			}else {
+				mav.addObject("loginSuccessAlert", "로그인이 실패하였습니다.");
+				mav.setViewName("Main");				
+			}
+			return mav;
+		}
 		if (service.login(idInput,pwInput)) {
 			mav.addObject("loginSuccessAlert", idInput+"님 반갑습니다. 즐거운 하루 되세요!♡");
 			mav.setViewName("Main");

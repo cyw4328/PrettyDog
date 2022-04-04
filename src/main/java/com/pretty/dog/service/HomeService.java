@@ -91,6 +91,18 @@ public class HomeService {
 		return mav;
 	}
 
+	public int SnsLogin(String idInput) {
+		
+		int snsSearch = dao.snsUser(idInput);
+		
+		if (snsSearch == 0) {
+			int a = dao.snsInsert(idInput);
+			snsSearch = a;
+		}
+		
+		return snsSearch;
+	}
+
 	
 	
 	

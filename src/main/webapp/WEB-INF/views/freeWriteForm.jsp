@@ -20,16 +20,11 @@
    	<script src="resources/js/jquery.twbsPagination.js"></script>
 	<style>
 		table{
-			border : 1px solid black;
+			border : 0;
 			border-collapse: collapse;
-			}
-		
-		table{
 			width: 800px;
 			height: 500px;
-			margin-left: 500px; 
-			margin-top: 100px;
-		}	
+			}
 			
 		
 	</style>
@@ -41,9 +36,9 @@
 
 
 
-	<h1>자유게시판 게시물 작성</h1>
+	<h1 style="position: relative;top: 50px;font-size: 30px;left: 300px;">자유게시판 게시물 작성</h1>
 	<form id = "freeWrite_form" name="freeForm" action="freeWrite" method="POST" enctype="multipart/form-data" onsubmit="submit_chk(event);" ><!-- 여러가지~ -->
-      	<table>
+      	<table style="position: absolute;top: 200px;left: 300px;">
          <tr style="height: 5%">
             <td>
             	<input type="text" name="community_sub" id="subject" style="width: 70%" placeholder="제목을 입력하세요" maxlength='20'/>
@@ -62,25 +57,25 @@
             <td><input type="hidden" name="mem_id" id="writer"/></td>
          </tr>
          <tr style="height: 60%">     
-            <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000'></textarea></td>
+            <td><textarea name="community_cont" id="content" style="width: 100%; height: 100%"  maxlength='1000' placeholder="내용을 입력해주세요!!"></textarea></td>
          </tr>
          
        <tr style="height: 20%">
             <td>
-            	<div id="image_container" style="width: 130px; height: 130px; margin: 20px">
+            	<div id="image_container" style="width: 130px; height: 130px; border: 1px solid;">
             	
-            		<img width="120px" height="120px" id = "oldImg" src=# onerror="this.style.display='none';"/>
+            		<img width="120px" height="120px" id = "oldImg" src=# onerror="this.src='/photo/photoerror.PNG';"/>
             		
             	</div>
             	
-            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);" accept ="image/*"/>
+            		<input type="file" id="imgs" name="imgs" onchange="setThumbnail(event);" accept ="image/*" style="margin-top: 10px;"/>
             	
             </td>
          </tr>
          <tr style="height: 10%">
             <th colspan="2">
-               <input type="button" onclick="listChk();" value="목록"/>
-               <button>저장</button>
+               <input type="button" onclick="listChk();" value="돌아가기" style="width: 150px;height: 30px;position: absolute;top: -60px;left: 600px;border: 0;background: pink;"/>
+               <button style="border: 0;background-color: pink;width: 200px;height: 50px;margin-top: 10px;">저장</button>
             </th>
          </tr>
       </table>

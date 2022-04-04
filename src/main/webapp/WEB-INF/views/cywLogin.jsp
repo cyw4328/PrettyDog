@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>이쁘개 로그인</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<style>
 		#AllPage{
 			position: relative;
@@ -52,6 +53,11 @@
 			margin-left: 10px;
 			border: 0;
 		}
+		#SnsJoin{
+			position: absolute;
+			top: 300px;
+			left: 100px;
+		}
 		 a:link { color: black; text-decoration: none;}
 		 a:visited { color: black; text-decoration: none;}
 		 a:hover { color: red; text-decoration: none;}
@@ -71,7 +77,7 @@
 			<form action="login" method="post" id="login">
 				<table>
 					<tr>
-						<td><input type="text" placeholder="ID를 입력해주세요!" name="idInput"/></td>
+						<td><input type="text" placeholder="ID를 입력해주세요!" name="idInput" id= "idInput"/></td>
 					</tr>
 					<tr>
 						<td><input type="password" placeholder="PW를 입력해주세요!" name="pwInput"/></td>
@@ -88,9 +94,45 @@
 		<div id="JoinFormBtn">
 			<input type="button" value="일반 회원가입" class="joinForm" id="nomalmem"/><input type="button" value="업주 회원가입" class="joinForm" id="Ownermem"/>
 		</div>
+		<div id="SnsJoin">
+			<img src="/photo/kakaoImg.jpg" style="width: 50px;height: 50px;" onclick="kakaoLogin()"/>
+		</div>
 	</div>	
 </body>
 <script>
+
+Kakao.init('9a016594e23ac3e216f7daff7c18b296'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  $('#idInput').val(response.kakao_account.email); 
+        	  console.log('test');
+        	  login.submit();
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+
+
+
+
+
+
+
+
 $('#loginBtn').click(function() {
 	var $idInput = $('input[name="idInput"]')
 	var $pwInput = $('input[name="pwInput"]')

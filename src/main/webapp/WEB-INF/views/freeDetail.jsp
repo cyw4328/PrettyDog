@@ -103,7 +103,7 @@
            	 	<a href="freeList">리스트</a>
            	 	<a href= "freeUpdateForm?community_boardnum=${dto.community_boardnum}"  onclick= "memAuthchk_postUp(event);">수정</a>
            	 	<a href = "freeDelete?community_boardnum=${dto.community_boardnum}" onclick= "memAuthchk_postDel(event);">삭제</a>
-           	 	<a href="DeclaForm_Post?community_boardnum=${dto.community_boardnum}" onclick="window.open(this.href,'','width=500, height=300, scrollbars=yes'); return false;">신고</a>
+           	 	<a href="DeclaForm_Post?community_boardnum=${dto.community_boardnum}" onclick="window.open(this.href,'','width=500, height=500, scrollbars=yes'); return false;">신고</a>
          	</th>
      	</tr> 
    </table>

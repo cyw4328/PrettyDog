@@ -8,7 +8,6 @@
    <style>
    
 	   	table, th, td{
-			border : 1px solid black;
 			border-collapse: collapse;
 			}
    </style>
@@ -18,20 +17,20 @@
    <form method="POST" id="declaForm">
       <table>
          <tr>
-            <th>게시물 작성자</th>
+            <th style="width: 150;">게시물 작성자</th>
             <td>
             <input type="hidden" name="dec_targetNum" value = "${dto.community_boardnum}">
-            <input type="text" id="dec_id" name="dec_id" value="${dto.mem_id}" readonly="readonly">
+            <input type="text" id="dec_id" name="dec_id" value="${dto.mem_id}" readonly="readonly" style="border: 0;">
            </td>
          </tr>
          <tr>
             <th>게시물 내용</th><!-- 게시글, 댓글 어떻게 구분해야 할까 --> <!-- 댓글번호가  0이면? 글번호 출력  -->
-            <td>${dto.community_cont}</td>
+            <td style="padding: 50px 0;/* width: 184px; */">${dto.community_cont}</td>
          </tr>
          <tr>
             <th>유형</th>
             <td>
-            	<select name="decO_num" id="decOP_selecter"> 
+            	<select name="decO_num" id="decOP_selecter" style="width: 100px;height: 45px;"> 
 						<c:forEach items="${list}" var="declaOP"> 																				
 							<option value="${declaOP.decO_num}">${declaOP.decO_cont}</option>												
 						</c:forEach> 
@@ -41,7 +40,7 @@
          <tr>
             <th colspan="2">
             	<input type="hidden" name="mem_id" id="reporter">
-              	<button onclick = "declaMsg(); return false">제출</button>
+              	<button onclick = "declaMsg(); return false" style="width: 150px;height: 50px;background-color: black;color: white;border: 0;margin-top: 50px;">제출</button>
             </th>
          </tr>
       </table>
